@@ -1,0 +1,3878 @@
+newLISP(R)
+==========
+:author:    Lutz Mueller
+//:email:      srackham@gmail.com
+:revdate:   2013-01-20
+:revnumber: 10.4.5
+
+__For Mac OS X, GNU Linux, Unix and Win32__
+
+**User Manual and Reference v.10.4.5**
+
+****
+Copyright (C) 2012 Lutz Mueller http://www.nuevatec.com[www.nuevatec.com]. +
+All rights reserved. +
+Permission is granted to copy, distribute and/or modify this document +
+under the terms of the GNU Free Documentation License, +
+Version 1.2 or any later version published by the Free Software +
+Foundation; with no Invariant Sections, no Front-Cover Texts, +
+and no Back-Cover Texts. A copy of the license is included in the +
+section entitled link:#GNUFDL[GNU Free Documentation License]. +
+The accompanying software is protected by the link:#GNUGPL[GNU General +
+Public License] V.3, June 2007. +
+newLISP is a registered trademark of Lutz Mueller. +
+****
+
+Contents
+--------
+
+link:#users_manual[User Manual]
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+1.  link:#introduction[Introduction]
+2.  link:#deprecated[Deprecated functions and future changes]
+3.  link:#REPL[Interactive Lisp mode]
+4.  link:#options[Command line options]
+* link:#cmd_help[Command line help summary]
+* link:#url_files[Specifying files as URLs]
+* link:#no_init[No loading of init.lsp]
+* link:#stack_size[Stack size]
+* link:#max_mem[Maximum memory usage]
+* link:#direct_exec[Direct execution mode]
+* link:#logging[Logging I/O]
+* link:#working_dir[Specifying the working directory]
+* link:#tcpip_server[newLISP as a TCP/IP server]
+* link:#daemon[TCP/IP daemon mode]
+* link:#prompt[Suppressing the prompt and HTTP processing]
+* link:#forcing_prompt[Forcing prompts in pipe I/O mode]
+* link:#http_mode[HTTP only server mode]
+* link:#local_domain_server[Local domain Unix socket server]
+* link:#conn_timeout[Connection timeout]
+* link:#inetd_daemon[`inetd` daemon mode]
+5.  link:#startup[Startup, directories, environment]
+* link:#environment[Environment variable NEWLISPDIR]
+* link:#initialization[The initialization file `init.lsp`]
+* link:#directories_unix[Directories on Linux, BSD, Mac OS X]
+* link:#directories_win32[Directories on Win32]
+6.  link:#shared-lib[Extending newLISP with shared libraries]
+7.  link:#newlisp-lib[newLISP as a shared library]
+8.  link:#expressions[Evaluating newLISP expressions]
+* link:#multiline[Interactive multiline expressions]
+* link:#int_float[Integer, floating point data and operators]
+* link:#eval_rules[Evaluation rules and data types]
+9.  link:#lambda_expressions[Lambda expressions in newLISP]
+10. link:#nil_and_true[`nil`, `true`, `cons` and `()` in newLISP]
+11. link:#arrays[Arrays]
+12. link:#indexing[Indexing elements of strings, lists and arrays]
+* link:#implicit_indexing[Implicit indexing for `nth`]
+* link:#implicit_default[Implicit indexing and the default functor]
+* link:#implicit_rest_slice[Implicit indexing for `rest` and `slice`]
+* link:#implicit_modify[Modify references in lists, arrays and strings]
+13. link:#destructive[Destructive versus non-destructive functions]
+* link:#make_nondestructive[Make a destructive function non-destructive]
+14. link:#return[Early return from functions, loops, blocks]
+* link:#flow_catch_throw[Using `catch` and `throw`]
+* link:#flow_and_or[Using `and` and `or`]
+15. link:#scoping[Dynamic and lexical scoping]
+16. link:#contexts[Contexts]
+* link:#context_rules[Symbol creation in contexts]
+* link:#creating_contexts[Creating contexts]
+* link:#scope_global[Global scope]
+* link:#protection[Symbol protection]
+* link:#overwrite[Overwriting global symbols and built-ins]
+* link:#context_vars[Variables holding contexts]
+* link:#sequence_creating[Sequence of creating contexts]
+* link:#context_modules[Contexts as programming modules]
+* link:#context_data[Contexts as data containers]
+* link:#loading_contexts[Loading and declaring contexts]
+* link:#serializing[Serializing context objects]
+17. link:#default_function[The context default functor]
+* link:#func_memory[Functions with memory]
+* link:#hash[Hash functions and dictionaries]
+* link:#pass_big[Passing data by reference]
+18. link:#foop[Functional object-oriented programming in newLISP]
+* link:#newlisp_classes[FOOP classes and constructors]
+* link:#newlisp_objects[Objects]
+* link:#colon_operator[The colon `:` operator and polymorphism]
+* link:#structure_foop[Structuring a larger FOOP program]
+19. link:#multi_processing[Concurrent processing and distributed
+computing]
+* link:#cilk[The Cilk API]
+* link:#distributed[Distributed network computing]
+20. link:#XML[XML, SXML and XML-RPC]
+21. link:#internationalization[Customization, localization and UTF-8]
+* link:#naming[Customizing function names]
+* link:#switching[Switching the locale]
+* link:#decimal_point[Decimal point and decimal comma]
+* link:#unicode_utf8[Unicode and UTF-8 encoding]
+* link:#utf8_capable[Functions working on UTF-8 characters]
+* link:#utf8_version[Functions only available on UTF-8 enabled versions]
+22. link:#commas[Commas in parameter lists]
+23. link:#linking[Linking newLISP source and executable]
+
+link:#function_ref[Function Reference]
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+1.  link:#symbol_names[Syntax of symbol variables and numbers]
+2.  link:#type_ids[Data types and names in the reference]
+3.  link:#functions[Functions in groups]
+* link:#list_processing[List processing, flow control, and integer
+arithmetic]
+* link:#string_operators[String and conversion functions]
+* link:#floating_point[Floating point math and special functions]
+* link:#matrices[Matrix functions]
+* link:#array-funcs[Array functions]
+* link:#bit_operators[Bit operators]
+* link:#predicates[Predicates]
+* link:#timedate[Date and time functions]
+* link:#montecarlo[Statistics, simulation and modeling functions]
+* link:#pattern[Pattern matching]
+* link:#financial[Financial math functions]
+* link:#input_output[File and I/O operations]
+* link:#processes[Processes and the Cilk API]
+* link:#directory_management[File and directory management]
+* link:#http_api[HTTP networking API]
+* link:#socket_tcpip[Socket TCP/IP, UDP and ICMP network API]
+* link:#reflection[Reflection and customization]
+* link:#system_functions[System functions]
+* link:#importing_libraries[Importing libraries]
+* link:#internals[newLISP internals API]
+4.  link:#functions_alphabetical[Functions in alphabetical order]
+*link:newlisp_manual.html#shell[!]
+link:newlisp_manual.html#arithmetic[+-*/%]
+link:newlisp_manual.html#abort[Ab] link:newlisp_manual.html#append[Ap]
+link:newlisp_manual.html#asin[As]
+link:newlisp_manual.html#base64-dec[Ba]
+link:newlisp_manual.html#callback[Ca] link:newlisp_manual.html#clean[Cl]
+link:newlisp_manual.html#command-event[Co]
+link:newlisp_manual.html#current-line[Cu]
+link:newlisp_manual.html#dec[De] link:newlisp_manual.html#difference[Di]
+link:newlisp_manual.html#do-until[Do]
+link:newlisp_manual.html#encrypt[En]  +
+ link:newlisp_manual.html#exec[Ex]
+link:newlisp_manual.html#file-info[Fi] link:newlisp_manual.html#flat[Fl]
+link:newlisp_manual.html#gammaln[Ga] link:newlisp_manual.html#global[Gl]
+link:newlisp_manual.html#inc[In] link:newlisp_manual.html#lambdap[La]
+link:newlisp_manual.html#listp[Li] link:newlisp_manual.html#macrop[Ma]
+link:newlisp_manual.html#mul[Mu]
+link:newlisp_manual.html#net-accept[Net]
+link:newlisp_manual.html#new[New] link:newlisp_manual.html#nth[Nt]
+link:newlisp_manual.html#pack[Pa]  +
+ link:newlisp_manual.html#pretty-print[Pr]
+link:newlisp_manual.html#randomize[Ra]
+link:newlisp_manual.html#read[Rea] link:newlisp_manual.html#regex[Reg]
+link:newlisp_manual.html#search[Sea]
+link:newlisp_manual.html#sequence[Seq]
+link:newlisp_manual.html#sleep[Sl]
+link:newlisp_manual.html#starts-with[St]
+link:newlisp_manual.html#sync[Sy]
+link:newlisp_manual.html#time-of-day[Ti]
+link:newlisp_manual.html#truep[Tr] link:newlisp_manual.html#utf8[Ut]
+link:newlisp_manual.html#write-file[Wr]*
+
+link:#appendix[Appendix]
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+* link:#error_codes[Error Codes]
+* link:#system_symbols[System Symbols]
+* link:#GNUFDL[GNU Free Documentation License]
+* link:#GNUGPL[GNU General Public License]
+
+( ∂ )
+
+newLISP User Manual
+-------------------
+
+1. Introduction
+~~~~~~~~~~~~~~~
+
+newLISP focuses on the core components of Lisp: _lists_, _symbols_, and
+_lambda expressions_. To these, newLISP adds _arrays_, _implicit
+indexing_ on lists and arrays, and _dynamic_ and _lexical scoping_.
+Lexical scoping is implemented using separate namespaces called
+_contexts_.
+
+The result is an easier-to-learn Lisp that is even smaller than most
+Scheme implementations, but which still has about 350 built-in
+functions. Not much over 200k in size, newLISP is built for high
+portability using only the most common Unix system C-libraries. It loads
+quickly and has a small memory footprint. newLISP is as fast or faster
+than other popular scripting languages and uses very few resources.
+
+Both built-in and user-defined functions, along with variables, share
+the same global symbol tree and are manipulated by the same functions.
+Lambda expressions and user-defined functions can be handled like any
+other list expression.
+
+newLISP is dynamically scoped inside lexically separated contexts
+(namespaces). Contexts in newLISP are used for multiple purposes. They
+allow (1) partitioning of programs into modules, (2) the definition of
+_Classes_ in FOOP (Functional Object Oriented Programming), (3) the
+definition of functions with state and (4) the creation of Hash trees
+for associative key → value storage.
+
+newLISP's efficient _red-black_ tree implementation can handle millions
+of symbols in namespaces or hashes without degrading performance.
+
+newLISP allocates and reclaims memory automatically, without using
+traditional asynchronous garbage collection. All objects -- except for
+contexts, built-in primitives, and symbols -- are passed by value and are
+referenced only once. Upon creation objects are scheduled for delayed
+deletion and Lisp cells are recycled for newly created objects. This
+results in predictable processing times without the pauses found in
+traditional garbage collection. newLISP's unique automatic memory
+management makes it the fastest interactive Lisp available. More than
+any other Lisp, it implements the _data equals program_ paradigm and
+full self reflection.
+
+Many of newLISP's built-in functions are polymorphic and accept a
+variety of data types and optional parameters. This greatly reduces the
+number of functions and syntactic forms necessary to learn and
+implement. High-level functions are available for string and list
+processing, financial math, statistics, and Artifial Intelligence
+applications.
+
+newLISP has functions to modify, insert, or delete elements inside
+complex _nested_ lists or _multi-dimensional_ array structures.
+
+Because strings can contain null characters in newLISP, they can be used
+to process binary data with most string manipulating functions.
+
+newLISP can also be extended with a shared library interface to import
+functions that access data in foreign binary data structures. The
+distribution contains modules for importing popular C-library APIs.
+
+newLISP's HTTP, TCP/IP, and UDP socket interfaces make it easy to write
+distributed networked applications. Its built-in XML interface, along
+with its text-processing features -- Perl Compatible Regular Expressions
+(PCRE) and text-parsing functions -- make newLISP a useful tool for CGI
+processing. The source distribution includes examples of HTML forms
+processing. newLISP can be run a as a CGI capable web server using its
+built-in http mode option.
+
+newLISP has built-in support for distributed processing on networks and
+parallel, concurrent processing on the same CPU with one or more
+processing cores.
+
+The source distribution can be compiled for Linux, Mac OS X/Darwin, BSDs
+Solaris, and Win32. newLISP can be compiled as a 64-bit LP64 application
+for full 64-bit memory addressing.
+
+newLISP-GS
+^^^^^^^^^^
+
+newLISP-GS comprises a graphical user interface (GUI) and library
+server. The GUI front-end is written in newLISP, whereas the library
+server is Java based and uses the standard Java runtime environment
+installed on all Windows and Mac OS X platforms. Applications built with
+newLISP-GS can have the host operating system's native look and feel.
+Interfaces to GTK, Tcl/Tk and OpenGL graphics libraries are also
+available.
+
+newLISP and Java are available for most operating systems. This makes
+newLISP-GS a platform-independent solution for writing GUI applications.
+
+For more information on newLISP-GS, see
+http://newlisp.org/guiserver[newLISP-GS].
+
+Licensing
+^^^^^^^^^
+
+newLISP and newLISP-GS are licensed under version 3 of the
+link:#GNUGPL[GPL (General Public License)]. The newLISP documentation as
+well as other documentation packaged with newLISP are licensed under the
+link:#GNUFDL[GNU Free Documentation License].
+
+( § )
+
+2. Deprecated functions and future changes
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Since version 10.3.0 newLISP can switch between IPv4 and IPv6 modes
+during run-time using the new link:#net-ipv[net-ipv] function. The `-6`
+commandline option can be used to start newLISP in IPv6 mode. After
+transition to IPv6 the `-6` commandline switch will be changed to `-4`
+for starting up in IPv4 mode.
+
+The old writing `parse-date` of link:#date-parse[date-parse] is still
+recognized but deprecated since version 10.3.0. The old writing will be
+removed in a future version.
+
+The functions `if-not` and `local` are deprecated and have been taken
+out of the documentation. Both functions will keep on working for an
+indefinite time.
+
+( § )
+
+3. Interactive Lisp mode
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+The best way to experience Lisp and experiment with it, is using
+interactive mode in a terminal window or operating system command shell.
+Since version 10.3, newLISP's read-eval-print-loop (REPL) accepts
+mult-line statements.
+
+To enter a multi-line statement hit the +[enter]+ key on an empty line
+after the system prompt. To exit multi-line mode, hit the +[enter]+ key
+again on an empty line. In the following example computer output is
+shown with labels on the right.
+
+[source,newlisp]
+----------------------
+>
+(define (foo x y)
+    (+ x y))
+
+(lambda (x y) (+ x y))    # <output>
+> (foo 3 4)
+7                         # <output>
+>
+----------------------
+
+Note, that multi-line mode is only possible in an OS command terminal
+window or command shell. The monitor window in the Java based newLISP-GS
+IDE will not accept multi-line statements.
+
+Intercative Lisp mode can accept operating system shell commands. To hit
+an OS command enter the `!` character right after the prompt,
+immediately followed by the shell command:
+
+-----------------------------------------------------------------------
+> !ls *.html
+CodePatterns.html        MemoryManagement.html   newLISPdoc.html
+ExpressionEvaluation.html   manual_frame.html       newlisp_index.html
+License.html            newLISP-10.3-Release.html   newlisp_manual.html
+>
+-----------------------------------------------------------------------
+
+In the example a `ls` shell command is entered to show HTML files in the
+current directory. On MS Windows a `dir` command could be used in the
+same fashion.
+
+The mode can also be used to call an editor or any other program:
+
+-------------
+> !vi foo.lsp
+-------------
+
+The Vi editor will open to edit the program "foo.lsp". After leaving the
+editor the program could be run using a load statement:
+
+------------------
+> (load "foo.lsp")
+------------------
+
+The program `foo.lsp` is now run. This mode using `!` can also be used
+from the newLISP-GS IDE.
+
+When using a Unix teminal or command shell, tab-expansion for built-in
+newLISP functions can be used:
+
+----------------------------------
+> (pri
+print       println     primitive?
+> (pri
+----------------------------------
+
+After entering the characters ` (pri ` hit the +[tab]+ key once to show
+all the built-in functions starting with the same characters. When
+hitting +[tab]+ twice before a function name has started, all built-in
+function names will be displayed.
+
+( § )
+
+4. Command-line options, startup and directories
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Command line help summary
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+When starting newLISP from the command-line several switches and options
+and source files can be specified. Executing:
+
+----------
+newlisp -h
+----------
+
+in a command shell will produce the following summary of options and
+switches:
+
+------------------------------
+-h this help
+-n no init (must be first)
+-s <stacksize>
+-m <max-mem-megabyte>
+-e <quoted lisp expression>
+-l <path-file> log connections
+-L <path-file> log all
+-w <working-directory>
+-c no prompts, HTTP
+-C force prompts
+-t <microsec-timeout>
+-p <port-number>
+-d <port-number>
+-http HTTP only
+-6 set IPv6 mode
+------------------------------
+
+Before or after the command-line switches, files to load and execute can
+be specified. If a newLISP executable program is followed by parameters
+the program must finish with an `(exit)` statement, else newLISP will
+take command-line parameters as additional newLISP scripts to be loaded
+and executed.
+
+On Linux and other Unix systems, a `newlisp` _man page_ can be found:
+
+-----------
+man newlisp
+-----------
+
+This will display a man page in the Linux/Unix shell.
+
+Specifying files as URLs
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+newLISP will load and execute files specified on the command-line. Files
+are specified with either their pathname or a `file://` URL on the local
+file system or with an `http://` URL on remote file systems running an
+HTTP server. That HTTP server can be newLISP running in HTTP server
+mode.
+
+-----------------------------------------
+newlisp aprog.lsp bprog.lsp prog.lsp
+newlisp http://newlisp.org/example.lsp
+newlisp file:///usr/home/newlisp/demo.lsp
+-----------------------------------------
+
+No loading of init.lsp
+^^^^^^^^^^^^^^^^^^^^^^
+
+This option suppresses loading of any present initialization file
+`init.lsp` or `.init.lsp`. In order to work, this must be the first
+option specified:
+
+----------
+newlisp -n
+----------
+
+More about link:#initialization[initialization files.]
+
+Stack size
+^^^^^^^^^^
+--------------------------------------------
+newlisp -s 4000
+newlisp -s 100000 aprog bprog
+newlisp -s 6000 myprog
+newlisp -s 6000 http://asite.com/example.lsp
+--------------------------------------------
+
+The above examples show starting newLISP with different stack sizes
+using the `-s` option, as well as loading one or more newLISP source
+files and loading files specified by a URL. When no stack size is
+specified, the stack defaults to 2048. Per stack position about 80 bytes
+of memory are preallocated.
+
+Maximum memory usage
+^^^^^^^^^^^^^^^^^^^^
+--------------
+newlisp -m 128
+--------------
+
+This example limits newLISP cell memory to 128 megabytes. In 32-bit
+newLISP, each Lisp cell consumes 16 bytes, so the argument `128` would
+represent a maximum of 8,388,608 newLISP cells. This information is
+returned by link:#sys-info[sys-info] as the list's second element.
+Although Lisp cell memory is not the only memory consumed by newLISP, it
+is a good estimate of overall dynamic memory usage.
+
+Direct execution mode
+^^^^^^^^^^^^^^^^^^^^^
+
+Small pieces of newLISP code can be executed directly from the
+command-line:
+
+-------------------------------------------------------
+newlisp -e "(+ 3 4)"  → 7 ; On Win32 and Unix
+
+newlisp -e '(append "abc" "def")'  → "abcdef" ; On Unix
+-------------------------------------------------------
+
+The expression enclosed in quotation marks is evaluated, and the result
+is printed to standard out (STDOUT). In most Unix system shells, single
+quotes can also be used as command string delimiters. Note that there is
+a space between `-e` and the quoted command string.
+
+Logging I/O
+^^^^^^^^^^^
+
+In any mode, newLISP can write a log when started with the `-l` or `-L`
+option. Depending on the mode newLISP is running, different output is
+written to the log file. Both options always must specify the path of a
+log-file. The path may be a relative path and can be either attached or
+detached to the `-l` or `-L` option. If the file does not exist, it is
+created when the first logging output is written.
+
+---------------------------------------------------------------
+newlisp -l./logfile.txt -c
+
+newlisp -L /usr/home/www/log.txt -http -w /usr/home/www/htpdocs
+---------------------------------------------------------------
+
+The following table shows the items logged in different situations:
+
+[cols="<,<,<",options="header",]
+|=======================================================================
+|logging mode |command-line and net-eval with `-c` |HTTP server with
+`-http`
+|`newlisp -l` |log only input and network connections |log only network
+connections
+
+|`newlisp -L` |log also newLISP output (w/o prompts) |log also HTTP
+requests
+|=======================================================================
+
+All logging output is written to the file specified after the `-l` or
+`-L` option.
+
+Specifying the working directory
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The `-w` option specifies the initial working directory for newLISP
+after startup:
+
+----------------------------
+newlisp -w /usr/home/newlisp
+----------------------------
+
+All file requests without a directory path will now be directed to the
+path specified with the `-w` option.
+
+Suppressing the prompt and HTTP processing
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The command-line prompt and initial copyright banner can be suppressed:
+
+----------
+newlisp -c
+----------
+
+Listen and connection messages are suppressed if logging is not enabled.
+The `-c` option is useful when controlling newLISP from other programs;
+it is mandatory when setting it up as a link:#net-eval[net-eval] server.
+
+The `-c` option also enables newLISP server nodes to answer HTTP `GET`,
+`PUT`, `POST` and `DELETE` requests, as well as perform CGI processing.
+Using the `-c` option, together with the `-w` and `-d` options, newLISP
+can serve as a standalone `httpd` webserver:
+
+-----------------------------------
+newlisp -c -d 8080 -w /usr/home/www
+-----------------------------------
+
+When running newLISP as an `inetd` or `xinetd` enabled server on Unix
+machines, use:
+
+---------------------------
+newlisp -c -w /usr/home/www
+---------------------------
+
+In `-c` mode, newLISP processes command-line requests as well as HTTP
+and link:#net-eval[net-eval] requests. Running newLISP in this mode is
+only recommended on a machine behind a firewall. This mode should not be
+run on machines open and accessible through the Internet. To suppress
+the processing of link:#net-eval[net-eval] and command-line–like
+requests, use the safer `-http` option.
+
+Forcing prompts in pipe I/O mode
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+A capital `C` forces prompts when running newLISP in pipe I/O mode
+inside the Emacs editor:
+
+----------
+newlisp -C
+----------
+
+To suppress console output from return values from evaluations, use
+link:#silent[silent].
+
+newLISP as a TCP/IP server
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+------------------------
+newlisp some.lsp -p 9090
+------------------------
+
+This example shows how newLISP can listen for commands on a TCP/IP
+socket connection. In this case, standard I/O is redirected to the port
+specified with the `-p` option. `some.lsp` is an optional file loaded
+during startup, before listening for a connection begins.
+
+The `-p` option is mainly used to control newLISP from another
+application, such as a newLISP GUI front-end or a program written in
+another language. As soon as the controlling client closes the
+connection, newLISP will exit.
+
+A telnet application can be used to test running newLISP as a server.
+First enter:
+
+-----------------
+newlisp -p 4711 &
+-----------------
+
+The `&` indicates to a Unix shell to run the process in the background.
+On Windows, start the server process without the `&` in the foreground
+and open a second command window for the telnet application. Now connect
+with a telnet:
+
+---------------------
+telnet localhost 4711
+---------------------
+
+If connected, the newLISP sign-on banner and prompt appear. Instead of
+`4711`, any other port number could be used.
+
+When the client application closes the connection, newLISP will exit
+too.
+
+TCP/IP daemon mode
+^^^^^^^^^^^^^^^^^^
+
+When the connection to the client is closed in `-p` mode, newLISP exits.
+To avoid this, use the `-d` option instead of the `-p` option:
+
+-----------------
+newlisp -d 4711 &
+-----------------
+
+This works like the `-p` option, but newLISP does not exit after a
+connection closes. Instead, it stays in memory, listening for a new
+connection and preserving its state. An link:#exit[exit] issued from a
+client application closes the network connection, and the newLISP daemon
+remains resident, waiting for a new connection. Any port number could be
+used in place of `4711`.
+
+After each transaction, when a connection closes, newLISP will go
+through a reset process, reinitialize stack and signals and go to the
+`MAIN` context. Only the contents of program and variable symbols will
+be preserved when running a stateful server.
+
+When running in `-p` or `-d` mode, the opening and closing tags `[cmd]`
+and `[/cmd]` must be used to enclose multiline statements. They must
+each appear on separate lines. This makes it possible to transfer larger
+portions of code from controlling applications.
+
+The following variant of the `-d` mode is frequently used in a
+distributed computing environment, together with
+link:#net-eval[net-eval] on the client side:
+
+--------------------
+newlisp -c -d 4711 &
+--------------------
+
+The `-c` spec suppresses prompts, making this mode suitable for
+receiving requests from the link:#net-eval[net-eval] function.
+
+newLISP server nodes running will also answer HTTP `GET`, `PUT` and
+`DELETE` requests. This can be used to retrieve and store files with
+link:#get-url[get-url], link:#put-url[put-url],
+link:#delete-url[delete-url], link:#read-file[read-file],
+link:#write-file[write-file] and link:#append-file[append-file], or to
+load and save programs using link:#load[load] and link:#save[save] from
+and to remote server nodes. See the chapters for the `-c` and `-http`
+options for more details.
+
+HTTP-only server mode
+^^^^^^^^^^^^^^^^^^^^^
+
+newLISP can be limited to HTTP processing using the `-http` option. With
+this mode, a secure `httpd` web server daemon can be configured:
+
+--------------------------------------
+newlisp -http -d 8080 -w /usr/home/www
+--------------------------------------
+
+When running newLISP as an `inetd` or `xinetd`-enabled server on Unix
+machines, use:
+
+------------------------------
+newlisp -http -w /usr/home/www
+------------------------------
+
+To further enhance security and HTTP processing, load a program during
+startup when using this mode:
+
+---------------------------------------------
+newlisp httpd-conf.lsp -http -w /usr/home/www
+---------------------------------------------
+
+The file `httpd-conf.lsp` contains a link:#command-event[command-event]
+function configuring a user-defined function to analyze, filter and
+translate requests. See the reference for this function for a working
+example.
+
+In the HTTP modes enabled by either `-c` or `-http`, the following file
+types are recognized, and a correctly formatted `Content-Type:` header
+is sent back:
+
+[cols="<3,<5",width="25%",options="header",]
+|===========================
+|file extension |media type
+|.avi |video/x-msvideo
+|.css |text/css
+|.gif |image/gif
+|.htm |text/htm
+|.html |text/html
+|.jpg |image/jpg
+|.js |application/javascript
+|.mov |video/quicktime
+|.mp3 |audio/mpeg
+|.mpg |video/mpeg
+|.pdf |application/pdf
+|.png |image/png
+|.wav |audio/x-wav
+|.zip |application/zip
+|_any other_ |text/plain
+|===========================
+
+To serve CGI, HTTP server mode needs a `/tmp` directory on Unix-like
+platforms or a `C:\tmp` directory on Win32. newLISP can process `GET`,
+`PUT`, `POST` and `DELETE` requests and create custom response headers. CGI
+files must have the extension `.cgi` and have executable permission on
+Unix. More information about CGI processing for newLISP server modes can
+be found in the document http://www.newlisp.org/CodePatterns.html[Code
+Patterns in newLISP]
+
+In both server modes `-c` and `-http` the environment variables
+`DOCUMENT_ROOT`, `REQUEST_METHOD`, `SERVER_SOFTWARE` and
+`QUERY_STRING` are set.  The variables `CONTENT_TYPE`,
+`CONTENT_LENGTH`, `HTTP_HOST`, `HTTP_USER_AGENT` and `HTTP_COOKIE` are
+also set, if present in the HTTP header sent by the client.
+
+Local domain Unix socket server
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Instead of a port, a local domain Unix socket path can be specified in
+the `-d` or `-p` server modes.
+
+-----------------------------
+newlisp -c -d /tmp/mysocket &
+-----------------------------
+
+Test the server using another newLISP process:
+
+-----------------------------------------------------
+newlisp -e '(net-eval "/tmp/mysocket" 0 "(symbols)")'
+-----------------------------------------------------
+
+A list of all built-in symbols will be printed to the terminal
+
+This mode will work together with local domain socket modes of
+link:#net-connect[net-connect], link:#net-listen[net-listen], and
+link:#net-eval[net-eval]. Local domain sockets opened with `net-connect`
+and `net-listen` can be served using link:#net-accept[net-accept],
+link:#net-receive[net-receive], and link:#net-send[net-send]. Local
+domain socket connections can be monitored using
+link:#net-peek[net-peek] and link:#net-select[net-select].
+
+Local domain socket connections are much faster than normal TCP/IP
+network connections and preferred for communications between processes
+on the same local file system in distributed applications. This mode is
+not available on Win32.
+
+Connection timeout
+^^^^^^^^^^^^^^^^^^
+
+Specifies a connection timeout when running in `-p` or `-d` demon mode.
+A newLISP Server will disconnect when no further input is read after
+accepting a client connection. The timeout is specified in micro
+seconds:
+
+-------------------------------
+newlisp -c -t 3000000 -d 4711 &
+-------------------------------
+
+The example specifies a timeout of three seconds.
+
+`inetd` daemon mode
+^^^^^^^^^^^^^^^^^^^
+
+The `inetd` server running on virtually all Linux/Unix OSes can function
+as a proxy for newLISP. The server accepts TCP/IP or UDP connections and
+passes on requests via standard I/O to newLISP. `inetd` starts a newLISP
+process for each client connection. When a client disconnects, the
+connection is closed and the newLISP process exits.
+
+`inetd` and newLISP together can handle multiple connections efficiently
+because of newLISP's small memory footprint, fast executable, and short
+program load times. When working with link:#net-eval[net-eval], this
+mode is preferred for efficiently handling multiple requests in a
+distributed computing environment.
+
+Two files must be configured: `services` and `inetd.conf`. Both are
+ASCII-editable and can usually be found at `/etc/services` and
+`/etc/inetd.conf`.
+
+Put one of the following lines into `inetd.conf:`
+
+-------------------------------------------------------------------
+net-eval  stream  tcp  nowait  root  /usr/bin/newlisp -c
+
+# as an alternative, a program can also be preloaded
+
+net-eval  stream  tcp  nowait  root  /usr/bin/newlisp -c myprog.lsp
+-------------------------------------------------------------------
+
+Instead of `root`, another user and optional group can be specified. For
+details, see the Unix man page for `inetd`.
+
+The following line is put into the `services` file:
+
+--------------------------------------------------------
+net-eval        4711/tcp     # newLISP net-eval requests
+--------------------------------------------------------
+
+On Mac OS X and some Unix systems, `xinetd` can be used instead of
+`inetd`. Save the following to a file named `net-eval` in the
+`/etc/xinetd.d/` directory:
+
+-----------------------------
+service net-eval
+{
+    socket_type = stream
+    wait = no
+    user = root
+    server = /usr/bin/newlisp
+    port = 4711
+    server_args = -c
+    only_from = localhost
+}
+-----------------------------
+
+For security reasons, `root` should be changed to a different user and
+file permissions of the www document directory adjusted accordingly. The
+`only_from` spec can be left out to permit remote access.
+
+See the man pages for `xinetd` and `xinetd.conf` for other configuration
+options.
+
+After configuring the daemon, `inetd` or `xinetd` must be restarted to
+allow the new or changed configuration files to be read:
+
+---------------
+kill -HUP <pid>
+---------------
+
+Replace `<pid>` with the process ID of the running `xinetd` process.
+
+A number or network protocol other than 4711 or TCP can be specified.
+
+newLISP handles everything as if the input were being entered on a
+newLISP command-line without a prompt. To test the `inetd` setup, the
+`telnet` program can be used:
+
+---------------------
+telnet localhost 4711
+---------------------
+
+newLISP expressions can now be entered, and `inetd` will automatically
+handle the startup and communications of a newLISP process. Multiline
+expressions can be entered by bracketing them with `[cmd]` and `[/cmd]`
+tags, each on separate lines.
+
+newLISP server nodes answer HTTP `GET` and `PUT` requests. This can be
+used to retrieve and store files with link:#get-url[get-url],
+link:#put-url[put-url], link:#read-file[read-file],
+link:#write-file[write-file] and link:#append-file[append-file], or to
+load and save programs using link:#load[load] and link:#save[save] from
+and to remote server nodes.
+
+( § )
+
+5. Startup, directories, environment
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Environment variable `NEWLISPDIR`
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+During startup, newLISP sets the environment variable `NEWLISPDIR`, if
+it is not set already. On Linux, BSDs, Mac OS X and other Unixes the
+variable is set to `/usr/share/newlisp`. On Win32 the variable is set to
+`%PROGRAMFILES%/newlisp`.
+
+The environment variable `NEWLISPDIR` is useful when loading files
+installed with newLISP:
+
+[source,newlisp]
+-------------------------------------------------------
+(load (append (env "NEWLISPDIR") "/guiserver.lsp"))
+
+(load (append (env "NEWLISPDIR") "/modules/mysql.lsp"))
+-------------------------------------------------------
+
+A predefined function `module` can be used to shorten the second
+statement loading from the `modules/` directory:
+
+[source,newlisp]
+--------------------
+(module "mysql.lsp")
+--------------------
+
+The initialization file `init.lsp`
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Before loading any files specified on the command-line, and before the
+banner and prompt are shown. newLISP tries to load a file `.init.lsp`
+from the home directory of the user starting newLISP. On Mac OS X, Linux
+and other Unix the home directory is found in the `HOME` environment
+variable. On Win32 the directory name is contained in the `USERPROFILE`
+or `DOCUMENT_ROOT` environment variable.
+
+If a `.init.lsp` cannot be found in the home directory newLISP tries to
+load the file `init.lsp` from the directory found in the environment
+variable `NEWLISPDIR`.
+
+When newLISP is run as a shared library, an initialization file is
+looked for in the environment variable `NEWLISPLIB_INIT`. The full
+path-name of the initialization file must be specified. If
+`NEWLISPLIB_INIT` is not defined, no initialization file will be loaded
+by the library module.
+
+Although newLISP does not require `init.lsp` to run, it is convenient
+for defining functions and system-wide variables.
+
+Note that neither one of the initialization files `init.lsp` nor
+`.init.lsp` is loaded during startup of linked programs.
+
+Directories on Linux, BSD, Mac OS X and other Unix
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The directory `/usr/share/newlisp/modules` contains modules with useful
+functions POP3 mail, etc. The directory `/usr/share/newlisp/guiserver`
+contains sample programs for writing GUI applications with newLISP-GS.
+The directory `/usr/share/doc/newlisp/` contains documentation in HTML
+format.
+
+Directories on Win32
+^^^^^^^^^^^^^^^^^^^^
+
+On Win32 systems, all files are installed in the default directory
+`%PROGRAMFILES%\newlisp`. `PROGRAMFILES` is a Win32 environment variable
+that resolves to `C:\Program files\newlisp\` in English language
+installations. The subdirectories `%PROGRAMFILES%\newlisp\modules` and
+`%PROGRAMFILES%\newlisp\guiserver` contain modules for interfacing to
+external libraries and sample programs written for newLISP-GS.
+
+( § )
+
+6. Extending newLISP with shared libraries
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Many shared libraries on Unix and Win32 systems can be used to extend
+newLISP's functionality. Examples are libraries for writing graphical
+user interfaces, libraries for encryption or decryption and libraries
+for accessing databases.
+
+The function link:#import[import] is used to import functions from
+external libraries. The function link:#callback[callback] is used to
+register callback functions in external libraries. Other functions like
+link:#pack[pack], link:#unpack[unpack], link:#get-string[get-string],
+link:#get-int[get-int] and link:#get-long[get-long] exist to facilitate
+formatting input and output to and from imported library functions.
+
+See also chapter
+http://www.newlisp.org/downloads/CodePatterns.html#toc-23[23. Extending
+newLISP] in the http://www.newlisp.org/downloads/CodePatterns.html[Code
+Patterns in newLISP] document.
+
+( § )
+
+7. newLISP as a shared library
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+newLISP can be compiled as a shared library. On Linux, BSDs and other
+Unix flavors the library is called `newlisp.so`. On Windows it is called
+`newlisp.dll` and `newlisp.dylib` on Mac OS X. A newLISP shared library
+is used like any other shared library.
+
+The main function to import is `newlispEvalStr`. Like
+link:#eval-string[eval-string], this function takes a string containing
+a newLISP expression and stores the result in a string address. The
+result can be retrieved using link:#get-string[get-string]. The returned
+string is formatted like output from a command-line session. It contains
+terminating line-feed characters, but but not the prompt string.
+
+When calling `newlispEvalStr`, output normally directed to the console
+(e.g. return values or link:#print[print] statements) is returned in the
+form of an integer string pointer. The output can be accessed by passing
+this pointer to the `get-string` function. To silence the output from
+return values, use the link:#silent[silent] function.
+
+When passing multi-line source to `newlispEvalStr`, that source should
+be bracketed by `[cmd]`, `[/cmd]` tags, each on a different line:
+
+[source,newlisp]
+----------------------
+(set 'code [text][cmd]
+...
+...
+...
+[/cmd][/text])
+----------------------
+
+Since v.10.3.3 callbacks can also be registered using `newlispCallback`.
+For more information read chapter
+http://www.newlisp.org/downloads/CodePatterns.html#toc-24[24. newLISP
+compiled as a shared library] in the
+http://www.newlisp.org/downloads/CodePatterns.html[Code Patterns in
+newLISP] document.
+
+( § )
+
+8. Evaluating newLISP expressions
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The following is a short introduction to newLISP statement evaluation
+and the role of integer and floating point arithmetic in newLISP.
+
+Top-level expressions are evaluated when using the link:#load[load]
+function or when entering expressions in console mode on the
+command-line.
+
+Interactive multiline expressions
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Multiline expressions can be entered by entering an empty line first.
+Once in multiline mode, another empty line returns from entry mode and
+evaluates the statement(s) entered:
+
+[source,newlisp]
+----------------------
+>
+(define (foo x y)
+    (+ x y))
+
+(lambda (x y) (+ x y))
+> (foo 3 4)
+7
+> _
+----------------------
+
+Entering multiline mode by hitting the enter key on an empty line
+suppresses the prompt. Entering another empty line will leave the
+multiline mode and evaluate expressions.
+
+As an alternative to entering empty lines, the `[cmd]` and `[/cmd]` tags
+are used, each entered on separate lines. This mode is used by some
+interactive IDEs controllling newLISP and internally by the
+link:#net-eval[net-eval] function. The `[cmd]` and `[/cmd]` tags must
+also be used in the console part of the newLISP-GS Java IDE.
+
+Integer, floating point data and operators
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+newLISP functions and operators accept integer and floating point
+numbers, converting them into the needed format. For example, a
+bit-manipulating operator converts a floating point number into an
+integer by omitting the fractional part. In the same fashion, a
+trigonometric function will internally convert an integer into a
+floating point number before performing its calculation.
+
+The symbol operators (`+` `-` `*` `/` `%` `$` `~` `|` `^` `<<` `>>`)
+return values of type integer. Functions and operators named with a word
+instead of a symbol (e.g., `add` rather than `+`) return floating point
+numbers. Integer operators truncate floating point numbers to integers,
+discarding the fractional parts.
+
+newLISP has two types of basic arithmetic operators: integer (`+` `-`
+`*` `/`) and floating point (`add` `sub` `mul` `div`). The arithmetic
+functions convert their arguments into types compatible with the
+function's own type: integer function arguments into integers, floating
+point function arguments into floating points. To make newLISP behave
+more like other scripting languages, the integer operators `+`, `-`,
+`*`, and `/` can be redefined to perform the floating point operators
+`add`, `sub`, `mul`, and `div`:
+
+[source,newlisp]
+--------------------------------------
+(constant '+ add)
+(constant '- sub)
+(constant '* mul)
+(constant '/ div)
+
+;; or all 4 operators at once
+(constant '+ add '- sub '* mul '/ div)
+--------------------------------------
+
+Now the common arithmetic operators `+`, `-`, `*`, and `/` accept both
+integer and floating point numbers and return floating point results.
+
+Note that the looping variables in link:#dotimes[dotimes] and
+link:#for[for], as well as the result of link:#sequence[sequence], use
+floating point numbers for their values.
+
+Care must be taken when link:#imoport[importing] from libraries that use
+functions expecting integers. After redefining `+, -, *`, and `/`, a
+double floating point number may be unintentionally passed to an
+imported function instead of an integer. In this case, floating point
+numbers can be converted into integers by using the function
+link:#int[int]. Likewise, integers can be transformed into floating
+point numbers using the link:#float[float] function:
+
+[source,newlisp]
+-------------------------------------------------------------
+(import "mylib.dll" "foo")  ; importing int foo(int x) from C
+(foo (int x))               ; passed argument as integer
+(import "mylib.dll" "bar")  ; importing C int bar(double y)
+(bar (float y))             ; force double float
+-------------------------------------------------------------
+
+Some of the modules shipping with newLISP are written assuming the
+default implementations of `+`, `-`, `*`, and `/`. This gives imported
+library functions maximum speed when performing address calculations.
+
+The newLISP preference is to leave `+`, `-`, `*`, and `/` defined as
+integer operators and use `add`, `sub`, `mul`, and `div` when explicitly
+required. Since version 8.9.7, integer operations in newLISP are 64 bit
+operations, whereas 64 bit double floating point numbers offer only 52
+bits of resolution in the integer part of the number.
+
+Evaluation rules and data types
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Evaluate expressions by entering and editing them on the command-line.
+More complicated programs can be entered using editors like Emacs and
+VI, which have modes to show matching parentheses while typing. Load a
+saved file back into a console session by using the link:#load[load]
+function.
+
+A line comment begins with a `;` (semicolon) or a `#` (number sign) and
+extends to the end of the line. newLISP ignores this line during
+evaluation. The `#` is useful when using newLISP as a scripting language
+in Linux/Unix environments, where the `#` is commonly used as a line
+comment in scripts and shells.
+
+When evaluation occurs from the command-line, the result is printed to
+the console window.
+
+The following examples can be entered on the command-line by typing the
+code to the left of the → symbol. The result that appears on the next
+line should match the code to the right of the → symbol.
+
+*nil* and *true* are Boolean data types that evaluate to themselves:
+
+[source,newlisp]
+-------------
+nil    → nil
+true   → true
+-------------
+
+*Integers* and *floating point* numbers evaluate to themselves:
+
+[source,newlisp]
+------------------------------------------------
+123      → 123    ; decimal integer
+0xE8     → 232    ; hexadecimal prefixed by 0x
+055      → 45     ; octal prefixed by 0 (zero)
+0b101010 → 42     ; binary prefixed by 0b
+1.23     → 1.23   ; float
+123e-3   → 0.123  ; float in scientific notation
+------------------------------------------------
+
+Integers are 64-bit numbers (including the sign bit, 32-bit before
+version 8.9.7). Valid integers are numbers between
+-9,223,372,036,854,775,808 and +9,223,372,036,854,775,807. Larger
+numbers converted from floating point numbers are truncated to one of
+the two limits. Integers internal to newLISP, which are limited to
+32-bit numbers, overflow to either +2,147,483,647 or -2,147,483,648.
+Floating point numbers are IEEE 754 64-bit doubles. Unsigned numbers up
+to 18,446,744,073,709,551,615 can be displayed using special formatting
+characters for link:#format[format].
+
+*Strings* may contain null characters and can have different delimiters.
+They evaluate to themselves.
+
+[source,newlisp]
+---------------------------------------------------
+"hello"             →"hello"
+"\032\032\065\032"  →"  A "
+"\x20\x20\x41\x20"  →"  A "
+"\t\r\n"            →"\t\r\n"
+"\x09\x0d\x0a"      →"\t\r\n"
+
+;; null characters are legal in strings:
+"\000\001\002"       → "\000\001\002"
+{this "is" a string} → "this \"is\" a string"
+
+;; use [text] tags for text longer than 2048 bytes:
+[text]this is a string, too[/text]
+→ "this is a string, too"
+---------------------------------------------------
+
+Strings delimited by `"` (double quotes) will also process the following
+characters escaped with a `\` (backslash):
+
+[cols="<1,<10",options="header",]
+|=======================================================================
+|character |description
+|`\"` |for a double quote inside a quoted string
+
+|`\n` |for a line-feed character (ASCII 10)
+
+|`\r` |for a return character (ASCII 13)
+
+|`\t` |for a TAB character (ASCII 9)
+
+|`\nnn` |for a three-digit ASCII number (nnn format between 000 and 255)
+
+|`\xnn` |for a two-digit-hex ASCII number (xnn format between x00 and
+xff)
+
+|`\unnnn` |for a unicode character encoded in the four `nnnn`
+hexadecimal digits. newLISP will translate this to a UTF8 character in
+the UTF8 enabled versions of newLISP.
+
+|`\\` |for the backslash character (ASCII 92) itself
+|=======================================================================
+
+Quoted strings cannot exceed 2,048 characters. Longer strings should use
+the `[text]` and `[/text]` tag delimiters. newLISP automatically uses
+these tags for string output longer than 2,048 characters.
+
+The `{` (left curly bracket), `}` (right curly bracket), and
+`[text], [/text]` delimiters do not perform escape character processing.
+
+*Lambda and lambda-macro expressions* evaluate to themselves:
+
+[source,newlisp]
+--------------------------------------------------------------------------------------
+(lambda (x) (* x x))                   → (lambda (x) (* x x))
+(lambda-macro (a b) (set (eval a) b))  → (lambda-macro (a b) (set (eval a) b))
+(fn (x) (* x x))                       → (lambda (x) (* x x))  ; an alternative syntax
+--------------------------------------------------------------------------------------
+
+*Symbols* evaluate to their contents:
+
+[source,newlisp]
+---------------------------
+(set 'something 123)  → 123
+something             → 123
+---------------------------
+
+*Contexts* evaluate to themselves:
+
+[source,newlisp]
+---------------------
+(context 'CTX)  → CTX
+CTX             → CTX
+---------------------
+
+*Built-in functions* also evaluate to themselves:
+
+[source,newlisp]
+-----------------------------------
+add                → add <B845770D>
+(eval (eval add))  → add <B845770D>
+(constant '+ add)  → add <B845770D>
++                  → add <B845770D>
+-----------------------------------
+
+In the above example, the number between the < > (angle brackets) is the
+hexadecimal memory address (machine-dependent) of the `add` function. It
+is displayed when printing a built-in primitive.
+
+*Quoted expressions* lose one ' (single quote) when evaluated:
+
+[source,newlisp]
+-----------------------
+'something  → something
+''''any     → '''any
+'(a b c d)  → (a b c d)
+-----------------------
+
+A single quote is often used to _protect_ an expression from evaluation
+(e.g., when referring to the symbol itself instead of its contents or to
+a list representing data instead of a function).
+
+*Lists* are evaluated by first evaluating the first list element before
+the rest of the expression (as in Scheme). The result of the evaluation
+is applied to the remaining elements in the list and must be one of the
+following: a `lambda` expression, `lambda-macro` expression, or
+`primitive` (built-in) function.
+
+[source,newlisp]
+---------------------------------------------------
+(+ 1 2 3 4)                  → 10
+(define (double x) (+ x x))  → (lambda (x) (+ x x))
+---------------------------------------------------
+
+or
+
+[source,newlisp]
+----------------------------------
+(set 'double (lambda (x) (+ x x)))
+(double 20)               → 40
+((lambda (x) (* x x)) 5)  → 25
+----------------------------------
+
+For a user-defined lambda expression, newLISP evaluates the arguments
+from left to right and binds the results to the parameters (also from
+left to right), before using the results in the body of the expression.
+
+Like Scheme, newLISP evaluates the _functor_ (function object) part of
+an expression before applying the result to its arguments. For example:
+
+[source,newlisp]
+-----------------------
+((if (> X 10) * +) X Y)
+-----------------------
+
+Depending on the value of X, this expression applies the `*` (product)
+or `+` (sum) function to X and Y.
+
+Because their arguments are not evaluated, `lambda-macro` expressions
+are useful for extending the syntax of the language. Most built-in
+functions evaluate their arguments from left to right (as needed) when
+executed. Some exceptions to this rule are indicated in the reference
+section of this manual. Lisp functions that do not evaluate all or some
+of their arguments are called _special forms_.
+
+*Arrays* evaluate to themselves:
+
+[source,newlisp]
+-----------------------------------------------
+(set 'A (array 2 2 '(1 2 3 4))) → ((1 2) (3 4))
+(eval A)                        → ((1 2) (3 4))
+-----------------------------------------------
+
+*Shell commands*: If an `!` (exclamation mark) is entered as the first
+character on the command-line followed by a shell command, the command
+will be executed. For example, `!ls` on Unix or `!dir` on Win32 will
+display a listing of the present working directory. No spaces are
+permitted between the `!` and the shell command. Symbols beginning
+with an `!` are still allowed inside expressions or on the
+command-line when preceded by a space. Note: This mode only works when
+running in the shell and does not work when controlling newLISP from
+another application.
+
+To exit the newLISP shell on Linux/Unix, press `Ctrl-D`; on Win32, type
+`(exit)` or `Ctrl-C`, then the x key.
+
+Use the link:#exec[exec] function to access shell commands from other
+applications or to pass results back to newLISP.
+
+( § )
+
+9. Lambda expressions in newLISP
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Lambda expressions in newLISP evaluate to themselves and can be treated
+just like regular lists:
+
+[source,newlisp]
+------------------------------------------------------------
+(set 'double (lambda (x) (+ x x)))
+(set 'double (fn (x) (+ x x)))      ; alternative syntax
+
+(last double)  → (+ x x)            ; treat lambda as a list
+------------------------------------------------------------
+
+Note: No `'` is necessary before the lambda expression because lambda
+expressions evaluate to themselves in newLISP.
+
+The second line uses the keyword `fn`, an alternative syntax first
+suggested by Paul Graham for his Arc language project.
+
+A lambda expression is a _lambda list_, a subtype of _list_, and its
+arguments can associate from left to right or right to left. When using
+link:#append[append], for example, the arguments associate from left to
+right:
+
+[source,newlisp]
+--------------------------------------------------------
+(append (lambda (x)) '((+ x x)))  → (lambda (x) (+ x x))
+--------------------------------------------------------
+
+link:#cons[cons], on the other hand, associates the arguments from right
+to left:
+
+[source,newlisp]
+----------------------------------------------------
+(cons '(x) (lambda (+ x x)))  → (lambda (x) (+ x x))
+----------------------------------------------------
+
+Note that the `lambda` keyword is not a symbol in a list, but a
+designator of a special _type_ of list: the _lambda list_.
+
+[source,newlisp]
+------------------------------------
+(length (lambda (x) (+ x x)))  → 2
+(first (lambda (x) (+ x x)))   → (x)
+------------------------------------
+
+Lambda expressions can be mapped or applied onto arguments to work as
+user-defined, anonymous functions:
+
+[source,newlisp]
+----------------------------------------------
+((lambda (x) (+ x x)) 123)           → 246
+(apply (lambda (x) (+ x x)) '(123))  → 246
+(map (lambda (x) (+ x x)) '(1 2 3))  → (2 4 6)
+----------------------------------------------
+
+A lambda expression can be assigned to a symbol, which in turn can be
+used as a function:
+
+[source,newlisp]
+----------------------------------------------------------
+(set 'double (lambda (x) (+ x x)))  → (lambda (x) (+ x x))
+(double 123)                        → 246
+----------------------------------------------------------
+
+The link:#define[define] function is just a shorter way of assigning a
+lambda expression to a symbol:
+
+[source,newlisp]
+----------------------------------------------------
+(define (double x) (+ x x)))  → (lambda (x) (+ x x))
+(double 123)                  → 246
+----------------------------------------------------
+
+In the above example, the expressions inside the lambda list are still
+accessible within `double`:
+
+[source,newlisp]
+----------------------------------------------------------
+(set 'double (lambda (x) (+ x x)))  → (lambda (x) (+ x x))
+(last double)                       → (+ x x)
+----------------------------------------------------------
+
+A lambda list can be manipulated as a first-class object using any
+function that operates on lists:
+
+[source,newlisp]
+-------------------------------------------------------------
+(setf (nth 1 double) '(mul 2 x)) → (lambda (x) (mul 2 x))
+double                           → (lambda (x) (mul 2 x))
+(double 123)                     → 246
+-------------------------------------------------------------
+
+All arguments are optional when applying lambda expressions and default
+to `nil` when not supplied by the user. This makes it possible to write
+functions with multiple parameter signatures.
+
+( § )
+
+10. `nil`, `true`, `cons`, and `()`
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+In newLISP, `nil` and `true` represent both the symbols and the Boolean
+values _false_ and _true_. Depending on their context, `nil` and `true`
+are treated differently. The following examples use `nil`, but they can
+be applied to `true` by simply reversing the logic.
+
+Evaluation of `nil` yields a Boolean false and is treated as such inside
+flow control expressions such as `if`, `unless`, `while`, `until`, and
+`not`. Likewise, evaluating `true` yields true.
+
+[source,newlisp]
+---------------------------------------------
+(set 'lst '(nil nil nil))  → (nil nil nil)
+(map symbol? lst)          → (true true true)
+---------------------------------------------
+
+In the above example, `nil` represents a symbol. In the following
+example, `nil` and `true` are evaluated and represent Boolean values:
+
+[source,newlisp]
+---------------------------------------
+(if nil "no" "yes")  → "yes"
+(if true "yes" "no") → "yes"
+(map not lst)        → (true true true)
+---------------------------------------
+
+In newLISP, `nil` and the empty list `()` are not the same as in some
+other Lisps. Only in conditional expressions are they treated as a
+Boolean false, as in `and`, `or`, `if`, `while`, `unless`, `until`, and
+`cond`.
+
+Evaluation of `(cons 'x '())` yields `(x)`, but `(cons 'x nil)` yields
+`(x nil)` because `nil` is treated as a Boolean value when evaluated,
+not as an empty list. The `cons` of two atoms in newLISP does not yield
+a dotted pair, but rather a two-element list. The predicate `atom?` is
+true for `nil`, but false for the empty list. The empty list in newLISP
+is only an empty list and not equal to `nil`.
+
+A list in newLISP is a newLISP cell of type list. It acts like a
+container for the linked list of elements making up the list cell's
+contents. There is no _dotted pair_ in newLISP because the _cdr_ (tail)
+part of a Lisp cell always points to another Lisp cell and never to a
+basic data type, such as a number or a symbol. Only the _car_ (head)
+part may contain a basic data type. Early Lisp implementations used
+_car_ and _cdr_ for the names _head_ and _tail_.
+
+( § )
+
+11. Arrays
+~~~~~~~~~~
+
+newLISP's arrays enable fast element access within large lists. New
+arrays can be constructed and initialized with the contents of an
+existing list using the function link:#array[array]. Lists can be
+converted into arrays, and vice versa. Most of the same functions used
+for modifying and accessing lists can be applied to arrays, as well.
+Arrays can hold any type of data or combination thereof.
+
+In particular, the following functions can be used for creating,
+accessing, and modifying arrays:
+
+[cols="1<,10<",width="40%",options="header",]
+|=======================================================================
+|function |description
+|link:#append[append] |appends arrays
+
+|link:#array[array] |creates and initializes an array with up to 16
+dimensions
+
+|link:#array-list[array-list] |converts an array into a list
+
+|link:#arrayp[array?] |checks if expression is an array
+
+|link:#det[det] |returns the determinant of a matrix
+
+|link:#first[first] |returns the first row of an array
+
+|link:#invert[invert] |returns the inversion of a matrix
+
+|link:#last[last] |returns the last row of an array
+
+|link:#mat[mat] |perform scalar operations on matrices
+
+|link:#multiply[multiply] |multiplies two matrices
+
+|link:#nth[nth] |returns an element of and array
+
+|link:#rest[rest] |returns all but the first row of an array
+
+|link:#setf[setf] |sets contents of an array reference
+
+|link:#slice[slice] |returns a slice of an array
+
+|link:#sort[sort] |sort the elements in an array
+
+|link:#transpose[transpose] |transposes a matrix
+|=======================================================================
+
+newLISP represents multidimensional arrays with an array of arrays
+(i.e., the elements of the array are themselves arrays).
+
+When used interactively, newLISP prints and displays arrays as lists,
+with no way of distinguishing between them.
+
+Use the link:#source[source] or link:#save[save] functions to serialize
+arrays (or the variables containing them). The link:#array[array]
+statement is included as part of the definition when serializing arrays.
+
+Like lists, negative indices can be used to enumerate the elements of an
+array, starting from the last element.
+
+An out-of-bounds index will cause an error message on an array or list.
+
+Arrays can be non-rectangular, but they are made rectangular during
+serialization when using link:#source[source] or link:#save[save]. The
+link:#array[array] function always constructs arrays in rectangular
+form.
+
+The matrix functions link:#det[det], link:#transpose[transpose],
+link:#multiply[multiply], and link:#invert[invert] can be used on
+matrices built with nested lists or arrays built with
+link:#array[array].
+
+For more details, see link:#array[array], link:#arrayp[array?], and
+link:#array-list[array-list] in the reference section of this manual.
+
+( § )
+
+12. Indexing elements of strings, lists, and arrays
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Some functions take array, list, or string elements (characters)
+specified by one or more _int-index_ (integer index). The positive
+indices run `0, 1, …, N-2, N-1`, where `N` is the number of elements in
+the list. If _int-index_ is negative, the sequence is
+`-N, -N+1, …, -2, -1`. Adding `N` to the negative index of an element
+yields the positive index. Unless a function does otherwise, an index
+greater than `N-1` or less then -N causes an out-of-bounds error in
+lists and arrays.
+
+Implicit indexing for `nth`
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Implicit indexing can be used instead of link:#nth[nth] to retrieve the
+elements of a list or array or the characters of a string:
+
+[source,newlisp]
+----------------------------------------------
+(set 'lst '(a b c (d e) (f g)))
+
+(lst 0)    → a      ; same as (nth 0 lst)
+(lst 3)    → (d e)
+(lst 3 1)  → e      ; same as (nth '(3 1) lst)
+(lst -1)   → (f g)
+
+(set 'myarray (array 3 2 (sequence 1 6)))
+
+(myarray 1)     → (3 4)
+(myarray 1 0)   → 3
+(myarray 0 -1)  → 2
+
+("newLISP" 3)   → "L"
+----------------------------------------------
+
+Indices may also be supplied from a list. In this way, implicit indexing
+works together with functions that take or produce index vectors, such
+as link:#push[push], link:#pop[pop], link:#ref[ref] and
+link:#ref-all[ref-all].
+
+[source,newlisp]
+-----------------------------------
+(lst '(3 1))                → e
+(set 'vec (ref 'e lst))     → (3 1)
+(lst vec)                   → e
+-----------------------------------
+
+Note that implicit indexing is not breaking newLISP syntax rules but is
+merely an expansion of existing rules to other data types in the functor
+position of an s-expression. In original Lisp, the first element in an
+s-expression list is applied as a function to the rest elements as
+arguments. In newLISP, a list in the functor position of an s-expression
+assumes self-indexing functionality using the index arguments following
+it.
+
+Implicit indexing is faster than the explicit forms, but the explicit
+forms may be more readable depending on context.
+
+Note that in the UTF-8–enabled version of newLISP, implicit indexing of
+strings or using the link:#nth[nth] function work on character rather
+than single-byte boundaries.
+
+Implicit indexing and the default functor
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The _default functor_ is a functor inside a context with the same name
+as the context itself. See link:#default_function[The context default
+function] chapter. A default functor can be used together with implicit
+indexing to serve as a mechanism for referencing lists:
+
+[source,newlisp]
+-------------------------------------
+(set 'MyList:MyList '(a b c d e f g))
+
+(MyList 0)   → a
+(MyList 3)   → d
+(MyList -1)  → g
+
+(3 2 MyList) → (d e)
+(-3 MyList)  → (e f g)
+
+(set 'aList MyList)
+
+(aList 3)  → d
+-------------------------------------
+
+In this example, `aList` references `MyList:MyList`, not a copy of it.
+For more information about contexts, see
+link:#context_objects[Programming with contexts].
+
+The indexed default functor can also be used with link:#setf[setf] as
+shown in the following example:
+
+[source,newlisp]
+-------------------------------------------
+(set 'MyList:MyList '(a b c d e f g))
+
+(setf (MyList 3) 999)   → 999
+(MyList 3)              → 999
+
+MyList:MyList           → (a b c 999 e f g)
+-------------------------------------------
+
+Implicit indexing for `rest` and `slice`
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Implicit forms of link:#rest[rest] and link:#slice[slice] can be created
+by prepending a list with one or two numbers for offset and length. If
+the length is negative it counts from the end of the list or string:
+
+[source,newlisp]
+-------------------------------------
+(set 'lst '(a b c d e f g))
+; or as array
+(set 'lst (array 7 '(a b c d e f g)))
+
+(1 lst)      → (b c d e f g)
+(2 lst)      → (c d e f g)
+(2 3 lst)    → (c d e)
+(-3 2 lst)   → (e f)
+(2 -2 lst)   → (c d e)
+
+(set 'str "abcdefg")
+
+(1 str)      → "bcdefg"
+(2 str)      → "cdefg"
+(2 3 str)    → "cde"
+(-3 2 str)   → "ef"
+(2 -2 str)   → "cde"
+-------------------------------------
+
+The functions link:#rest[rest], link:#first[first] and link:#last[last]
+work on multi-byte character boundaries in UTF-8 enabled versions of
+newLISP. But the implicit indexing forms for slicing and resting will
+always work on single-byte boundaries and can be used for binary
+content. Offset and length results from the regular expression functions
+link:#find[find] and link:#regex[regex] are also in single-byte counts
+and can be further processed with link:#slice[slice] or its implicit
+form.
+
+Modify references in lists, arrays and strings
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Parts in lists, arrays and strings referenced by indices can be modified
+using link:#setf[setf]:
+
+[source,newlisp]
+-------------------------------------------------------------
+; lists
+
+(set 'lst '(a b c d (e f g)))
+
+(lst 1) → b
+
+(setf (lst 1) 'z) → z
+
+lst → (a z c d (e f g))
+
+(setf (lst -1) '(E F G)) → (E F G)
+
+lst → (a z c d (E F G))
+
+; arrays
+
+(set 'myarray (array 2 3 (sequence 1 6))) → ((1 2 3) (4 5 6))
+
+(setf (myarray 1 2) 66) → 66
+
+myarray → ((1 2 3) (4 5 66))
+
+; strings
+
+(set 's "NewLISP")
+
+(setf (s 0) "n") → "n"
+
+s → "newLISP"
+-------------------------------------------------------------
+
+Note that only full elements or nested lists or arrays can be changed
+this way. Slices or rest parts of lists or arrays as used in implicit
+resting or slicing cannot be substituted at once using link:#setf[setf],
+but would have to be substituted element by element. In strings only one
+character can be replaced at a time, but that character can be replaced
+by a multi-chracacter string.
+
+( § )
+
+13. Destructive versus nondestructive functions
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Most of the primitives in newLISP are nondestructive (no _side effects_)
+and leave existing objects untouched, although they may create new ones.
+There are a few destructive functions, however, that _do_ change the
+contents of a variable, list, array, or string:
+
+[cols="1<,5<",options="header",]
+|=======================================================================
+|function |description
+|link:#inci[++] |increments numbers in integer mode
+
+|link:#deci[--] |decrements numbers in integer mode
+
+|link:#bind[bind] |binds variable associations in a list
+
+|link:#constant[constant] |sets the contents of a variable and protects
+it
+
+|link:#extend[extend] |extends a list or string
+
+|link:#dec[dec] |decrements a number referenced by a variable, list or
+array
+
+|link:#define[define] |sets the contents of a variable
+
+|link:#inc[inc] |increments a number referenced by a variable, list or
+array
+
+|link:#net-receive[net-receive] |reads into a buffer variable
+
+|link:#pop[pop] |pops an element from a list or string
+
+|link:#pop-assoc[pop-assoc] |removes an association from an association
+list
+
+|link:#push[push] |pushes a new element onto a list or string
+
+|link:#read[read] |reads into a buffer variable
+
+|link:#receive[receive] |receives a message from a parent or child
+process
+
+|link:#replace[replace] |replaces elements in a list or string
+
+|link:#reverse[reverse] |reverses a list or string
+
+|link:#rotate[rotate] |rotates the elements of a list or characters of a
+string
+
+|link:#set[set] |sets the contents of a variable
+
+|link:#setf[setf setq] |sets the contents of a variable, list, array or
+string
+
+|link:#set-ref[set-ref] |searches for an element in a nested list and
+replaces it
+
+|link:#set-ref-all[set-ref-all] |searches for an element in a nested
+list and replaces all instances
+
+|link:#sort[sort] |sorts the elements of a list or array
+
+|link:#swap[swap] |swaps two elements inside a list or string
+|=======================================================================
+
+Make a destructive function non-destructive
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Some destructive functions can be made non-destructive by wrapping the
+target object into the link:#copy[copy] function.
+
+[source,newlisp]
+---------------------------------------
+(set 'aList '(a b c d e f))
+
+(replace 'c (copy aList)) → (a b d e f)
+
+aList → (a b c d e f)
+---------------------------------------
+
+The list in `aList` is left unchanged.
+
+( § )
+
+14. Early return from functions, loops, and blocks
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+What follows are methods of interrupting the control flow inside both
+loops and the link:#begin[begin] expression.
+
+The looping functions link:#dolist[dolist] and link:#dotimes[dotimes]
+can take optional conditional expressions to leave the loop early.
+link:#catch[catch] and link:#throw[throw] are a more general form to
+break out of a loop body and are also applicable to other forms or
+statement blocks.
+
+Using `catch` and `throw`
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Because newLISP is a functional language, it uses no `break` or `return`
+statements to exit functions or iterations. Instead, a block or function
+can be exited at any point using the functions link:#catch[catch] and
+link:#throw[throw]:
+
+[source,newlisp]
+------------------------------
+(define (foo x)
+    ...
+    (if condition (throw 123))
+    ...
+    456
+)
+
+;; if condition is true
+
+(catch (foo p))  → 123
+
+;; if condition is not true
+
+(catch (foo p))  → 456
+------------------------------
+
+Breaking out of loops works in a similar way:
+
+[source,newlisp]
+----------------------------------------
+(catch
+    (dotimes (i N)
+        (if (= (foo i) 100) (throw i))))
+
+→ value of i when foo(i) equals 100
+----------------------------------------
+
+The example shows how an iteration can be exited before executing `N`
+times.
+
+Multiple points of return can be coded using link:#throw[throw]:
+
+[source,newlisp]
+-------------------------------
+(catch (begin
+    (foo1)
+    (foo2)
+    (if condition-A (throw 'x))
+    (foo3)
+    (if condition-B (throw 'y))
+    (foo4)
+    (foo5)))
+-------------------------------
+
+If `condition-A` is true, `x` will be returned from the `catch`
+expression; if `condition-B` is true, the value returned is `y`.
+Otherwise, the result from `foo5` will be used as the return value.
+
+As an alternative to link:#catch[catch], the
+link:#error-event[error-event] function can be used to catch errors
+caused by faulty code or user-initiated exceptions.
+
+The link:#throw-error[throw-error] function may be used to throw
+user-defined errors.
+
+Using `and` and `or`
+^^^^^^^^^^^^^^^^^^^^
+
+Using the logical functions link:#and[and] and link:#or[or], blocks of
+statements can be built that are exited depending on the Boolean result
+of the enclosed functions:
+
+[source,newlisp]
+-------------
+(and
+    (func-a)
+    (func-b)
+    (func-c)
+    (func-d))
+-------------
+
+The link:#and[and] expression will return as soon as one of the block's
+functions returns `nil` or an `()` (empty list). If none of the
+preceding functions causes an exit from the block, the result of the
+last function is returned.
+
+link:#or[or] can be used in a similar fashion:
+
+[source,newlisp]
+-------------
+(or
+    (func-a)
+    (func-b)
+    (func-c)
+    (func-d))
+-------------
+
+The result of the link:#or[or] expression will be the first function
+that returns a value which is _not_ `nil` or `()`.
+
+( § )
+
+15. Dynamic and lexical scoping
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+newLISP uses dynamic scoping _inside_ contexts. A context is a lexically
+closed namespace. In this way, parts of a newLISP program can live in
+different namespaces taking advantage of _lexical scoping_.
+
+When the parameter symbols of a lambda expression are bound to its
+arguments, the old bindings are pushed onto a stack. newLISP
+automatically restores the original variable bindings when leaving the
+lambda function.
+
+The following example illustrates the _dynamic scoping_ mechanism. The
+text without the `>` prompt is the output from newLISP:
+
+[source,newlisp]
+--------------------
+> (set 'x 1)
+1
+> (define (f) x)
+(lambda () x)
+> (f)
+1
+> (define (g x) (f))
+(lambda (x) (f))
+> (g 0)
+0
+> (f)
+1
+> _
+--------------------
+
+The variable `x` is first set to `1`. But when `(g 0)` is called, `x` is
+bound to `0` and `x` is reported by `(f)` as `0` during execution of
+`(g 0)`. After execution of `(g 0)`, the call to `(f)` will report `x`
+as `1` again.
+
+This is different from the _lexical scoping_ mechanisms found in
+languages like C or Java, where the binding of local parameters occurs
+inside the function only. In lexically scoped languages like C, `(f)`
+would always print the global bindings of the symbol `x` with `1`.
+
+Be aware that passing quoted symbols to a user-defined function causes a
+name clash if the same variable name is used as a function parameter:
+
+[source,newlisp]
+--------------------------------------------
+(define (inc-symbol x y) (inc (eval x) y))
+(set 'y 200)
+(inc-symbol 'y 123)  → 246
+y                    → 200  ; y is still 200
+--------------------------------------------
+
+Because the global `y` shares the same symbol as the function's second
+parameter, `inc-symbol` returns 246 (123 + 123), leaving the global `y`
+unaffected. Dynamic scoping's _variable capture_ can be a disadvantage
+when passing symbol references to user-defined functions. newLISP offers
+several methods to avoid variable capture.
+
+* The function link:#args[args] can be used when passing symbols.
+* One or more user-defined functions can be placed in their own
+  namespace called a link:#contexts[context]. A symbol name clash
+  cannot occur when accessing symbols and calling functions from
+  _outside_ of the defining context.
+
+Contexts should be used to group related functions when creating
+interfaces or function libraries. This surrounds the functions with a
+lexical "fence", thus avoiding variable name clashes with the calling
+functions.
+
+newLISP uses contexts for different forms of lexical scoping. See the
+chapters link:#contexts[Contexts] and link:#context_objects[Programming
+with contexts], as well as the section link:#default_function[default
+functors] for more information.
+
+( § )
+
+16. Contexts
+~~~~~~~~~~~~
+
+In newLISP, symbols can be separated into namespaces called _contexts_.
+Each context has a private symbol table separate from all other
+contexts. Symbols known in one context are unknown in others, so the
+same name may be used in different contexts without conflict.
+
+Contexts are used to build modules of isolated variable and function
+definitions. They can also be copied and dynamically assigned to
+variables or passed as arguments. Because contexts in newLISP have
+lexically separated namespaces, they allow programming with _lexical
+scoping_ and software object styles of programming.
+
+Contexts are identified by symbols that are part of the root or `MAIN`
+context. Although context symbols are uppercased in this chapter,
+lowercase symbols may also be used.
+
+In addition to context names, `MAIN` contains the symbols for built-in
+functions and special symbols such as `true` and `nil`. The `MAIN`
+context is created automatically each time newLISP is run. To see all
+the symbols in `MAIN`, enter the following expression after starting
+newLISP:
+
+[source,newlisp]
+---------
+(symbols)
+---------
+
+Symbol creation in contexts
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The following rules should simplify the process of understanding
+contexts by identifying to which context the created symbols are being
+assigned.
+
+1.  newLISP first parses and translates each top level expression. The
+symbols are created during this phase. After the expression is
+translated, it gets evaluated.
+2.  A symbol is created when newLISP first _sees_ it, when calling the
+link:#load[load], link:#sym[sym], or link:#eval-string[eval-string]
+functions. When newLISP reads a source file, symbols are created
+_before_ evaluation occurs.
+3.  When an unknown symbol is encountered during code translation, a
+search for its definition begins inside the current context. Failing
+that, the search continues inside `MAIN` for a built-in function,
+context, or global symbol. If no definition is found, the symbol is
+created locally inside the current context.
+4.  Once a symbol is created and assigned to a specific context, it will
+belong to that context permanently.
+5.  When a user-defined function is evaluated, the context is switched
+to the parent context of the symbol it is called with.
+6.  A context switch only influences symbol creation during
+link:#load[load], link:#sym[sym], or link:#eval-string[eval-string].
+link:#load[load] by default loads into MAIN except when context switches
+occur on the top level of the file loaded. The context should always be
+specified when the functions link:#sym[sym] and
+link:#eval-string[eval-string] are used. When this rule is followed, a
+context switch should only occur on the top level of a program, never
+inside a function.
+
+Creating contexts
+^^^^^^^^^^^^^^^^^
+
+Contexts can be created either by using the link:#context[context]
+function or via implicit creation. The first method is used when writing
+larger portions of code belonging the same context:
+
+[source,newlisp]
+--------------------
+(context 'FOO)
+
+(set 'var 123)
+
+(define (func x y z)
+    ... )
+
+(context MAIN)
+--------------------
+
+If the context does not exist yet, the context symbol must be quoted. If
+the symbol is not quoted, newLISP assumes the symbol is a variable
+holding the symbol of the context to create. Because a context evaluates
+to itself, existing contexts like MAIN do not require quoting.
+
+When newLISP reads the above code, it will read, then evaluate the first
+statement: `(context 'FOO)`. This causes newLISP to switch the namespace
+to `FOO` and the following symbols `var`, `x`, `y` and `z` will all be
+created in the `FOO` context when reading and evaluating the remaining
+expressions.
+
+To refer to `var` or `func` from anywhere else outside the `FOO` namespace
+they need to be prefixed with the context name:
+
+[source,newlisp]
+----------------
+FOO:var → 123
+
+(FOO:func p q r)
+----------------
+
+The link:#symbols[symbols] function is used to show all symbols
+belonging to a context:
+
+[source,newlisp]
+----------------------------------------------------
+(symbols FOO) → (FOO:func FOO:var FOO:x FOO:y FOO:z)
+----------------------------------------------------
+
+Implicitly creating contexts
+++++++++++++++++++++++++++++
+
+A context is implicitly created when referring to one that does not yet
+exist. Unlike the `context` function, the context is not switched. The
+following statements are all executed inside the `MAIN` context:
+
+[source,newlisp]
+-------------------------
+> (set 'ACTX:var "hello")
+"hello"
+> ACTX:var
+"hello"
+> _
+-------------------------
+
+Note that only the symbols prefixed with their context name will be part
+of the context:
+
+[source,newlisp]
+----------------------
+(define (ACTX:foo x y)
+    (+ x y))
+----------------------
+
+When above code is loaded in MAIN only `foo` will be part of `ACTX`. The
+symbols `x` and `y` will still be part of `MAIN`.
+
+Loading module files
+++++++++++++++++++++
+
+When loading source files on the command-line with link:#load[load], or
+when executing the functions link:#eval-string[eval-string] or
+link:#sym[sym], the `context` function tells newLISP where to put all of
+the symbols and definitions:
+
+[source,newlisp]
+-------------------------------------------
+;;; file MY_PROG.LSP
+;;
+;; everything from here on goes into GRAPH
+(context 'GRAPH)
+
+(define (draw-triangle x y z)
+    (…))
+
+(define (draw-circle)
+    (…))
+
+;; show the runtime context, which is GRAPH
+(define (foo)
+    (context))
+
+;; switch back to MAIN
+(context 'MAIN)
+
+;; end of file
+-------------------------------------------
+
+The `draw-triangle` and `draw-circle` functions -- along with their `x`,
+`y`, and `z` parameters -- are now part of the `GRAPH` context. These
+symbols are known only to `GRAPH`. To call these functions from another
+context, prefix them with `GRAPH:`
+
+[source,newlisp]
+---------------------------
+(GRAPH:draw-triangle 1 2 3)
+(GRAPH:foo)  → GRAPH
+---------------------------
+
+The last statement shows how the runtime context has changed to `GRAPH`
+(function `foo`'s context).
+
+A symbol's name and context are used when comparing symbols from
+different contexts. The link:#term[term] function can be used to extract
+the term part from a fully qualified symbol.
+
+[source,newlisp]
+-----------------------------------------------
+;; same symbol name, but different context name
+(= 'A:val 'B:val)                → nil
+(= (term 'A:val) (term 'B:val))  → true
+-----------------------------------------------
+
+Note: The symbols are quoted with a `'` (single quote) because we are
+interested in the symbol itself, not in the contents of the symbol.
+
+Global scope
+^^^^^^^^^^^^
+
+By default, only built-in functions and symbols like `nil` and `true`
+are visible inside contexts other than `MAIN`. To make a symbol visible
+to every context, use the link:#global[global] function:
+
+----------------------
+(set 'aVar 123) → 123
+(global 'aVar)  → aVar
+
+(context 'FOO)  → FOO
+
+aVar            → 123
+----------------------
+
+Without the `global` statement, the second `aVar` would have returned
+`nil` instead of `123`. If `FOO` had a previously defined symbol (`aVar`
+in this example) _that_ symbol's value -- and not the global's -- would be
+returned instead. Note that only symbols from the `MAIN` context can be
+made global.
+
+Once it is made visible to contexts through the link:#global[global]
+function, a symbol cannot be hidden from them again.
+
+Symbol protection
+^^^^^^^^^^^^^^^^^
+
+By using the link:#constant[constant] function, symbols can be both set
+and protected from change at the same time:
+
+[source,newlisp]
+-----------------------------------------------
+> (constant 'aVar 123)  → 123
+> (set 'aVar 999)
+ERR: symbol is protected in function set : aVar
+>_
+-----------------------------------------------
+
+A symbol needing to be both a constant and a global can be defined
+simultaneously:
+
+[source,newlisp]
+-----------------------------
+(constant (global 'aVar) 123)
+-----------------------------
+
+In the current context, symbols protected by `constant` can be
+overwritten by using the `constant` function again. This protects the
+symbols from being overwritten by code in other contexts.
+
+Overwriting global symbols and built-ins
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Global and built-in function symbols can be overwritten inside a context
+by prefixing them with their _own_ context symbol:
+
+-----------------------
+(context 'Account)
+
+(define (Account:new …)
+    (…))
+
+(context 'MAIN)
+-----------------------
+
+In this example, the built-in function link:#new[new] is overwritten by
+`Account:new`, a different function that is private to the `Account`
+context.
+
+Variables containing contexts
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Variables can be used to refer to contexts:
+
+[source,newlisp]
+-----------------------
+(set 'FOO:x 123)
+
+(set 'ctx FOO)    → FOO
+
+ctx:x             → 123
+
+(set 'ctx:x 999)  → 999
+
+FOO:x             → 999
+-----------------------
+
+Context variables are useful when writing functions, which need to
+switch contexts or use contexts which do not exist yet:
+
+[source,newlisp]
+------------------------
+(define (update ctx val)
+    (set 'ctx:sum val)
+    (ctx:func 999)
+)
+
+(context 'FOO)
+(define (func x)
+    (println "=>" x))
+(context MAIN)
+------------------------
+
+The following shows a terminal session using above definitions. The
+program output is shown with labels on the right:
+
+[source,newlisp]
+------------------
+> (update FOO 123)
+=> 999                 # <output>
+
+> FOO:sum
+123                    # <output>
+>
+------------------
+
+The same one function `update` can display different behavior depending
+on the context passed as first parameter.
+
+Sequence of creating or loading contexts
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The sequence in which contexts are created or loaded can lead to
+unexpected results. Enter the following code into a file called `demo`:
+
+[source,newlisp]
+-----------------------------------
+;; demo - file for loading contexts
+(context 'FOO)
+(set 'ABC 123)
+(context MAIN)
+
+(context 'ABC)
+(set 'FOO 456)
+(context 'MAIN)
+-----------------------------------
+
+Now load the file into the newlisp shell:
+
+[source,newlisp]
+----------------------------------------------
+> (load "demo")
+ERR: symbol is protected in function set : FOO
+> _
+----------------------------------------------
+
+Loading the file causes an error message for `FOO`, but not for `ABC`.
+When the first context `FOO` is loaded, the context `ABC` does not exist
+yet, so a local variable `FOO:ABC` gets created. When `ABC` loads, `FOO`
+already exists as a global protected symbol and will be correctly
+flagged as protected.
+
+`FOO` could still be used as a local variable in the `ABC` context by
+explicitly prefixing it, as in `ABC:FOO`.
+
+The following pattern can be applied to avoid unexpected behavior when
+loading contexts being used as modules to build larger applications:
+
+[source,newlisp]
+-------------------------------
+;; begin of file - MyModule.lsp
+(load "This.lsp")
+(load "That.lsp")
+(load "Other.lsp")
+
+(context 'MyModule)
+
+…
+
+(define (func x y z) (…))
+
+…
+
+(context 'MAIN)
+
+(MyModule:func 1 2 3)
+
+(exit)
+
+;; end of file
+-------------------------------
+
+Always load the modules required by a context _before_ the module's
+`context` statement. Always finish by switching back to the `MAIN`
+context, where the module's functions and values can be safely accessed.
+
+Contexts as programming modules
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Contexts in newLISP are mainly used for partitioning source into
+modules. Because each module lives in a different namespace, modules are
+lexically separated and the names of symbols cannot clash with identical
+names in other modules.
+
+The http://newlisp.org/code/modules/[modules], which are part of the
+newLISP distribution, are a good example of how to put related functions
+into a module file, and how to document modules using the
+http://newlisp.org/newLISPdoc.html[newLISPdoc] utility.
+
+For best programming practice, a file should only contain one module and
+the filename should be similar if not identical to the context name
+used:
+
+[source,newlisp]
+------------------------------------------------
+;; file db.lsp, commonly used database functions
+
+(context 'db)
+
+;; Variables used throughout this namespace
+
+(define db:handle)
+(define db:host "http://localhost")
+
+;; Constants
+
+(constant 'Max_N 1000000)
+(constant 'Path "/usr/data/")
+
+;; Functions
+
+(define (db:open ... )
+    ... )
+
+(define (db:close ... )
+    ... )
+
+(define (db:update ... )
+    ... )
+------------------------------------------------
+
+The example shows a good practice of predefining variables, which are
+global inside the namespace, and defining as constants the variables
+that will not change.
+
+If a file contains more than one context, then the end of the context
+should be marked with a switch back to `MAIN`:
+
+[source,newlisp]
+-------------------------------
+;; Multi context file multi.lsp
+
+(context 'A-ctx)
+...
+(context MAIN)
+
+(context 'B-ctx)
+...
+(context MAIN)
+
+(context 'C-ctx)
+...
+(context MAIN)
+-------------------------------
+
+Contexts as data containers
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Contexts are frequently uses as data containers, e.g. for hash-like
+dictionaries and configuration data:
+
+[source,newlisp]
+-----------------------------------
+;; Config.lsp - configuration setup
+
+(context 'Config)
+
+(set 'user-name "admin")
+(set 'password "secret")
+(set 'db-name "/usr/data/db.lsp")
+...
+
+;; eof
+-----------------------------------
+
+Loading the `Config` namespace will now load a whole variable set into
+memory at once:
+
+[source,newlisp]
+----------------------------------------
+(load "Config.lsp")
+
+(set 'file (open Config:db-name "read"))
+...
+...
+----------------------------------------
+
+In a similar fashion a whole data set can be saved:
+
+[source,newlisp]
+---------------------------
+(save "Config.lsp" 'Config)
+---------------------------
+
+Read more about this in the section link:#serializing[Serializing
+contexts].
+
+Loading and declaring contexts
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Module files are loaded using the link:#load[load] function. If a
+programming project contains numerous modules that refer to each other,
+they should be pre-declared to avoid problems due to context forward
+references that can occur before the loading of that context.
+
+[source,newlisp]
+--------------------------------------------------------------------------
+;; pre-declaring contexts, finish with Main to return
+(map context '(Utilities Config Acquisition Analysis SysLog MAIN))
+
+;; loading context module files
+(load "Utilities.lsp" "Acquisition.lsp")
+(load "http://192.168.1.34/Config.lsp") ; load module from remote location
+(load "Analysis.lsp" "SysLog.lsp")
+
+(define (run)
+    ... )
+
+(run)
+
+;; end of file
+--------------------------------------------------------------------------
+
+When pre-declaring and loading modules as shown in the example, the
+sequence of declaration or loading can be neglected. All forward
+references to variables and definitions in modules not loaded yet will
+be translated correctly.
+
+Modules not starting with a context switch are always loaded into `MAIN`
+except when the link:#load[load] statement specifies a target context as
+the last parameter. The link:#load[load] function can take `URL`s to
+load modules from remote locations, via `HTTP`.
+
+The current context after the link:#load[load] statement will always be
+the same as before the link:#load[load].
+
+Serializing contexts
+^^^^^^^^^^^^^^^^^^^^
+
+Serialization makes a software object _persistent_ by converting it into
+a character stream, which is then saved to a file or string in memory.
+In newLISP, anything referenced by a symbol can be serialized to a file
+by using the link:#save[save] function. Like other symbols, contexts are
+saved just by using their names:
+
+[source,newlisp]
+---------------------------------------------------------------------------
+(save "mycontext.lsp" 'MyCtx)              ; save MyCtx to mycontext.lsp
+
+(load "mycontext.lsp")                     ; loads MyCtx into memory
+
+(save "mycontexts.lsp" 'Ctx1 'Ctx2 'Ctx3)  ; save multiple contexts at once
+---------------------------------------------------------------------------
+
+For details, see the functions link:#save[save] (mentioned above) and
+link:#source[source] (for serializing to a newLISP string).
+
+( § )
+
+17. The context default functor
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+A _default functor_ or _default function_ is a symbol or user-defined
+function or macro with the same name as its namespace. When the context
+is used as the name of a function or in the functor position of an
+s-expression, newLISP executes the default function.
+
+[source,newlisp]
+----------------------------------
+;; the default function
+
+(define (Foo:Foo a b c) (+ a b c))
+
+(Foo 1 2 3)  → 6
+----------------------------------
+
+If a default function is called from a context other than `MAIN`, the
+context must already exist or be declared with a _forward declaration_,
+which creates the context and the function symbol:
+
+[source,newlisp]
+-----------------------------------------------------
+;; forward declaration of a default function
+(define Fubar:Fubar)
+
+(context 'Foo)
+(define (Foo:Foo a b c)
+    …
+    (Fubar a b)         ; forward reference
+    (…))         ; to default function
+
+(context MAIN)
+
+;; definition of previously declared default function
+
+(context 'Fubar)
+(define (Fubar:Fubar x y)
+    (…))
+
+(context MAIN)
+-----------------------------------------------------
+
+Default functions work like global functions, but they are lexically
+separate from the context in which they are called.
+
+Like a lambda or lambda-macro function, default functions can be used
+with link:#map[map] or link:#apply[apply].
+
+Functions with memory
+^^^^^^^^^^^^^^^^^^^^^
+
+A default function can update the lexically isolated static variables
+contained inside its namespace:
+
+[source,newlisp]
+--------------------------
+;; a function with memory
+
+(define (Gen:Gen x)
+    (if Gen:acc
+        (inc Gen:acc x)
+        (setq Gen:acc x)))
+
+(Gen 1)  → 1
+(Gen 1)  → 2
+(Gen 2)  → 4
+(Gen 3)  → 7
+
+gen:acc  → 7
+--------------------------
+
+The first time the `Gen` function is called, its accumulator is set to
+the value of the argument. Each successive call increments `Gen`'s
+accumulator by the argument's value.
+
+The definition of `Gen:Gen` shows, how a function is put in its own
+namespace without using the surrounding `(context 'Gen)` and
+`(context MAIN)` statements. In that case only symbols qualified by the
+namespace prefix will end up in the `Gen` context. In the above example
+the variable `x` is still part of `MAIN`.
+
+Hash functions and dictionaries
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+There are several functions that can be used to place symbols into
+namespace contexts. When using dictionaries as simple hash-like
+collections of variable → value pairs, use the uninitialized
+link:#default_function[default functor]:
+
+[source,newlisp]
+-------------------------------------------------------------
+(define Myhash:Myhash) ; create namespace and default functor
+
+; or as an alternative use
+
+(new Tree 'MyHash) ; create from built-in template
+-------------------------------------------------------------
+
+Either method can be used to make the `MyHash` dictionary space and
+default functor. Creating key-value pairs and retrieving a value is
+easy:
+
+[source,newlisp]
+-------------------------------------------------------
+(Myhash "var" 123) ; create and set variable/value pair
+
+(Myhash "var") ; → 123 ; retrieve value
+-------------------------------------------------------
+
+Note that the _default functor_ should not be initialized to any value
+other than `nil`. The default functor works like a dictionary hash
+function creating the symbols in the string following it and setting it
+to the value if specified.
+
+Symbol variables created this way can contain spaces or other characters
+normally not allowed in newLISP symbol names:
+
+[source,newlisp]
+--------------------------------------------
+(define Foo:Foo)
+
+(Foo "John Doe" 123)         → 123
+(Foo "#1234" "hello world")  → "hello world"
+(Foo "var" '(a b c d))       → (a b c d)
+
+(Foo "John Doe")  → 123
+(Foo "#1234")     → "hello world"
+(Foo "var")     → (a b c d)
+--------------------------------------------
+
+An entry which doesn't exist will return `nil`:
+
+[source,newlisp]
+--------------------
+(Foo "bar")    → nil
+--------------------
+
+Setting an entry to `nil` will effectively delete it from the namespace.
+
+An association list can be generated from the contents of the namespace:
+
+[source,newlisp]
+--------------------------------------------------------------------
+(Foo) → (("#1234" "hello world") ("John Doe" 123) ("var" (a b c d)))
+--------------------------------------------------------------------
+
+Entries in the dictionary can also be created from a list:
+
+[source,newlisp]
+------------------------------------------------------------------------
+(Foo '(("#1234" "hello world") ("John Doe" 123) ("var" (a b c d))) → Foo
+------------------------------------------------------------------------
+
+The list can also be used to iterate through the sorted key -> value
+pairs:
+
+[source,newlisp]
+--------------------------------------------------------
+(dolist (item (Foo)) (println (item 0) " -> " (item 1)))
+
+#1234 -> hello world
+John Doe -> 123
+var -> (a b c d)
+--------------------------------------------------------
+
+Like many built-in functions, hash expressions return a reference to
+their content which can be modified directly:
+
+[source,newlisp]
+---------------------------------
+(pop (Foo "var")) → a
+
+(Foo "var") → (b c d)
+
+(push 'z (Foo "var")) → (z b c d)
+
+(Foo "var") → (z b c d)
+---------------------------------
+
+When setting hash values, the anaphoric system variable `$it` can be used
+to refer to the old value when setting the new:
+
+[source,newlisp]
+----------------------------
+(Foo "bar" "hello world")
+
+(Foo "bar" (upper-case $it))
+
+(Foo "bar") → "HELLO WORLD"
+----------------------------
+
+Hash values also can be modified using link:#setf[setf]:
+
+[source,newlisp]
+----------------------------
+(Foo "bar" 123)        → 123
+
+(setf (Foo "bar") 456) → 456
+
+(Foo "bar")            → 456
+----------------------------
+
+But supplying the value as a second parameter to the hash functions is
+shorter to write and faster.
+
+Dictionaries can easily be saved to a file and reloaded later:
+
+[source,newlisp]
+---------------------
+; save dictionary
+(save "Foo.lsp" 'Foo)
+
+; load dictionary
+(load "Foo.lsp")
+---------------------
+
+Internally the key strings are created and stored as symbols in the hash
+context. All key strings are prepended with an `_` underscore character.
+This protects against overwriting the default symbol and symbols like
+`set` and `sym`, which are needed when loading a hash namespace from
+disk or over `HTTP`. Note the following difference:
+
+[source,newlisp]
+--------------------------------------------------------------------
+(Foo) → (("#1234" "hello world") ("John Doe" 123) ("var" (a b c d)))
+
+(symbols Foo) → (Foo:Foo Foo:_#1234 Foo:_John Doe Foo:_var)
+--------------------------------------------------------------------
+
+In the first line hash symbols are shown as strings without without the
+preceding underscore characters. The second line shows the internal form
+of the symbols with prepended underscore characters.
+
+For a more detailed introduction to _namespaces_, see the chapter on
+link:#contexts[Contexts].
+
+Passing data by reference
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+A link:#default_function[default functor] can also be used to hold data.
+If this data contains a list or string, the context name can be used as
+a reference to the data:
+
+[source,newlisp]
+----------------------------------------------------
+;; the default functor for holding data
+
+(define Mylist:Mylist '(a b c d e f g))
+
+(Mylist 3) → d
+
+(setf (Mylist 3) 'D) → D
+
+Mylist:Mylist → (a b c D e f g)
+
+;; access list or string data from a default functor
+
+(first Mylist) → a
+
+(reverse Mylist) → (g f e D c b a)
+
+(set 'Str:Str "acdefghijklmnop")
+
+(upper-case Str) → "ACDEFGHIJKLMNOP"
+----------------------------------------------------
+
+Most of the time, newLISP passes parameters by _value copy_. This poses
+a potential problem when passing large lists or strings to user-defined
+functions or macros. Strings and lists, which are packed in a namespace
+using default functors, are passed automatically by reference:
+
+[source,newlisp]
+---------------------------------------
+;; use a default functor to hold a list
+
+(set 'Mydb:Mydb (sequence 1 100000))
+
+(define (change-db obj idx value)
+    (setf (obj idx) value))
+
+; pass by context reference
+(change-db Mydb 1234 "abcdefg")
+
+(Mydb 1234)  → "abcdefg"
+---------------------------------------
+
+Any argument of a built-in function calling for either a list or a
+string -- but no other data type -- can receive data passed by reference.
+Any user-defined function can take either normal variables, or can take
+a context name for passing a reference to the default functor containing
+a list or string.
+
+Note that on lists with less than about 100 elements or strings of less
+than about 50000 characters, the speed difference between reference and
+value passing is negligible. But on bigger data objects, differences in
+both speed and memory usage between reference and value passing can be
+significant.
+
+Built-in and user-defined functions are suitable for both types of
+arguments, but when passing context names, data will be passed by
+reference.
+
+Quoted symbols can also be used to pass data by reference, but this
+method has disadvantages:
+
+[source,newlisp]
+----------------------------------------------------
+(define (change-list aList) (push 999 (eval aList)))
+
+(set 'data '(1 2 3 4 5))
+
+; note the quote ' in front of data
+(change-list 'data)  → (999 1 2 3 4 5)
+
+data  →  (999 1 2 3 4 5)
+----------------------------------------------------
+
+Although this method is simple to understand and use, it poses the
+potential problem of _variable capture_ when passing the same symbol as
+used as a function parameter:
+
+[source,newlisp]
+---------------------------------------------
+;; pass data by symbol reference
+
+> (set 'aList '(a b c d))
+(a b c d)
+> (change-list 'aList)
+
+ERR: list or string expected : (eval aList)
+called from user defined function change-list
+>
+---------------------------------------------
+
+At the beginning of the chapter it was shown how to package data in a
+name-space using a default functor. Not only the default functor but any
+symbol in context can be used to hold data. The disadvantage is that the
+calling function must have knowledge about the symbol being used:
+
+[source,newlisp]
+------------------------------------
+;; pass data by context reference
+
+(set 'Mydb:data (sequence 1 100000))
+
+(define (change-db obj idx value)
+    (setf (obj:data idx) value))
+
+(change-db Mydb 1234 "abcdefg")
+
+(nth 1234 Mydb:data)   → "abcdefg"
+; or
+(Mydb:data 1234)   → "abcdefg"
+------------------------------------
+
+The function receives the namespace in the variable `obj`, but it must
+have the knowledge that the list to access is contained in the `data`
+symbol of that namespace (context).
+
+( § )
+
+18. Functional object-oriented programming
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Functional-object oriented programming (FOOP) is based on the following
+five principles:
+
+* Class attributes and methods are stored in the namespace of the object
+class.
+* The namespace default functor holds the object constructor method.
+* An object is constructed using a list, the first element of which is
+the context symbol describing the class of the object.
+* Polymorphism is implemented using the link:#colon[`:` (colon)]
+operator, which selects the appropriate class from the object.
+* A target object inside a class-method function is accessed via the
+link:#self[self] function.
+
+The following paragraphs are a short introduction to FOOP as designed by
+_Michael Michaels_ from http://neglook.com[neglook.com].
+
+FOOP classes and constructors
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Class attributes and methods are stored in the namespace of the object
+class. No object instance data is stored in this namespace/context. Data
+variables in the class namespace only describe the class of objects as a
+whole but don't contain any object specific information. A generic FOOP
+object constructor can be used as a template for specific object
+constructors when creating new object classes with `new`:
+
+[source,newlisp]
+--------------------------------------------------------------------
+; built-in generic FOOP object constructor
+(define (Class:Class)
+    (cons (context) (args)))
+
+; create some new classes
+
+(new Class 'Rectangle)   → Rectangle
+(new Class 'Circle)      → Circle
+
+; create some objects using the default constructor
+
+(set 'rect (Rectangle 10 20))   → (Rectangle 10 20)
+(set 'circ (Circle 10 10 20))   → (Circle 10 10 20)
+
+; create a list of objects
+; building the list using the list function instead of assigning
+; a quoted list ensures that the object constructors are executed
+
+(set 'shapes (list (Circle 5 8 12) (Rectangle 4 8) (Circle 7 7 15)))
+→ ((Circle 5 8 12) (Rectangle 4 8) (Circle 7 7 15))
+--------------------------------------------------------------------
+
+The generic FOOP constructor is already pre-defined, and FOOP code can
+start with `(new Class ...)` statements right away.
+
+As a matter of style, new classes should only be created in the MAIN
+context. If creating a new class while in a different namespace, the new
+class name must be prefixed with MAIN and the statement should be on the
+top-level:
+
+[source,newlisp]
+---------------------------
+(context 'Geometry)
+
+(new Class 'MAIN:Rectangle)
+(new Class 'MAIN:Circle)
+
+...
+---------------------------
+
+Creating the namespace classes using link:#new[new] reserves the class
+name as a context in newLISP and facilitates forward references. At the
+same time, a simple constructor is defined for the new class for
+instantiating new objects. As a convention, it is recommended to start
+class names in upper-case to signal that the name stands for a
+namespace.
+
+In some cases, it may be useful to overwrite the simple constructor,
+that was created during class creation, with `new`:
+
+[source,newlisp]
+----------------------------------
+; overwrite simple constructor
+(define (Circle:Circle x y radius)
+    (list Circle x y radius))
+----------------------------------
+
+A constructor can also specify defaults:
+
+[source,newlisp]
+------------------------------------------------
+; constructor with defaults
+(define (Circle:Circle (x 10) (y 10) (radius 3))
+    (list Circle x y radius))
+
+(Circle) → (Circle 10 10 3)
+------------------------------------------------
+
+In many cases the constructor as created when using `new` is sufficient
+and overwriting it is not necessary.
+
+Objects and associations
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+FOOP represents objects as lists. The first element of the list
+indicates the object's kind or class, while the remaining elements
+contain the data. The following statements define two _objects_ using
+any of the constructors defined previously:
+
+[source,newlisp]
+-----------------------------------------------------------
+(set 'myrect (Rectangle 5 5 10 20)) → (Rectangle 5 5 10 20)
+(set 'mycircle (Circle 1 2 10)) → (Circle 1 2 10)
+-----------------------------------------------------------
+
+An object created is identical to the function necessary to create it
+(hence FOOP). Nested objects can be created in a similar manner:
+
+[source,newlisp]
+----------------------------------------------------------------------------
+; create classes
+(new Class 'Person)
+(new Class 'Address)
+(new Class 'City)
+(new Class 'Street)
+
+; create an object containing other objects
+(set 'JohnDoe (Person (Address (City "Boston") (Street 123 "Main Street"))))
+→ (Person (Address (City "Boston") (Street 123 "Main Street")))
+----------------------------------------------------------------------------
+
+Objects in FOOP not only resemble functions they also resemble
+associations. The link:#assoc[assoc] function can be used to access
+object data by name:
+
+[source,newlisp]
+------------------------------------------------------------------------------
+(assoc Address JohnDoe) → (Address (City "Boston") (Street 123 "Main Street"))
+
+(assoc (list Address Street) JohnDoe) → (Street 123 "Main Street")
+------------------------------------------------------------------------------
+
+In a similar manner link:#setf[setf] together with link:#assoc[assoc]
+can be used to modify object data:
+
+[source,newlisp]
+------------------------------------------------------------------------
+(setf (assoc (list Address Street) JohnDoe) '(Street 456 "Main Street"))
+→ (Street 456 "Main Street")
+------------------------------------------------------------------------
+
+The street number has been changed from `123` to `456`.
+
+Note that in none of the `assoc` statements `Address` and `Street` need
+to carry quotes. The same is true in the set statement:
+`(set 'JohnDoe (Person ...))` for the data part assigned. In both cases
+we do not deal with symbols or lists of symbols but rather with contexts
+and FOOP objects which evaluate to themselves. Quoting would not make a
+difference.
+
+The colon `:` operator and polymorphism
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+In newLISP, the colon character `:` is primarily used to connect the
+context symbol with the symbol it is qualifying. Secondly, the colon
+function is used in FOOP to resolve a function's application
+_polymorphously_.
+
+The following code defines two functions called `area`, each belonging
+to a different namespace / class. Both functions could have been defined
+in different modules for better separation, but in this case they are
+defined in the same file and without bracketing link:#context[context]
+statements. Here, only the symbols `rectangle:area` and `circle:area`
+belong to different namespaces. The local parameters `p`, `c`, `dx`, and
+`dy` are all part of `MAIN`, but this is of no concern.
+
+[source,newlisp]
+--------------------------------------
+;; class methods for rectangles
+
+(define (Rectangle:area)
+    (mul (self 3) (self 4)))
+
+(define (Rectangle:move dx dy)
+    (inc (self 1) dx)
+    (inc (self 2) dy))
+
+;; class methods for circles
+
+(define (Circle:area)
+    (mul (pow (self 3) 2) (acos 0) 2))
+
+(define (Circle:move dx dy)
+    (inc (self 1) dx)
+    (inc (self 2) dy))
+--------------------------------------
+
+By prefixing the `area` or `move` symbol with the link:#colon[`:`
+(colon)], we can call these functions for each class of object. Although
+there is no space between the colon and the symbol following it, newLISP
+parses them as distinct entities. The colon works as a function that
+processes parameters:
+
+[source,newlisp]
+--------------------------------------------------------------------------------
+(:area myrect) → 200 ; same as (: area myrect)
+(:area mycircle) → 314.1592654 ; same as (: area mycircle)
+
+;; map class methods uses curry to enclose the colon operator and class function
+
+(map (curry :area) (list myrect mycircle)) → (200 314.1592654)
+
+(map (curry :area) '((Rectangle 5 5 10 20) (Circle 1 2 10))) → (200 314.1592654)
+
+;; objects are mutable (since v10.1.8)
+
+(:move myrect 2 3)
+(:move mycircle 4 5)
+
+myrect    → (Rectangle 7 8 10 20)
+mycircle  → (Circle 5 7 10)
+--------------------------------------------------------------------------------
+
+In this example, the correct qualified symbol (`rectangle:area` or
+`circle:area`) is constructed and applied to the object data based on
+the symbol following the colon and the context name (the first element
+of the object list).
+
+Note, that although the caller specifies the called target object of the
+call, the method definition does not include the object as a parameter.
+When writing functions to modify FOOP objects, instead the function
+link:#self[self] is used to access and index the object.
+
+Structuring a larger FOOP program
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+In all the previous examples, class function methods where directly
+written into the MAIN context namespace. This works and is adequate for
+smaller programs written by just one programmer. When writing larger
+systems, all the methods for one class should be surrounded by
+link:#context[context] statements to provide better isolation of
+parameter variables used and to create an isolated location for
+potential class variables.
+
+Class variables could be used in this example as a container for lists
+of objects, counters or other information specific to a class but not to
+a specific object. The following code segment rewrites the example from
+above in this fashion.
+
+Each context / namespace could go into an extra file with the same name
+as the class contained. Class creation, startup code and the main
+control code is in a file `MAIN.lsp`:
+
+[source,newlisp]
+--------------------------------------------------
+; file MAIN.lsp - declare all classes used in MAIN
+
+(new Class 'Rectangle)
+(new Class 'Circle)
+
+; start up code
+
+(load "Rectangle.lsp")
+(load "Circle.lsp")
+
+; main control code
+
+; end of file
+--------------------------------------------------
+
+Each class is in a separate file:
+
+[source,newlisp]
+---------------------------------------------------
+; file Rectangle.lsp - class methods for rectangles
+
+(context Rectangle)
+
+(define (Rectangle:area)
+(mul (self 3) (self 4)))
+
+(define (Rectangle:move dx dy)
+(inc (self 1) dx)
+(inc (self 2) dy))
+
+; end of file
+---------------------------------------------------
+
+And the `Circle` class file follows:
+
+[source,newlisp]
+---------------------------------------------
+; file Circle.lsp - class methods for circles
+
+(context Circle)
+
+(define (Circle:area)
+    (mul (pow (self 3) 2) (acos 0) 2))
+
+(define (Circle:move dx dy)
+    (inc (self 1) dx)
+    (inc (self 2) dy))
+
+; end of file
+---------------------------------------------
+
+All sets of class functions are now lexically separated from each other.
+
+( § )
+
+19. Concurrent processing and distributed computing
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+newLISP has high-level APIs to control multiple processes on the same
+CPU or distributed onto different computer nodes on a TCP/IP network.
+
+Cilk API
+^^^^^^^^
+
+newLISP implements a http://supertech.csail.mit.edu/cilk/[Cilk]-like
+API to launch and control concurrent processes. The API can take
+advantage of multi-core computer architectures. Only three functions,
+link:#spawn[spawn], link:#sync[sync] and link:#abort[abort], are
+necessary to start multiple processes and collect the results in a
+synchronized fashion. The underlying operating system distributes
+processes onto different cores inside the CPU or executes them on the
+same core in parallel if there are not enough cores present. Note that
+newLISP only implements the API; optimized scheduling of spawned
+procedures is not performed as in Cilk. Functions are started in the
+order they appear in `spawn` statements and are distributed and
+scheduled onto different cores in the CPU by the operating system.
+
+When multiple cores are present, this can increase overall processing
+speed by evaluating functions in parallel. But even when running on
+single core CPUs, the Cilk API makes concurrent processing much easier
+for the programmer and may speed up processing if subtasks include
+waiting for I/O or sleeping.
+
+Since version 10.1 link:#send[send] and link:#receive[receive] message
+functions are available for communications between parent and child
+processes. The functions can be used in blocking and non blocking
+communications and can transfer any kind of newLISP data or expressions.
+Transmitted expressions can be evaluated in the recipients environment.
+
+Internally, newLISP uses the lower level link:#fork[fork],
+link:#wait-pid[wait-pid], link:#destroy[destroy], and link:#share[share]
+functionalities to control processes and synchronize the passing of
+computed results via a shared memory interface.
+
+Only on Mac OS X and other Unixes will the Cilk API parallelize tasks.
+On Win32, the API partly simulates the behavior on Unix but executes
+tasks sequentially. This way, code can be written that runs on all
+platforms.
+
+Distributed network computing
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+With only one function, link:#net-eval[net-eval], newLISP implements
+distributed computing. Using `net-eval`, different tasks can be mapped
+and evaluated on different nodes running on a TCP/IP network or local
+domain Unix sockets network when running on the same computer.
+`net-eval` does all the housekeeping required to connect to remote
+nodes, transfer functions to execute, and collect the results.
+`net-eval` can also use a call-back function to further structure
+consolidation of incoming results from remote nodes.
+
+The functions link:#read-file[read-file], link:#write-file[write-file],
+link:#append-file[append-file] and link:#delete-file[delete-file] all
+can take URLs instead of path-file names. Server side newLISP running in
+demon mode or an other HTTP server like Apache, receive standard HTTP
+requests and translate them into the corresponding actions on files.
+
+( § )
+
+20. XML, S-XML, and XML-RPC
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+newLISP's built-in support for XML-encoded data or documents comprises
+three functions: link:#xml-parse[xml-parse],
+link:#xml-type-tags[xml-type-tags], and link:#xml-error[xml-error].
+
+Use the link:#xml-parse[xml-parse] function to parse XML-encoded
+strings. When `xml-parse` encounters an error, `nil` is returned. To
+diagnose syntax errors caused by incorrectly formatted XML, use the
+function link:#xml-error[xml-error]. The
+link:#xml-type-tags[xml-type-tags] function can be used to control or
+suppress the appearance of XML type tags. These tags classify XML into
+one of four categories: text, raw string data, comments, and element
+data.
+
+.XML source:
+[source,newlisp]
+-----------------------------------
+<?xml version="1.0"?>
+<DATABASE name="example.xml">
+<!--This is a database of fruits-->
+<FRUIT>
+<NAME>apple</NAME>
+<COLOR>red</COLOR>
+<PRICE>0.80</PRICE>
+</FRUIT>
+</DATABASE>
+-----------------------------------
+
+.Parsing without options:
+[source,newlisp]
+-------------------------------------------------------------------
+(xml-parse (read-file "example.xml"))
+→  (("ELEMENT" "DATABASE" (("name" "example.xml")) (("TEXT" "\r\n")
+("COMMENT" "This is a database of fruits")
+("TEXT" "\r\n        ")
+("ELEMENT" "FRUIT" () (
+    ("TEXT" "\r\n\t        ")
+    ("ELEMENT" "NAME" () (("TEXT" "apple")))
+    ("TEXT" "\r\n\t\t")
+    ("ELEMENT" "COLOR" () (("TEXT" "red")))
+    ("TEXT" "\r\n\t\t")
+    ("ELEMENT" "PRICE" () (("TEXT" "0.80")))
+    ("TEXT" "\r\n\t")))
+("TEXT" "\r\n"))))
+-------------------------------------------------------------------
+
+S-XML can be generated directly from XML using
+link:#xml-type-tags[xml-type-tags] and the special option parameters of
+the link:#xml-parse[xml-parse] function:
+
+.S-XML generation using all options:
+[source,newlisp]
+----------------------------------------------------
+(xml-type-tags nil nil nil nil)
+(xml-parse (read-file "example.xml") (+ 1 2 4 8 16))
+→  ((DATABASE (@ (name "example.xml"))
+  (FRUIT (NAME "apple")
+      (COLOR "red")
+      (PRICE "0.80"))))
+----------------------------------------------------
+
+S-XML is XML reformatted as newLISP _S-expressions_. The `@` (at symbol)
+denotes an XML attribute specification.
+
+See link:#xml-parse[xml-parse] in the reference section of the manual
+for details on parsing and option numbers, as well as for a longer
+example.
+
+XML-RPC
+^^^^^^^
+
+The remote procedure calling protocol XML-RPC uses HTTP post requests as
+a transport and XML for the encoding of method names, parameters, and
+parameter types. XML-RPC client libraries and servers have been
+implemented for most popular compiled and scripting languages.
+
+For more information about XML, visit
+http://www.xmlrpc.com/[www.xmlrpc.com].
+
+XML-RPC clients and servers are easy to write using newLISP's built-in
+network and XML support. A stateless XML-RPC server implemented as a CGI
+service can be found in the file `examples/xmlrpc.cgi`. This script can
+be used together with a web server, like Apache. This XML-RPC service
+script implements the following methods:
+
+[cols="1<,2<",width="60%",options="header",]
+|=======================================================================
+|method |description
+|`system.listMethods` |Returns a list of all method names
+
+|`system.methodHelp` |Returns help for a specific method
+
+|`system.methodSignature` |Returns a list of return/calling signatures
+for a specific method
+
+|`newLISP.evalString` |Evaluates a Base64 newLISP expression string
+|=======================================================================
+
+The first three methods are _discovery_ methods implemented by most
+XML-RPC servers. The last one is specific to the newLISP XML-RPC server
+script and implements remote evaluation of a Base64-encoded string of
+newLISP source code. newLISP's link:#base64-enc[base64-enc] and
+link:#base64-dec[base64-dec] functions can be used to encode and decode
+Base64-encoded information.
+
+In the `modules` directory of the source distribution, the file
+`xmlrpc-client.lsp` implements a specific client interface for all of
+the above methods.
+
+[source,newlisp]
+----------------------------------------------------------
+(load "xmlrpc-client.lsp")  ; load XML-RPC client routines
+
+(XMLRPC:newLISP.evalString
+"http://localhost:8080/xmlrpc.cgi"
+"(+ 3 4)")  → "7"
+----------------------------------------------------------
+
+In a similar fashion, standard `system.xxx` calls can be issued.
+
+All functions return either a result if successful, or `nil` if a
+request fails. In case of failure, the expression `(XMLRPC:error)` can
+be evaluated to return an error message.
+
+For more information, please consult the header of the file
+`modules/xmlrpc-client.lsp`.
+
+( § )
+
+21. Customization, localization, and UTF-8
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Customizing function names
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+All built-in primitives in newLISP can be easily renamed:
+
+[source,newlisp]
+------------------
+(constant 'plus +)
+------------------
+
+Now, `plus` is functionally equivalent to `+` and runs at the same
+speed.
+
+The link:#constant[constant] function, rather than the `set` function,
+must be used to rename built-in primitive symbols. By default, all
+built-in function symbols are protected against accidental overwriting.
+
+It is possible to redefine all integer arithmetic operators to their
+floating point equivalents:
+
+[source,newlisp]
+-----------------
+(constant '+ add)
+(constant '- sub)
+(constant '* mul)
+(constant '/ div)
+-----------------
+
+All operations using `+`, `-`, `*`, and `/` are now performed as
+floating point operations.
+
+Using the same mechanism, the names of built-in functions can be
+translated into languages other than English:
+
+[source,newlisp]
+---------------------------------------------------------
+(constant 'wurzel sqrt)    ; German for 'square-root'
+
+; make the new symbol global at the same time
+(constant (global 'imprime) print)  ; Spanish for 'print'
+…
+---------------------------------------------------------
+
+The new symbol can be made global at the same time using
+link:#global[global].
+
+Switching the locale
+^^^^^^^^^^^^^^^^^^^^
+
+newLISP can switch locales based on the platform and operating system.
+On startup, non-UTF-8 enabled newLISP attempts to set the ISO C standard
+default POSIX locale, available for most platforms and locales. On UTF-8
+enabled newLISP the default locale for the platform is set. The
+link:#set-locale[set-locale] function can also be used to switch to the
+default locale:
+
+[source,newlisp]
+---------------
+(set-locale "")
+---------------
+
+This switches to the default locale used on your platform/operating
+system and ensures character handling (e.g.,
+link:#upper-case[upper-case]) works correctly.
+
+Many Unix systems have a variety of locales available. To find out which
+ones are available on a particular Linux/Unix/BSD system, execute the
+following command in a system shell:
+
+---------
+locale -a
+---------
+
+This command prints a list of all the locales available on your system.
+Any of these may be used as arguments to link:#set-locale[set-locale]:
+
+[source,newlisp]
+--------------------
+(set-locale "es_US")
+--------------------
+
+This would switch to a U.S. Spanish locale. Accents or other characters
+used in a U.S. Spanish environment would be correctly converted.
+
+See the manual description for more details on the usage of
+link:#set-locale[set-locale].
+
+Decimal point and decimal comma
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Many countries use a comma instead of a period as a decimal separator in
+numbers. newLISP correctly parses numbers depending on the locale set:
+
+[source,newlisp]
+-----------------------------------------------
+; switch to German locale on a Linux system
+(set-locale "de_DE") → ("de_DE" ",")
+
+; newLISP source and output use a decimal comma
+(div 1,2 3)  → 0,4
+-----------------------------------------------
+
+The default POSIX C locale, which is set when newLISP starts up, uses a
+period as a decimal separator.
+
+****
+The following countries use a *period as a decimal separator*:
+
+[literal]
+Australia, Botswana, Canada (English-speaking), China, Costa Rica,
+Dominican Republic, El Salvador, Guatemala, Honduras, Hong Kong, India,
+Ireland, Israel, Japan, Korea (both North and South), Malaysia, Mexico,
+Nicaragua, New Zealand, Panama, Philippines, Puerto Rico, Saudi Arabia,
+Singapore, Switzerland, Thailand, United Kingdom, and United States.
+
+The following countries use a *comma as a decimal separator*:
+
+[literal]
+Albania, Andorra, Argentina, Austria, Belarus, Belgium, Bolivia, Brazil,
+Bulgaria, Canada (French-speaking), Croatia, Cuba, Chile, Colombia,
+Czech Republic, Denmark, Ecuador, Estonia, Faroes, Finland, France,
+Germany, Greece, Greenland, Hungary, Indonesia, Iceland, Italy, Latvia,
+Lithuania, Luxembourg, Macedonia, Moldova, Netherlands, Norway,
+Paraguay, Peru, Poland, Portugal, Romania, Russia, Serbia, Slovakia,
+Slovenia, Spain, South Africa, Sweden, Ukraine, Uruguay, Venezuela, and
+Zimbabwe.
+****
+
+Unicode and UTF-8 encoding
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Note that for many European languages, the link:#set-locale[set-locale]
+mechanism is sufficient to display non-ASCII character sets, as long as
+each character is presented as _one_ byte internally. UTF-8 encoding is
+only necessary for multi-byte character sets as described in this
+chapter.
+
+newLISP can be compiled as a UTF-8–enabled application. UTF-8 is a
+multi-byte encoding of the international Unicode character set. A
+UTF-8–enabled newLISP running on an operating system with UTF-8 enabled
+can handle any character of the installed locale.
+
+.The following steps make UTF-8 work with newLISP on a specific operating system and platform:
+
+1. Use one of the makefiles ending in `utf8` to compile newLISP as a
+   UTF-8 application. If no UTF-8 makefile is available for your
+   platform, the normal makefile for your operating system contains
+   instructions on how to change it for UTF-8.
++
+The Mac OS X binary installer contains a UTF-8–enabled version by
+default.
++
+2. Enable the UTF-8 locale on your operating system. Check and set a
+   UTF-8 locale on Unix and Unix-like OSes by using the `locale` command
+   or the `set-locale` function within newLISP. On Linux, the locale can
+   be changed by setting the appropriate environment variable. The
+   following example uses `bash` to set the U.S. locale:
++
+---------------------------
+export LC_CTYPE=en_US.UTF-8
+---------------------------
++
+3. The UTF-8–enabled newLISP automatically switches to the locale found
+   on the operating system. Make sure the command shell is
+   UTF-8–enabled. When using the Tcl/Tk front-end on Linux/Unix, Tcl/Tk
+   will automatically switch to UTF-8 display as long as the Unix
+   environment variable is set correctly. The U.S. version of WinXP's
+   `notepad.exe` can display Unicode UTF-8–encoded characters, but the
+   command shell and the Tcl/Tk front-end cannot. On Linux and other
+   Unixes, the Xterm shell can be used when started as follows:
++
+--------------------------
+LC_CTYPE=en_US.UTF-8 xterm
+--------------------------
+
+.The following procedure can now be used to check for UTF-8 support.  After starting newLISP, type:
+
+[source,newlisp]
+-------------------------------------------------------------------
+(println (char 937))               ; displays Greek uppercase omega
+(println (lower-case (char 937)))  ; displays lowercase omega
+-------------------------------------------------------------------
+
+While the uppercase omega (Ω) looks like a big O on two tiny legs, the
+lowercase omega (ω) has a shape similar to a small `w` in the Latin
+alphabet.
+
+NOTE: Only the output of `println` will be displayed as a character;
+`println`'s return value will appear on the console as a multi-byte
+ASCII character.
+
+When UTF-8–enabled newLISP is used on a non-UTF-8–enabled display, both
+the output and the return value will be two characters. These are the
+two bytes necessary to encode the omega character.
+
+Functions working on UTF-8 characters
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+When UTF-8–enabled newLISP is used, the following string functions work
+on one- or multi-byte characters rather than one 8-bit byte boundaries:
+
+[cols="1<,2<",width="60%",options="header",]
+|=======================================================================
+|function |description
+|link:#char[char] |translates between characters and ASCII/Unicode
+
+|link:#chop[chop] |chops characters from the end of a string
+
+|link:#date[date] |converts date number to string (when used with the
+third argument)
+
+|link:#dostring[dostring] |evaluates once for each character in a string
+
+|link:#explode[explode] |transforms a string into a list of characters
+
+|link:#first[first] |gets first element in a list (car, head) or string
+
+|link:#last[last] |returns the last element of a list or string
+
+|link:#lower-case[lower-case] |converts a string to lowercase characters
+
+|link:#nth[nth] |gets the _nth_ element of a list or string
+
+|link:#pop[pop] |deletes an element from a list or string
+
+|link:#push[push] |inserts a new element in a list or string
+
+|link:#rest[rest] |gets all but the first element of a list (cdr, tail)
+or string
+
+|link:#select[select] |selects and permutes elements from a list or
+string
+
+|link:#title-case[title-case] |converts the first character of a string
+to uppercase
+
+|link:#trim[trim] |trims a string from both sides
+
+|link:#upper-case[upper-case] |converts a string to uppercase characters
+|=======================================================================
+
+All other string functions work on 8-bit bytes. When positions are
+returned, as in link:#find[find] or link:#regex[regex], they are single
+8-bit byte positions rather than character positions which may be
+multi-byte. The link:#get-char[get-char] and link:#slice[slice]
+functions do not take multi-byte character offsets, but single-byte
+offsets, even in UTF-8 enabled versions of newLISP. The
+link:#reverse[reverse] function reverses a byte vector, not a character
+vector. The last three functions can still be used to manipulate binary
+non-textual data in the UTF-8–enabled version of newLISP.
+
+To enable UTF-8 in Perl Compatible Regular Expressions (PCRE) -- used by
+link:#directory[directory], link:#find[find], link:#member[member],
+link:#parse[parse], link:#regex[regex], link:#regex-comp[regex-comp] and
+link:#replace[replace] -- set the option number accordingly (2048). Note
+that offset and lengths in link:#regex[regex] results are always in
+single byte counts. See the link:#regex[regex] documentation for
+details.
+
+Use link:#explode[explode] to obtain an array of UTF-8 characters and to
+manipulate characters rather than bytes when a UTF-8–enabled function is
+unavailable:
+
+[source,newlisp]
+----------------------------------------------------------
+(join (reverse (explode str)))  ; reverse UTF-8 characters
+----------------------------------------------------------
+
+The above string functions (often used to manipulate non-textual binary
+data) now work on character, rather than byte, boundaries, so care must
+be exercised when using the UTF-8–enabled version. The size of the first
+127 ASCII characters -- along with the characters in popular code pages
+such as ISO 8859 -- is one byte long. When working exclusively within
+these code pages, UTF-8–enabled newLISP is not required. The
+link:#set-locale[set-locale] function alone is sufficient for localized
+behavior.
+
+Functions only available on UTF-8 enabled versions
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+[cols="1<,2<",width="60%",options="header",]
+|=======================================================================
+|function |description
+|link:#unicode[unicode] |converts UTF-8 or ASCII strings into USC-4
+Unicode
+
+|link:#utf8[utf8] |converts UCS-4 Unicode strings to UTF-8
+
+|link:#utf8len[utf8len] |returns the number of UTF-8 characters in a a
+string
+|=======================================================================
+
+The first two functions are rarely used in practice, as most Unicode
+text files are already UTF-8–encoded (rather than UCS-4, which uses
+four-byte integer characters). Unicode can be displayed directly when
+using the `"%ls"` link:#format[format] specifier.
+
+For further details on UTF-8 and Unicode, consult
+http://www.cl.cam.ac.uk/~mgk25/unicode.html[_UTF-8 and Unicode FAQ for
+Unix/Linux_] by _Markus Kuhn_.
+
+( § )
+
+22. Commas in parameter lists
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Some of the example programs contain functions that use a comma to
+separate the parameters into two groups. This is not a special syntax of
+newLISP, but rather a visual trick. The comma is a symbol just like any
+other symbol. The parameters after the comma are not required when
+calling the function; they simply declare local variables in a
+convenient way. This is possible in newLISP because parameter variables
+in lambda expressions are local and arguments are optional:
+
+[source,newlisp]
+-------------------------------
+(define (my-func a b c , x y z)
+    (set 'x …)
+(…))
+-------------------------------
+
+When calling this function, only `a, b`, and `c` are used as parameters.
+The others (the comma symbol, `x`, ` y`, and `z`) are initialized to
+`nil` and are local to the function. After execution, the function's
+contents are forgotten and the environment's symbols are restored to
+their previous values.
+
+For other ways of declaring and initializing local variables, see
+link:#let[let], link:#letex[letex] and link:#letn[letn].
+
+( § )
+
+23. Linking newLISP source and executable
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+On MS Windows, source code and the newLISP executable can be linked
+together to build a self-contained application by using `link.lsp`. On
+UNIX, the new linked executable will only work correctly when called
+with the full pathname.
+
+The `link.lsp` program is located in the `newlisp/util` directory of the
+source distributions. As an example, the following code is linked to the
+newLISP executable to form a simple, self-contained application:
+
+[source,newlisp]
+------------------------------------
+;; uppercase.lsp - Link example
+(println (upper-case (main-args 1)))
+(exit)
+------------------------------------
+
+This program, which resides in the file `uppercase.lsp`, takes the first
+word on the command-line and converts it to uppercase.
+
+.To build this program as a self-contained executable, follow these four steps:
+
+1. Put the following files into the same directory: (a) a copy of the
+   newLISP executable; (b) `newlisp.exe`; (c) `link.lsp`; and (d) the
+   program to link with (`uppercase.lsp` in this example).
+
+2. In a shell, go to the directory referred to in step 1 and load
+   `link.lsp`:
++
+----------------
+newlisp link.lsp
+----------------
++
+3. In the newLISP shell, type one of the following:
++
+----------------------------------------------------
+(link "newlisp.exe" "uppercase.exe" "uppercase.lsp")
+----------------------------------------------------
++
+4. Exit the newLISP shell and type:
++
+-----------------------------------
+uppercase "convert me to uppercase"
+-----------------------------------
+
+.The console should print:
+
+-----------------------
+CONVERT ME TO UPPERCASE
+-----------------------
+
+NOTE: Neither one of the initialization files `init.lsp` nor
+`.init.lsp` is loaded during startup of linked programs.
+
+( ∂ )
+
