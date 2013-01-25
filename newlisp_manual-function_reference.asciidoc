@@ -1,1640 +1,11 @@
-newLISP Function Reference
---------------------------
-
-1. Syntax of symbol variables and numbers
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-Source code in newLISP is parsed according to the rules outlined here.
-When in doubt, verify the behavior of newLISP's internal parser by
-calling link:#parse[parse] without optional arguments.
-
-Symbols for variable names
-^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-The following rules apply to the naming of symbols used as variables or
-functions:
-
-1.  Variable symbols may not start with any of the following
-characters: +
- `# ; " ' ( )  { } . , 0 1 2 3 4 5 6 7 8 9` +
-2.  Variable symbols starting with a `+` or `-` cannot have a number as
-the second character. +
-3.  Any character is allowed inside a variable name, except for: +
- `" ' ( ) : ,` and the space character. These mark the end of a variable
-symbol. +
-4.  A symbol name starting with `[` (left square bracket) and ending
-with `]` (right square bracket) may contain any character except the
-right square bracket.
-
-All of the following symbols are legal variable names in newLISP:
-
-[source,newlisp]
-------------
-myvar
-A-name
-X34-zz
-[* 7 5 ()};]
-*111*
-------------
-
-Sometimes it is useful to create hash-like link:#hash[lookup
-dictionaries] with keys containing characters that are illegal in
-newLISP variables. The functions link:#sym[sym] and
-link:#context[context] can be used to create symbols containing these
-characters:
-
-------------------------------
-(set (sym "(#:L*") 456)  → 456
-
-(eval (sym "(#:L*"))  → 456
-
-(set (sym 1) 123)  → 123
-
-(eval (sym 1))  → 123
-
-1        → 1
-(+ 1 2)  → 3
-------------------------------
-
-The last example creates the symbol `1` containing the value `123`. Also
-note that creating such a symbol does not alter newLISP's normal
-operations, since `1` is still parsed as the number one.
-
-Numbers
-^^^^^^^
-
-newLISP recognizes the following number formats:
-
-*Integers* are one or more digits long, optionally preceded by a `+` or
-`-` sign. Any other character marks the end of the integer or may be
-part of the sequence if parsed as a float (see float syntax below).
-
-[source,newlisp]
------
-123
-+4567
--999
------
-
-*Hexadecimals* start with a `0x` (or `0X`), followed by any combination
-of the hexadecimal digits: `0123456789abcdefABCDEF`. Any other character
-ends the hexadecimal number.
-
-[source,newlisp]
---------------
-0xFF    →  255
-0x10ab  → 4267
-0X10CC  → 4300
---------------
-
-*Binaries* start with a `0b` (or `0B`), followed by up to 64 1's or 0s.
-Any other character ends the binary number.
-
-[source,newlisp]
-----------------
-0b101010   →  42
-----------------
-
-*Octals* start with an optional `+` (plus) or `-` (minus) sign and a `0`
-(zero), followed by any combination of the octal digits: `01234567`. Any
-other character ends the octal number.
-
-[source,newlisp]
------------
-012   →  10
-010   →   8
-077   →  63
--077  → -63
------------
-
-*Floating point* numbers can start with an optional `+` (plus) or `-`
-(minus) sign, but they cannot be followed by a `0` (zero); this would
-make them octal numbers instead of floating points. A single `.`
-(decimal point) can appear anywhere within a floating point number,
-including at the beginning.
-
-[source,newlisp]
-------------------
-1.23     →  1.23
--1.23    → -1.23
-+2.3456  →  2.3456
-.506     →  0.506
-------------------
-
-As described below, *scientific notation* starts with a floating point
-number called the _significand_ (or _mantissa_), followed by the letter
-`e` or `E` and an integer _exponent_.
-
-[source,newlisp]
--------------------
-1.23e3    →  1230
--1.23E3   → -1230
-+2.34e-2  →  0.0234
-.506E3    →  506
--------------------
-
-// ( § )
-
-2. Data types and names in the reference
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-To describe the types and names of a function's parameters, the
-following naming convention is used throughout the reference section:
-
-*syntax: (format _str-format_ _exp-data-1_ [_exp-data-i_ ... ])*
-
-Arguments are represented by symbols formed by the argument's type and
-name, separated by a `-` (hyphen). Here, _str-format_ (a string) and
-_exp-data-1_ (an expression) are named "format" and "data-1",
-respectively.
-
-Arguments enclosed in brackets `[` and `]` are optional. When arguments
-are separated by a vertical `|` then one of them must be chosen.
-
-array
-^^^^^
-
-An array (constructed with the link:#array[array] function).
-
-body
-^^^^
-
-One or more expressions for evaluation. The expressions are evaluated
-sequentially if there is more than one.
-
---------------------------
-1 7.8
-nil
-(+ 3 4)
-"Hi" (+ a b)(print result)
-(do-this)(do-that) 123
---------------------------
-
-bool
-^^^^
-
-`true`, `nil`, or an expression evaluating to one of these two.
-
---------------------
-true, nil, (<= X 10)
---------------------
-
-context
-^^^^^^^
-
-An expression evaluating to a context (namespace) or a variable symbol
-holding a context.
-
------------------------
-MyContext, aCtx, TheCTX
------------------------
-
-exp
-^^^
-
-Any data type described in this chapter.
-
-func
-^^^^
-
-A symbol or an expression evaluating to an operator symbol or lambda
-expression.
-
-------------------------------------------------
-+, add, (first '(add sub)), (lambda (x) (+ x x))
-------------------------------------------------
-
-int
-^^^
-
-An integer or an expression evaluating to an integer. Generally, if a
-floating point number is used when an int is expected, the value is
-truncated to an integer.
-
----------------
-123, 5, (* X 5)
----------------
-
-list
-^^^^
-
-A list of elements (any type) or an expression evaluating to a list.
-
------------------------
-(a b c "hello" (+ 3 4))
------------------------
-
-num
-^^^
-
-An integer, a floating point number, or an expression evaluating to one
-of these two. If an integer is passed, it is converted to a floating
-point number.
-
---------------------------
-1.234, (div 10 3), (sin 1)
---------------------------
-
-matrix
-^^^^^^
-
-A list in which each row element is itself a list or an array in which
-each row element is itself an array. All element lists or arrays (rows)
-are of the same length. Any data type can be element of a matrix, but
-when using specific matrix operations like link:#det[det],
-link:#multiply[multiply], or link:#invert[invert], all numbers must be
-floats or integers.
-
-The dimensions of a matrix are defined by indicating the number of rows
-and the number of column elements per row. Functions working on matrices
-ignore superfluous columns in a row. For missing row elements, `0.0` is
-assumed by the functions link:#det[det], link:#multiply[multiply], and
-link:#invert[invert], while link:#transpose[transpose] assumes `nil`.
-Special rules apply for link:#transpose[transpose] when a whole row is
-not a list or an array, but some other data type.
-
----------------------------------------
-((1  2  3  4)
-(5  6  7  8)
-(9 10 11 12))        ; 3 rows 4 columns
-
-((1 2) (3 4) (5 6))  ; 3 rows 2 columns
----------------------------------------
-
-place
-^^^^^
-
-A place referenced by a symbol or a place defined in a list, array or
-string by indexing with link:#nth[nth] or link:#indexing[implicit
-indexing] or a place referenced by functions like link:#first[first],
-link:#last[last], link:#assoc[assoc] or link:#lookup[lookup].
-
-str
-^^^
-
-A string or an expression that evaluates to a string.
-
----------------------------------------
-"Hello", (append first-name  " Miller")
----------------------------------------
-
-Special characters can be included in quoted strings by placing a `\`
-(backslash) before the character or digits to escape them:
-
-[cols="<,<",options="header",]
-|=======================================================================
-|character |description
-|`\"` |for a double quote inside a quoted string
-
-|`\n` |the line-feed character (ASCII 10)
-
-|`\r` |the carriage return character (ASCII 13)
-
-|`\t` |the tab character (ASCII 9)
-
-|`\nnn` |a decimal ASCII code where nnn is between 000 and 255
-
-|`\xnn` |a hexadecimal code where nn is between 00 and FF
-
-|`\unnnn` |a unicode character encoded in the four `nnnn` hexadecimal
-digits. When reading a quoted string, newLISP will translate this to a
-UTF8 character in the UTF8 enabled versions of newLISP.
-
-|`\\` |the backslash character itself
-|=======================================================================
-
-Decimals start with a digit. Hexadecimals start with `x`:.
-
-----------------------
-"\065\066\067" → "ABC"
-"\x41\x42\x43" → "ABC"
-----------------------
-
-Instead of a `"` (double quote), a `{` (left curly bracket) and `}`
-(right curly bracket) can be used to delimit strings. This is useful
-when quotation marks need to occur inside strings. Quoting with the
-curly brackets suppresses the backslash escape effect for special
-characters. Balanced nested curly brackets may be used within a string.
-This aids in writing regular expressions or short sections of HTML.
-
-------------------------------------------------------------
-(print "<A href=\"http://mysite.com\">" ) ; the cryptic way
-
-(print {<A href="http://mysite.com">} )   ; the readable way
-
-; path names on MS Windows
-
-(set 'path "C:\\MyDir\\example.lsp")
-
-; no escaping when using braces
-
-(set 'path {C:\MyDir\example.lsp})
-
-; on MS Windows the forward slash can be used in path names
-
-(set 'path "C:/MyDir/example.lsp")
-
-; inner braces are balanced
-(regex {abc{1,2}} line)
-
-(print [text]
-  this could be
-  a very long (> 2048 characters) text,
-  i.e. HTML.
-[/text])
-------------------------------------------------------------
-
-The tags `[text]` and `[/text]` can be used to delimit long strings and
-suppress escape character translation. This is useful for delimiting
-long HTML passages in CGI files written in newLISP or for situations
-where character translation should be completely suppressed. Always use
-the `[text]` tags for strings longer than 2048 characters.
-
-sym
-^^^
-
-A symbol or expression evaluating to a symbol.
-
---------------------------------------------
-'xyz, (first '(+ - /)), '*, '- , someSymbol,
---------------------------------------------
-
-Most of the context symbols in this manual start with an uppercase
-letter to distinguish them from other symbols.
-
-sym-context
-^^^^^^^^^^^
-
-A symbol, an existing context, or an expression evaluating to a symbol
-from which a context will be created. If a context does not already
-exist, many functions implicitly create them (e.g.,
-link:#bayes-train[bayes-train], link:#context[context],
-link:#eval-string[eval-string], link:#load[load], link:#sym[sym], and
-link:#xml-parse[xml-parse]). The context must be specified when these
-functions are used on an existing context. Even if a context already
-exists, some functions may continue to take quoted symbols (e.g.,
-link:#context[context]). For other functions, such as
-link:#contextp[context?], the distinction is critical.
-
-// ( § )
-
-3. Functions in groups
-~~~~~~~~~~~~~~~~~~~~~~
-
-Some functions appear in more than one group.
-
-List processing, flow control, and integer arithmetic
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-link:#arithmetic[+, -, *, /, %]
-
-integer arithmetic
-
-link:#inci[++]
-
-increment integer numbers
-
-link:#deci[--]
-
-decrement integer numbers
-
-link:#logical[<, >, =]
-
-compares any data type: less, greater, equal
-
-link:#logical[<=, >=, !=]
-
-compares any data type: less-equal, greater-equal, not-equal
-
-link:#colon[:]
-
-constructs a context symbol and applies it to an object
-
-link:#and[and]
-
-logical `and`
-
-link:#append[append]
-
-appends lists ,arrays or strings to form a new list, array or string
-
-link:#apply[apply]
-
-applies a function or primitive to a list of arguments
-
-link:#args[args]
-
-retrieves the argument list of a function or macro expression
-
-link:#assoc[assoc]
-
-searches for keyword associations in a list
-
-link:#begin[begin]
-
-begins a block of functions
-
-link:#bind[bind]
-
-binds variable associations in a list
-
-link:#case[case]
-
-branches depending on contents of control variable
-
-link:#catch[catch]
-
-evaluates an expression, possibly catching errors
-
-link:#chop[chop]
-
-chops elements from the end of a list
-
-link:#clean[clean]
-
-cleans elements from a list
-
-link:#cond[cond]
-
-branches conditionally to expressions
-
-link:#cons[cons]
-
-prepends an element to a list, making a new list
-
-link:#constant[constant]
-
-defines a constant symbol
-
-link:#count[count]
-
-counts elements of one list that occur in another list
-
-link:#curry[curry]
-
-transforms a function f(x, y) into a function fx(y)
-
-link:#define[define]
-
-defines a new function or lambda expression
-
-link:#define-macro[define-macro]
-
-defines a macro or lambda-macro expression
-
-link:#def-new[def-new]
-
-copies a symbol to a different context (namespace)
-
-link:#difference[difference]
-
-returns the difference between two lists
-
-link:#doargs[doargs]
-
-iterates through the arguments of a function
-
-link:#dolist[dolist]
-
-evaluates once for each element in a list
-
-link:#dostring[dostring]
-
-evaluates once for each character in a string
-
-link:#dotimes[dotimes]
-
-evaluates once for each number in a range
-
-link:#dotree[dotree]
-
-iterates through the symbols of a context
-
-link:#do-until[do-until]
-
-repeats evaluation of an expression until the condition is met
-
-link:#do-while[do-while]
-
-repeats evaluation of an expression while the condition is true
-
-link:#dup[dup]
-
-duplicates a list or string a specified number of times
-
-link:#ends-with[ends-with]
-
-checks the end of a string or list against a key of the same type
-
-link:#eval[eval]
-
-evaluates an expression
-
-link:#exists[exists]
-
-checks for the existence of a condition in a list
-
-link:#expand[expand]
-
-replaces a symbol in a nested list
-
-link:#explode[explode]
-
-explodes a list or string
-
-link:#extend[extend]
-
-extends a list or string
-
-link:#first[first]
-
-gets the first element of a list or string
-
-link:#filter[filter]
-
-filters a list
-
-link:#find[find]
-
-searches for an element in a list or string
-
-link:#flat[flat]
-
-returns the flattened list
-
-link:#define[fn]
-
-defines a new function or lambda expression
-
-link:#for[for]
-
-evaluates once for each number in a range
-
-link:#for-all[for-all]
-
-checks if all elements in a list meet a condition
-
-link:#if[if]
-
-evaluates an expression conditionally
-
-link:#index[index]
-
-filters elements from a list and returns their indices
-
-link:#intersect[intersect]
-
-returns the intersection of two lists
-
-link:#define[lambda]
-
-defines a new function or lambda expression
-
-link:#last[last]
-
-returns the last element of a list or string
-
-link:#length[length]
-
-calculates the length of a list or string
-
-link:#let[let]
-
-declares and initializes local variables
-
-link:#letex[letex]
-
-expands local variables into an expression, then evaluates
-
-link:#letn[letn]
-
-initializes local variables incrementally, like _nested lets_
-
-link:#list[list]
-
-makes a list
-
-link:#lookup[lookup]
-
-looks up members in an association list
-
-link:#map[map]
-
-maps a function over members of a list, collecting the results
-
-link:#match[match]
-
-matches patterns against lists; for matching against strings, see
-link:#find[find] and link:#regex[regex]
-
-link:#member[member]
-
-finds a member of a list or string
-
-link:#not[not]
-
-logical `not`
-
-link:#nth[nth]
-
-gets the _nth_ element of a list or string
-
-link:#or[or]
-
-logical `or`
-
-link:#pop[pop]
-
-deletes and returns an element from a list or string
-
-link:#pop-assoc[pop-assoc]
-
-removes an association from an association list
-
-link:#push[push]
-
-inserts a new element into a list or string
-
-link:#quote[quote]
-
-quotes an expression
-
-link:#ref[ref]
-
-returns the position of an element inside a nested list
-
-link:#ref-all[ref-all]
-
-returns a list of index vectors of elements inside a nested list
-
-link:#rest[rest]
-
-returns all but the first element of a list or string
-
-link:#replace[replace]
-
-replaces elements inside a list or string
-
-link:#reverse[reverse]
-
-reverses a list or string
-
-link:#rotate[rotate]
-
-rotates a list or string
-
-link:#select[select]
-
-selects and permutes elements from a list or string
-
-link:#self[self]
-
-Accesses the target object inside a FOOP method
-
-link:#set[set]
-
-sets the binding or contents of a symbol
-
-link:#setf[setf setq]
-
-sets contents of a symbol or list, array or string reference
-
-link:#set-ref[set-ref]
-
-searches for an element in a nested list and replaces it
-
-link:#set-ref-all[set-ref-all]
-
-searches for an element in a nested list and replaces all instances
-
-link:#silent[silent]
-
-works like link:#begin[begin] but suppresses console output of the
-return value
-
-link:#slice[slice]
-
-extracts a sublist or substring
-
-link:#sort[sort]
-
-sorts the members of a list
-
-link:#starts-with[starts-with]
-
-checks the beginning of a string or list against a key of the same type
-
-link:#swap[swap]
-
-swaps two elements inside a list or string
-
-link:#unify[unify]
-
-unifies two expressions
-
-link:#unique[unique]
-
-returns a list without duplicates
-
-link:#union[union]
-
-returns a unique list of elements found in two or more lists.
-
-link:#unless[unless]
-
-evaluates an expression conditionally
-
-link:#until[until]
-
-repeats evaluation of an expression until the condition is met
-
-link:#when[when]
-
-evaluates a block of statements conditionally
-
-link:#while[while]
-
-repeats evaluation of an expression while the condition is true
-
-String and conversion functions
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-[cols="<,<",]
-|=======================================================================
-|link:#address[address] |gets the memory address of a number or string
-
-|link:#append[append] |appends lists, arrays or strings to form a new
-list, array or string
-
-|link:#bits[bits] |translates a number into binary representation
-
-|link:#char[char] |translates between characters and ASCII codes
-
-|link:#chop[chop] |chops off characters from the end of a string
-
-|link:#dostring[dostring] |evaluates once for each character in a string
-
-|link:#dup[dup] |duplicates a list or string a specified number of times
-
-|link:#ends-with[ends-with] |checks the end of a string or list against
-a key of the same type
-
-|link:#encrypt[encrypt] |does a one-time–pad encryption and decryption
-of a string
-
-|link:#eval-string[eval-string] |compiles, then evaluates a string
-
-|link:#explode[explode] |transforms a string into a list of characters
-
-|link:#extend[extend] |extends a list or string
-
-|link:#find[find] |searches for an element in a list or string
-
-|link:#find-all[find-all] |returns a list of all pattern matches found
-in string
-
-|link:#first[first] |gets the first element in a list or string
-
-|link:#float[float] |translates a string or integer into a floating
-point number
-
-|link:#format[format] |formats numbers and strings as in the C language
-
-|link:#get-char[get-char] |gets a character from a memory address
-
-|link:#get-float[get-float] |gets a double float from a memory address
-
-|link:#get-int[get-int] |gets a 32-bit integer from a memory address
-
-|link:#get-long[get-long] |gets a long 64-bit integer from a memory
-address
-
-|link:#get-string[get-string] |gets a string from a memory address
-
-|link:#int[int] |translates a string or float into an integer
-
-|link:#join[join] |joins a list of strings
-
-|link:#last[last] |returns the last element of a list or string
-
-|link:#lower-case[lower-case] |converts a string to lowercase characters
-
-|link:#member[member] |finds a list or string member
-
-|link:#name[name] |returns the name of a symbol or its context as a
-string
-
-|link:#nth[nth] |gets the _nth_ element in a list or string
-
-|link:#pack[pack] |packs newLISP expressions into a binary structure
-
-|link:#parse[parse] |breaks a string into tokens
-
-|link:#pop[pop] |pops from a string
-
-|link:#push[push] |pushes onto a string
-
-|link:#regex[regex] |performs a Perl-compatible regular expression
-search
-
-|link:#regex-comp[regex-comp] |pre-compiles a regular expression pattern
-
-|link:#replace[replace] |replaces elements in a list or string
-
-|link:#rest[rest] |gets all but the first element of a list or string
-
-|link:#reverse[reverse] |reverses a list or string
-
-|link:#rotate[rotate] |rotates a list or string
-
-|link:#select[select] |selects and permutes elements from a list or
-string
-
-|link:#setf[setf setq] |sets contents of a string reference
-
-|link:#slice[slice] |extracts a substring or sublist
-
-|link:#source[source] |returns the source required to bind a symbol as a
-string
-
-|link:#starts-with[starts-with] |checks the start of the string or list
-against a key string or list
-
-|link:#string[string] |transforms anything into a string
-
-|link:#sym[sym] |translates a string into a symbol
-
-|link:#title-case[title-case] |converts the first character of a string
-to uppercase
-
-|link:#trim[trim] |trims a string on one or both sides
-
-|link:#unicode[unicode] |converts ASCII or UTF-8 to UCS-4 Unicode
-
-|link:#utf8[utf8] |converts UCS-4 Unicode to UTF-8
-
-|link:#utf8len[utf8len] |returns length of an UTF-8 string in UTF-8
-characters
-
-|link:#unpack[unpack] |unpacks a binary structure into newLISP
-expressions
-
-|link:#upper-case[upper-case] |converts a string to uppercase characters
-|=======================================================================
-
-Floating point math and special functions
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-[cols="<,<",]
-|=======================================================================
-|link:#abs[abs] |returns the absolute value of a number
-
-|link:#acos[acos] |calculates the arc-cosine of a number
-
-|link:#acosh[acosh] |calculates the inverse hyperbolic cosine of a
-number
-
-|link:#add[add] |adds floating point or integer numbers and returns a
-floating point number
-
-|link:#array[array] |creates an array
-
-|link:#array-list[array-list] |returns a list conversion from an array
-
-|link:#asin[asin] |calculates the arcsine of a number
-
-|link:#asinh[asinh] |calculates the inverse hyperbolic sine of a number
-
-|link:#atan[atan] |calculates the arctangent of a number
-
-|link:#atanh[atanh] |calculates the inverse hyperbolic tangent of a
-number
-
-|link:#atan2[atan2] |computes the principal value of the arctangent of Y
-/ X in radians
-
-|link:#beta[beta] |calculates the beta function
-
-|link:#betai[betai] |calculates the incomplete beta function
-
-|link:#binomial[binomial] |calculates the binomial function
-
-|link:#ceil[ceil] |rounds up to the next integer
-
-|link:#cos[cos] |calculates the cosine of a number
-
-|link:#cosh[cosh] |calculates the hyperbolic cosine of a number
-
-|link:#crc32[crc32] |calculates a 32-bit CRC for a data buffer
-
-|link:#dec[dec] |decrements a number in a variable, list or array
-
-|link:#div[div] |divides floating point or integer numbers
-
-|link:#erf[erf] |calculates the error function of a number
-
-|link:#exp[exp] |calculates the exponential _e_ of a number
-
-|link:#factor[factor] |factors a number into primes
-
-|link:#fft[fft] |performs a fast Fourier transform (FFT)
-
-|link:#floor[floor] |rounds down to the next integer
-
-|link:#flt[flt] |converts a number to a 32-bit integer representing a
-float
-
-|link:#gammai[gammai] |calculates the incomplete Gamma function
-
-|link:#gammaln[gammaln] |calculates the log Gamma function
-
-|link:#gcd[gcd] |calculates the greatest common divisor of a group of
-integers
-
-|link:#ifft[ifft] |performs an inverse fast Fourier transform (IFFT)
-
-|link:#inc[inc] |increments a number in a variable, list or array
-
-|link:#infp[inf?] |checks if a floating point value is infinite
-
-|link:#log[log] |calculates the natural or other logarithm of a number
-
-|link:#min[min] |finds the smallest value in a series of values
-
-|link:#max[max] |finds the largest value in a series of values
-
-|link:#mod[mod] |calculates the modulo of two numbers
-
-|link:#mul[mul] |multiplies floating point or integer numbers
-
-|link:#NaNp[NaN?] |checks if a float is NaN (not a number)
-
-|link:#round[round] |rounds a number
-
-|link:#pow[pow] |calculates _x_ to the power of _y_
-
-|link:#sequence[sequence] |generates a list sequence of numbers
-
-|link:#series[series] |creates a geometric sequence of numbers
-
-|link:#sgn[sgn] |calculates the signum function of a number
-
-|link:#sin[sin] |calculates the sine of a number
-
-|link:#sinh[sinh] |calculates the hyperbolic sine of a number
-
-|link:#sqrt[sqrt] |calculates the square root of a number
-
-|link:#sub[sub] |subtracts floating point or integer numbers
-
-|link:#tan[tan] |calculates the tangent of a number
-
-|link:#tanh[tanh] |calculates the hyperbolic tangent of a number
-
-|link:#uuid[uuid] |returns a UUID (Universal Unique IDentifier)
-|=======================================================================
-
-Matrix functions
-^^^^^^^^^^^^^^^^
-
-[cols="<,<",]
-|=================================================================
-|link:#det[det] |returns the determinant of a matrix
-|link:#invert[invert] |returns the inversion of a matrix
-|link:#mat[mat] |performs scalar operations on matrices
-|link:#multiply[multiply] |multiplies two matrices
-|link:#transpose[transpose] |returns the transposition of a matrix
-|=================================================================
-
-Array functions
-^^^^^^^^^^^^^^^
-
-[cols="<,<",]
-|=======================================================================
-|link:#append[append] |appends arrays
-
-|link:#array[array] |creates and initializes an array with up to 16
-dimensions
-
-|link:#array-list[array-list] |converts an array into a list
-
-|link:#arrayp[array?] |checks if expression is an array
-
-|link:#det[det] |returns the determinant of a matrix
-
-|link:#first[first] |returns the first row of an array
-
-|link:#invert[invert] |returns the inversion of a matrix
-
-|link:#last[last] |returns the last row of an array
-
-|link:#mat[mat] |performs scalar operations on matrices
-
-|link:#multiply[multiply] |multiplies two matrices
-
-|link:#nth[nth] |returns an element of an array
-
-|link:#rest[rest] |returns all but the first row of an array
-
-|link:#setf[setf] |sets contents of an array reference
-
-|link:#slice[slice] |returns a slice of an array
-
-|link:#transpose[transpose] |transposes a matrix
-|=======================================================================
-
-Bit operators
-^^^^^^^^^^^^^
-
-[cols="<,<",]
-|========================================================
-|link:#bit_shift[<<, >>] |bit shift left, bit shift right
-|link:#bit_and[&] |bitwise and
-|link:#bit_inclusive[|] |bitwise inclusive or
-|link:#bit_exclusive[^] |bitwise exclusive or
-|link:#bit_not[~] |bitwise not
-|========================================================
-
-Predicates
-^^^^^^^^^^
-
-[cols="<,<",]
-|=======================================================================
-|link:#atomp[atom?] |checks if an expression is an atom
-
-|link:#arrayp[array?] |checks if an expression is an array
-
-|link:#contextp[context?] |checks if an expression is a context
-
-|link:#directoryp[directory?] |checks if a disk node is a directory
-
-|link:#emptyp[empty?] |checks if a list or string is empty
-
-|link:#evenp[even?] |checks the parity of an integer number
-
-|link:#filep[file?] |checks if a file exists
-
-|link:#floatp[float?] |checks if an expression is a float
-
-|link:#globalp[global?] |checks if a symbol is global
-
-|link:#infp[inf?] |checks if a floating point value is infinite
-
-|link:#integerp[integer?] |checks if an expression is an integer
-
-|link:#lambdap[lambda?] |checks if an expression is a lambda expression
-
-|link:#legalp[legal?] |checks if a string contains a legal symbol
-
-|link:#listp[list?] |checks if an expression is a list
-
-|link:#macrop[macro?] |checks if an expression is a lambda-macro
-expression
-
-|link:#NaNp[NaN?] |checks if a float is NaN (not a number)
-
-|link:#nilp[nil?] |checks if an expression is `nil`
-
-|link:#nullp[null?] |checks if an expression is `nil`, `""`, `()`, `0`
-or `0.0`
-
-|link:#numberp[number?] |checks if an expression is a float or an
-integer
-
-|link:#oddp[odd?] |checks the parity of an integer number
-
-|link:#protectedp[protected?] |checks if a symbol is protected
-
-|link:#primitivep[primitive?] |checks if an expression is a primitive
-
-|link:#quotep[quote?] |checks if an expression is quoted
-
-|link:#stringp[string?] |checks if an expression is a string
-
-|link:#symbolp[symbol?] |checks if an expression is a symbol
-
-|link:#truep[true?] |checks if an expression is not `nil`
-
-|link:#zerop[zero?] |checks if an expression is `0` or `0.0`
-|=======================================================================
-
-Date and time functions
-^^^^^^^^^^^^^^^^^^^^^^^
-
-[cols="<,<",]
-|=======================================================================
-|link:#date[date] |converts a date-time value to a string
-
-|link:#date-list[date-list] |returns a list of year, month, day, hours,
-minutes, seconds from a time value in seconds
-
-|link:#date-parse[date-parse] |parses a date string and returns the
-number of seconds passed since January 1, 1970, (formerly `parse-date`)
-
-|link:#date-value[date-value] |calculates the time in seconds since
-January 1, 1970 for a date and time
-
-|link:#now[now] |returns a list of current date-time information
-
-|link:#time[time] |calculates the time it takes to evaluate an
-expression in milliseconds
-
-|link:#time-of-day[time-of-day] |calculates the number of milliseconds
-elapsed since the day started
-|=======================================================================
-
-Statistics, simulation and modeling functions
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-[cols="<,<",]
-|=======================================================================
-|link:#amb[amb] |randomly selects an argument and evaluates it
-
-|link:#bayes-query[bayes-query] |calculates Bayesian probabilities for a
-data set
-
-|link:#bayes-train[bayes-train] |counts items in lists for Bayesian or
-frequency analysis
-
-|link:#corr[corr] |calculates the _product-moment correlation_
-coefficient
-
-|link:#crit-chi2[crit-chi2] |calculates the _Chi²_ statistic for a given
-probability
-
-|link:#crit-f[crit-f] |calculates the _F_ statistic for a given
-probability
-
-|link:#crit-t[crit-t] |calculates the _Student's t_ statistic for a
-given probability
-
-|link:#crit-z[crit-z] |calculates the normal distributed _Z_ for a given
-probability
-
-|link:#normal[normal] |makes a list of normal distributed floating point
-numbers
-
-|link:#prob-chi2[prob-chi2] |calculates the tail probability of a _Chi²_
-distribution value
-
-|link:#prob-f[prob-f] |calculates the tail probability of a _F_
-distribution value
-
-|link:#prob-t[prob-t] |calculates the tail probability of a _Student's
-t_ distribution value
-
-|link:#prob-z[prob-z] |calculates the cumulated probability of a _Z_
-distribution value
-
-|link:#rand[rand] |generates random numbers in a range
-
-|link:#random[random] |generates a list of evenly distributed floats
-
-|link:#randomize[randomize] |shuffles all of the elements in a list
-
-|link:#seed[seed] |seeds the internal random number generator
-
-|link:#stats[stats] |calculates some basic statistics for a data vector
-
-|link:#t-test[t-test] |performs a t-test on dependent or independent
-data samples
-|=======================================================================
-
-Pattern matching
-^^^^^^^^^^^^^^^^
-
-[cols="<,<",]
-|=======================================================================
-|link:#ends-with[ends-with] |tests if a list or string ends with a
-pattern
-
-|link:#find[find] |searches for a pattern in a list or string
-
-|link:#find-all[find-all] |finds all occurrences of a pattern in a
-string
-
-|link:#match[match] |matches list patterns
-
-|link:#parse[parse] |breaks a string along around patterns
-
-|link:#ref[ref] |returns the position of an element inside a nested list
-
-|link:#ref-all[ref-all] |returns a list of index vectors of elements
-inside a nested list
-
-|link:#regex[regex] |finds patterns in a string
-
-|link:#replace[replace] |replaces patterns in a string
-
-|link:#search[search] |searches for a pattern in a file
-
-|link:#starts-with[starts-with] |tests if a list or string starts with a
-pattern
-
-|link:#unify[unify] |performs a logical unification of patterns
-|=======================================================================
-
-Financial math functions
-^^^^^^^^^^^^^^^^^^^^^^^^
-
-[cols="<,<",]
-|====================================================================
-|link:#fv[fv] |returns the future value of an investment
-|link:#irr[irr] |calculates the internal rate of return
-|link:#nper[nper] |calculates the number of periods for an investment
-|link:#npv[npv] |calculates the net present value of an investment
-|link:#pv[pv] |calculates the present value of an investment
-|link:#pmt[pmt] |calculates the payment for a loan
-|====================================================================
-
-Input/output and file operations
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-[cols="<,<",]
-|=======================================================================
-|link:#append-file[append-file] |appends data to a file
-
-|link:#close[close] |closes a file
-
-|link:#current-line[current-line] |retrieves contents of last read-line
-buffer
-
-|link:#device[device] |sets or inquires about current print device
-
-|link:#exec[exec] |launches another program, then reads from or writes
-to it
-
-|link:#load[load] |loads and evaluates a file of newLISP code
-
-|link:#open[open] |opens a file for reading or writing
-
-|link:#peek[peek] |checks file descriptor for number of bytes ready for
-reading
-
-|link:#print[print] |prints to the console or a device
-
-|link:#println[println] |prints to the console or a device with a
-line-feed
-
-|link:#read[read] |reads binary data from a file
-
-|link:#read-char[read-char] |reads an 8-bit character from a file
-
-|link:#read-file[read-file] |reads a whole file in one operation
-
-|link:#read-key[read-key] |reads a keyboard key
-
-|link:#read-line[read-line] |reads a line from the console or file
-
-|link:#read-utf8[read-utf8] |reads UTF-8 character from a file
-
-|link:#save[save] |saves a workspace, context, or symbol to a file
-
-|link:#search[search] |searches a file for a string
-
-|link:#seek[seek] |sets or reads a file position
-
-|link:#write[write] |writes binary data to a file
-
-|link:#write-char[write-char] |writes a character to a file
-
-|link:#write-file[write-file] |writes a file in one operation
-
-|link:#write-line[write-line] |writes a line to the console or a file
-|=======================================================================
-
-Processes and the Cilk API
-^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-[cols="<,<",]
-|=======================================================================
-|link:#shell[!] |shells out to the operating system
-
-|link:#abort[abort] |aborts a child process started with `spawn`
-
-|link:#destroy[destroy] |destroys a process created with `fork` or
-`process`
-
-|link:#exec[exec] |runs a process, then reads from or writes to it
-
-|link:#fork[fork] |launches a newLISP child process
-
-|link:#pipe[pipe] |creates a pipe for interprocess communication
-
-|link:#process[process] |launches a child process, remapping standard
-I/O and standard error
-
-|link:#receive[receive] |receive a message from another process
-
-|link:#semaphore[semaphore] |creates and controls semaphores
-
-|link:#send[send] |send a message to another process
-
-|link:#share[share] |shares memory with other processes
-
-|link:#spawn[spawn] |launches a child process for Cilk process
-management
-
-|link:#sync[sync] |waits for child processes launched with `spawn` and
-collects results
-
-|link:#wait-pid[wait-pid] |waits for a child process to end
-|=======================================================================
-
-File and directory management
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-[cols="<,<",]
-|=======================================================================
-|link:#change-dir[change-dir] |changes to a different drive and
-directory
-
-|link:#copy-file[copy-file] |copies a file
-
-|link:#delete-file[delete-file] |deletes a file
-
-|link:#directory[directory] |returns a list of directory entries
-
-|link:#file-info[file-info] |gets file size, date, time, and attributes
-
-|link:#make-dir[make-dir] |makes a new directory
-
-|link:#real-path[real-path] |returns the full path of the relative file
-path
-
-|link:#remove-dir[remove-dir] |removes an empty directory
-
-|link:#rename-file[rename-file] |renames a file or directory
-|=======================================================================
-
-HTTP networking API
-^^^^^^^^^^^^^^^^^^^
-
-[cols="<,<",]
-|=======================================================================
-|link:#base64-enc[base64-enc] |encodes a string into BASE64 format
-
-|link:#base64-dec[base64-dec] |decodes a string from BASE64 format
-
-|link:#delete-url[delete-url] |deletes a file or page from the web
-
-|link:#get-url[get-url] |reads a file or page from the web
-
-|link:#post-url[post-url] |posts info to a URL address
-
-|link:#put-url[put-url] |uploads a page to a URL address
-
-|link:#xfer-event[xfer-event] |registers an event handler for HTTP byte
-transfers
-
-|link:#xml-error[xml-error] |returns last XML parse error
-
-|link:#xml-parse[xml-parse] |parses an XML document
-
-|link:#xml-type-tags[xml-type-tags] |shows or modifies XML type tags
-|=======================================================================
-
-Socket TCP/IP, UDP and ICMP network API
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-[cols="<,<",]
-|=======================================================================
-|link:#net-accept[net-accept] |accepts a new incoming connection
-
-|link:#net-close[net-close] |closes a socket connection
-
-|link:#net-connect[net-connect] |connects to a remote host
-
-|link:#net-error[net-error] |returns the last error
-
-|link:#net-eval[net-eval] |evaluates expressions on multiple remote
-newLISP servers
-
-|link:#net-interface[net-interface] |Sets the default interface IP
-address on multihomed computers.
-
-|link:#net-ipv[net-ipv] |Switches between IPv4 and IPv6 internet
-protocol versions.
-
-|link:#net-listen[net-listen] |listens for connections to a local socket
-
-|link:#net-local[net-local] |returns the local IP and port number for a
-connection
-
-|link:#net-lookup[net-lookup] |returns the name for an IP number
-
-|link:#net-packet[net-packet] |send a custom configured IP packet over
-raw sockets
-
-|link:#net-peek[net-peek] |returns the number of characters ready to be
-read from a network socket
-
-|link:#net-peer[net-peer] |returns the remote IP and port for a net
-connect
-
-|link:#net-ping[net-ping] |sends a ping packet (ICMP echo request) to
-one or more addresses
-
-|link:#net-receive[net-receive] |reads data on a socket connection
-
-|link:#net-receive-from[net-receive-from] |reads a UDP on an open
-connection
-
-|link:#net-receive-udp[net-receive-udp] |reads a UDP and closes the
-connection
-
-|link:#net-select[net-select] |checks a socket or list of sockets for
-status
-
-|link:#net-send[net-send] |sends data on a socket connection
-
-|link:#net-send-to[net-send-to] |sends a UDP on an open connection
-
-|link:#net-send-udp[net-send-udp] |sends a UDP and closes the connection
-
-|link:#net-service[net-service] |translates a service name into a port
-number
-
-|link:#net-sessions[net-sessions] |returns a list of currently open
-connections
-|=======================================================================
-
-Reflection and customization
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-[cols="<,<",]
-|=======================================================================
-|link:#command-event[command-event] |pre-processes the command-line and
-HTTP requests
-
-|link:#error-event[error-event] |defines an error handler
-
-|link:#last-error[last-error] |report the last error number and text
-
-|link:#ostype[ostype] |contains a string describing the OS platform
-
-|link:#prefix[prefix] |Returns the context prefix of a symbol
-
-|link:#prompt-event[prompt-event] |customizes the interactive newLISP
-shell prompt
-
-|link:#read-expr[read-expr] |reads and translates s-expressions from
-source
-
-|link:#reader-event[reader-event] |preprocess expressions before
-evaluation event-driven
-
-|link:#set-locale[set-locale] |switches to a different locale
-
-|link:#source[source] |returns the source required to bind a symbol to a
-string
-
-|link:#sys-error[sys-error] |reports OS system error numbers
-
-|link:#sys-info[sys-info] |gives information about system resources
-
-|link:#term[term] |returns the term part of a symbol or its context as a
-string
-|=======================================================================
-
-System functions
-^^^^^^^^^^^^^^^^
-
-[cols="<,<",]
-|=======================================================================
-|link:#systemsymbol[$] |accesses system variables $0 -> $15
-
-|link:#callback[callback] |registers a callback function for an imported
-library
-
-|link:#catch[catch] |evaluates an expression, catching errors and early
-returns
-
-|link:#context[context] |creates or switches to a different namespace
-
-|link:#copy[copy] |copies the result of an evaluation
-
-|link:#debug[debug] |debugs a user-defined function
-
-|link:#delete[delete] |deletes symbols from the symbol table
-
-|link:#default[default] |returns the contents of a default functor from
-a context
-
-|link:#env[env] |gets or sets the operating system's environment
-
-|link:#exit[exit] |exits newLISP, setting the exit value
-
-|link:#global[global] |makes a symbol accessible outside MAIN
-
-|link:#import[import] |imports a function from a shared library
-
-|link:#main-args[main-args] |gets command-line arguments
-
-|link:#new[new] |creates a copy of a context
-
-|link:#pretty-print[pretty-print] |changes the pretty-printing
-characteristics
-
-|link:#read-expr[read-expr] |translates a string to an s-expression
-without evaluating it
-
-|link:#reset[reset] |goes to the top level
-
-|link:#signal[signal] |sets a signal handler
-
-|link:#sleep[sleep] |suspends processing for specified milliseconds
-
-|link:#sym[sym] |creates a symbol from a string
-
-|link:#symbols[symbols] |returns a list of all symbols in the system
-
-|link:#throw[throw] |causes a previous link:#catch[catch] to return
-
-|link:#throw-error[throw-error] |throws a user-defined error
-
-|link:#timer[timer] |starts a one-shot timer, firing an event
-
-|link:#trace[trace] |sets or inquires about trace mode
-
-|link:#trace-highlight[trace-highlight] |sets highlighting strings in
-trace mode
-|=======================================================================
-
-Importing libraries
-^^^^^^^^^^^^^^^^^^^
-
-[cols="<,<",]
-|=======================================================================
-|link:#address[address] |returns the memory address of a number or
-string
-
-|link:#callback[callback] |registers a callback function for an imported
-library
-
-|link:#flt[flt] |converts a number to a 32-bit integer representing a
-float
-
-|link:#float[float] |translates a string or integer into a floating
-point number
-
-|link:#get-char[get-char] |gets a character from a memory address
-
-|link:#get-float[get-float] |gets a double float from a memory address
-
-|link:#get-int[get-int] |gets a 32-bit integer from a memory address
-
-|link:#get-long[get-long] |gets a long 64-bit integer from a memory
-address
-
-|link:#get-string[get-string] |gets a string from a memory address
-
-|link:#import[import] |imports a function from a shared library
-
-|link:#int[int] |translates a string or float into an integer
-
-|link:#pack[pack] |packs newLISP expressions into a binary structure
-
-|link:#struct[struct] |Defines a data structure with C types
-
-|link:#unpack[unpack] |unpacks a binary structure into newLISP
-expressions
-|=======================================================================
-
-newLISP internals API
-^^^^^^^^^^^^^^^^^^^^^
-
-[cols="<,<",]
-|=======================================================================
-|link:#command-event[command-event] |pre-processes the command-line and
-HTTP requests
-
-|link:#cpymem[cpymem] |copies memory between addresses
-
-|link:#dump[dump] |shows memory address and contents of newLISP cells
-
-|link:#prompt-event[prompt-event] |customizes the interactive newLISP
-shell prompt
-
-|link:#read-expr[read-expr] |reads and translates s-expressions from
-source
-
-|link:#reader-event[reader-event] |preprocess expressions before
-evaluation event-driven
-|=======================================================================
-
-// ( § )
-
 4. Functions in alphabetical order
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-!
-~
+==== [big red]#!#
 
-syntax: (! _str-shell-command_ [_int-flags_])
-+++++++++++++++++++++++++++++++++++++++++++++
+*syntax:* (! _str-shell-command_ [_int-flags_])
 
-Executes the command in _str-command_ by shelling out to the operating
+Executes the command in _str-shell-command_ by shelling out to the operating
 system and executing. This function returns a different value depending
 on the host operating system.
 
@@ -1655,6 +26,7 @@ various parameters of process creation. The inclusion of this parameter
 – which also can be `0` – forces a different creation of the process
 without a command shell window. This parameter is ignored on Unix.
 
+[source,newlisp]
 ------------------------------------------------------------
 ; on MS Windows
 ; close the console of the currently running newLISP process
@@ -1681,11 +53,9 @@ Used in this way, the `!` operator is not a newLISP function at all, but
 rather a special feature of the newLISP command shell. The `!` must be
 entered as the first character on the command-line.
 
-$
-~
+==== [big red]#$#
 
-syntax: ($ _int-idx_)
-+++++++++++++++++++++
+*syntax:* ($ _int-idx_)
 
 The functions that use regular expressions (link:#directory[directory],
 link:#ends-with[ends-with], link:#find[find], link:#parse[parse],
@@ -1711,33 +81,27 @@ $2  → "80"
 ($ 2)  → "80"
 ------------------------------------
 
-+, -, *, / ,%
-~~~~~~~~~~~~~
+==== [big red]#+, -, *, / ,%#
 
-syntax: (+ _int-1_ [_int-2_ ... ])
-++++++++++++++++++++++++++++++++++
+*syntax:* (+ _int-1_ [_int-2_ ... ])
 
-Returns the sum of all numbers in _int-1_ —.
+Returns the sum of all numbers in _int-1_ --.
 
-syntax: (- _int-1_ [_int-2_ ... ])
-++++++++++++++++++++++++++++++++++
+*syntax:* (- _int-1_ [_int-2_ ... ])
 
 Subtracts _int-2_ from _int-1_, then the next _int-i_ from the previous
 result. If only one argument is given, its sign is reversed.
 
-syntax: (* _int-1_ [_int-2_ ... ])
-++++++++++++++++++++++++++++++++++
+*syntax:* (* _int-1_ [_int-2_ ... ])
 
 The product is calculated for _int-1_ to _int-i_.
 
-syntax: (/ _int-1_ [_int-2_ ... ])
-++++++++++++++++++++++++++++++++++
+*syntax:* (/ _int-1_ [_int-2_ ... ])
 
 Each result is divided successively until the end of the list is
 reached. Division by zero causes an error.
 
-syntax: (% _int-1_ [_int-2_ ... ])
-++++++++++++++++++++++++++++++++++
+*syntax:* (% _int-1_ [_int-2_ ... ])
 
 Each result is divided successively by the next _int_, then the rest
 (modulo operation) is returned. Division by zero causes an error. For
@@ -1775,11 +139,9 @@ to negative or negative to positive.
 Floating point values that evaluate to `NaN` (Not a Number), ar treated
 as `0` (zero).
 
-++ link:#destructive[!]
-~~~~~~~~~~~~~~~~~~~~~~~
+==== [big red]#++ link:#destructive[!]#
 
-syntax: (++ _place_ [_num_ ... ])
-+++++++++++++++++++++++++++++++++
+*syntax:* (++ _place_ [_num_ ... ])
 
 The `++` operator works like link:#inc[inc], but performs integer
 arithmetic. Without the optional argument in _num_, `++` increments the
@@ -1813,11 +175,9 @@ If the symbol for _place_ contains `nil`, it is treated as if containing
 See link:#deci[--] for decrementing numbers in integer mode. See
 link:#inc[inc] for incrementing numbers in floating point mode.
 
--- link:#destructive[!]
-~~~~~~~~~~~~~~~~~~~~~~~
+==== [big red]#-- link:#destructive[!]#
 
-syntax: (-- _place_ [_num_ ... ])
-+++++++++++++++++++++++++++++++++
+*syntax:* (-- _place_ [_num_ ... ])
 
 The `--` operator works like link:#inc[dec], but performs integer
 arithmetic. Without the optional argument in _num-2_, `--` decrements
@@ -1852,16 +212,14 @@ If the symbol for _place_ contains `nil`, it is treated as if containing
 See link:#inci[++] for incrementing numbers in integer mode. See
 link:#dec[dec] for decrementing numbers in floating point mode.
 
-<, >, =, <=, >=, !=
-~~~~~~~~~~~~~~~~~~~
+==== [big red]#<, >, =, <=, >=, !=#
 
-syntax: (< _exp-1_ [_exp-2_ ... ]) +
- syntax: (> _exp-1_ [_exp-2_ ... ]) +
- syntax: (= _exp-1_ [_exp-2_ ... ]) +
- syntax: (<= _exp-1_ [_exp-2_ ... ]) +
- syntax: (>= _exp-1_ [_exp-2_ ... ]) +
- syntax: (!= _exp-1_ [_exp-2_ ... ])
-++++++++++++++++++++++++++++++++++++++
+*syntax:* (< _exp-1_ [_exp-2_ ... ]) +
+*syntax:* (> _exp-1_ [_exp-2_ ... ]) +
+*syntax:* (= _exp-1_ [_exp-2_ ... ]) +
+*syntax:* (<= _exp-1_ [_exp-2_ ... ]) +
+*syntax:* (>= _exp-1_ [_exp-2_ ... ]) +
+*syntax:* (!= _exp-1_ [_exp-2_ ... ])
 
 Expressions are evaluated and the results are compared successively. As
 long as the comparisons conform to the comparison operators, evaluation
@@ -1885,10 +243,10 @@ In mixed-type expressions, the types are compared from lowest to
 highest. Floats and integers are compared by first converting them to
 the needed type, then comparing them as numbers.
 
-_______________________________________________________________________
+***********************************************************************
 *Atoms:* nil, true, integer or float, string, symbol, primitive +
- *Lists:* quoted list/expression, list/expression, lambda, lambda-macro
-_______________________________________________________________________
+*Lists:* quoted list/expression, list/expression, lambda, lambda-macro
+***********************************************************************
 
 [source,newlisp]
 ----------------------------------------------------------
@@ -1914,14 +272,12 @@ _______________________________________________________________________
 (map > '(1 3 -4 -3 1 2))   → (true true nil nil true true)
 ----------------------------------------------------------
 
-<<, >>
-~~~~~~
+==== [big red]#<<, >>#
 
-syntax: (<< _int-1_ _int-2_ [_int-3_ ... ]) +
- syntax: (>> _int-1_ _int-2_ [_int-3_ ... ]) +
- syntax: (<< _int-1_) +
- syntax: (>> _int-1_)
-++++++++++++++++++++++++++++++++++++++++++++++
+*syntax:* (<< _int-1_ _int-2_ [_int-3_ ... ]) +
+*syntax:* (>> _int-1_ _int-2_ [_int-3_ ... ]) +
+*syntax:* (<< _int-1_) +
+*syntax:* (>> _int-1_)
 
 The number _int-1_ is arithmetically shifted to the left or right by the
 number of bits given as _int-2_, then shifted by _int-3_ and so on. For
@@ -1929,6 +285,7 @@ example, 64-bit integers may be shifted up to 63 positions. When
 shifting right, the most significant bit is duplicated (_arithmetic
 shift_):
 
+[source,newlisp]
 --------------------------------------------------------------------------
 (>> 0x8000000000000000 1)  → 0xC000000000000000  ; not 0x0400000000000000!
 --------------------------------------------------------------------------
@@ -1946,11 +303,9 @@ shift_):
 
 When _int-1_ is the only argument `<<` and `>>` shift by one bit.
 
-&
-~
+==== [big red]#&#
 
-syntax: (& _int-1_ _int-2_ [_int-3_ ... ])
-++++++++++++++++++++++++++++++++++++++++++
+*syntax:* (& _int-1_ _int-2_ [_int-3_ ... ])
 
 A bitwise `and` operation is performed on the number in _int-1_ with the
 number in _int-2_, then successively with _int-3_, etc.
@@ -1960,11 +315,9 @@ number in _int-2_, then successively with _int-3_, etc.
 (& 0xAABB 0x000F)  → 11  ; which is 0xB
 ---------------------------------------
 
-|
-~
+==== [big red]#|#
 
-syntax: (| _int-1_ _int-2_ [_int-3_ ... ])
-++++++++++++++++++++++++++++++++++++++++++
+*syntax:* (| _int-1_ _int-2_ [_int-3_ ... ])
 
 A bitwise `or` operation is performed on the number in _int-1_ with the
 number in _int-2_, then successively with _int-3_, etc.
@@ -1974,11 +327,9 @@ number in _int-2_, then successively with _int-3_, etc.
 (| 0x10 0x80 2 1)  → 147
 ------------------------
 
-^
-~
+==== [big red]#^#
 
-syntax: (^ _int-1_ _int-2_ [_int-3_ ... ])
-++++++++++++++++++++++++++++++++++++++++++
+*syntax:* (^ _int-1_ _int-2_ [_int-3_ ... ])
 
 A bitwise `xor` operation is performed on the number in _int-1_ with the
 number in _int-2_, then successively with _int-3_, etc.
@@ -1988,11 +339,9 @@ number in _int-2_, then successively with _int-3_, etc.
 (^ 0xAA 0x55)  → 255
 --------------------
 
-~
-~
+==== [big red]#~#
 
-syntax: (~ _int_)
-+++++++++++++++++
+*syntax:* (~ _int_)
 
 A bitwise `not` operation is performed on the number in _int_, reversing
 all of the bits.
@@ -2003,11 +352,9 @@ all of the bits.
 (~ 0xFFFFFFFF)                → 0
 ------------------------------------
 
-:
-~
+==== [big red]#:#
 
-syntax: (: _sym-function_ _list-object_ [ ... ])
-++++++++++++++++++++++++++++++++++++++++++++++++
+*syntax:* (: _sym-function_ _list-object_ [ ... ])
 
 The colon is used not only as a syntactic separator between between
 namespace prefix and the term inside but also as an operator. When used
@@ -2064,12 +411,10 @@ mycircle → (Circle 5 7 10)
 Inside the FOOP methods the link:#self[self] function is used to access
 the target object of the method.
 
-abort
-~~~~~
+==== [big red]#abort#
 
-syntax: (abort _int-pid_) +
- syntax: (abort)
-+++++++++++++++++++++++++++
+*syntax:* (abort _int-pid_) +
+*syntax:* (abort)
 
 In the first form, `abort` aborts a specific child process of the
 current parent process giving the process id in _int-pid_. The process
@@ -2086,6 +431,7 @@ The function `abort` is not available on Win32.
 To abort all child processes spawned from the current process use
 `abort` without any parameters:
 
+[source,newlisp]
 ---------------------------
 (abort)  → true ; abort all
 ---------------------------
@@ -2094,11 +440,9 @@ The function `abort` is part of the Cilk API for synchronizing child
 processes and process parallelization. See the reference for the
 function link:#spawn[spawn] for a full discussion of the Cilk API.
 
-abs
-~~~
+==== [big red]#abs#
 
-syntax: (abs _num_)
-+++++++++++++++++++
+*syntax:* (abs _num_)
 
 Returns the absolute value of the number in _num_.
 
@@ -2107,11 +451,9 @@ Returns the absolute value of the number in _num_.
 (abs -3.5)  → 3.5
 -----------------
 
-acos
-~~~~
+==== [big red]#acos#
 
-syntax: (acos _num-radians_)
-++++++++++++++++++++++++++++
+*syntax:* (acos _num-radians_)
 
 The arc-cosine function is calculated from the number in _num-radians_.
 
@@ -2121,11 +463,9 @@ The arc-cosine function is calculated from the number in _num-radians_.
 (cos (acos 1)) → 1
 ------------------
 
-acosh
-~~~~~
+==== [big red]#acosh#
 
-syntax: (acosh _num-radians_)
-+++++++++++++++++++++++++++++
+*syntax:* (acosh _num-radians_)
 
 Calculates the inverse hyperbolic cosine of _num-radians_, the value
 whose hyperbolic cosine is _num-radians_. If _num-radians_ is less than
@@ -2138,11 +478,9 @@ whose hyperbolic cosine is _num-radians_. If _num-radians_ is less than
 (acosh 0.5) → NaN
 ------------------------
 
-add
-~~~
+==== [big red]#add#
 
-syntax: (add _num-1_ [_num-2_ ... ])
-++++++++++++++++++++++++++++++++++++
+*syntax:* (add _num-1_ [_num-2_ ... ])
 
 All of the numbers in _num-1_, _num-2_, and on are summed. `add` accepts
 float or integer operands, but it always returns a floating point
@@ -2154,13 +492,11 @@ number. Any floating point calculation with `NaN` also returns `NaN`.
 (add 1 2 3 4 5)  → 15
 ------------------------
 
-address
-~~~~~~~
+==== [big red]#address#
 
-syntax: (address _int_) +
- syntax: (address _float_) +
- syntax: (address _str_)
-++++++++++++++++++++++++++++
+*syntax:* (address _int_) +
+*syntax:* (address _float_) +
+*syntax:* (address _str_)
 
 Returns the memory address of the integer in _int_, the double floating
 point number in _float_, or the string in _str_. This function is used
@@ -2201,11 +537,9 @@ expression objects.
 See also the link:#get-char[get-char], link:#get-int[get-int],
 link:#get-long[get-long] and link:#get-float[get-float] functions.
 
-amb
-~~~
+==== [big red]#amb#
 
-syntax: (amb _exp-1_ [_exp-2_ ... ])
-++++++++++++++++++++++++++++++++++++
+*syntax:* (amb _exp-1_ [_exp-2_ ... ])
 
 One of the expressions _exp-1_ ... _n_ is selected at random, and the
 evaluation result is returned.
@@ -2223,11 +557,9 @@ link:#random[random], link:#randomize[randomize], or
 link:#normal[normal]. To initialize the pseudo random number generating
 process at a specific starting point, use the link:#seed[seed] function.
 
-and
-~~~
+==== [big red]#and#
 
-syntax: (and _exp-1_ [_exp-2_ ... ])
-++++++++++++++++++++++++++++++++++++
+*syntax:* (and _exp-1_ [_exp-2_ ... ])
 
 The expressions _exp-1_, _exp-2_, _etc._ are evaluated in order,
 returning the result of the last expression. If any of the expressions
@@ -2244,13 +576,11 @@ or the empty list `()` is returned.
 (and)                             → true
 --------------------------------------------
 
-append
-~~~~~~
+==== [big red]#append#
 
-syntax: (append _list-1_ [_list-2_ ... ]) +
- syntax: (append _array-1_ [_array-2_ ... ]) +
- syntax: (append _str-1_ [_str-2_ ... ])
-++++++++++++++++++++++++++++++++++++++++++++++
+*syntax:* (append _list-1_ [_list-2_ ... ]) +
+*syntax:* (append _array-1_ [_array-2_ ... ]) +
+*syntax:* (append _str-1_ [_str-2_ ... ])
 
 In the first form, `append` works with lists, appending _list-1_ through
 _list-n_ to form a new list. The original lists are left unchanged.
@@ -2301,11 +631,9 @@ convert arguments to strings and append in one step.
 Use the functions link:#extend[extend] and link:#push[push] to append to
 an existing list or string modifying the target.
 
-append-file
-~~~~~~~~~~~
+==== [big red]#append-file#
 
-syntax: (append-file _str-filename_ _str-buffer_)
-+++++++++++++++++++++++++++++++++++++++++++++++++
+*syntax:* (append-file _str-filename_ _str-buffer_)
 
 Works similarly to link:#write-file[write-file], but the content in
 _str-buffer_ is appended if the file in _str-filename_ exists. If the
@@ -2343,11 +671,9 @@ be used to transfer files to remote newLISP server nodes.
 
 See also link:#read-file[read-file] and link:#write-file[write-file].
 
-apply
-~~~~~
+==== [big red]#apply#
 
-syntax: (apply _func list_ [_int-reduce_])
-++++++++++++++++++++++++++++++++++++++++++
+*syntax:* (apply _func list_ [_int-reduce_])
 
 Applies the contents of _func_ (primitive, user-defined function, or
 lambda expression) to the arguments in _list_.
@@ -2367,6 +693,7 @@ repeatedly applied using the previous result as the first argument and
 taking the other arguments required successively from _list_ (in
 left-associative order). For example, if `op` takes two arguments, then:
 
+[source,newlisp]
 -----------------------------------------------
 (apply op '(1 2 3 4 5) 2)
 
@@ -2398,12 +725,10 @@ of their arguments, not on _special forms_ like link:#dotimes[dotimes]
 or link:#case[case], which evaluate only some of their arguments. Doing
 so will cause the function to fail.
 
-args
-~~~~
+==== [big red]#args#
 
-syntax: (args) +
- syntax: (args _int-idx-1_ [_int-idx-2_ ... ])
-++++++++++++++++++++++++++++++++++++++++++++++
+*syntax:* (args) +
+*syntax:* (args _int-idx-1_ [_int-idx-2_ ... ])
 
 Accesses a list of all unbound arguments passed to the currently
 evaluating link:#define[define], link:#define-macro[define-macro]
@@ -2469,11 +794,9 @@ function call, but it should not be used as an argument to another
 macro, in which case `(args)` would not be evaluated and would therefore
 have the wrong contents in the new macro environment.
 
-array
-~~~~~
+==== [big red]#array#
 
-syntax: (array _int-n1_ [_int-n2_ ... ] [_list-init_])
-++++++++++++++++++++++++++++++++++++++++++++++++++++++
+*syntax:* (array _int-n1_ [_int-n2_ ... ] [_list-init_])
 
 Creates an array with _int-n1_ elements, optionally initializing it with
 the contents of _list-init_. Up to sixteen dimensions may be specified
@@ -2498,8 +821,8 @@ Arrays can be initialized with objects of any type. If fewer
 initializers than elements are provided, the list is repeated until all
 elements of the array are initialized.
 
+[source,newlisp]
 ------------------------------------------
-
 (set 'myarray (array 3 4 (sequence 1 12)))
 → ((1 2 3 4) (5 6 7 8) (9 10 11 12))
 ------------------------------------------
@@ -2538,6 +861,7 @@ Care must be taken to use an array when replacing a whole row.
 link:#array-list[array-list] can be used to convert arrays back into
 lists:
 
+[source,newlisp]
 --------------------------------------------------------
 (array-list myarray)  → ((1 2 3 4) (a b c d) (1 2 3 99))
 --------------------------------------------------------
@@ -2545,6 +869,7 @@ lists:
 To convert a list back into an array, apply link:#flat[flat] to the
 list:
 
+[source,newlisp]
 -------------------------------------------------------
 (set 'aList '((1 2) (3 4)))             → ((1 2) (3 4))
 
@@ -2554,6 +879,7 @@ list:
 The link:#arrayp[array?] function can be used to check if an expression
 is an array:
 
+[source,newlisp]
 -------------------------------------
 (array? myarray)               → true
 
@@ -2566,6 +892,7 @@ necessary to create them. This way, variables containing arrays are
 correctly serialized when saving with link:#save[save] or creating
 source strings using link:#source[source].
 
+[source,newlisp]
 ------------------------------------------
 (set 'myarray (array 3 4 (sequence 1 12)))
 
@@ -2579,11 +906,9 @@ source strings using link:#source[source].
   (9 10 11 12)))))
 ------------------------------------------
 
-array-list
-~~~~~~~~~~
+==== [big red]#array-list#
 
-syntax: (array-list _array_)
-++++++++++++++++++++++++++++
+*syntax:* (array-list _array_)
 
 Returns a list conversion from _array_, leaving the original array
 unchanged:
@@ -2600,11 +925,9 @@ unchanged:
 → (true true)
 ------------------------------------------
 
-array?
-~~~~~~
+==== [big red]#array?#
 
-syntax: (array? _exp_)
-++++++++++++++++++++++
+*syntax:* (array? _exp_)
 
 Checks if _exp_ is an array:
 
@@ -2618,11 +941,9 @@ Checks if _exp_ is an array:
 (array? (array-list M))  → nil
 -----------------------------------
 
-asin
-~~~~
+==== [big red]#asin#
 
-syntax: (asin _num-radians_)
-++++++++++++++++++++++++++++
+*syntax:* (asin _num-radians_)
 
 Calculates the arcsine function from the number in _num-radians_ and
 returns the result.
@@ -2633,11 +954,9 @@ returns the result.
 (sin (asin 1)) → 1
 -----------------------
 
-asinh
-~~~~~
+==== [big red]#asinh#
 
-syntax: (asinh _num-radians_)
-+++++++++++++++++++++++++++++
+*syntax:* (asinh _num-radians_)
 
 Calculates the inverse hyperbolic sine of _num-radians_, the value whose
 hyperbolic sine is _num-radians_.
@@ -2648,12 +967,10 @@ hyperbolic sine is _num-radians_.
 (sinh (asinh 2))  → 2
 -------------------------------
 
-assoc
-~~~~~
+==== [big red]#assoc#
 
-syntax: (assoc _exp-key_ _list-alist_) +
- syntax: (assoc _list-exp-key_ _list-alist_)
-++++++++++++++++++++++++++++++++++++++++++++
+*syntax:* (assoc _exp-key_ _list-alist_) +
+*syntax:* (assoc _list-exp-key_ _list-alist_)
 
 In the first syntax the value of _exp-key_ is used to search
 _list-alist_ for a _member-list_ whose first element matches the key
@@ -2673,6 +990,7 @@ will be `nil`.
 Together with link:#setf[setf] `assoc` can be used to change an
 association.
 
+[source,newlisp]
 -------------------------------------------------
 (setf (assoc 'pears data) '(pears 8))
 
@@ -2697,6 +1015,7 @@ The list in _list-aList_ can be a context which will be interpreted as
 its _default functor_. This way very big lists can be passed by
 reference for speedier access and less memory usage:
 
+[source,newlisp]
 ---------------------------------------------------------------------
 (set 'persons:persons '(
     (id001 (name "Anne") (address (country "USA") (city "New York")))
@@ -2714,11 +1033,9 @@ For making replacements in association lists, use the link:#setf[setf]
 together with the `assoc` function. The link:#lookup[lookup] function is
 used to perform association lookup and element extraction in one step.
 
-atan
-~~~~
+==== [big red]#atan#
 
-syntax: (atan _num-radians_)
-++++++++++++++++++++++++++++
+*syntax:* (atan _num-radians_)
 
 The arctangent of _num-radians_ is calculated and returned.
 
@@ -2728,11 +1045,9 @@ The arctangent of _num-radians_ is calculated and returned.
 (tan (atan 1))  → 1
 ------------------------------
 
-atan2
-~~~~~
+==== [big red]#atan2#
 
-syntax: (atan2 _num-Y-radians_ _num-X-radians_)
-+++++++++++++++++++++++++++++++++++++++++++++++
+*syntax:* (atan2 _num-Y-radians_ _num-X-radians_)
 
 The `atan2` function computes the principal value of the arctangent of Y
 / X in radians. It uses the signs of both arguments to determine the
@@ -2747,11 +1062,9 @@ coordinates into polar coordinates.
 (= (atan2 1 2) (atan (div 1 2)))  → true
 ------------------------------------------------
 
-atanh
-~~~~~
+==== [big red]#atanh#
 
-syntax: (atanh _num-radians_)
-+++++++++++++++++++++++++++++
+*syntax:* (atanh _num-radians_)
 
 Calculates the inverse hyperbolic tangent of _num-radians_, the value
 whose hyperbolic tangent is _num-radians_. If the absolute value of
@@ -2766,11 +1079,9 @@ to 1, `atanh` returns infinity.
 (atanh 1) → inf
 --------------------------
 
-atom?
-~~~~~
+==== [big red]#atom?#
 
-syntax: (atom? _exp_)
-+++++++++++++++++++++
+*syntax:* (atom? _exp_)
 
 Returns `true` if the value of _exp_ is an atom, otherwise `nil`. An
 expression is an atom if it evaluates to nil, true, an integer, a float,
@@ -2786,11 +1097,9 @@ expressions, and quoted expressions are not atoms.
 (atom? ''foo)         → nil
 ----------------------------
 
-base64-dec
-~~~~~~~~~~
+==== [big red]#base64-dec#
 
-syntax: (base64-dec _str_)
-++++++++++++++++++++++++++
+*syntax:* (base64-dec _str_)
 
 The BASE64 string in _str_ is decoded. Note that _str_ is not verified
 to be a valid BASE64 string. The decoded string is returned.
@@ -2806,11 +1115,9 @@ newLISP's BASE64 handling is derived from routines found in the Unix
 http://curl.haxx.se/[curl] utility and conforms to the RFC 4648
 standard.
 
-base64-enc
-~~~~~~~~~~
+==== [big red]#base64-enc#
 
-syntax: (base64-enc _str_ [_bool-flag_])
-++++++++++++++++++++++++++++++++++++++++
+*syntax:* (base64-enc _str_ [_bool-flag_])
 
 The string in _str_ is encoded into BASE64 format. This format encodes
 groups of 3 * 8 = 24 input bits into 4 * 8 = 32 output bits, where each
@@ -2849,11 +1156,9 @@ newLISP's BASE64 handling is derived from routines found in the Unix
 http://curl.haxx.se/[curl] utility and conforms to the RFC 4648
 standard.
 
-bayes-query
-~~~~~~~~~~~
+==== [big red]#bayes-query#
 
-syntax: (bayes-query _list-L_ _context-D_ [_bool-chain_ [_bool-probs_]])
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+*syntax:* (bayes-query _list-L_ _context-D_ [_bool-chain_ [_bool-probs_]])
 
 Takes a list of tokens (_list-L_) and a trained dictionary (_context-D_)
 and returns a list of the combined probabilities of the tokens in one
@@ -2944,6 +1249,7 @@ different frequencies and want to determine if a sentence is more likely
 to occur in one or the other author's writing. A similar method is
 frequently used to differentiate between spam and legitimate email.
 
+[source,newlisp]
 -------------------------------------------------------------
 ;; from Project Gutenberg: http://www.gutenberg.org/catalog/
 ;; The Adventures of Sherlock Holmes - Sir Arthur Conan Doyle
@@ -2967,6 +1273,7 @@ with the `bayes-query` function.
 The following code illustrates how `bayes-query` is used to classify a
 sentence as _Doyle_ or _Dowson_:
 
+[source,newlisp]
 --------------------------------------------------------------------------------
 (load "DoyleDowson.lsp")
 (bayes-query (parse "he was putting the last touches to a picture")
@@ -3050,11 +1357,9 @@ be used together with the Chain Bayesian mode for maximum performance:
 As expected, the results are the same for probabilities as they are for
 frequencies.
 
-bayes-train
-~~~~~~~~~~~
+==== [big red]#bayes-train#
 
-syntax: (bayes-train _list-M1_ [_list-M2_ ... ] _sym-context-D_)
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+*syntax:* (bayes-train _list-M1_ [_list-M2_ ... ] _sym-context-D_)
 
 Takes one or more lists of tokens (_M1_, _M2—_) from a joint set of
 tokens. In newLISP, tokens can be symbols or strings (other data types
@@ -3100,6 +1405,7 @@ example illustrates how an `_` is prepended when training with strings.
 character. This is the same way hashes are created and contexts
 populates with symbols by `bayes-train` can be used like hashes:
 
+[source,newlisp]
 --------------------------------------------------------------
 ; use a bayes-trained context namespace like a hash dictionary
 
@@ -3116,6 +1422,7 @@ may be used when the frequency of symbols just describe already-known
 proportions. In this case, it may be better to describe the model data
 set explicitly, without the `bayes-train` function:
 
+[source,newlisp]
 -----------------------------------
 (set 'Data:tested-positive '(8 18))
 (set 'Data:tested-negative '(2 72))
@@ -3136,6 +1443,7 @@ in small portions, then fed into `bayes-train` in multiple stages.
 Categories can also be singularly trained by specifying an empty list
 for the absent corpus:
 
+[source,newlisp]
 --------------------------------------------------
 (bayes-train shakespeare1 '() 'data)
 (bayes-train shakespeare2 '() 'data)
@@ -3156,11 +1464,9 @@ the resulting frequencies could be analyzed using
 link:#prob-chi2[prob-chi2] against a _null hypothesis_ of proportional
 distribution of items across categories.
 
-begin
-~~~~~
+==== [big red]#begin#
 
-syntax: (begin _body_)
-++++++++++++++++++++++
+*syntax:* (begin _body_)
 
 The `begin` function is used to group a block of expressions. The
 expressions in _body_ are evaluated in sequence, and the value of the
@@ -3182,11 +1488,9 @@ an link:#if[if] expression.
 The link:#silent[silent] function works like `begin`, but suppresses
 console output on return.
 
-beta
-~~~~
+==== [big red]#beta#
 
-syntax: (beta _cum-a_ _num-b_)
-++++++++++++++++++++++++++++++
+*syntax:* (beta _cum-a_ _num-b_)
 
 The _Beta_ function, `beta`, is derived from the _log Gamma_ `gammaln`
 function as follows:
@@ -3198,11 +1502,9 @@ _*beta = exp(gammaln(a) + gammaln(b) - gammaln(a + b))*_
 (beta 1 2)  → 0.5
 -----------------
 
-betai
-~~~~~
+==== [big red]#betai#
 
-syntax: (betai _num-x_ _num-a_ _num-b_)
-+++++++++++++++++++++++++++++++++++++++
+*syntax:* (betai _num-x_ _num-a_ _num-b_)
 
 The _Incomplete Beta_ function, `betai`, equals the cumulative
 probability of the _Beta_ distribution, `betai`, at _x_ in _num-x_. The
@@ -3223,17 +1525,16 @@ incomplete Beta distribution can be used to derive a variety of other
 functions in mathematics and statistics. See also the
 link:#binomial[binomial] function.
 
-bind link:#destructive[!]
-~~~~~~~~~~~~~~~~~~~~~~~~~
+==== [big red]#bind link:#destructive[!]#
 
-syntax: (bind _list-variable-associations_ [_bool-eval_])
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+*syntax:* (bind _list-variable-associations_ [_bool-eval_])
 
 _list-variable-associations_ contains an association list of symbols and
 their values. `bind` sets all symbols to their associated values.
 
 The associated values are evaluated if the _bool-eval_ flag is `true`:
 
+[source,newlisp]
 -------------------------------------
 (set 'lst '((a (+ 3 4)) (b "hello")))
 
@@ -3252,6 +1553,7 @@ The return value of bind is the value of the last association.
 `bind` is often used to bind association lists returned by
 link:#unify[unify].
 
+[source,newlisp]
 -------------------------------------------
 (bind (unify '(p X Y a) '(p Y X X)))    → a
 
@@ -3261,6 +1563,7 @@ Y    → a
 
 This can be used for de-structuring:
 
+[source,newlisp]
 ------------------------------------------------
 (set 'structure '((one "two") 3 (four (x y z))))
 (set 'pattern '((A B) C (D E)))
@@ -3276,11 +1579,9 @@ E → (x y z)
 link:#unify[unify] returns an association list and `bind` binds the
 associations.
 
-binomial
-~~~~~~~~
+==== [big red]#binomial#
 
-syntax: (binomial _int-n_ _int-k_ _float-p_)
-++++++++++++++++++++++++++++++++++++++++++++
+*syntax:* (binomial _int-n_ _int-k_ _float-p_)
 
 The binomial distribution function is defined as the probability for an
 event to occur _int-k_ times in _int-n_ trials if that event has a
@@ -3300,11 +1601,9 @@ The example calculates the probability for an event with a probability
 of 0.5 to occur 3 times in 10 trials. For a cumulated distribution, see
 the link:#betai[betai] function.
 
-bits
-~~~~
+==== [big red]#bits#
 
-syntax: (bits _int_ [_bool_])
-+++++++++++++++++++++++++++++
+*syntax:* (bits _int_ [_bool_])
 
 Transforms a number in _int_ to a string of 1's and 0's or a list, if
 _bool_ evaluates to anything not `nil`.
@@ -3327,13 +1626,11 @@ and program control switching on the result.
 
 link:#int[int] with a base of 2 is the inverse function to `bits`.
 
-callback
-~~~~~~~~
+==== [big red]#callback#
 
-syntax: (callback _int-index_ _sym-function_) +
- syntax: (callback _sym-function_ _str-return-type_ [_str_param_type_
-...]) +
- stntax: (callback _sym-function_)
+*syntax:* (callback _int-index_ _sym-function_) +
+*syntax:* (callback _sym-function_ _str-return-type_ [_str_param_type_ ...]) +
+*stntax:* (callback _sym-function_)
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 In the first *simple `callback` syntax* up to sixteen (0 to 15)
@@ -3400,6 +1697,7 @@ library function, which takes as one of it's arguments the address of a
 comparison function. The comparison function in this case is written in
 newLISP and called into by the imported `qsort` function:
 
+[source,newlisp]
 ----------------------------------------------------------------
 ; C void qsort(...) takes an integer array with number and width
 ; of array elements and a pointer to the comparison function
@@ -3434,11 +1732,9 @@ buffers and structures.
 
 Note that newLISP as already a fast built-in link:#sort[sort] function.
 
-case
-~~~~
+==== [big red]#case#
 
-syntax: (case _exp-switch_ (_exp-1_ _body-1_) [(_exp-2_ _body-2_) ... ])
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+*syntax:* (case _exp-switch_ (_exp-1_ _body-1_) [(_exp-2_ _body-2_) ... ])
 
 The result of evaluating _exp-switch_ is compared to each of the
 _unevaluated_ expressions _exp-1, exp-2,_ —. If a match is found, the
@@ -3463,12 +1759,10 @@ expression.
 The example shows how, if no match is found, the last expression in the
 body of a `case` function can be evaluated.
 
-catch
-~~~~~
+==== [big red]#catch#
 
-syntax: (catch _exp_) +
- syntax: (catch _exp_ _symbol_)
-+++++++++++++++++++++++++++++++
+*syntax:* (catch _exp_) +
+*syntax:* (catch _exp_ _symbol_)
 
 In the first syntax, `catch` will return the result of the evaluation of
 _exp_ or the evaluated argument of a link:#throw[throw] executed during
@@ -3483,6 +1777,7 @@ the evaluation of _exp_:
 This form is useful for breaking out of iteration loops and for forcing
 an early return from a function or expression block:
 
+[source,newlisp]
 ----------------------------
 (define (foo x)
    …
@@ -3521,6 +1816,7 @@ When a link:#throw[throw] is executed during the evaluation of _exp_,
 `catch` will return `true`, and the `throw` argument will be stored in
 _symbol_:
 
+[source,newlisp]
 ----------------------------------------------
 (catch (dotimes (x 100)
   (if (= x 50) (throw "fin")) 'result)  → true
@@ -3534,11 +1830,9 @@ out of iteration loops (as in the first syntax), the second syntax of
 link:#throw-error[throw-error] function may be used to throw
 user-defined errors.
 
-ceil
-~~~~
+==== [big red]#ceil#
 
-syntax: (ceil _number_)
-+++++++++++++++++++++++
+*syntax:* (ceil _number_)
 
 Returns the next highest integer above _number_ as a floating point.
 
@@ -3550,11 +1844,9 @@ Returns the next highest integer above _number_ as a floating point.
 
 See also the link:#floor[floor] function.
 
-change-dir
-~~~~~~~~~~
+==== [big red]#change-dir#
 
-syntax: (change-dir _str-path_)
-+++++++++++++++++++++++++++++++
+*syntax:* (change-dir _str-path_)
 
 Changes the current directory to be the one given in _str-path_. If
 successful, `true` is returned; otherwise `nil` is returned.
@@ -3566,12 +1858,10 @@ successful, `true` is returned; otherwise `nil` is returned.
 
 Makes `/etc` the current directory.
 
-char link:#utf8_capable[utf8]
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+==== [big red]#char link:#utf8_capable[utf8]#
 
-syntax: (char _str_ [_int-index_ [true]]) +
- syntax: (char _int_)
-+++++++++++++++++++++++++++++++++++++++++++
+*syntax:* (char _str_ [_int-index_ [true]]) +
+*syntax:* (char _int_)
 
 Given a string argument, extracts the character at _int-index_ from
 _str_, returning either the ASCII value of that character or the Unicode
@@ -3612,12 +1902,10 @@ Unicode and a UTF-8 character is returned.
 (char (& (char "生") (char "死"))) → 愛 ; by @kosh_bot
 ------------------------------------------------------------
 
-chop link:#utf8_capable[utf8]
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+==== [big red]#chop link:#utf8_capable[utf8]#
 
-syntax: (chop _str_ [_int-chars_]) +
- syntax: (chop _list_ [_int-elements_])
-+++++++++++++++++++++++++++++++++++++++
+*syntax:* (chop _str_ [_int-chars_]) +
+*syntax:* (chop _list_ [_int-elements_])
 
 If the first argument evaluates to a string, `chop` returns a copy of
 _str_ with the last _int-char_ characters omitted. If the _int-char_
@@ -3644,11 +1932,9 @@ str  → "newLISP"
 lst  → (a b (c d) e)
 ---------------------------------
 
-clean
-~~~~~
+==== [big red]#clean#
 
-syntax: (clean _exp-predicate_ _list_)
-++++++++++++++++++++++++++++++++++++++
+*syntax:* (clean _exp-predicate_ _list_)
 
 The predicate _exp-predicate_ is applied to each element of _list_. In
 the returned list, all elements for which _exp-predicate_ is `true` are
@@ -3683,11 +1969,9 @@ See also the related function link:#index[index], which returns the
 indices of the remaining elements, and link:#filter[filter], which
 returns all elements for which a predicate returns true.
 
-close
-~~~~~
+==== [big red]#close#
 
-syntax: (close _int-file_)
-++++++++++++++++++++++++++
+*syntax:* (close _int-file_)
 
 Closes the file specified by the file handle in _int-file_. The handle
 would have been obtained from a previous link:#open[open] operation. If
@@ -3703,11 +1987,9 @@ successful, `close` returns `true`; otherwise `nil` is returned.
 Note that using `close` on link:#device[device] automatically resets it
 to 0 (zero, the screen device).
 
-command-event
-~~~~~~~~~~~~~
+==== [big red]#command-event#
 
-syntax: (command-event _sym-event-handler_ | _func-event-handler_)
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+*syntax:* (command-event _sym-event-handler_ | _func-event-handler_)
 
 Specifies a user defined function for pre-processing the newLISP
 command-line before it gets evaluated. This can be used to write
@@ -3738,6 +2020,7 @@ prompt.
 The following program can be used either stand-alone or included in
 newLISP's `init.lsp` startup file:
 
+[source,newlisp]
 --------------------------------------------------------------
 #!/usr/bin/newlisp
 
@@ -3782,6 +2065,7 @@ request lines, e.g.: discovering all queries trying to perform CGI using
 a file ending in `.exe`. Such a request would be translated into a
 request for an error page:
 
+[source,newlisp]
 --------------------------------------------------------
 ;; httpd-conf.lsp
 ;;
@@ -3829,12 +2113,9 @@ web server. The server output will appear in the shell window.
 Note, that the command line length as well as the line length in HTTP
 headers is limited to 512 characters for newLISP.
 
-cond
-~~~~
+==== [big red]#cond#
 
-syntax: (cond (_exp-condition-1_ _body-1_) [(_exp-condition-2_ _body-2_)
-... ])
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+*syntax:* (cond (_exp-condition-1_ _body-1_) [(_exp-condition-2_ _body-2_) ... ])
 
 Like `if`, `cond` conditionally evaluates the expressions within its
 body. The _exp-condition_s are evaluated in turn, until some
@@ -3864,6 +2145,7 @@ evaluated is returned. If no condition evaluates to `true`, the value of
 the last conditional expression is returned (i.e., `nil` or an empty
 list).
 
+[source,newlisp]
 ---------------------
 (cond ((+ 3 4)))  → 7
 ---------------------
@@ -19245,4 +17527,6 @@ END OF TERMS AND CONDITIONS
 
 // ( ∂ )
 
-// vim: set tw=72 :
+//vlm:let @q="Ifunction::(\<esc>\"wDJDJJhdt(jddkA\<c-r>=@w =~ 'destructive' ? '[!]' : '[]'\<esc>\<esc>"
+//vlm:let @q="I==== [big red]#\<esc>A#\<esc>+dtsI*\<esc>Ea*\<esc>jdd"
+// vim: set tw=72 cms=//%s :

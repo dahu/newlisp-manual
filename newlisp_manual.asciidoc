@@ -30,11 +30,10 @@ Public License] V.3, June 2007. +
 newLISP is a registered trademark of Lutz Mueller. +
 ****
 
-// toc::[]
-// ( ∂ )
+toc::[]
 
-include::[newlisp_manual-user_manual.html]
-include::[newlisp_manual-function_reference-overview.html]
-include::[newlisp_manual-function_reference.html]
+include::newlisp_manual-user_manual.asciidoc[]
+include::newlisp_manual-function_reference-overview.asciidoc[]
+include::newlisp_manual-function_reference.asciidoc[]
 
 // vim: set tw=72 :
