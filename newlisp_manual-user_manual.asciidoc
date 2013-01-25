@@ -1,38 +1,3 @@
-newLISP(R)
-==========
-:author:         Lutz Mueller
-:revdate:        2013-01-20
-:revnumber:      10.4.5
-:toc:
-:toc-placement:  manual
-:toc-title:      Contents
-:toclevels:      3
-:icons:
-:data-uri:
-:pygments:
-//:email:        lutz@nuevatec.com
-
-****
-__For Mac OS X, GNU Linux, Unix and Win32__
-
-**User Manual and Reference v.10.4.5**
-
-Copyright (C) 2012 Lutz Mueller http://www.nuevatec.com[www.nuevatec.com]. +
-All rights reserved. +
-Permission is granted to copy, distribute and/or modify this document +
-under the terms of the GNU Free Documentation License, +
-Version 1.2 or any later version published by the Free Software +
-Foundation; with no Invariant Sections, no Front-Cover Texts, +
-and no Back-Cover Texts. A copy of the license is included in the +
-section entitled link:#GNUFDL[GNU Free Documentation License]. +
-The accompanying software is protected by the link:#GNUGPL[GNU General +
-Public License] V.3, June 2007. +
-newLISP is a registered trademark of Lutz Mueller. +
-****
-
-// toc::[]
-// ( ∂ )
-
 newLISP User Manual
 -------------------
 
@@ -136,7 +101,7 @@ link:#GNUGPL[GPL (General Public License)]. The newLISP documentation as
 well as other documentation packaged with newLISP are licensed under the
 link:#GNUFDL[GNU Free Documentation License].
 
-( § )
+// ( § )
 
 2. Deprecated functions and future changes
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -155,7 +120,7 @@ The functions `if-not` and `local` are deprecated and have been taken
 out of the documentation. Both functions will keep on working for an
 indefinite time.
 
-( § )
+// ( § )
 
 3. Interactive Lisp mode
 ~~~~~~~~~~~~~~~~~~~~~~~~
@@ -232,7 +197,7 @@ all the built-in functions starting with the same characters. When
 hitting +[tab]+ twice before a function name has started, all built-in
 function names will be displayed.
 
-( § )
+// ( § )
 
 4. Command-line options, startup and directories
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -740,7 +705,7 @@ link:#write-file[write-file] and link:#append-file[append-file], or to
 load and save programs using link:#load[load] and link:#save[save] from
 and to remote server nodes.
 
-( § )
+// ( § )
 
 5. Startup, directories, environment
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -816,7 +781,7 @@ installations. The subdirectories `%PROGRAMFILES%\newlisp\modules` and
 `%PROGRAMFILES%\newlisp\guiserver` contain modules for interfacing to
 external libraries and sample programs written for newLISP-GS.
 
-( § )
+// ( § )
 
 6. Extending newLISP with shared libraries
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -838,7 +803,7 @@ http://www.newlisp.org/downloads/CodePatterns.html#toc-23[23. Extending
 newLISP] in the http://www.newlisp.org/downloads/CodePatterns.html[Code
 Patterns in newLISP] document.
 
-( § )
+// ( § )
 
 7. newLISP as a shared library
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -880,7 +845,7 @@ compiled as a shared library] in the
 http://www.newlisp.org/downloads/CodePatterns.html[Code Patterns in
 newLISP] document.
 
-( § )
+// ( § )
 
 8. Evaluating newLISP expressions
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1214,7 +1179,7 @@ To exit the newLISP shell on Linux/Unix, press `Ctrl-D`; on Win32, type
 Use the link:#exec[exec] function to access shell commands from other
 applications or to pass results back to newLISP.
 
-( § )
+// ( § )
 
 9. Lambda expressions in newLISP
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1314,7 +1279,7 @@ All arguments are optional when applying lambda expressions and default
 to `nil` when not supplied by the user. This makes it possible to write
 functions with multiple parameter signatures.
 
-( § )
+// ( § )
 
 10. `nil`, `true`, `cons`, and `()`
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1364,7 +1329,7 @@ basic data type, such as a number or a symbol. Only the _car_ (head)
 part may contain a basic data type. Early Lisp implementations used
 _car_ and _cdr_ for the names _head_ and _tail_.
 
-( § )
+// ( § )
 
 11. Arrays
 ~~~~~~~~~~
@@ -1444,7 +1409,7 @@ link:#array[array].
 For more details, see link:#array[array], link:#arrayp[array?], and
 link:#array-list[array-list] in the reference section of this manual.
 
-( § )
+// ( § )
 
 12. Indexing elements of strings, lists, and arrays
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1633,7 +1598,7 @@ but would have to be substituted element by element. In strings only one
 character can be replaced at a time, but that character can be replaced
 by a multi-chracacter string.
 
-( § )
+// ( § )
 
 13. Destructive versus nondestructive functions
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1719,7 +1684,7 @@ aList → (a b c d e f)
 
 The list in `aList` is left unchanged.
 
-( § )
+// ( § )
 
 14. Early return from functions, loops, and blocks
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1833,7 +1798,7 @@ link:#or[or] can be used in a similar fashion:
 The result of the link:#or[or] expression will be the first function
 that returns a value which is _not_ `nil` or `()`.
 
-( § )
+// ( § )
 
 15. Dynamic and lexical scoping
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1910,7 +1875,7 @@ chapters link:#contexts[Contexts] and link:#context_objects[Programming
 with contexts], as well as the section link:#default_function[default
 functors] for more information.
 
-( § )
+// ( § )
 
 16. Contexts
 ~~~~~~~~~~~~
@@ -2466,7 +2431,7 @@ saved just by using their names:
 For details, see the functions link:#save[save] (mentioned above) and
 link:#source[source] (for serializing to a newLISP string).
 
-( § )
+// ( § )
 
 17. The context default functor
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -2828,7 +2793,7 @@ The function receives the namespace in the variable `obj`, but it must
 have the knowledge that the list to access is contained in the `data`
 symbol of that namespace (context).
 
-( § )
+// ( § )
 
 18. Functional object-oriented programming
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -3139,7 +3104,7 @@ And the `Circle` class file follows:
 
 All sets of class functions are now lexically separated from each other.
 
-( § )
+// ( § )
 
 19. Concurrent processing and distributed computing
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -3203,7 +3168,7 @@ can take URLs instead of path-file names. Server side newLISP running in
 demon mode or an other HTTP server like Apache, receive standard HTTP
 requests and translate them into the corresponding actions on files.
 
-( § )
+// ( § )
 
 20. XML, S-XML, and XML-RPC
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -3334,7 +3299,7 @@ be evaluated to return an error message.
 For more information, please consult the header of the file
 `modules/xmlrpc-client.lsp`.
 
-( § )
+// ( § )
 
 21. Customization, localization, and UTF-8
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -3640,7 +3605,7 @@ For further details on UTF-8 and Unicode, consult
 http://www.cl.cam.ac.uk/~mgk25/unicode.html[_UTF-8 and Unicode FAQ for
 Unix/Linux_] by _Markus Kuhn_.
 
-( § )
+// ( § )
 
 22. Commas in parameter lists
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -3669,7 +3634,7 @@ their previous values.
 For other ways of declaring and initializing local variables, see
 link:#let[let], link:#letex[letex] and link:#letn[letn].
 
-( § )
+// ( § )
 
 23. Linking newLISP source and executable
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -3727,6 +3692,5 @@ CONVERT ME TO UPPERCASE
 NOTE: Neither one of the initialization files `init.lsp` nor
 `.init.lsp` is loaded during startup of linked programs.
 
-( ∂ )
-
- vim: set tw=72 :
+// ( ∂ )
+// vim: set tw=72 :

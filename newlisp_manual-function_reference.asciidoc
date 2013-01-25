@@ -133,7 +133,7 @@ number called the _significand_ (or _mantissa_), followed by the letter
 .506E3    →  506
 -------------------
 
-( § )
+// ( § )
 
 2. Data types and names in the reference
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -376,7 +376,7 @@ exists, some functions may continue to take quoted symbols (e.g.,
 link:#context[context]). For other functions, such as
 link:#contextp[context?], the distinction is critical.
 
-( § )
+// ( § )
 
 3. Functions in groups
 ~~~~~~~~~~~~~~~~~~~~~~
@@ -1623,7 +1623,7 @@ source
 evaluation event-driven
 |=======================================================================
 
-( § )
+// ( § )
 
 4. Functions in alphabetical order
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -17958,7 +17958,7 @@ Checks the evaluation of _exp_ to see if it equals `0` (zero).
 
 `zero?` will return `nil` on data types other than numbers.
 
-( ∂ )
+// ( ∂ )
 
 '''''
 
@@ -18186,7 +18186,7 @@ These symbols are not protected and can be redefined by the user. The
 `$x` variable is built-in and proteced against deletion. This `$x`
 variable is also used in link:#curry[curry] expressions.
 
-( ∂ )
+// ( ∂ )
 
 '''''
 
@@ -19243,6 +19243,6 @@ return for a fee.
 END OF TERMS AND CONDITIONS
 +++++++++++++++++++++++++++
 
-( ∂ )
+// ( ∂ )
 
- vim: set tw=72 :
+// vim: set tw=72 :
