@@ -1,15 +1,22 @@
 newLISP(R)
 ==========
-:author:    Lutz Mueller
-//:email:      srackham@gmail.com
-:revdate:   2013-01-20
-:revnumber: 10.4.5
+:author:         Lutz Mueller
+:revdate:        2013-01-20
+:revnumber:      10.4.5
+:toc:
+:toc-placement:  manual
+:toc-title:      Contents
+:toclevels:      3
+:icons:
+:data-uri:
+:pygments:
+//:email:        lutz@nuevatec.com
 
+****
 __For Mac OS X, GNU Linux, Unix and Win32__
 
 **User Manual and Reference v.10.4.5**
 
-****
 Copyright (C) 2012 Lutz Mueller http://www.nuevatec.com[www.nuevatec.com]. +
 All rights reserved. +
 Permission is granted to copy, distribute and/or modify this document +
@@ -23,165 +30,13 @@ Public License] V.3, June 2007. +
 newLISP is a registered trademark of Lutz Mueller. +
 ****
 
-Contents
---------
-
-link:#users_manual[User Manual]
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-1.  link:#introduction[Introduction]
-2.  link:#deprecated[Deprecated functions and future changes]
-3.  link:#REPL[Interactive Lisp mode]
-4.  link:#options[Command line options]
-* link:#cmd_help[Command line help summary]
-* link:#url_files[Specifying files as URLs]
-* link:#no_init[No loading of init.lsp]
-* link:#stack_size[Stack size]
-* link:#max_mem[Maximum memory usage]
-* link:#direct_exec[Direct execution mode]
-* link:#logging[Logging I/O]
-* link:#working_dir[Specifying the working directory]
-* link:#tcpip_server[newLISP as a TCP/IP server]
-* link:#daemon[TCP/IP daemon mode]
-* link:#prompt[Suppressing the prompt and HTTP processing]
-* link:#forcing_prompt[Forcing prompts in pipe I/O mode]
-* link:#http_mode[HTTP only server mode]
-* link:#local_domain_server[Local domain Unix socket server]
-* link:#conn_timeout[Connection timeout]
-* link:#inetd_daemon[`inetd` daemon mode]
-5.  link:#startup[Startup, directories, environment]
-* link:#environment[Environment variable NEWLISPDIR]
-* link:#initialization[The initialization file `init.lsp`]
-* link:#directories_unix[Directories on Linux, BSD, Mac OS X]
-* link:#directories_win32[Directories on Win32]
-6.  link:#shared-lib[Extending newLISP with shared libraries]
-7.  link:#newlisp-lib[newLISP as a shared library]
-8.  link:#expressions[Evaluating newLISP expressions]
-* link:#multiline[Interactive multiline expressions]
-* link:#int_float[Integer, floating point data and operators]
-* link:#eval_rules[Evaluation rules and data types]
-9.  link:#lambda_expressions[Lambda expressions in newLISP]
-10. link:#nil_and_true[`nil`, `true`, `cons` and `()` in newLISP]
-11. link:#arrays[Arrays]
-12. link:#indexing[Indexing elements of strings, lists and arrays]
-* link:#implicit_indexing[Implicit indexing for `nth`]
-* link:#implicit_default[Implicit indexing and the default functor]
-* link:#implicit_rest_slice[Implicit indexing for `rest` and `slice`]
-* link:#implicit_modify[Modify references in lists, arrays and strings]
-13. link:#destructive[Destructive versus non-destructive functions]
-* link:#make_nondestructive[Make a destructive function non-destructive]
-14. link:#return[Early return from functions, loops, blocks]
-* link:#flow_catch_throw[Using `catch` and `throw`]
-* link:#flow_and_or[Using `and` and `or`]
-15. link:#scoping[Dynamic and lexical scoping]
-16. link:#contexts[Contexts]
-* link:#context_rules[Symbol creation in contexts]
-* link:#creating_contexts[Creating contexts]
-* link:#scope_global[Global scope]
-* link:#protection[Symbol protection]
-* link:#overwrite[Overwriting global symbols and built-ins]
-* link:#context_vars[Variables holding contexts]
-* link:#sequence_creating[Sequence of creating contexts]
-* link:#context_modules[Contexts as programming modules]
-* link:#context_data[Contexts as data containers]
-* link:#loading_contexts[Loading and declaring contexts]
-* link:#serializing[Serializing context objects]
-17. link:#default_function[The context default functor]
-* link:#func_memory[Functions with memory]
-* link:#hash[Hash functions and dictionaries]
-* link:#pass_big[Passing data by reference]
-18. link:#foop[Functional object-oriented programming in newLISP]
-* link:#newlisp_classes[FOOP classes and constructors]
-* link:#newlisp_objects[Objects]
-* link:#colon_operator[The colon `:` operator and polymorphism]
-* link:#structure_foop[Structuring a larger FOOP program]
-19. link:#multi_processing[Concurrent processing and distributed
-computing]
-* link:#cilk[The Cilk API]
-* link:#distributed[Distributed network computing]
-20. link:#XML[XML, SXML and XML-RPC]
-21. link:#internationalization[Customization, localization and UTF-8]
-* link:#naming[Customizing function names]
-* link:#switching[Switching the locale]
-* link:#decimal_point[Decimal point and decimal comma]
-* link:#unicode_utf8[Unicode and UTF-8 encoding]
-* link:#utf8_capable[Functions working on UTF-8 characters]
-* link:#utf8_version[Functions only available on UTF-8 enabled versions]
-22. link:#commas[Commas in parameter lists]
-23. link:#linking[Linking newLISP source and executable]
-
-link:#function_ref[Function Reference]
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-1.  link:#symbol_names[Syntax of symbol variables and numbers]
-2.  link:#type_ids[Data types and names in the reference]
-3.  link:#functions[Functions in groups]
-* link:#list_processing[List processing, flow control, and integer
-arithmetic]
-* link:#string_operators[String and conversion functions]
-* link:#floating_point[Floating point math and special functions]
-* link:#matrices[Matrix functions]
-* link:#array-funcs[Array functions]
-* link:#bit_operators[Bit operators]
-* link:#predicates[Predicates]
-* link:#timedate[Date and time functions]
-* link:#montecarlo[Statistics, simulation and modeling functions]
-* link:#pattern[Pattern matching]
-* link:#financial[Financial math functions]
-* link:#input_output[File and I/O operations]
-* link:#processes[Processes and the Cilk API]
-* link:#directory_management[File and directory management]
-* link:#http_api[HTTP networking API]
-* link:#socket_tcpip[Socket TCP/IP, UDP and ICMP network API]
-* link:#reflection[Reflection and customization]
-* link:#system_functions[System functions]
-* link:#importing_libraries[Importing libraries]
-* link:#internals[newLISP internals API]
-4.  link:#functions_alphabetical[Functions in alphabetical order]
-*link:newlisp_manual.html#shell[!]
-link:newlisp_manual.html#arithmetic[+-*/%]
-link:newlisp_manual.html#abort[Ab] link:newlisp_manual.html#append[Ap]
-link:newlisp_manual.html#asin[As]
-link:newlisp_manual.html#base64-dec[Ba]
-link:newlisp_manual.html#callback[Ca] link:newlisp_manual.html#clean[Cl]
-link:newlisp_manual.html#command-event[Co]
-link:newlisp_manual.html#current-line[Cu]
-link:newlisp_manual.html#dec[De] link:newlisp_manual.html#difference[Di]
-link:newlisp_manual.html#do-until[Do]
-link:newlisp_manual.html#encrypt[En]  +
- link:newlisp_manual.html#exec[Ex]
-link:newlisp_manual.html#file-info[Fi] link:newlisp_manual.html#flat[Fl]
-link:newlisp_manual.html#gammaln[Ga] link:newlisp_manual.html#global[Gl]
-link:newlisp_manual.html#inc[In] link:newlisp_manual.html#lambdap[La]
-link:newlisp_manual.html#listp[Li] link:newlisp_manual.html#macrop[Ma]
-link:newlisp_manual.html#mul[Mu]
-link:newlisp_manual.html#net-accept[Net]
-link:newlisp_manual.html#new[New] link:newlisp_manual.html#nth[Nt]
-link:newlisp_manual.html#pack[Pa]  +
- link:newlisp_manual.html#pretty-print[Pr]
-link:newlisp_manual.html#randomize[Ra]
-link:newlisp_manual.html#read[Rea] link:newlisp_manual.html#regex[Reg]
-link:newlisp_manual.html#search[Sea]
-link:newlisp_manual.html#sequence[Seq]
-link:newlisp_manual.html#sleep[Sl]
-link:newlisp_manual.html#starts-with[St]
-link:newlisp_manual.html#sync[Sy]
-link:newlisp_manual.html#time-of-day[Ti]
-link:newlisp_manual.html#truep[Tr] link:newlisp_manual.html#utf8[Ut]
-link:newlisp_manual.html#write-file[Wr]*
-
-link:#appendix[Appendix]
-^^^^^^^^^^^^^^^^^^^^^^^^
-
-* link:#error_codes[Error Codes]
-* link:#system_symbols[System Symbols]
-* link:#GNUFDL[GNU Free Documentation License]
-* link:#GNUGPL[GNU General Public License]
-
-( ∂ )
+// toc::[]
+// ( ∂ )
 
 newLISP User Manual
 -------------------
+
+toc::[]
 
 1. Introduction
 ~~~~~~~~~~~~~~~
