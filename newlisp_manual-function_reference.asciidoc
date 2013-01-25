@@ -28,8 +28,7 @@ right square bracket.
 
 All of the following symbols are legal variable names in newLISP:
 
-barry code example
-
+[source,newlisp]
 ------------
 myvar
 A-name
@@ -70,8 +69,7 @@ newLISP recognizes the following number formats:
 `-` sign. Any other character marks the end of the integer or may be
 part of the sequence if parsed as a float (see float syntax below).
 
-barry code example
-
+[source,newlisp]
 -----
 123
 +4567
@@ -82,8 +80,7 @@ barry code example
 of the hexadecimal digits: `0123456789abcdefABCDEF`. Any other character
 ends the hexadecimal number.
 
-barry code example
-
+[source,newlisp]
 --------------
 0xFF    →  255
 0x10ab  → 4267
@@ -93,8 +90,7 @@ barry code example
 *Binaries* start with a `0b` (or `0B`), followed by up to 64 1's or 0s.
 Any other character ends the binary number.
 
-barry code example
-
+[source,newlisp]
 ----------------
 0b101010   →  42
 ----------------
@@ -103,8 +99,7 @@ barry code example
 (zero), followed by any combination of the octal digits: `01234567`. Any
 other character ends the octal number.
 
-barry code example
-
+[source,newlisp]
 -----------
 012   →  10
 010   →   8
@@ -118,8 +113,7 @@ make them octal numbers instead of floating points. A single `.`
 (decimal point) can appear anywhere within a floating point number,
 including at the beginning.
 
-barry code example
-
+[source,newlisp]
 ------------------
 1.23     →  1.23
 -1.23    → -1.23
@@ -131,8 +125,7 @@ As described below, *scientific notation* starts with a floating point
 number called the _significand_ (or _mantissa_), followed by the letter
 `e` or `E` and an integer _exponent_.
 
-barry code example
-
+[source,newlisp]
 -------------------
 1.23e3    →  1230
 -1.23E3   → -1230
@@ -1645,8 +1638,7 @@ Executes the command in _str-command_ by shelling out to the operating
 system and executing. This function returns a different value depending
 on the host operating system.
 
-barry code example
-
+[source,newlisp]
 -------------
 (! "vi")
 (! "ls -ltr")
@@ -1680,8 +1672,7 @@ command window replacing the closed one.
 Note that `!` (exclamation mark) can be also be used as a command-line
 shell operator by omitting the parenthesis and space after the `!`:
 
-barry code example
-
+[source,newlisp]
 ----------------------------------------------------
 > !ls -ltr    ; executed in the newLISP shell window
 ----------------------------------------------------
@@ -1706,8 +1697,7 @@ As an alternative, the contents of these variables may also be accessed
 by using `($ 0)`, `($ 1)`, `($ 2)`, etc. This method allows indexed
 access (i.e., `($ i)`, where `i` is an integer).
 
-barry code example
-
+[source,newlisp]
 ------------------------------------
 (set 'str  "http://newlisp.org:80")
 (find "http://(.*):(.*)" str 0)  → 0
@@ -1753,8 +1743,7 @@ Each result is divided successively by the next _int_, then the rest
 (modulo operation) is returned. Division by zero causes an error. For
 floating point numbers, use the link:#mod[mod] function.
 
-barry code example
-
+[source,newlisp]
 ------------------------------------
 (+ 1 2 3 4 5)        → 15
 (+ 1 2 (- 5 2) 8)    → 14
@@ -1806,8 +1795,7 @@ wrap around to negative numbers. Results smaller than
 _place_ is either a symbol or a place in a list structure holding a
 number, or a number returned by an expression.
 
-barry code example
-
+[source,newlisp]
 --------------------------
 (set 'x 1)
 (++ x)        → 2
@@ -1845,8 +1833,7 @@ wrap around to negative numbers. Results smaller than
 _place_ is either a symbol or a place in a list structure holding a
 number, or a number returned by an expression.
 
-barry code example
-
+[source,newlisp]
 --------------------------
 (set 'x 1)
 (-- x)        → 0
@@ -1903,8 +1890,7 @@ _______________________________________________________________________
  *Lists:* quoted list/expression, list/expression, lambda, lambda-macro
 _______________________________________________________________________
 
-barry code example
-
+[source,newlisp]
 ----------------------------------------------------------
 (< 3 5 8 9)                     → true
 (> 4 2 3 6)                     → nil
@@ -1947,8 +1933,7 @@ shift_):
 (>> 0x8000000000000000 1)  → 0xC000000000000000  ; not 0x0400000000000000!
 --------------------------------------------------------------------------
 
-barry code example
-
+[source,newlisp]
 ------------------
 (<< 1 3)      →  8
 (<< 1 2 1)    →  8
@@ -1970,8 +1955,7 @@ syntax: (& _int-1_ _int-2_ [_int-3_ ... ])
 A bitwise `and` operation is performed on the number in _int-1_ with the
 number in _int-2_, then successively with _int-3_, etc.
 
-barry code example
-
+[source,newlisp]
 ---------------------------------------
 (& 0xAABB 0x000F)  → 11  ; which is 0xB
 ---------------------------------------
@@ -1985,8 +1969,7 @@ syntax: (| _int-1_ _int-2_ [_int-3_ ... ])
 A bitwise `or` operation is performed on the number in _int-1_ with the
 number in _int-2_, then successively with _int-3_, etc.
 
-barry code example
-
+[source,newlisp]
 ------------------------
 (| 0x10 0x80 2 1)  → 147
 ------------------------
@@ -2000,8 +1983,7 @@ syntax: (^ _int-1_ _int-2_ [_int-3_ ... ])
 A bitwise `xor` operation is performed on the number in _int-1_ with the
 number in _int-2_, then successively with _int-3_, etc.
 
-barry code example
-
+[source,newlisp]
 --------------------
 (^ 0xAA 0x55)  → 255
 --------------------
@@ -2015,8 +1997,7 @@ syntax: (~ _int_)
 A bitwise `not` operation is performed on the number in _int_, reversing
 all of the bits.
 
-barry code example
-
+[source,newlisp]
 ------------------------------------
 (format "%X" (~ 0xFFFFFFAA))  → "55"
 (~ 0xFFFFFFFF)                → 0
@@ -2041,8 +2022,7 @@ which is the symbol (name) of its class context. The class context
 implements the functions applicable to the object. No space is required
 between the colon and the symbol following it.
 
-barry code example
-
+[source,newlisp]
 --------------------------------------------------------------------------------
 (define (Rectangle:area)
     (mul (self 3) (self 4)))
@@ -2098,8 +2078,7 @@ using link:#fork[fork], use link:#destroy[destroy] instead.
 
 The function `abort` is not available on Win32.
 
-barry code example
-
+[source,newlisp]
 --------------------
 (abort 2245)  → true
 --------------------
@@ -2123,8 +2102,7 @@ syntax: (abs _num_)
 
 Returns the absolute value of the number in _num_.
 
-barry code example
-
+[source,newlisp]
 -----------------
 (abs -3.5)  → 3.5
 -----------------
@@ -2137,8 +2115,7 @@ syntax: (acos _num-radians_)
 
 The arc-cosine function is calculated from the number in _num-radians_.
 
-barry code example
-
+[source,newlisp]
 ------------------
 (acos 1)  → 0
 (cos (acos 1)) → 1
@@ -2154,8 +2131,7 @@ Calculates the inverse hyperbolic cosine of _num-radians_, the value
 whose hyperbolic cosine is _num-radians_. If _num-radians_ is less than
 1, `acosh` returns `NaN`.
 
-barry code example
-
+[source,newlisp]
 ------------------------
 (acosh 2)  → 1.316957897
 (cosh (acosh 2)) → 2
@@ -2172,8 +2148,7 @@ All of the numbers in _num-1_, _num-2_, and on are summed. `add` accepts
 float or integer operands, but it always returns a floating point
 number. Any floating point calculation with `NaN` also returns `NaN`.
 
-barry code example
-
+[source,newlisp]
 ------------------------
 (add 2 3.25 9)   → 14.25
 (add 1 2 3 4 5)  → 15
@@ -2192,8 +2167,7 @@ point number in _float_, or the string in _str_. This function is used
 for passing parameters to library functions that have been imported
 using the link:#import[import] function.
 
-barry code example
-
+[source,newlisp]
 ----------------------------------------------------------
 (set 's "\001\002\003\004")
 
@@ -2236,8 +2210,7 @@ syntax: (amb _exp-1_ [_exp-2_ ... ])
 One of the expressions _exp-1_ ... _n_ is selected at random, and the
 evaluation result is returned.
 
-barry code example
-
+[source,newlisp]
 ----------------------------------------------------------
 (amb 'a 'b 'c 'd 'e)  → one of: a, b, c, d, or e at random
 
@@ -2261,8 +2234,7 @@ returning the result of the last expression. If any of the expressions
 yield `nil` or the empty list `()`, evaluation is terminated and `nil`
 or the empty list `()` is returned.
 
-barry code example
-
+[source,newlisp]
 --------------------------------------------
 (set 'x 10)                       → 10
 (and (< x 100) (> x 2))           → true
@@ -2283,8 +2255,7 @@ syntax: (append _list-1_ [_list-2_ ... ]) +
 In the first form, `append` works with lists, appending _list-1_ through
 _list-n_ to form a new list. The original lists are left unchanged.
 
-barry code example
-
+[source,newlisp]
 --------------------------------------------------------------------
 (append '(1 2 3) '(4 5 6) '(a b))  → (1 2 3 4 5 6 a b)
 
@@ -2295,8 +2266,7 @@ barry code example
 
 In the second form `append` works on arrays:
 
-barry code example
-
+[source,newlisp]
 ------------------------------------------
 (set 'A (array 3 2 (sequence 1 6)))
 → ((1 2) (3 4) (5 6))
@@ -2313,8 +2283,7 @@ barry code example
 In the third form, `append` works on strings. The strings in _str-n_ are
 concatenated into a new string and returned.
 
-barry code example
-
+[source,newlisp]
 -------------------------------------------------------------
 (set 'more " how are you")       → " how are you"
 
@@ -2348,8 +2317,7 @@ On failure the function returns `nil`. For error information, use
 link:#sys-error[sys-error] when used on files. When used on URLs
 link:#net-error[net-error] gives more error information.
 
-barry code example
-
+[source,newlisp]
 ------------------------------------
 (write-file "myfile.txt" "ABC")
 (append-file "myfile.txt" "DEF")
@@ -2363,8 +2331,7 @@ link:#put-url[put-url] with `"Pragma: append\r\n"` in the header option
 and can take the same additional parameters. The `"Pragma: append\r\n"`
 option is supplied automatically.
 
-barry code example
-
+[source,newlisp]
 -----------------------------------------------------------------
 (append-file "http://asite.com/message.txt" "More message text.")
 -----------------------------------------------------------------
@@ -2385,8 +2352,7 @@ syntax: (apply _func list_ [_int-reduce_])
 Applies the contents of _func_ (primitive, user-defined function, or
 lambda expression) to the arguments in _list_.
 
-barry code example
-
+[source,newlisp]
 ------------------------------------------------
 (apply + '(1 2 3 4))                   → 10
 (set 'aList '(3 4 5))                  → (3 4 5)
@@ -2449,8 +2415,7 @@ macros with a variable number of parameters.
 `args` can be used to define hygienic macros that avoid the danger of
 variable capture. See link:#define-macro[define-macro].
 
-barry code example
-
+[source,newlisp]
 ----------------------------
 (define-macro (print-line)
     (dolist (x (args))
@@ -2464,8 +2429,7 @@ the effect of the built-in function link:#println[println].
 
 In the second syntax, `args` can take one or more indices (_int-idx-n_).
 
-barry code example
-
+[source,newlisp]
 ---------------------------------------
 (define-macro (foo)
     (print (args 2) (args 1) (args 0)))
@@ -2486,8 +2450,7 @@ lists.
 Remember that `(args)` only contains the arguments not already bound to
 local variables of the current function or macro:
 
-barry code example
-
+[source,newlisp]
 --------------------------
 (define (foo a b) (args))
 
@@ -2522,8 +2485,7 @@ indexing into a large list becomes too slow. Not all list functions may
 be used on arrays. For a more detailed discussion, see the chapter on
 link:#arrays[arrays].
 
-barry code example
-
+[source,newlisp]
 --------------------------------------------------
 (array 5)                  → (nil nil nil nil nil)
 
@@ -2626,8 +2588,7 @@ syntax: (array-list _array_)
 Returns a list conversion from _array_, leaving the original array
 unchanged:
 
-barry code example
-
+[source,newlisp]
 ------------------------------------------
 (set 'myarray (array 3 4 (sequence 1 12)))
 → ((1 2 3 4) (5 6 7 8) (9 10 11 12))
@@ -2647,8 +2608,7 @@ syntax: (array? _exp_)
 
 Checks if _exp_ is an array:
 
-barry code example
-
+[source,newlisp]
 -----------------------------------
 (set 'M (array 3 4 (sequence 1 4)))
 → ((1 2 3 4) (1 2 3 4) (1 2 3 4)))
@@ -2667,8 +2627,7 @@ syntax: (asin _num-radians_)
 Calculates the arcsine function from the number in _num-radians_ and
 returns the result.
 
-barry code example
-
+[source,newlisp]
 -----------------------
 (asin 1)  → 1.570796327
 (sin (asin 1)) → 1
@@ -2683,8 +2642,7 @@ syntax: (asinh _num-radians_)
 Calculates the inverse hyperbolic sine of _num-radians_, the value whose
 hyperbolic sine is _num-radians_.
 
-barry code example
-
+[source,newlisp]
 -------------------------------
 (asinh 2)         → 1.443635475
 (sinh (asinh 2))  → 2
@@ -2702,8 +2660,7 @@ _list-alist_ for a _member-list_ whose first element matches the key
 value. If found, the _member-list_ is returned; otherwise, the result
 will be `nil`.
 
-barry code example
-
+[source,newlisp]
 ------------------------------------------------------
 (assoc 1 '((3 4) (1 2)))  → (1 2)
 
@@ -2725,8 +2682,7 @@ data  → ((apples 123) (bananas 123 45) (pears 8))
 In the second syntax more then one key expressions can be specified to
 search in nested, multilevel association lists:
 
-barry code example
-
+[source,newlisp]
 ------------------------------------------------------------------------------
 (set 'persons '(
     (id001 (name "Anne") (address (country "USA") (city "New York")))
@@ -2766,8 +2722,7 @@ syntax: (atan _num-radians_)
 
 The arctangent of _num-radians_ is calculated and returned.
 
-barry code example
-
+[source,newlisp]
 ------------------------------
 (atan 1)        → 0.7853981634
 (tan (atan 1))  → 1
@@ -2784,8 +2739,7 @@ The `atan2` function computes the principal value of the arctangent of Y
 quadrant of the return value. `atan2` is useful for converting Cartesian
 coordinates into polar coordinates.
 
-barry code example
-
+[source,newlisp]
 ------------------------------------------------
 (atan2 1 1)                       → 0.7853981634
 (div (acos 0) (atan2 1 1))        → 2
@@ -2804,8 +2758,7 @@ whose hyperbolic tangent is _num-radians_. If the absolute value of
 _num-radians_ is greater than 1, `atanh` returns `NaN`; if it is equal
 to 1, `atanh` returns infinity.
 
-barry code example
-
+[source,newlisp]
 --------------------------
 (atanh 0.5) → 0.5493061443
 (tanh (atanh 0.5)) → 0.5
@@ -2824,8 +2777,7 @@ expression is an atom if it evaluates to nil, true, an integer, a float,
 a string, a symbol or a primitive. Lists, lambda or lambda-macro
 expressions, and quoted expressions are not atoms.
 
-barry code example
-
+[source,newlisp]
 ----------------------------
 (atom? '(1 2 3))      → nil
 (and (atom? 123)
@@ -2843,8 +2795,7 @@ syntax: (base64-dec _str_)
 The BASE64 string in _str_ is decoded. Note that _str_ is not verified
 to be a valid BASE64 string. The decoded string is returned.
 
-barry code example
-
+[source,newlisp]
 ------------------------------------------------
 (base64-dec "SGVsbG8gV29ybGQ=")  → "Hello World"
 ------------------------------------------------
@@ -2880,8 +2831,7 @@ The encoded string is returned.
 BASE64 encoding is used with many Internet protocols to encode binary
 data for inclusion in text-based messages (e.g., XML-RPC).
 
-barry code example
-
+[source,newlisp]
 ------------------------------------------------
 (base64-enc "Hello World")  → "SGVsbG8gV29ybGQ="
 
@@ -3038,8 +2988,7 @@ The second example is frequently found in introductory literature on
 Bayesian statistics. It shows the Chain Bayesian method of using
 `bayes-query` on the data of a previously processed data set:
 
-barry code example
-
+[source,newlisp]
 ---------------------------------
 (set 'Data:test-positive '(8 18))
 (set 'Data:test-negative '(2 72))
@@ -3052,8 +3001,7 @@ the healthy population and a false negative rate of 20 percent in the
 sick. What is the probability of a person carrying the disease after
 testing positive?
 
-barry code example
-
+[source,newlisp]
 --------------------------------------------------------------------
 (bayes-query '(test-positive) Data true)
 → (0.3076923077 0.6923076923)
@@ -3083,8 +3031,7 @@ the data were originally defined as percentages. The additional optional
 _bool-probs_ flag allows probabilities to be entered directly and should
 be used together with the Chain Bayesian mode for maximum performance:
 
-barry code example
-
+[source,newlisp]
 -------------------------------------------------------------------------
 (set 'Data:test-positive '(0.8 0.2))
 (set 'Data:test-negative '(0.2 0.8))
@@ -3126,8 +3073,7 @@ symbol cannot be part of the symbols passed as an _Mi_ category.
 The function returns a list of token frequencies found in the different
 categories or models.
 
-barry code example
-
+[source,newlisp]
 -----------------------------------------------------
 (bayes-train '(A A B C C) '(A B B C C C) 'L)  → (5 6)
 
@@ -3220,8 +3166,7 @@ The `begin` function is used to group a block of expressions. The
 expressions in _body_ are evaluated in sequence, and the value of the
 last expression in _body_ is returned.
 
-barry code example
-
+[source,newlisp]
 ----------------------------------------------
 (begin
   (print "This is a block of 2 expressions\n")
@@ -3248,8 +3193,7 @@ function as follows:
 
 _*beta = exp(gammaln(a) + gammaln(b) - gammaln(a + b))*_
 
-barry code example
-
+[source,newlisp]
 -----------------
 (beta 1 2)  → 0.5
 -----------------
@@ -3268,8 +3212,7 @@ trials:
 
 _*pev = Betai(p, k, N - k + 1)*_
 
-barry code example
-
+[source,newlisp]
 ----------------------------
 (betai 0.5 3 8)  → 0.9453125
 ----------------------------
@@ -3348,8 +3291,7 @@ _*binomial = pow(p, k) * pow(1.0 - p, n - k) * n! / (k! * (n - k)!)*_
 where _x!_ is the factorial of _x_ and _pow(x, y)_ is _x_ raised to the
 power of _y_.
 
-barry code example
-
+[source,newlisp]
 --------------------------------
 (binomial 10 3 0.5)  → 0.1171875
 --------------------------------
@@ -3372,8 +3314,7 @@ presentation 1's and 0's are represented as `true` and `nil` and in
 order from the lowest to the highest bit. This allows direct indexing
 and program control switching on the result.
 
-barry code example
-
+[source,newlisp]
 -------------------------------------------------------------------------
 (bits 1234)      → "10011010010"
 
@@ -3405,8 +3346,7 @@ http://www.opengl.org[OpenGL] graphics library:
 If more than sixteen callback functions are required, slots must be
 reassigned to a different callback function.
 
-barry code example
-
+[source,newlisp]
 ----------------------------------------------------------------
 ...
 (define (draw)
@@ -3506,8 +3446,7 @@ corresponding expressions in _body_ are evaluated. The result of the
 last body expression is returned as the result for the entire `case`
 expression.
 
-barry code example
-
+[source,newlisp]
 ----------------------------------------
 (define (translate n)
   (case n
@@ -3535,8 +3474,7 @@ In the first syntax, `catch` will return the result of the evaluation of
 _exp_ or the evaluated argument of a link:#throw[throw] executed during
 the evaluation of _exp_:
 
-barry code example
-
+[source,newlisp]
 -----------------------------------
 (catch (dotimes (x 1000)
   (if (= x 500) (throw x))))  → 500
@@ -3568,8 +3506,7 @@ _symbol_. This form can be useful when errors are expected as a normal
 potential outcome of a function and are dealt with during program
 execution.
 
-barry code example
-
+[source,newlisp]
 --------------------------------------------------------
 (catch (func 3 4) 'result)  → nil
 result
@@ -3605,8 +3542,7 @@ syntax: (ceil _number_)
 
 Returns the next highest integer above _number_ as a floating point.
 
-barry code example
-
+[source,newlisp]
 -----------------
 (ceil -1.5)  → -1
 (ceil 3.4)   → 4
@@ -3623,8 +3559,7 @@ syntax: (change-dir _str-path_)
 Changes the current directory to be the one given in _str-path_. If
 successful, `true` is returned; otherwise `nil` is returned.
 
-barry code example
-
+[source,newlisp]
 -------------------
 (change-dir "/etc")
 -------------------
@@ -3657,8 +3592,7 @@ character with value _int_.
 On UTF-8–enabled versions of newLISP, the value in _int_ is taken as
 Unicode and a UTF-8 character is returned.
 
-barry code example
-
+[source,newlisp]
 ------------------------------------------------------------
 (char "ABC")          → 65  ; ASCII code for "A"
 (char "ABC" 1)        → 66  ; ASCII code for "B"
@@ -3693,8 +3627,7 @@ _str_.
 If the first argument evaluates to a list, a copy of _list_ is returned
 with _int-elements_ omitted (same as for strings).
 
-barry code example
-
+[source,newlisp]
 ---------------------------------
 (set 'str "newLISP")  → "newLISP"
 
@@ -3723,8 +3656,7 @@ eliminated.
 
 `clean` works like link:#filter[filter] with a negated predicate.
 
-barry code example
-
+[source,newlisp]
 --------------------------------------------------------------
 (clean symbol? '(1 2 d 4 f g 5 h))   → (1 2 4 5)
 
@@ -3761,8 +3693,7 @@ Closes the file specified by the file handle in _int-file_. The handle
 would have been obtained from a previous link:#open[open] operation. If
 successful, `close` returns `true`; otherwise `nil` is returned.
 
-barry code example
-
+[source,newlisp]
 ------------------------
 (close (device))  → true
 (close 7)         → true
@@ -3794,8 +3725,7 @@ The following example makes the newLISP shell work like a normal Unix
 shell when the command starts with a letter. But starting the line with
 an open parenthesis or a space initiates a newLISP evaluation.
 
-barry code example
-
+[source,newlisp]
 --------------------------------------------------------
 (command-event (fn (s)
     (if (starts-with s "[a-zA-Z]" 0) (append "!" s) s)))
@@ -3914,8 +3844,7 @@ returned as the result of the entire _cond-expression_. If all
 conditions evaluate to `nil` or an empty list, _cond_ returns the value
 of the last _cond-expression_.
 
-barry code example
-
+[source,newlisp]
 ----------------------------
 (define (classify x)
   (cond
@@ -3955,8 +3884,7 @@ to anything other than a list, the results of evaluating _exp-1_ and
 _exp-2_ are returned in a list. Note that there is no _dotted pair_ in
 newLISP: _cons_ing two atoms constructs a list, not a dotted pair.
 
-barry code example
-
+[source,newlisp]
 -------------------------------------
 (cons 'a 'b)            → (a b)
 (cons 'a '(b c))        → (a b c)
@@ -4060,8 +3988,7 @@ symbol for the current context is returned.
 Because contexts evaluate to themselves, a quote is not necessary to
 switch to a different context if that context already exists.
 
-barry code example
-
+[source,newlisp]
 -----------------------------------------------------------------------
 (context 'GRAPH)          ; create / switch context GRAPH
 
@@ -4185,8 +4112,7 @@ syntax: (context? _exp_) +
 In the first syntax, _context?_ is a predicate that returns `true` only
 if _exp_ evaluates to a context; otherwise, it returns `nil`.
 
-barry code example
-
+[source,newlisp]
 -------------------------------------------------------
 (context? MAIN)  → true
 (set 'x 123)
@@ -4247,8 +4173,7 @@ Copies a file from a path-filename given in _str-from-name_ to a
 path-filename given in _str-to-name_. Returns `true` if the copy was
 successful or `nil`, if the copy was unsuccessful.
 
-barry code example
-
+[source,newlisp]
 -------------------------------------------------------
 (copy-file "/home/me/newlisp/data.lsp" "/tmp/data.lsp")
 -------------------------------------------------------
@@ -4276,8 +4201,7 @@ _list-vector-X_ and _list-vector-Y_. Both lists must be of same length.
 |p |Two tailed probability of t under the null hyothesis
 |=======================================================
 
-barry code example
-
+[source,newlisp]
 -------------------------------------------------------------------------
 (set 'study-time '(90 100 130 150 180 200 220 300 350 400))
 (set 'test-errors '(25 28 20 20 15 12 13 10 8 6))
@@ -4301,8 +4225,7 @@ syntax: (cos _num-radians_)
 
 Calculates the cosine of _num-radians_ and returns the result.
 
-barry code example
-
+[source,newlisp]
 ------------------------------------------
 (cos 1)                     → 0.5403023059
 (set 'pi (mul 2 (acos 0)))  → 3.141592654
@@ -4319,8 +4242,7 @@ Calculates the hyperbolic cosine of _num-radians_. The hyperbolic cosine
 is defined mathematically as: _(exp (x) + exp (-x)) / 2_. An overflow to
 `inf` may occur if _num-radians_ is too large.
 
-barry code example
-
+[source,newlisp]
 ---------------------------------------------------
 (cosh 1)     → 1.543080635
 (cosh 10)    → 11013.23292
@@ -4337,8 +4259,7 @@ syntax: (count _list-1_ _list-2_)
 Counts elements of _list-1_ in _list-2_ and returns a list of those
 counts.
 
-barry code example
-
+[source,newlisp]
 --------------------------------------------------
 (count '(1 2 3) '(3 2 1 4 2 3 1 1 2 2))  → (3 4 2)
 (count '(z a) '(z d z b a z y a))        → (3 2)
@@ -4371,8 +4292,7 @@ Note that this function should only be used when familiar with newLISP
 internals. `cpymem` can crash the system or make it unstable if used
 incorrectly.
 
-barry code example
-
+[source,newlisp]
 -----------------------------------------------
 (cpymem (pack "c c" 0 32) (last (dump 'sym)) 2)
 
@@ -4435,8 +4355,7 @@ buffer in _str-data_, starting with a CRC of `0xffffffff` for the first
 byte. `crc32` uses an algorithm published by
 http://www.w3.org[www.w3.org].
 
-barry code example
-
+[source,newlisp]
 --------------------------------------------------
 (crc32 "abcdefghijklmnopqrstuvwxyz")  → 1277644989
 --------------------------------------------------
@@ -4458,8 +4377,7 @@ null hypothesis.
 Note that versions prior to 10.2.0 took _(1.0 - p)_ for the probability
 instead of _p_.
 
-barry code example
-
+[source,newlisp]
 ---------------------------------
 (crit-chi2 0.01 4)  → 13.27670443
 ---------------------------------
@@ -4477,8 +4395,7 @@ _num-probability_ under the null hypothesis and the degrees of freedmom
 given in _int-df1_ and _int-df2_ for testing the significance of a
 statistical null hypothesis using the _F-test_.
 
-barry code example
-
+[source,newlisp]
 ----------------------------------
 (crit-f 0.05 10 12)  → 2.753386727
 ----------------------------------
@@ -4496,8 +4413,7 @@ probability _num-probability_ under the null hypothesis and the degrees
 of freedom in _int-df_ for testing the significance of a statistical
 null hypothesis.
 
-barry code example
-
+[source,newlisp]
 -------------------------------
 (crit-t 0.05 14)  → 1.761310142
 -------------------------------
@@ -4514,8 +4430,7 @@ Calculates the critical normal distributed Z value of a given cumulated
 probability _num-probability_ for testing of statistical significance
 and confidence intervals.
 
-barry code example
-
+[source,newlisp]
 -----------------------------
 (crit-z 0.999)  → 3.090232372
 -----------------------------
@@ -4535,8 +4450,7 @@ link:#write-line[write-line] is called without a string parameter.
 The following source shows the typical code pattern for creating a Unix
 command-line filter:
 
-barry code example
-
+[source,newlisp]
 -----------------------------------------
 #!/usr/bin/newlisp
 
@@ -4567,8 +4481,7 @@ into a function _fx(y)_ that takes a single argument. `curry` works like
 a macro in that it does not evaluate its arguments. Instead, they are
 evaluated during the application of _func_.
 
-barry code example
-
+[source,newlisp]
 ---------------------------------------------------------------
 (set 'f (curry + 10))  → (lambda ($x) (+ 10 $x))
 
@@ -4607,8 +4520,7 @@ before conversion of _int-sec_ to a string. If _int-secs_ is out of
 range or an invalid _str-format_ is specified, an empty string `""` is
 returned.
 
-barry code example
-
+[source,newlisp]
 -----------------------------------------------------------------------
 (date)                   → "Fri Oct 29 09:56:58 2004"
 
@@ -4631,8 +4543,7 @@ The third syntax makes the date string fully customizable by using a
 format specified in _str-format_. This allows the day and month names to
 be translated into results appropriate for the current locale:
 
-barry code example
-
+[source,newlisp]
 ---------------------------------------------------------------
 (set-locale "german") → "de_DE"
 
@@ -4771,8 +4682,7 @@ for December 14th, 1901.
 This function is not available on Win32 platforms. The function was
 named `parse-date` in previous versions. The old form is deprecated.
 
-barry code example
-
+[source,newlisp]
 -------------------------------------------------------------------------
 (date-parse "2007.1.3" "%Y.%m.%d")    → 1167782400
 (date-parse "January 10, 07" "%B %d, %y")    → 1168387200
@@ -4802,8 +4712,7 @@ zone.
 In the second syntax, `date-value` returns the time value in seconds for
 the current time.
 
-barry code example
-
+[source,newlisp]
 -------------------------------------------------------------
 (date-value 2002 2 28)       → 1014854400
 (date-value 1970 1 1 0 0 0)  → 0
@@ -4835,8 +4744,7 @@ Calls link:#trace[trace] and begins evaluating the user-defined function
 in _func_. `debug` is a shortcut for executing `(trace true)`, then
 entering the function to be debugged.
 
-barry code example
-
+[source,newlisp]
 --------------------------
 ;; instead of doing
 (trace true)
@@ -4867,8 +4775,7 @@ numbers passed into floating point type.
 _place_ is either a symbol or a place in a list structure holding a
 number, or a number returned by an expression.
 
-barry code example
-
+[source,newlisp]
 --------------------
 (set x 10)    → 10
 (dec x)       → 9
@@ -4928,8 +4835,7 @@ translated into symbol references of the target context.
 
 `def-new` returns the symbol created:
 
-barry code example
-
+[source,newlisp]
 -------------------------------
 > (set 'foo:var '(foo:x foo:y))
 (foo:x foo:y)
@@ -4994,8 +4900,7 @@ syntax: (default _context_)
 
 Return the contents of the default functor in _context_.
 
-barry code example
-
+[source,newlisp]
 ------------------------
 (define Foo:Foo 123)
 
@@ -5037,8 +4942,7 @@ The return value of `define` is the assigned _lambda_ expression. When
 calling a user-defined function, the return value is the last expression
 evaluated in the function body.
 
-barry code example
-
+[source,newlisp]
 -----------------------------------------------------
 (define (area x y) (* x y))  → (lambda (x y) (* x y))
 (area 2 3)                   → 6
@@ -5086,8 +4990,7 @@ environment.
 
 The second version of `define` works like the link:#set[set] function.
 
-barry code example
-
+[source,newlisp]
 -------------------------------------
 (define x 123)  →   123
 ;; is equivalent to
@@ -5124,8 +5027,7 @@ are assigned to the variables in _sym-param-1 ..._. Then the _body_
 expressions are evaluated. When evaluating the `define-macro` function,
 the lambda-macro expression is returned.
 
-barry code example
-
+[source,newlisp]
 -------------------------------------------------
 (define-macro (my-setq p1 p2) (set p1 (eval p2)))
 → (lambda-macro (p1 p2) (set p1 (eval p2)))
@@ -5191,8 +5093,7 @@ link:#default_function[_default function_]. This is the preferred method
 in newLISP to write `define-macro`s.
 * Use link:#args[args] to access arguments passed by the function.
 
-barry code example
-
+[source,newlisp]
 -----------------------------------------------------
 ;; a define-macro as a lexically isolated function
 ;; avoiding variable capture in passed parameters
@@ -5214,8 +5115,7 @@ it is a link:#default_function[_default function_].
 The second possibility is to refer to passed parameters using
 link:#args[args]:
 
-barry code example
-
+[source,newlisp]
 -----------------------------------------------------------
 ;; avoid variable capture in macros using the args function
 
@@ -5250,8 +5150,7 @@ and `true` cannot be deleted.
 `delete` returns `true` if the symbol was deleted successfully or `nil`
 if the symbol was not deleted.
 
-barry code example
-
+[source,newlisp]
 -----------------------------------------------------
 (set 'lst '(a b aVar c d))
 
@@ -5296,8 +5195,7 @@ link:#net-error[net-error] gives more error information.
 
 The file name can be given as a URL.
 
-barry code example
-
+[source,newlisp]
 ---------------------------------------------
 (delete-file "junk")
 
@@ -5330,8 +5228,7 @@ deleted.
 This feature is also available when the link:#delete-file[delete-file]
 function is used and a URL is specified for the filename.
 
-barry code example
-
+[source,newlisp]
 --------------------------------------------------
 (delete-url "http://www.aserver.com/somefile.txt")
 (delete-url "http://site.org:8080/page.html" 5000)
@@ -5367,8 +5264,7 @@ When specifying _int-signal_, `destroy` works like a Unix `kill` command
 sending the specified Unix signal to the process in _int-pid_. This
 second syntax is not available on Win32.
 
-barry code example
-
+[source,newlisp]
 -----------------------------------------------------------
 (set 'pid (process "/usr/bin/bc" bcin bcout))
 (destroy pid)
@@ -5391,8 +5287,7 @@ _float-pivot_. This value substitutes pivot elements in the
 LU-decomposition algorithm, which result in zero when the algorithm
 deals with a singular matrix.
 
-barry code example
-
+[source,newlisp]
 --------------------------------------
 (set 'A '((-1 1 1) (1 4 -5) (1 -2 0)))
 (det A)  → -1
@@ -5429,8 +5324,7 @@ console window and link:#read-line[read-line] accepts input from the
 keyboard. If the current I/O device has been set by opening a file, then
 link:#print[print] and link:#read-line[read-line] work on that file.
 
-barry code example
-
+[source,newlisp]
 ---------------------------------------------------------
 (device (open "myfile" "write"))  → 5
 (print "This goes in myfile")     → "This goes in myfile"
@@ -5453,8 +5347,7 @@ _list-A_, but not in _list-B_. All elements in the resulting list are
 unique, but _list-A_ and _list-B_ need not be unique. Elements in the
 lists can be any type of Lisp expression.
 
-barry code example
-
+[source,newlisp]
 ---------------------------------------------------------
 (difference '(2 5 6 0 3 5 0 2) '(1 2 3 3 2 1))  → (5 6 0)
 ---------------------------------------------------------
@@ -5464,8 +5357,7 @@ specifies `true` or an expression not evaluating to `nil`. In the
 resulting list, all elements of _list-B_ are eliminated in _list-A_, but
 duplicates of other elements in _list-A_ are left.
 
-barry code example
-
+[source,newlisp]
 ------------------------------------------------------------------
 (difference '(2 5 6 0 3 5 0 2) '(1 2 3 3 2 1) true)  → (5 6 0 5 0)
 ------------------------------------------------------------------
@@ -5484,8 +5376,7 @@ A list of directory entry names is returned for the directory path given
 in _str-path_. On failure, `nil` is returned. When _str-path_ is
 omitted, the list of entries in the current directory is returned.
 
-barry code example
-
+[source,newlisp]
 ------------------
 (directory "/bin")
 
@@ -5504,8 +5395,7 @@ in the list of directory entries. In _int-regex-options_, special
 regular expression options can be specified; see link:#regex[regex] for
 details.
 
-barry code example
-
+[source,newlisp]
 --------------------------------------------------------------
 (directory "." "\\.c")  → ("foo.c" "bar.c")
 ;; or using braces as string pattern delimiters
@@ -5547,8 +5437,7 @@ Successively divides _num-1_ by the number in _num-2—_. `div` can
 perform mixed-type arithmetic, but it always returns floating point
 numbers. Any floating point calculation with `NaN` also returns `NaN`.
 
-barry code example
-
+[source,newlisp]
 ----------------------------------------
 (div 10 3)                 → 3.333333333
 (div 120 (sub 9.0 6) 100)  → 0.4
@@ -5577,8 +5466,7 @@ _exp-condition_ is returned.
 
 `do-until` also updates the system iterator symbol `$idx`.
 
-barry code example
-
+[source,newlisp]
 --------------------------
 (set 'x 1)
 (do-until (> x 0) (inc x))
@@ -5611,8 +5499,7 @@ the _body_ expression.
 
 `do-while` also updates the system iterator symbol `$idx`.
 
-barry code example
-
+[source,newlisp]
 ---------------------------
 (set 'x 10)
 (do-while (< x 10) (inc x))
@@ -5645,8 +5532,7 @@ expression always returns the result of the last evaluation.
 
 `doargs` also updates the system iterator symbol `$idx`.
 
-barry code example
-
+[source,newlisp]
 -----------------------------
 (define (foo)
     (doargs (i) (println i)))
@@ -5691,8 +5577,7 @@ _exp-break_. If the break expression evaluates to any non-`nil` value,
 the `dolist` loop returns with the value of _exp-break_. The break
 condition is tested before evaluating _body._
 
-barry code example
-
+[source,newlisp]
 -----------------------------------------------------
 (set 'x 123)
 (dolist (x '(a b c d e f g))  ; prints: abcdefg
@@ -5748,8 +5633,7 @@ _exp-break_. If the break expression evaluates to any non-`nil` value,
 the `dolist` loop returns with the value of _exp-break_. The break
 condition is tested before evaluating _body._
 
-barry code example
-
+[source,newlisp]
 -------------------------------------------------
 ; ASCII example
 (set 'str "abcdefg")
@@ -5804,8 +5688,7 @@ _exp-break_. If the break expression evaluates to any non-`nil` value,
 the `dotimes` loop returns with the value of _exp-break_. The break
 condition is tested before evaluating _body_.
 
-barry code example
-
+[source,newlisp]
 ---------------------------------
 (dotimes (x 10)
   (print x))  → 9  ; return value
@@ -5833,8 +5716,7 @@ symbols created by link:#bayes-train[bayes-train].
 
 `dotree` also updates the system iterator symbol `$idx`.
 
-barry code example
-
+[source,newlisp]
 --------------------------------------------
 ;; faster and less memory overhead
 (dotree (s SomeCTX) (print s " "))
@@ -5857,8 +5739,7 @@ function outputs a listing of all Lisp cells to the console. When _exp_
 is given, it is evaluated and the contents of a Lisp cell are returned
 in a list.
 
-barry code example
-
+[source,newlisp]
 -------------------------------------------------
 (dump 'a)   → (9586996 5 9578692 9578692 9759280)
 
@@ -5905,8 +5786,7 @@ will contain _int-n_ evaluations of _exp_.
 
 Without the repetition parameter, `dup` assumes 2.
 
-barry code example
-
+[source,newlisp]
 ---------------------------------------------
 (dup "A" 6)       → "AAAAAA"
 (dup "A" 6 true)  → ("A" "A" "A" "A" "A" "A")
@@ -5938,8 +5818,7 @@ _exp_ is tested for an empty list (or _str_ for an empty string).
 Depending on whether the argument contains elements, `true` or `nil` is
 returned.
 
-barry code example
-
+[source,newlisp]
 ---------------------------
 (set 'var '())
 (empty? var)         → true
@@ -5965,8 +5844,7 @@ virtually impossible to break, since the encryption seems to contain
 only random data. To retrieve the original, the same function and pad
 are applied again to the encrypted text:
 
-barry code example
-
+[source,newlisp]
 ------------------------------------------------------
 (set 'secret
   (encrypt "A secret message" "my secret key"))
@@ -5997,8 +5875,7 @@ If a regular expression _option_ number is specified, _str-key_ contains
 a regular expression pattern. See link:#regex[regex] for valid numbers
 for _option_.
 
-barry code example
-
+[source,newlisp]
 -------------------------------------------
 (ends-with "newLISP" "LISP")         → true
 (ends-with "newLISP" "lisp")         → nil
@@ -6009,8 +5886,7 @@ barry code example
 In the second syntax, `ends-with` checks if a list ends with the list
 element in _exp_. `true` or `nil` is returned depending on outcome.
 
-barry code example
-
+[source,newlisp]
 ---------------------------------------------
 (ends-with '(1 2 3 4 5) 5)             → true
 (ends-with '(a b c d e) 'b)            → nil
@@ -6033,8 +5909,7 @@ In the first syntax (without arguments), the operating system's
 environment is retrieved as an association list in which each entry is a
 key-value pair of environment variable and value.
 
-barry code example
-
+[source,newlisp]
 ---------------------------------------------------------------
 (env)
 → (("PATH" "/bin:/usr/bin:/sbin") ("TERM" "xterm-color") ... ))
@@ -6044,8 +5919,7 @@ In the second syntax, the name of an environment variable is given in
 _var-str_. `env` returns the value of the variable or `nil` if the
 variable does not exist in the environment.
 
-barry code example
-
+[source,newlisp]
 ----------------------------------------------
 (env "PATH")  → "/bin:/usr/bin:/usr/local/bin"
 ----------------------------------------------
@@ -6056,8 +5930,7 @@ the empty string `""`, then the variable is completely removed from the
 environment except when running on Solaris, where the variable stays
 with an empty string.
 
-barry code example
-
+[source,newlisp]
 ---------------------------------------------
 (env "NEWLISPBIN" "/usr/bin/")  → true
 (env "NEWLISPBIN")              → "/usr/bin/"
@@ -6076,8 +5949,7 @@ function is defined as:
 
 *_erf (x) = 2/sqrt(pi) * integral from 0 to x of exp(-t^2) dt_*
 
-barry code example
-
+[source,newlisp]
 -----------------------------------------------------------------
 (map erf (sequence 0.0 6.0 0.5))
 →
@@ -6098,8 +5970,7 @@ error handler can use the built-in function link:#last-error[last-error]
 to retrieve the number and text of the error. The event handler is
 specified as either a quoted symbol or a lambda function.
 
-barry code example
-
+[source,newlisp]
 --------------------------------------------------------------------
 (define (my-handler)
   (print "error # " (first (last-error)) " has occurred\n") )
@@ -6129,8 +6000,7 @@ syntax: (eval _exp_)
 _eval_ evaluates the result of evaluating _exp_ in the current variable
 environment.
 
-barry code example
-
+[source,newlisp]
 -------------------------------
 (set 'expr '(+ 3 4))  → (+ 3 4)
 (eval expr)           → 7
@@ -6201,8 +6071,7 @@ _exp-error_ will be evaluated and the result returned.
 _int-offset_ specifies an optional offset into _str-source_, where to
 start evaluation.
 
-barry code example
-
+[source,newlisp]
 ---------------------------------------------------------------
 (eval-string "(+ 3 4)")  → 7
 (set 'X 123)             → 123
@@ -6263,8 +6132,7 @@ in standard out (STDOUT)). `exec` returns `nil` if the process could not
 be launched. If the process could be launched but only returns and error
 and no valid output, the empty list will be returned.
 
-barry code example
-
+[source,newlisp]
 ----------------------------------------------------------
 (exec "ls *.c")  → ("newlisp.c" "nl-math.c" "nl-string.c")
 ----------------------------------------------------------
@@ -6277,8 +6145,7 @@ _str-process_, and receives from _str-stdin_ standard input for this
 process. The return value is `true` if the process was successfully
 launched; otherwise it is `nil`.
 
-barry code example
-
+[source,newlisp]
 ----------------------
 (exec "cgiProc" query)
 ----------------------
@@ -6297,8 +6164,7 @@ Successively applies _func-condition_ to the elements of _list_ and
 returns the first element that meets the condition in _func-condition_.
 If no element meets the condition, `nil` is returned.
 
-barry code example
-
+[source,newlisp]
 ---------------------------------------------------------------------
 (exists string? '(2 3 4 6 "hello" 7))       → "hello"
 
@@ -6332,8 +6198,7 @@ link:#daemon[daemon server mode] using `-d` as a command-line option,
 only the network connection is closed, while newLISP stays resident,
 listening for a new connection.
 
-barry code example
-
+[source,newlisp]
 --------
 (exit 5)
 --------
@@ -6348,8 +6213,7 @@ The expression in _num_ is evaluated, and the exponential function is
 calculated based on the result. `exp` is the inverse function of
 link:#log[log].
 
-barry code example
-
+[source,newlisp]
 ----------------------------
 (exp 1)        → 2.718281828
 (exp (log 1))  → 1
@@ -6368,8 +6232,7 @@ _sym-n_) is looked up in a simple or nested expression _exp_. They are
 then expanded to the current binding of the symbol and the expanded
 expression is returned. The original list remains unchanged.
 
-barry code example
-
+[source,newlisp]
 --------------------------------------------------
 (set 'x 2 'a '(d e))
 (set 'foo 'a)
@@ -6416,8 +6279,7 @@ variables:
 If the _bool_ evaluates to `true`, the value parts in the association
 list are evaluated.
 
-barry code example
-
+[source,newlisp]
 -------------------------------------------------------------------
 (expand '(a b c) '((a 1) (b 2)))                → (1 2 c)
 (expand '(a b c) '((a 1) (b 2) (c (x y z))))    → (1 2 (x y z))
@@ -6441,8 +6303,7 @@ context of logic programming. As in the first syntax of `expand`,
 symbols must be preset. Only uppercase variables and those bound to
 anything other than `nil` will be expanded:
 
-barry code example
-
+[source,newlisp]
 -----------------------------------------------
 (set 'A 1 'Bvar 2 'C nil 'd 5 'e 6)
 (expand '(A (Bvar) C d e f))  → (1 (2) C d e f)
@@ -6485,8 +6346,7 @@ in _int-chunk_ to break the string into multi-character chunks. When
 specifying a value for _bool_ other than `nil`, the last chunk will be
 omitted if it does not have the full length specified in _int-chunk_.
 
-barry code example
-
+[source,newlisp]
 ---------------------------------------------------------
 (explode "newLISP")  → ("n" "e" "w" "L" "I" "S" "P")
 
@@ -6530,8 +6390,7 @@ The following shows an example of the last chunk being omitted when the
 value for _bool_ is other than `nil`, and the chunk does not have the
 full length specified in _int-chunk_.
 
-barry code example
-
+[source,newlisp]
 -------------------------------------------------------------------
 (explode '(a b c d e f g h))    → ((a) (b) (c) (d) (e) (f) (g) (h))
 (explode '(a b c d e f g) 2)  → ((a b) (c d) (e f) (g))
@@ -6564,8 +6423,7 @@ The first parameter can be an un-initialized variable.
 
 The extended list or string is returned.
 
-barry code example
-
+[source,newlisp]
 --------------------------------------
 ; extending lists
 
@@ -6601,8 +6459,7 @@ Factors the number in _int_ into its prime components. When floating
 point numbers are passed, they are truncated to their integer part
 first.
 
-barry code example
-
+[source,newlisp]
 ---------------------------------------------------------------
 (factor 123456789123456789)  → (3 3 7 11 13 19 3607 3803 52579)
 
@@ -6642,8 +6499,7 @@ part. If only real numbers are used, the imaginary part is set to `0.0`
 When the imaginary part of a complex number is `0`, simple numbers can
 be used instead.
 
-barry code example
-
+[source,newlisp]
 ------------------------------------------------------
 (ifft (fft '((1 0) (2 0) (3 0) (4 0))))
 → ((1 0) (2 0) (3 0) (4 0))
@@ -6686,8 +6542,7 @@ information about the original file referenced by the link is returned.
 Depending on _bool-flag_ set, the function reports on either the link
 (no flag or `nil` flag) or on the original linked file (`true` flag).
 
-barry code example
-
+[source,newlisp]
 ---------------------------------------------------------
 (file-info ".bashrc")
 → (124 33188 0 500 0 920951022 920951022 920953074)
@@ -6716,8 +6571,7 @@ _str-path-name_ is returned. The existence of a file does not imply
 anything about its read or write permissions. A file may exist while not
 having the permissions to read from or write to it by the current user.
 
-barry code example
-
+[source,newlisp]
 --------------------------------------------------------
 (if (file? "afile") (set 'fileNo (open "afile" "read")))
 
@@ -6736,8 +6590,7 @@ _exp-list_. A list is returned containing the elements for which
 _exp-predicate_ is true. `filter` works like link:#clean[clean], but
 with a negated predicate.
 
-barry code example
-
+[source,newlisp]
 --------------------------------------------------------------
 (filter symbol? '(1 2 d 4 f g 5 h))  → (d f g h)
 
@@ -6787,8 +6640,7 @@ option can be specified with the _int-regex-option_ parameter.
 When using regular expressions or comparison functors the system
 variable `$0` is set to the last element found.
 
-barry code example
-
+[source,newlisp]
 ------------------------------------------------------------
 ; find an expression in a list
 (find '(1 2) '((1 4) 5 6 (1 2) (8 9)))  → 3
@@ -6860,8 +6712,7 @@ integer).
 See link:#regex[regex] for the meaning of the option numbers and more
 information on regular expression searching.
 
-barry code example
-
+[source,newlisp]
 ----------------------------------------------------------
 ; simple string search
 (find "world" "Hello world")  → 6
@@ -6931,8 +6782,7 @@ or regular subexpressions before placing them into the returned list. An
 additional option, _int-option_, specifies special regular expression
 options (see link:#regex[regex] for further details).
 
-barry code example
-
+[source,newlisp]
 -----------------------------------------------------------------
 (find-all {\d+} "lkjhkljh34ghfdhgfd678gfdhfgd9")
 → ("34" "678" "9")
@@ -6963,8 +6813,7 @@ link:#match[match] patterns _list-match-pattern_ in _list-lists_. As in
 `find-all` for strings, an expression can be specified in _exp_ to
 process further the matched sublist:
 
-barry code example
-
+[source,newlisp]
 ----------------------------------------------------------------
 (find-all '(? 2) '((a 1) (b 2) (a 2) (c 4))) → ((b 2) (a 2))
 
@@ -6979,8 +6828,7 @@ In the third syntax, `find-all` can specify a built-in or user-defined
 function used for comparing list elements with the key expression in
 _exp-key_:
 
-barry code example
-
+[source,newlisp]
 -------------------------------------------------------------------------------------
 (find-all 5 '(2 7 4 5 9 2 4 9 7 4 8) $it <) → (7 9 9 7 8)
 
@@ -7010,8 +6858,7 @@ Returns the first element of a list or the first character of a string.
 The operand is not changed. This function is equivalent to _car_ or
 _head_ in other Lisp dialects.
 
-barry code example
-
+[source,newlisp]
 -----------------------------------------------
 (first '(1 2 3 4 5))       → 1
 (first '((a b) c d))       → (a b)
@@ -7028,8 +6875,7 @@ aList                      → (a b c d e)
 In the third syntax, the first character is returned from the string in
 _str_ as a string.
 
-barry code example
-
+[source,newlisp]
 -------------------------------
 (first "newLISP")         → "n"
 (first (rest "newLISP"))  → "e"
@@ -7047,8 +6893,7 @@ syntax: (flat _list_)
 
 Returns a flattened list from a list:
 
-barry code example
-
+[source,newlisp]
 -------------------------------------
 (set 'lst '(a (b (c d))))
 (flat lst)  → (a b c d)
@@ -7077,8 +6922,7 @@ Floats with exponents larger than 1e308 or smaller than -1e308 are
 converted to +INF or -INF, respectively. The display of +INF and -INF
 differs on different platforms and compilers.
 
-barry code example
-
+[source,newlisp]
 ----------------------------------------------
 (float "1.23")       → 1.23
 (float " 1.23")      → 1.23
@@ -7114,8 +6958,7 @@ syntax: (float? _exp_)
 `true` is returned only if _exp_ evaluates to a floating point number;
 otherwise, `nil` is returned.
 
-barry code example
-
+[source,newlisp]
 --------------------
 (set 'num 1.23)
 (float? num)  → true
@@ -7129,8 +6972,7 @@ syntax: (floor _number_)
 
 Returns the next lowest integer below _number_ as a floating point.
 
-barry code example
-
+[source,newlisp]
 ------------------
 (floor -1.5)  → -2
 (floor 3.4)   → 3
@@ -7149,8 +6991,7 @@ function is used when passing 32-bit floats to library routines. newLISP
 floating point numbers are 64-bit and are passed as 64-bit floats when
 calling imported C library routines.
 
-barry code example
-
+[source,newlisp]
 ------------------------------------------------------
 (flt 1.23)  → 1067282596
 
@@ -7180,8 +7021,7 @@ functions can be used as arguments.
 Using an anonymous function eliminates the need to define a new function
 with link:#define[define]. Instead, a function is defined on the fly:
 
-barry code example
-
+[source,newlisp]
 ---------------------------------------------------------------------
 (map (fn (x) (+ x x)) '(1 2 3 4 5)) → (2 4 6 8 10)
 
@@ -7219,8 +7059,7 @@ value if no step size is specified, or as a floating point value when a
 step size is present. After evaluation of the `for` statement _sym_
 assumes its previous value.
 
-barry code example
-
+[source,newlisp]
 ----------------------------------------------
 > (for (x 1 10 2) (println x))
 1
@@ -7260,8 +7099,7 @@ Applies the function in _func-condition_ to all elements in _list_. If
 all elements meet the condition in _func-condition_, the result is
 `true`; otherwise, `nil` is returned.
 
-barry code example
-
+[source,newlisp]
 -----------------------------------------------------
 (for-all number? '(2 3 4 6 7))                 → true
 
@@ -7295,8 +7133,7 @@ based on the `fork()` implementation of the underlying OS.
 A much simpler automated method to launch processes and collect results
 is available with link:#spawn[spawn] and the link:#cilk[Cilk API].
 
-barry code example
-
+[source,newlisp]
 --------------------------------------------------------
 > (set 'x 0)
 0
@@ -7324,8 +7161,7 @@ the parent process.
 The second example illustrates how link:#pipe[pipe] can be used to
 communicate between processes.
 
-barry code example
-
+[source,newlisp]
 -------------------------------------------------------
 #!/usr/bin/newlisp
 
@@ -7494,8 +7330,7 @@ Other text may occur between, before, or after the format specs.
 Note that on Tru64 Unix the format character `i` can be used instead of
 `d`.
 
-barry code example
-
+[source,newlisp]
 --------------------------------------------------------
 (format ">>>%6.2f<<<" 1.2345)     → ">>>  1.23<<<"
 (format ">>>%-6.2f<<<" 1.2345)    → ">>>1.23  <<<"
@@ -7557,8 +7392,7 @@ and a beginning principal value of _num-pv_. If payment is at the end of
 the period, _int-type_ is `0` (zero) or _int-type_ is omitted; for
 payment at the beginning of each period, _int-type_ is 1.
 
-barry code example
-
+[source,newlisp]
 ------------------------------------------------------
 (fv (div 0.07 12) 240 775.30 -100000)  → -0.5544645052
 ------------------------------------------------------
@@ -7579,8 +7413,7 @@ syntax: (gammai _num-a_ _num-b_)
 Calculates the incomplete Gamma function of values _a_ and _b_ in
 _num-a_ and _num-b_, respectively.
 
-barry code example
-
+[source,newlisp]
 ----------------------------
 (gammai 4 5)  → 0.7349740847
 ----------------------------
@@ -7602,8 +7435,7 @@ syntax: (gammaln _num-x_)
 
 Calculates the log Gamma function of the value _x_ in _num-x_.
 
-barry code example
-
+[source,newlisp]
 ------------------------
 (exp (gammaln 6))  → 120
 ------------------------
@@ -7631,8 +7463,7 @@ greatest common divisor for the first two integers in _int-i_ and then
 further reduce the argument list by calculating the greatest common
 divisor of the result and the next argument in the parameter list.
 
-barry code example
-
+[source,newlisp]
 -------------------
 (gcd 0)        → 0
 (gcd 0 0)      → 0
@@ -7654,8 +7485,7 @@ Gets an 8-bit character from an address specified in _int-address_. This
 function is useful when using imported shared library functions with
 link:#import[import].
 
-barry code example
-
+[source,newlisp]
 ---------------------------
 char * foo(void)
         {
@@ -7694,8 +7524,7 @@ This function is helpful when using imported shared library functions
 (with `import`) that return an address pointer to a double float or a
 pointer to a structure containing double floats.
 
-barry code example
-
+[source,newlisp]
 ------------------------------
 double float * foo(void)
         {
@@ -7734,8 +7563,7 @@ function is handy when using imported shared library functions with
 `import`, a function returning an address pointer to an integer, or a
 pointer to a structure containing integers.
 
-barry code example
-
+[source,newlisp]
 -----------------------
 int * foo(void)
         {
@@ -7782,8 +7610,7 @@ function is handy when using `import` to import shared library
 functions, a function returning an address pointer to a long integer, or
 a pointer to a structure containing long integers.
 
-barry code example
-
+[source,newlisp]
 -------------------------
 long long int * foo(void)
         {
@@ -7829,8 +7656,7 @@ Gets a character string from the address specified in _int-address_.
 This function is helpful when using imported shared library functions
 with link:#import[import].
 
-barry code example
-
+[source,newlisp]
 ---------------------------
 char * foo(void)
         {
@@ -7853,8 +7679,7 @@ address as the argument. Because `get-string` always breaks off at the
 first first `\000` (null character) it encounters, it can be used to
 retrieve a string from a buffer:
 
-barry code example
-
+[source,newlisp]
 --------------------------------------------------------
 (set 'buff "ABC\000\000\000DEF")  → "ABC\000\000\000DEF"
 
@@ -7909,8 +7734,7 @@ into an unchunked format.
 
 `get-url` requests are also understood by newLISP server nodes.
 
-barry code example
-
+[source,newlisp]
 ---------------------------------------------------------------
 (get-url "http://www.nuevatec.com")
 (get-url "http://www.nuevatec.com" 3000)
@@ -7998,8 +7822,7 @@ accessible from contexts other than MAIN. The statement has to be
 executed in the MAIN context, and only symbols belonging to MAIN can be
 made global. `global` returns the last symbol made global.
 
-barry code example
-
+[source,newlisp]
 ----------------------------
 (global 'aVar 'x 'y 'z)  → z
 
@@ -8023,8 +7846,7 @@ Checks if symbol in _sym_ is global. Built-in functions, context
 symbols, and all symbols made global using the function
 link:#global[global] are global:
 
-barry code example
-
+[source,newlisp]
 ------------------------
 global? 'print)   → true
 (global 'var)     → var
@@ -8047,8 +7869,7 @@ result of evaluating _exp-1_ is returned; otherwise, the value of
 _exp-2_ is returned. If _exp-2_ is absent, the value of _exp-condition_
 is returned.
 
-barry code example
-
+[source,newlisp]
 ---------------------------------------
 (set 'x 50)                   → 50
 (if (< x 100) "small" "big")  → "small"
@@ -8061,8 +7882,7 @@ The second form of `if` works similarly to link:#cond[cond], except it
 does not take parentheses around the condition-body pair of expressions.
 In this form, `if` can have an unlimited number of arguments.
 
-barry code example
-
+[source,newlisp]
 ----------------------------
 (define (classify x)
     (if
@@ -8103,8 +7923,7 @@ an integer power of 2, `ifft` increases the number of elements by
 padding the list with zeroes. When complex numbers are `0` in the
 imaginary part, simple numbers can be used.
 
-barry code example
-
+[source,newlisp]
 ---------------------------------------------------
 (ifft (fft '((1 0) (2 0) (3 0) (4 0))))
 → ((1 0) (2 0) (3 0) (4 0))
@@ -8179,8 +7998,7 @@ with 32-bit versions of newLISP and libraries. To use floating point
 numbers in a 64-bit environment use the link:#extended_import[extended
 `import` syntax].
 
-barry code example
-
+[source,newlisp]
 ------------------------------------------------------
 ;; define LIBC platform independent
 
@@ -8402,8 +8220,7 @@ converts integer numbers passed into floating point type.
 _place_ is either a symbol or a place in a list structure holding a
 number, or a number returned by an expression.
 
-barry code example
-
+[source,newlisp]
 --------------------
 (set 'x 0)    → 0
 (inc x)       → 1
@@ -8452,8 +8269,7 @@ Applies the predicate _exp-predicate_ to each element of the list
 _exp-list_ and returns a list containing the indices of the elements for
 which _exp-predicate_ is true.
 
-barry code example
-
+[source,newlisp]
 -------------------------------------------------
 (index symbol? '(1 2 d 4 f g 5 h))  → (2 4 5 7)
 
@@ -8478,8 +8294,7 @@ syntax: (inf? _float_)
 If the value in _float_ is infinite the function returns `true` else
 `nil`.
 
-barry code example
-
+[source,newlisp]
 -----------------------
 (inf? (div 1 0)) → true
 
@@ -8518,8 +8333,7 @@ point values larger or smaller than the integer maximum or minimum are
 also truncated. A floating point expression evaluating to `NaN` is
 converted to `0` (zero).
 
-barry code example
-
+[source,newlisp]
 ---------------------------------------------
 (int "123")          → 123
 (int " 123")         → 123
@@ -8563,8 +8377,7 @@ syntax: (integer? _exp_)
 Returns `true` only if the value of _exp_ is an integer; otherwise, it
 returns `nil`.
 
-barry code example
-
+[source,newlisp]
 ----------------------
 (set 'num 123)  → 123
 (integer? num)  → true
@@ -8580,8 +8393,7 @@ syntax: (intersect _list-A_ _list-B_) +
 In the first syntax, `intersect` returns a list containing one copy of
 each element found both in _list-A_ and _list-B_.
 
-barry code example
-
+[source,newlisp]
 -------------------------------------------
 (intersect '(3 0 1 3 2 3 4 2 1) '(1 4 2 5))
 → (2 4 1)
@@ -8592,8 +8404,7 @@ _list-A_ that are also in _list-B_, without eliminating duplicates in
 _list-A_. _bool_ is an expression evaluating to `true` or any other
 value not `nil`.
 
-barry code example
-
+[source,newlisp]
 ------------------------------------------------
 (intersect '(3 0 1 3 2 3 4 2 1) '(1 4 2 5) true)
 → (1 2 4 2 1)
@@ -8624,8 +8435,7 @@ number of elements in the first row. For missing elements in
 non-rectangular matrices, `0.0` (zero) is assumed. A matrix can either
 be a nested list or an link:#array[array].
 
-barry code example
-
+[source,newlisp]
 --------------------------------------------------------------------
 (set 'A '((-1 1 1) (1 4 -5) (1 -2 0)))
 (invert A)  → ((10 2 9) (5 1 4) (6 1 5))
@@ -8668,8 +8478,7 @@ converge after 50 iterations.
 
 _irr_ is often used to decide between different types of investments.
 
-barry code example
-
+[source,newlisp]
 -------------------------------------------------
 (irr '(-1000 500 400 300 200 100))
 → 0.2027
@@ -8711,8 +8520,7 @@ _str-joint_ is present, it is inserted between each string in the join.
 If _bool-trail-joint_ is `true` then a joint string is also appended to
 the last string.
 
-barry code example
-
+[source,newlisp]
 ---------------------------------------------------------
 (set 'lst '("this" "is" "a" "sentence"))
 
@@ -8750,8 +8558,7 @@ syntax: (lambda? _exp_)
 Returns `true` only if the value of _exp_ is a lambda expression;
 otherwise, returns `nil`.
 
-barry code example
-
+[source,newlisp]
 --------------------------------------------------
 (define (square x) (* x x)) → (lambda (x) (* x x))
 
@@ -8773,8 +8580,7 @@ syntax: (last _list_) +
 
 Returns the last element of a list or a string.
 
-barry code example
-
+[source,newlisp]
 -----------------------------------------
 (last '(1 2 3 4 5))  → 5
 (last '(a b (c d)))  → (c d)
@@ -8789,8 +8595,7 @@ barry code example
 In the second version the last character in the string _str_ is returned
 as a string.
 
-barry code example
-
+[source,newlisp]
 -----------------------
 (last "newLISP")  → "P"
 -----------------------
@@ -8816,8 +8621,7 @@ returned.
 When _int-error_ is specified, a list of the number and the error text
 is returned.
 
-barry code example
-
+[source,newlisp]
 ---------------------------------------------------
 (last-error)  → nil
 
@@ -8854,8 +8658,7 @@ containing spaces, quotes, or other characters not normally allowed).
 Non-legal symbols are created frequently when using them for associative
 data access:
 
-barry code example
-
+[source,newlisp]
 ----------------------------------------------------
 (symbol? (sym "one two"))  → true
 
@@ -8884,8 +8687,7 @@ Applied to a number, `length` returns the number of bytes needed in
 memory to store that number: 4 or 8 for integers and 8 for floating
 point numbers.
 
-barry code example
-
+[source,newlisp]
 ----------------------------------------------------
 (length '(a b (c d) e))         → 4
 (length '())                    → 0
@@ -8932,8 +8734,7 @@ complex expressions by defining local variables close to the place where
 they are used. The second form omits the parentheses around the variable
 expression pairs but functions identically.
 
-barry code example
-
+[source,newlisp]
 ---------------------------------------------------
 (define (sum-sq a b)
     (let ((x (* a a)) (y (* b b)))
@@ -8973,8 +8774,7 @@ if missing.
 Both forms provide the same functionality, but in the second form the
 parentheses around the initializers can be omitted:
 
-barry code example
-
+[source,newlisp]
 ---------------------------------------------------
 (letex (x 1 y 2 z 3) '(x y z))    → (1 2 3)
 
@@ -9019,8 +8819,7 @@ fully parenthesized first syntax, initializers are optional and assumed
 The following comparison of link:#let[let] and `letn` show the
 difference:
 
-barry code example
-
+[source,newlisp]
 ------------------------------
 (set 'x 10)
 (let ((x 1) (y (+ x 1)))
@@ -9058,8 +8857,7 @@ syntax: (list _exp-1_ [_exp-2_ ... ])
 The _exp_ are evaluated and the values used to construct a new list.
 Note that arguments of array type are converted to lists.
 
-barry code example
-
+[source,newlisp]
 --------------------------------------------------
 (list 1 2 3 4 5)                → (1 2 3 4 5)
 (list 'a '(b c) (+ 3 4) '() '*) → (a (b c) 7 () *)
@@ -9078,8 +8876,7 @@ Returns `true` only if the value of _exp_ is a list; otherwise returns
 `nil`. Note that lambda and lambda-macro expressions are also recognized
 as special instances of a list expression.
 
-barry code example
-
+[source,newlisp]
 ------------------------------------
 (set 'var '(1 2 3 4))    → (1 2 3 4)
 (list? var)              → true
@@ -9110,8 +8907,7 @@ link:#context[context] switches will be loaded into the `MAIN` context.
 The _str-file-name_ specs can contain URLs. Both `http://` and
 ` file://` URLs are supported.
 
-barry code example
-
+[source,newlisp]
 --------------------------------------------------------
 (load "myfile.lsp")
 
@@ -9157,8 +8953,7 @@ syntax: (log _num_) +
 In the first syntax, the expression in _num_ is evaluated and the
 natural logarithmic function is calculated from the result.
 
-barry code example
-
+[source,newlisp]
 -------------------
 (log 1)         → 0
 (log (exp 1))   → 1
@@ -9166,8 +8961,7 @@ barry code example
 
 In the second syntax, an arbitrary base can be specified in _num-base_.
 
-barry code example
-
+[source,newlisp]
 -----------------------------
 (log 1024 2)             → 10
 (log (exp 1) (exp 1))    →  1
@@ -9195,8 +8989,7 @@ See also link:#indexing[Indexing elements of strings and lists].
 `lookup` is similar to link:#assoc[assoc] but goes one step further by
 extracting a specific element found in the list.
 
-barry code example
-
+[source,newlisp]
 -------------------------------------------------------
 (set 'params '(
     (name "John Doe")
@@ -9235,8 +9028,7 @@ syntax: (lower-case _str_)
 Converts the characters of the string in _str_ to lowercase. A new
 string is created, and the original is left unaltered.
 
-barry code example
-
+[source,newlisp]
 -------------------------------------------
 (lower-case "HELLO WORLD")  → "hello world"
 (set 'Str "ABC")
@@ -9256,8 +9048,7 @@ syntax: (macro? _exp_)
 returns `true` if _exp_ evaluates to a lambda-macro expression;
 otherwise, `nil` is returned.
 
-barry code example
-
+[source,newlisp]
 ------------------------------------------------
 (define-macro (mysetq lv rv) (set lv (eval rv)))
 
@@ -9274,8 +9065,7 @@ syntax: (main-args) +
 `main-args` returns a list with several string members, one for program
 invocation and one for each of the command-line arguments.
 
-barry code example
-
+[source,newlisp]
 --------------------------------
 newlisp 1 2 3
 
@@ -9343,8 +9133,7 @@ retrieved on Unix systems using the command `umask` and is usually
 `0022` (octal), which masks write (and creation) permission for
 non-owners of the file.
 
-barry code example
-
+[source,newlisp]
 ----------------------------------------------------
 ;; 0 (zero) in front of 750 makes it an octal number
 
@@ -9364,8 +9153,7 @@ Successively applies the primitive function, defined function, or lambda
 expression _exp-functor_ to the arguments specified in _list-args-1,
 list-args-2—_, returning all results in a list.
 
-barry code example
-
+[source,newlisp]
 -------------------------------------------------------------
 (map + '(1 2 3) '(50 60 70))  → (51 62 73)
 
@@ -9452,8 +9240,7 @@ data objects. This makes matrix operations in newLISP as fast as those
 coded directly in C. The same is true for the matrix operations
 link:#multiply[multiply] and link:#invert[invert].
 
-barry code example
-
+[source,newlisp]
 -------------------------------------
 (set 'A '((1 2 3) (4 5 6)))
 (set 'B A)
@@ -9511,8 +9298,7 @@ link:#find[find], link:#ref[ref], link:#ref-all[ref-all] and
 link:#replace[replace] and is internally used by
 link:#find-all[find-all] for lists.
 
-barry code example
-
+[source,newlisp]
 --------------------------------------------------------
 (match '(a ? c) '(a b c))  → (b)
 
@@ -9573,8 +9359,7 @@ syntax: (max _num-1_ [_num-2_ ... ])
 
 Evaluates the expressions _num-1_— and returns the largest number.
 
-barry code example
-
+[source,newlisp]
 ---------------------------
 (max 4 6 2 3.54 7.1)  → 7.1
 ---------------------------
@@ -9594,8 +9379,7 @@ the element found and the rest of the original list is constructed and
 returned. If nothing is found, `nil` is returned. When specifying
 _num-option_, `member` performs a regular expression search.
 
-barry code example
-
+[source,newlisp]
 ----------------------------------------------------
 (set 'aList '(a b c d e f g h))  → (a b c d e f g h)
 (member 'd aList)                → (d e f g h)
@@ -9606,8 +9390,7 @@ In the second syntax, `member` searches for _str-key_ in _str_. If
 _str-key_ is found, all of _str_ (starting with _str-key_) is returned.
 `nil` is returned if nothing is found.
 
-barry code example
-
+[source,newlisp]
 --------------------------------------
 (member "LISP" "newLISP")  → "LISP"
 (member "LI" "newLISP")    → "LISP"
@@ -9626,8 +9409,7 @@ syntax: (min _num-1_ [_num-2_ ... ])
 
 Evaluates the expressions _num-1_— and returns the smallest number.
 
-barry code example
-
+[source,newlisp]
 -------------------------
 (min 4 6 2 3.54 7.1)  → 2
 -------------------------
@@ -9652,8 +9434,7 @@ is less than the magnitude of the denominator.
 In the second syntax `1` is assumed for _num-2_ and the result is the
 fractional part of _num-1_.
 
-barry code example
-
+[source,newlisp]
 -----------------------
 (mod 10.5 3.3)   →  0.6
 (mod -10.5 3.3)  → -0.6
@@ -9674,8 +9455,7 @@ product. `mul` can perform mixed-type arithmetic, but it always returns
 floating point numbers. Any floating point calculation with `NaN` also
 returns `NaN`.
 
-barry code example
-
+[source,newlisp]
 ---------------------------
 (mul 1 2 3 4 5 1.1)  → 132
 (mul 0.5 0.5)        → 0.25
@@ -9699,8 +9479,7 @@ number of elements in the first row. For missing elements in
 non-rectangular matrices, `0.0` is assumed. A matrix can either be a
 nested list or link:#array[array].
 
-barry code example
-
+[source,newlisp]
 -------------------------------------------------
 (set 'A '((1 2 3) (4 5 6)))
 (set 'B '((1 2) (1 2) (1 2)))
@@ -9734,8 +9513,7 @@ Tests if the result of a floating point math operation is a `NaN`.
 Certain floating point operations return a special IEEE 754 number
 format called a `NaN` for 'Not a Number'.
 
-barry code example
-
+[source,newlisp]
 -------------------------------------------
 ; floating point operation on NaN yield NaN
 (set 'x (sqrt -1))  → NaN
@@ -9775,8 +9553,7 @@ Accepts a connection on a socket previously put into listening mode.
 Returns a newly created socket handle for receiving and sending data on
 this connection.
 
-barry code example
-
+[source,newlisp]
 -------------------------------
 (set 'socket (net-listen 1234))
 (net-accept socket)
@@ -9798,8 +9575,7 @@ Closes a network socket in _int-socket_ that was previously created by a
 link:#net-connect[net-connect] or link:#net-accept[net-accept] function.
 Returns `true` on success and `nil` on failure.
 
-barry code example
-
+[source,newlisp]
 -----------------
 (net-close aSock)
 -----------------
@@ -9820,8 +9596,7 @@ In the first syntax, connects to a remote host computer specified in
 _str-remote-host_ and a port specified in _int-port_. Returns a socket
 handle after having connected successfully; otherwise, returns `nil`.
 
-barry code example
-
+[source,newlisp]
 --------------------------------------------
 (set 'socket (net-connect "example.com" 80))
 (net-send socket "GET /\r\n\r\n")
@@ -9842,8 +9617,7 @@ seconds for an open port. With a timeout value the function can be made
 to return on an unavailable port much earlier or later. The following
 example shows a port scanner looking for open ports:
 
-barry code example
-
+[source,newlisp]
 -------------------------------------------------------------------------
 (set 'host (main-args 2))
 (println "Scanning: " host)
@@ -9917,8 +9691,7 @@ actually establish a connection to the target multicast address but only
 puts the socket into UDP multicasting mode. On the receiving side, use
 link:#net-listen[net-listen] together with the UDP multicast option.
 
-barry code example
-
+[source,newlisp]
 -------------------------------------------
 ;; example client I
 (net-connect "" 4096 "multi")  → 3
@@ -9953,8 +9726,7 @@ Specifying the string `"broadcast"` or `"b"` in the third parameter,
 _str-mode_, causes UDP broadcast communications to be set up. In this
 case, the broadcast address ending in 255 is used.
 
-barry code example
-
+[source,newlisp]
 ---------------------------------------------------
 ;; example client
 (net-connect "192.168.2.255" 3000 "broadcast")  → 3
@@ -9989,8 +9761,7 @@ file system via a _local domain Unix socket_ named using
 _str-file-path_. Returns a socket handle after having connected
 successfully; otherwise, returns `nil`.
 
-barry code example
-
+[source,newlisp]
 ----------------------------------
 (net-connect "/tmp/mysocket")  → 3
 
@@ -10065,8 +9836,7 @@ The following messages are returned:
 |26 |HTTP error in chunked format
 |=====================================
 
-barry code example
-
+[source,newlisp]
 -------------------------------------------------
 (net-error) → nil
 
@@ -10137,8 +9907,7 @@ will wait up to 60 seconds for a response after a connection is made.
 Otherwise, if the timeout in milliseconds has expired, `nil` is
 returned; else, the evaluation result of _exp_ is returned.
 
-barry code example
-
+[source,newlisp]
 -------------------------------------------------------------------------------
 ; the code to be evaluated is given in a quoted expression
 (net-eval "192.168.1.94" 4711 '(+ 3 4))       → 7
@@ -10169,8 +9938,7 @@ nodes are returned as a list of error numbers and descriptive error
 strings. See the function link:#net-error[net-error] for a list of
 potential error messages.
 
-barry code example
-
+[source,newlisp]
 ------------------------------------------------------
 ; two different remote nodes different IPs
 (net-eval '(
@@ -10224,8 +9992,7 @@ Optionally, a handler function can be specified. This function will be
 repeatedly called while waiting and once for every remote evaluation
 completion.
 
-barry code example
-
+[source,newlisp]
 ---------------------------------------------------------------------------
 (define (myhandler param)
     (if param
@@ -10299,8 +10066,7 @@ single network interface installed.
 On error the function returns `nil` and link:#net-error[net-error] can
 be used to report the error.
 
-barry code example
-
+[source,newlisp]
 ------------------------------------------------
 (net-interface "192.168.1.95")  → "192.168.1.95"
 (net-interface "localhost")     → "127.0.0.1"
@@ -10320,8 +10086,7 @@ Switches between IPv4 and IPv6 internet protocol versions. _int-version_
 contains either a 4 for IPv4 or a 6 for IPv6. When no parameter is
 given, `net-ipv` returns the current setting.
 
-barry code example
-
+[source,newlisp]
 ------------------
 (net-ipv)      → 4
 (net-ipv 6)    → 6
@@ -10359,8 +10124,7 @@ As soon as a connection is accepted, link:#net-accept[net-accept]
 returns a socket number that can be used to communicate with the
 connecting client.
 
-barry code example
-
+[source,newlisp]
 --------------------------------------------------
 (set 'port 1234)
 (set 'listen (net-listen port))
@@ -10400,8 +10164,7 @@ _str-file-path_. If successful, returns a socket handle that can be used
 with link:#net-accept[net-accept] to accept a client connection;
 otherwise, returns `nil`.
 
-barry code example
-
+[source,newlisp]
 ---------------------------------
 (net-listen "/tmp/mysocket")  → 5
 
@@ -10484,8 +10247,7 @@ _str-ip-addr_ as an address on which to receive multicast transmissions.
 This address should not be confused with the IP address of the server
 host.
 
-barry code example
-
+[source,newlisp]
 -------------------------------------------
 ;; example client
 
@@ -10560,8 +10322,7 @@ syntax: (net-local _int-socket_)
 Returns the IP number and port of the local computer for a connection on
 a specific _int-socket_.
 
-barry code example
-
+[source,newlisp]
 -----------------------------------------
 (net-local 16)  → ("204.179.131.73" 1689)
 -----------------------------------------
@@ -10579,8 +10340,7 @@ syntax: (net-lookup _str-ip-number_) +
 Returns either a hostname string from _str-ip-number_ in IP dot format
 or the IP number in dot format from _str-hostname_:
 
-barry code example
-
+[source,newlisp]
 -----------------------------------------------------
 (net-lookup "209.24.120.224")    → "www.nuevatec.com"
 (net-lookup "www.nuevatec.com")  → "209.24.120.224"
@@ -10622,8 +10382,7 @@ following UDP header has a length of 8 bytes and is followed by the data
 string `Hello World`. The checksum bytes in both headers are left as
 `0x00 0x00` and will be recalculated internally.
 
-barry code example
-
+[source,newlisp]
 -----------------------------------------------------------------------------------
 ; packet as generated by: (net-send-udp "192.168.1.92" 12345 "Hello World")
 
@@ -10656,8 +10415,7 @@ Returns the number of bytes ready for reading on the network socket
 _int-socket_. If an error occurs or the connection is closed, `nil` is
 returned.
 
-barry code example
-
+[source,newlisp]
 --------------------------------------------
 (set 'aSock (net-connect "aserver.com" 123))
 
@@ -10681,8 +10439,7 @@ syntax: (net-peer _int-socket_)
 Returns the IP number and port number of the remote computer for a
 connection on _int-socket_.
 
-barry code example
-
+[source,newlisp]
 --------------------------------------
 (net-peer 16)  → ("192.100.81.100" 13)
 --------------------------------------
@@ -10730,8 +10487,7 @@ sudo newlisp
 Alternatively, newLISP can be installed with the set-user-ID bit set to
 run in superuser mode.
 
-barry code example
-
+[source,newlisp]
 ---------------------------------------------------------
 (net-ping "newlisp.org")     → (("66.235.209.72" 634080))
 (net-ping "127.0.0.1")       → (("127.0.0.1" 115))
@@ -10758,8 +10514,7 @@ As third optional parameter, a `true` value can be specified. This
 setting will return an error string instead of the response time, if the
 host does not answer.
 
-barry code example
-
+[source,newlisp]
 -------------------------------------------------------------------------------------
 (net-ping '("newlisp.org" "192.168.1.255") 2000 20)
 → (("66.235.209.72" 826420) ("192.168.1.1" 124) ("192.168.1.254" 210))
@@ -10833,8 +10588,7 @@ Optionally, a _wait-string_ can be specified as a fourth parameter.
 matching _wait-string_ is received. The _wait-string_ will be part of
 the data contained in _sym-buffer_.
 
-barry code example
-
+[source,newlisp]
 ---------------------------------
 (define (gettime)
     (net-connect "netcom.com" 13)
@@ -10883,8 +10637,7 @@ socket.
 On success `net-receive` returns a list of the data string, remote IP
 number and remote port used. On failure it returns `nil`.
 
-barry code example
-
+[source,newlisp]
 --------------------------------------------------------------
 ;; listen on port 1001 on the default address
 (net-listen 1001 "" "udp")  → 1980
@@ -10940,8 +10693,7 @@ No previous setup using `net-listen` or `net-connect` is necessary.
 followed by a string containing the sender's IP number and the port
 used.
 
-barry code example
-
+[source,newlisp]
 ------------------------------------------------------------
 ;; wait for datagram with maximum 20 bytes
 (net-receive-udp 10001 20)
@@ -11009,8 +10761,7 @@ other portions of the program can run. On error,
 link:#net-error[net-error] is set. When `-1` is specified for
 _int-micro-seconds_, `net-select` will never time out.
 
-barry code example
-
+[source,newlisp]
 ---------------------------------------------------
 (set 'listen-socket (net-listen 1001))
 
@@ -11034,8 +10785,7 @@ of sockets, `net-select` will return a list of ready sockets. The
 following example would listen on two sockets and continue accepting and
 servicing connections:
 
-barry code example
-
+[source,newlisp]
 -----------------------------------------------------------
 (set 'listen-list '(1001 1002))
 
@@ -11074,8 +10824,7 @@ sent. `net-send` returns the number of bytes sent or `nil` on failure.
 On failure, use link:#net-error[net-error] to get more error
 information.
 
-barry code example
-
+[source,newlisp]
 ------------------------------
 (set 'buf "hello there")
 
@@ -11107,8 +10856,7 @@ When using `net-connect` together with `net-send-to`, then only one of
 the functions should specify the remote host. The other should leave the
 address as an empty string.
 
-barry code example
-
+[source,newlisp]
 ------------------------------------------------------
 ;;;;;;;;;;;;;;;;;; UDP server
 (set 'socket (net-listen 10001 "" "udp"))
@@ -11165,8 +10913,7 @@ between sender and receiver is recommended for ensuring delivery. UDP
 communication by itself does not guarantee reliable delivery as TCP/IP
 does.
 
-barry code example
-
+[source,newlisp]
 -----------------------------------------------
 (net-send-udp "somehost.com" 3333 "Hello")  → 5
 -----------------------------------------------
@@ -11206,8 +10953,7 @@ the service name.
 
 Returns `nil` on failure.
 
-barry code example
-
+[source,newlisp]
 -------------------------------------------------------
 ; get the port number from the name
 (net-service "ftp" "tcp")       → 21
@@ -11250,8 +10996,7 @@ to references in the target context. This way, all functions and data
 structures referring to symbols in the original context will now refer
 to symbols in the target context.
 
-barry code example
-
+[source,newlisp]
 --------------------------------------
 (new CTX 'CTX-2)  → CTX-2
 
@@ -11271,8 +11016,7 @@ already exists, the quote before the context symbol can be omitted.
 Context symbols need not be mentioned explicitly, but they can be
 contained in variables:
 
-barry code example
-
+[source,newlisp]
 ---------------------------------------
 (set 'foo:x 123)
 (set 'bar:y 999)
@@ -11303,8 +11047,7 @@ syntax: (nil? _exp_)
 If the expression in _exp_ evaluates to `nil`, then `nil?` returns
 `true`; otherwise, it returns `nil`.
 
-barry code example
-
+[source,newlisp]
 ----------------------------------
 (map nil? '(x nil  1 nil "hi" ()))
 → (nil true nil true nil nil)
@@ -11335,8 +11078,7 @@ _float-mean_ and a standard deviation of _float-stdev_. The random
 generator used internally can be seeded using the link:#seed[seed]
 function.
 
-barry code example
-
+[source,newlisp]
 -------------------------------------------------------
 (normal 10 3 10)
 → (7 6.563476562 11.93945312 6.153320312 9.98828125
@@ -11364,8 +11106,7 @@ syntax: (not _exp_)
 If _exp_ evaluates to `nil` or the empty list `()`, then `true` is
 returned; otherwise, `nil` is returned.
 
-barry code example
-
+[source,newlisp]
 ----------------------------
 (not true)            → nil
 (not nil)             → true
@@ -11388,8 +11129,7 @@ backward in time, before being split into separate date values.
 An optional list-index in _int-index_ makes `now` return a specific
 member in the result list.
 
-barry code example
-
+[source,newlisp]
 -----------------------------------------------------
 (now)       → (2002 2 27 18 21 30 140000 57 3 -300 0)
 (now 0 -2)  → -300 ; minutes west of GMT
@@ -11471,8 +11211,7 @@ If payment is at the end of the period, _int-type_ is `0` (zero) or
 _int-type_ is omitted; for payment at the beginning of each period,
 _int-type_ is 1.
 
-barry code example
-
+[source,newlisp]
 --------------------------------------------------
 (nper (div 0.07 12) 775.30 -100000)  → 239.9992828
 --------------------------------------------------
@@ -11496,8 +11235,7 @@ _list-values_. Payments are represented by negative values in
 _list-values_, while income is represented by positive values in
 _list-values_.
 
-barry code example
-
+[source,newlisp]
 ----------------------------------------
 (npv 0.1 '(1000 1000 1000))
 → 2486.851991
@@ -11531,8 +11269,7 @@ nested lists or arrays. If there are more indices than nesting levels,
 the extra indices are ignored. When multiple indices are used, they must
 be put in a list as shown in the second syntax group.
 
-barry code example
-
+[source,newlisp]
 --------------------------------------------------------
 (set 'L '(a b c))
 (nth 0 L)    → a
@@ -11604,8 +11341,7 @@ explicit `nth` may be more readable in some situations.
 
 `nth` works on link:#array[arrays] just like it does on lists:
 
-barry code example
-
+[source,newlisp]
 ----------------------------------------
 (set 'aArray (array 2 3 '(a b c d e f)))
 → ((a b c) (d e f))
@@ -11623,8 +11359,7 @@ barry code example
 In the String version, `nth` returns the character found at the position
 _int-index_ in _str_ and returns it as a string.
 
-barry code example
-
+[source,newlisp]
 --------------------------
 (nth  0 "newLISP")   → "n"
 
@@ -11653,8 +11388,7 @@ returns `true`. In all other cases, `null?` returns `nil`. The predicate
 `null?` is useful in conjunction with the functions link:#filter[filter]
 or link:#clean[clean] to check the outcome of other newLISP operations.
 
-barry code example
-
+[source,newlisp]
 ----------------------------------------------------------
 (set 'x (sqrt -1)) → NaN ; or nan on UNIX
 (null? x) → true
@@ -11681,8 +11415,7 @@ syntax: (number? _exp_)
 `true` is returned only if _exp_ evaluates to a floating point number or
 an integer; otherwise, `nil` is returned.
 
-barry code example
-
+[source,newlisp]
 -----------------------
 (set 'x 1.23)
 (set 'y 456)
@@ -11733,8 +11466,7 @@ The following strings are legal access modes:
  `"update"` or `"u"` for read/write access +
  `"append"` or `"a"` for append read/write access +
 
-barry code example
-
+[source,newlisp]
 -------------------------------------------
 (device (open "newfile.data" "write"))  → 5
 (print "hello world\n")  → "hello world"
@@ -11762,8 +11494,7 @@ required to perform I/O on named pipes.
 To create a named pipe in newLISP, use the link:#exec[exec] or
 link:#import[import] function:
 
-barry code example
-
+[source,newlisp]
 ----------------------------------
 (exec "mkfifo myfifo")
 
@@ -11786,8 +11517,7 @@ Evaluates expressions _exp-x_ from left to right until finding a result
 that does not evaluate to `nil` or the empty list `()`. The result is
 the return value of the `or` expression.
 
-barry code example
-
+[source,newlisp]
 ------------------------------------------
 (set 'x 10)
 (or (> x 100) (= x 10))          → true
@@ -11806,8 +11536,7 @@ syntax: ostype
 `ostype` is a built-in system constant containing the name of the
 operating system newLISP is running on.
 
-barry code example
-
+[source,newlisp]
 -----------------
 ostype  → "Win32"
 -----------------
@@ -11884,8 +11613,7 @@ The following characters are used in _str-format_:
 `d`, `ld`, or `lu` formats. It will also convert integers into floats
 when passing them to `f` and `lf` formats.
 
-barry code example
-
+[source,newlisp]
 ---------------------------------------------------------
 (pack "c c c" 65 66 67)  → "ABC"
 (unpack "c c c" "ABC")   → (65 66 67)
@@ -11978,8 +11706,7 @@ is specified, there is no limitation on the length of tokens. A
 different algorithm is used that splits the source string _str-data_ at
 the string in _str-break_.
 
-barry code example
-
+[source,newlisp]
 -------------------------------------------------------------
 (parse "hello how are you")     → ("hello" "how" "are" "you")
 
@@ -12032,8 +11759,7 @@ otherwise, it returns `nil` if the file descriptor is invalid. `peek`
 can also be used to check `stdin`. This function is only available on
 Unix-like operating systems.
 
-barry code example
-
+[source,newlisp]
 -------------------------------------------
 (peek 0)  ; check # of bytes ready on stdin
 -------------------------------------------
@@ -12053,8 +11779,7 @@ syntax: (pipe)
 Creates an inter-process communications pipe and returns the `read` and
 `write` handles to it within a list.
 
-barry code example
-
+[source,newlisp]
 --------------------------------------------
 (pipe)  → (3 4)  ; 3 for read, 4 for writing
 --------------------------------------------
@@ -12087,8 +11812,7 @@ _num-future-value_ is the value of the loan at the end (typically
 or _int-type_ is omitted; for payment at the beginning of each period,
 _int-type_ is 1.
 
-barry code example
-
+[source,newlisp]
 ----------------------------------------------
 (pmt (div 0.07 12) 240 100000)  → -775.2989356
 ----------------------------------------------
@@ -12124,8 +11848,7 @@ link:#ref-all[ref-all], which return lists of indices.
 `pop` changes the contents of the target list. The popped element is
 returned.
 
-barry code example
-
+[source,newlisp]
 ------------------------------------------
 (set 'pList '((f g) a b c "hello" d e 10))
 
@@ -12163,8 +11886,7 @@ pList
 
 `pop` can also be used on strings with one index:
 
-barry code example
-
+[source,newlisp]
 ------------------------
 ;; use pop on strings
 
@@ -12198,8 +11920,7 @@ syntax: (pop-assoc _exp-key_ _list-assoc_) +
 Removes an association referred to by the key in _exp-key_ from the
 association list in _list-assoc_ and returns the popped expression.
 
-barry code example
-
+[source,newlisp]
 --------------------------------------
 ;; simple associations
 
@@ -12247,8 +11968,7 @@ which is specified in milliseconds. When no response from the host is
 received before the timeout has expired, the string `ERR: timeout` is
 returned.
 
-barry code example
-
+[source,newlisp]
 ---------------------------------------------------
 ;; specify content type
 (post-url "http://somesite.com/form.pl"
@@ -12293,8 +12013,7 @@ syntax: (pow _num-1_ _num-2_ [_num-3_ ... ]) +
 
 Calculates _num-1_ to the power of _num-2_ and so forth.
 
-barry code example
-
+[source,newlisp]
 ------------------------
 (pow 100 2)      → 10000
 (pow 100 0.5)    → 10
@@ -12313,8 +12032,7 @@ syntax: (prefix _sym_)
 
 Returns the context of a symbol in _sym_:
 
-barry code example
-
+[source,newlisp]
 -------------------------------------------------
 (setf s 'Foo:bar)      → Foo:bar
 (prefix s)             → Foo
@@ -12344,8 +12062,7 @@ _str-fp-format_ describes the default format for printing floating point
 numbers. All parameters are optional. `pretty-print` returns the current
 settings or the new settings when parameters are specified.
 
-barry code example
-
+[source,newlisp]
 ------------------------------------------------------
 (pretty-print)  → (80 " " "%1.10g")  ; default setting
 
@@ -12377,8 +12094,7 @@ being printed. To completely suppress pretty printing, use the function
 link:#string[string] to convert the expression to a raw unformatted
 string as follows:
 
-barry code example
-
+[source,newlisp]
 ------------------------------
 ;; print without formatting
 
@@ -12394,8 +12110,7 @@ syntax: (primitive? _exp_)
 Evaluates and tests if _exp_ is a primitive symbol and returns `true` or
 `nil` depending on the result.
 
-barry code example
-
+[source,newlisp]
 ------------------------
 (set 'var define)
 (primitive? var)  → true
@@ -12427,8 +12142,7 @@ escape character `\`:
 |`\xnn` |where `nn` is a hexadecimal ASCII code between 00 and FF
 |================================================================
 
-barry code example
-
+[source,newlisp]
 --------------------------------
 (print (set 'res (+ 1 2 3)))
 (print "the result is" res "\n")
@@ -12464,8 +12178,7 @@ with _num-df_ degrees of freedom to be equal or greater under the null
 hypothesis. `prob-chi2` is derived from the incomplete Gamma function
 link:#gammai[gammai].
 
-barry code example
-
+[source,newlisp]
 --------------------------------
 (prob-chi2 10 6)  → 0.1246520195
 --------------------------------
@@ -12482,8 +12195,7 @@ Returns the probability of an observed _F_ statistic in _num-f_ with
 _int-df1_ and _int-df2_ degrees of freedom to be equal or greater under
 the null hypothesis.
 
-barry code example
-
+[source,newlisp]
 -----------------------------------
 (prob-f 2.75 10 12)  → 0.0501990804
 -----------------------------------
@@ -12500,8 +12212,7 @@ Returns the probability of an observed _Student's t_ statistic in
 _num-t_ with _int-df_ degrees of freedom to be equal or greater under
 the null hypothesis.
 
-barry code example
-
+[source,newlisp]
 ---------------------------------
 (prob-t 1.76 14)  → 0.05011454551
 ---------------------------------
@@ -12518,8 +12229,7 @@ Returns the probability of _num-z_, not to exceed the observed value
 where _num-z_ is a normal distributed value with a mean of `0.0` and a
 standard deviation of `1.0`.
 
-barry code example
-
+[source,newlisp]
 -------------------
 (prob-z 0.0)  → 0.5
 -------------------
@@ -12551,8 +12261,7 @@ Unixes. On Win32, double quotes are used. The process id returned can be
 used to destroy the running process using link:#destroy[destroy], if the
 process does not exit by itself.
 
-barry code example
-
+[source,newlisp]
 --------------------------------------------------------------
 (process "c:/WINDOWS/system32/notepad.exe")  → 1894 ; on Win32
 
@@ -12573,8 +12282,7 @@ other application via link:#write-line[write-line] and
 link:#read-line[read-line] or link:#write[write] and link:#read[read]
 statements:
 
-barry code example
-
+[source,newlisp]
 ----------------------------------------------------------------
 ;; Linux/Unix
 ;; create pipes
@@ -12743,8 +12451,7 @@ Repeatedly using `push` to the end of a list using `-1` as the
 _int-index_ is optimized and as fast as pushing to the front of a list
 with no index at all. This can be used to efficiently grow a list.
 
-barry code example
-
+[source,newlisp]
 ---------------------------------------------------
 ; inserting in front
 (set 'pList '(b c))  → (b c)
@@ -12854,8 +12561,7 @@ description of the error.
 
 `put-url` requests are also understood by newLISP server nodes.
 
-barry code example
-
+[source,newlisp]
 --------------------------------------------------------
 (put-url "http://asite.com/myFile.txt" "Hi there")
 (put-url "http://asite.com/myFile.txt" "Hi there" 2000)
@@ -12874,8 +12580,7 @@ example, the local file `webpage.html` is transferred to `asite.com`.
 On an Apache web server, the following could be configured in
 `httpd.conf`.
 
-barry code example
-
+[source,newlisp]
 ---------------------------
 <directory /www/htdocs>
 Options All
@@ -12887,8 +12592,7 @@ The script `put.cgi` would contain code to receive content from the web
 server via STDIN. The following is a working `put.cgi` written in
 newLISP for the Apache web server:
 
-barry code example
-
+[source,newlisp]
 ---------------------------------------------
 #!/usr/home/johndoe/bin/newlisp
 #
@@ -12960,8 +12664,7 @@ omitted. If payment is at the end of the period, _int-type_ is `0`
 (zero) or _int-type_ is omitted; for payment at the beginning of each
 period, _int-type_ is 1.
 
-barry code example
-
+[source,newlisp]
 ---------------------------------------------
 (pv (div 0.07 12) 240 775.30)  → -100000.1373
 ---------------------------------------------
@@ -12982,8 +12685,7 @@ syntax: (quote _exp_)
 Returns _exp_ without evaluating it. The same effect can be obtained by
 prepending a `'` (single quote) to _exp_.
 
-barry code example
-
+[source,newlisp]
 ---------------------------
 (quote x)         → x
 (quote 123)       → 123
@@ -13000,8 +12702,7 @@ syntax: (quote? _exp_)
 Evaluates and tests whether _exp_ is quoted. Returns `true` or `nil`
 depending on the result.
 
-barry code example
-
+[source,newlisp]
 ----------------------
 (set 'var ''x)  → 'x
 (quote? var)    → true
@@ -13022,8 +12723,7 @@ the internal random generator is initialized using the current value
 returned by the C `time()` function. Optionally, a second parameter can
 be specified to return a list of length _int-N_ of random numbers.
 
-barry code example
-
+[source,newlisp]
 ---------------------------------------------------------------
 (dotimes (x 100) (print (rand 2))) =>
 11100000110100111100111101 ... 10111101011101111101001100001000
@@ -13050,8 +12750,7 @@ floating point numbers scaled (multiplied) by _float-scale_, with an
 added offset of _float-offset_. The starting point of the internal
 random generator can be seeded using link:#seed[seed].
 
-barry code example
-
+[source,newlisp]
 -----------------------------------------------------------
 (random 0 1 10)
 → (0.10898973 0.69823783 0.56434872 0.041507289 0.16516733
@@ -13075,8 +12774,7 @@ syntax: (randomize _list_ [_bool_])
 
 Rearranges the order of elements in _list_ into a random order.
 
-barry code example
-
+[source,newlisp]
 -----------------------------------------------
 (randomize '(a b c d e f g))  → (b a c g d e f)
 (randomize (sequence 1 5))    → (3 5 4 1 2)
@@ -13122,8 +12820,7 @@ found. In any case, the bytes read are put into the buffer pointed to by
 _sym-buffer_, and the file pointer of the file read is moved forward. If
 no new bytes have been read, _sym-buffer_ will contain `nil`.
 
-barry code example
-
+[source,newlisp]
 ---------------------------------------
 (set 'handle (open "aFile.ext" "read"))
 (read handle buff 200)
@@ -13152,8 +12849,7 @@ specified. The file handle is obtained from a previous link:#open[open]
 operation. Each `read-char` advances the file pointer by one byte. Once
 the end of the file is reached, `nil` is returned.
 
-barry code example
-
+[source,newlisp]
 ------------------------------------------
 (define (slow-file-copy from-file to-file)
     (set 'in-file (open from-file "read"))
@@ -13193,8 +12889,7 @@ _int-offset_ specifies an optional offset into _str-source_ where
 processing should start. When calling `read-expr` repeatedly this number
 can be updated using `$0`.
 
-barry code example
-
+[source,newlisp]
 --------------------------------------------------------
 (set 'code "; a statement\n(define (double x) (+ x x))")
 
@@ -13231,8 +12926,7 @@ On failure the function returns `nil`. For error information, use
 link:#sys-error[sys-error] when used on files. When used on URLs
 link:#net-error[net-error] gives more error information.
 
-barry code example
-
+[source,newlisp]
 -------------------------------------------------------
 (write-file "myfile.enc"
     (encrypt (read-file "/home/lisp/myFile") "secret"))
@@ -13246,8 +12940,7 @@ current directory.
 When the prefix is `http://`, `read-file` works exactly like
 link:#get-url[get-url] and can take the same additional parameters.
 
-barry code example
-
+[source,newlisp]
 -------------------------------------------------
 (read-file "http://asite.com/somefile.tgz" 10000)
 -------------------------------------------------
@@ -13273,8 +12966,7 @@ except for navigation keys and other control sequences like function
 keys, in which case the return values may vary on different OSes and
 configurations.
 
-barry code example
-
+[source,newlisp]
 ---------------------------------------------------
 (read-key)  → 97  ; after hitting the A key
 (read-key)  → 65  ; after hitting the shifted A key
@@ -13322,8 +13014,7 @@ or pipe, it will return `nil` when input is exhausted.
 When using `read-line` on _stdin_, line length is limited to 2048
 characters and performance is much faster.
 
-barry code example
-
+[source,newlisp]
 ----------------------------------------
 (print "Enter a num:")
 (set 'num (int (read-line)))
@@ -13360,8 +13051,7 @@ reached, `nil` is returned.
 The function returns an integer value which can be converted to a
 displayable UTF-8 character string using the link:#char[char] function.
 
-barry code example
-
+[source,newlisp]
 ---------------------------------------
 (set 'fle (open "utf8text.txt" "read"))
 (while (setq chr (read-utf8 fle))
@@ -13389,8 +13079,7 @@ Specifying a quoted `nil` for the event will disable it.
 The following one-liner `reader-event` could be used to enhance the
 interactive shell with a tracer:
 
-barry code example
-
+[source,newlisp]
 -----------------------------------------------
 >(reader-event (lambda (ex) (print " => " ex)))
 $reader-event
@@ -13407,8 +13096,7 @@ The following example shows the core of a simple macro rewrite
 pre-processor. A full version is installed in the standard location as
 module file `macro.lsp`.
 
-barry code example
-
+[source,newlisp]
 ---------------------------------------------------------------------
 (context 'macro)
 
@@ -13444,8 +13132,7 @@ function.
 
 Register a function macro for pre-processing:
 
-barry code example
-
+[source,newlisp]
 ------------------------------------------------------
 (macro (square X) (pow X 2)) ; must use uppercase vars
 
@@ -13471,8 +13158,7 @@ syntax: (real-path [_str-path_])
 Returns the full path from the relative file path given in _str-path_.
 If a path is not given, `"."` (the current directory) is assumed.
 
-barry code example
-
+[source,newlisp]
 ----------------------------------------------------
 (real-path)  → "/usr/home/fred"  ; current directory
 (real-path "./somefile.txt")
@@ -13497,8 +13183,7 @@ process. The message received replaces the contents in _sym-message._
 The function reads one message from the receiver queue of _int-pid_ for
 each invocation. When the queue is empty, `nil` is returned.
 
-barry code example
-
+[source,newlisp]
 ------------------------------
 ; sending process
 (send spid "hello")  → true
@@ -13521,8 +13206,7 @@ The function will loop until a message can be read from the queue.
 In the second syntax, the function returns a list of all child processes
 with pending messages for the parent process:
 
-barry code example
-
+[source,newlisp]
 ---------------------------------------------------
 ; read pending messages from child processes
 (dolist (pid (receive))
@@ -13562,8 +13246,7 @@ function.
 When the optional `true` parameter is present, the element found is
 returned instead of the index vector.
 
-barry code example
-
+[source,newlisp]
 --------------------------------------------------------
 ; get index vectors for list elements
 
@@ -13667,8 +13350,7 @@ returned of the index vectors.
 By default, `ref-all` checks if expressions are equal. With
 _func-compare_, more complex comparison functions can be used.
 
-barry code example
-
+[source,newlisp]
 ----------------------------------------------------------------------------------
 (set 'L '(a b c (d a f (a h a)) (k a (m n a) (x))))
 
@@ -13787,8 +13469,7 @@ can be used in other newLISP expressions for further processing.
 Functions using regular expressions will not reset the `$0, $1 ... $15`
 variables to `nil` when no match is found.
 
-barry code example
-
+[source,newlisp]
 ---------------------------------------------------------------
 (regex "b+" "aaaabbbaaaa")  → ("bbb" 4 3)
 
@@ -13934,8 +13615,7 @@ again, then the caching of the last pattern is not sufficient.
 `regex-comp` can be used to pre-compile repetitive patterns to speed up
 regular expression searches:
 
-barry code example
-
+[source,newlisp]
 ----------------------------------------------
 ; slower without pre-compilation
 
@@ -13972,8 +13652,7 @@ Removes the directory whose path name is specified in _str-path_. The
 directory must be empty for `remove-dir` to succeed. Returns `nil` on
 failure.
 
-barry code example
-
+[source,newlisp]
 -------------------
 (remove-dir "temp")
 -------------------
@@ -13990,8 +13669,7 @@ Renames a file or directory entry given in the path name _str-path-old_
 to the name given in _str-path-new_. Returns `nil` or `true` depending
 on the operation's success.
 
-barry code example
-
+[source,newlisp]
 ---------------------------------------
 (rename-file "data.lisp" "data.backup")
 ---------------------------------------
@@ -14022,8 +13700,7 @@ Optionally, _func-compare_ can specify a comparison operator or
 user-defined function. By default, _func-compare_ is the `=` (equals
 sign).
 
-barry code example
-
+[source,newlisp]
 -----------------------------------------------------------------
 ;; list replacement
 
@@ -14084,8 +13761,7 @@ List removal
 The last form of `replace` has only two arguments: the expression _exp_
 and _list_. This form removes all _exp_s found in _list_.
 
-barry code example
-
+[source,newlisp]
 --------------------------------
 ;; removing elements from a list
 
@@ -14106,8 +13782,7 @@ every replacement. The number of replacements made is contained in the
 system variable `$0`. This form of `replace` can also process binary
 `0`s (zeros).
 
-barry code example
-
+[source,newlisp]
 --------------------------------------------------
 ;; string replacement
 (set 'str "this isa sentence")
@@ -14146,8 +13821,7 @@ an integer).
 After all replacements are made, the number of replacements is contained
 in the system variable `$0`.
 
-barry code example
-
+[source,newlisp]
 -----------------------------------------------------------
 ;; using the option parameter to employ regular expressions
 
@@ -14225,8 +13899,7 @@ syntax: (rest _list_) +
 Returns all of the items in a list or a string, except for the first.
 `rest` is equivalent to _cdr_ or _tail_ in other Lisp dialects.
 
-barry code example
-
+[source,newlisp]
 ------------------------------------------
 (rest '(1 2 3 4))            → (2 3 4)
 (rest '((a b) c d))          → (c d)
@@ -14247,8 +13920,7 @@ barry code example
 In the second version, `rest` returns all but the first character of the
 string _str_ in a string.
 
-barry code example
-
+[source,newlisp]
 ------------------------------------
 (rest "newLISP")          → "ewLISP"
 (first (rest "newLISP"))  → "e"
@@ -14272,8 +13944,7 @@ syntax: (reverse _list_) +
 In the first form, `reverse` reverses and returns the _list_. Note that
 `reverse` is destructive and changes the original list.
 
-barry code example
-
+[source,newlisp]
 ----------------------------------
 (set 'l '(1 2 3 4 5 6 7 8 9))
 
@@ -14284,8 +13955,7 @@ l            → (9 8 7 6 5 4 3 2 1)
 In the second form, `reverse` is used to reverse the order of characters
 in a string.
 
-barry code example
-
+[source,newlisp]
 --------------------------
 (set 'str "newLISP")
 
@@ -14309,8 +13979,7 @@ negative, the rotation is to the left. If no _int-count_ is specified,
 `rotate` rotates 1 to the right. `rotate` is a destructive function that
 changes the contents of the original list or string.
 
-barry code example
-
+[source,newlisp]
 ------------------------------------
 (set 'l '(1 2 3 4 5 6 7 8 9))
 
@@ -14343,8 +14012,7 @@ It is positive when the integer part of a number is being rounded.
 
 If _int-digits_ is omitted, the function rounds to `0` decimal digits.
 
-barry code example
-
+[source,newlisp]
 ----------------------------
 (round 123.49 2)    → 100
 (round 123.49 1)    → 120
@@ -14387,8 +14055,7 @@ link:#define[define] or link:#define-macro[define-macro] statements.
 
 `save` returns `true` on completion.
 
-barry code example
-
+[source,newlisp]
 ---------------------------------------------------------------
 (save "save.lsp")
 
@@ -14449,8 +14116,7 @@ is found.
 When using the regular expression options flag, patterns found are
 stored in the system variables `$0` to `$15`.
 
-barry code example
-
+[source,newlisp]
 --------------------------------------------------------
 (set 'file (open "init.lsp" "read"))
 (search file "define")
@@ -14489,8 +14155,7 @@ Note that the maximum value for _int-seed_ is limited to 16 or 32 bits,
 depending on the operating system used. Internally, only the 32 least
 significant bits are passed to the random seed function of the OS.
 
-barry code example
-
+[source,newlisp]
 --------------------
 (seed 12345)
 
@@ -14516,8 +14181,7 @@ more _int-index_ are used to access the object members.
 
 Objects referenced with `self` are mutable:
 
-barry code example
-
+[source,newlisp]
 -----------------------------------------------
 (new Class 'Circle)
 
@@ -14562,8 +14226,7 @@ Subsequent writing to this position will extend the file and fill unused
 positions with zero's. The blocks of zeros are not actually allocated on
 disk, so the file takes up less space and is called a _sparse file_.
 
-barry code example
-
+[source,newlisp]
 -----------------------------------------
 (set 'file (open "myfile" "read"))  → 5
 (seek file 100)                     → 100
@@ -14592,8 +14255,7 @@ In the first two forms, `select` picks one or more elements from _list_
 using one or more indices specified in _list-selection_ or the
 _int-index_i_.
 
-barry code example
-
+[source,newlisp]
 ----------------------------------------
 (set 'lst '(a b c d e f g))
 
@@ -14608,8 +14270,7 @@ In the second two forms, `select` picks one or more characters from
 _string_ using one or more indices specified in _list-selection_ or the
 _int-index_i_.
 
-barry code example
-
+[source,newlisp]
 ------------------------------------
 (set 'str "abcdefg")
 
@@ -14671,8 +14332,7 @@ text from the underlying operating system.
 
 The following code examples summarize the different syntax forms:
 
-barry code example
-
+[source,newlisp]
 ------------------------------------------------------------------------------
 ;; init semaphores
 (semaphore)
@@ -14698,8 +14358,7 @@ barry code example
 
 The following example shows semaphores controlling a child process:
 
-barry code example
-
+[source,newlisp]
 -------------------------------------------------------
 ;; counter process output in bold
 
@@ -14854,8 +14513,7 @@ queue. The example shows 5 child processes constantly delivering status
 data to a parent process which will display the data. After three data
 sets have been read, the parent will abort all child processes and exit:
 
-barry code example
-
+[source,newlisp]
 -----------------------------------------------------------
 #!/usr/bin/newlisp
 
@@ -14919,8 +14577,7 @@ messages between child process peers. The implementation relies on the
 fact that the recipient can evaluate expressions contained in messages
 received. These expressions can be any valid newLISP statements:
 
-barry code example
-
+[source,newlisp]
 ---------------------------------------------------------------------
 #!/usr/bin/newlisp
 
@@ -14989,8 +14646,7 @@ optional step size of _num-step_. When _num-step_ is omitted, the value
 optional step size is specified) or floating point (when the optional
 step size is present).
 
-barry code example
-
+[source,newlisp]
 -------------------------------------------------
 (sequence 10 5)     → (10 9 8 7 6 5)
 (sequence 0 1 0.2)  → (0 0.2 0.4 0.6 0.8 1)
@@ -15016,8 +14672,7 @@ are always floating point numbers.
 
 When _num-count_ is less than `1`, then `series` returns an empty list.
 
-barry code example
-
+[source,newlisp]
 ------------------------------------------------------
 (series 2 2 5)     → (2 4 8 16 32)
 (series 1 1.2 6)   → (1 1.2 1.44 1.728 2.0736 2.48832)
@@ -15029,8 +14684,7 @@ barry code example
 In the second syntax, `series` uses a function specified in _func_ to
 transform the previous expression in to the next expression:
 
-barry code example
-
+[source,newlisp]
 ---------------------------------------------------------------------
 ; embed the function Phi: f(x) = 1 / (1 + x)
 ; see also http://en.wikipedia.org/wiki/Golden_ratio
@@ -15088,8 +14742,7 @@ An error message results when trying to change the contents of the
 symbols `nil`, `true`, or a context symbol. `set` can take multiple
 argument pairs.
 
-barry code example
-
+[source,newlisp]
 ------------------------------------------------------
 (set 'x 123)     → 123
 (set 'x 'y)      → y
@@ -15161,8 +14814,7 @@ current platform.
 string in a list or `nil` if the requested change could not be
 performed.
 
-barry code example
-
+[source,newlisp]
 --------------------------------------------------------
 ; report current locale
 
@@ -15218,8 +14870,7 @@ _exp-replacement_. The _list_ can be nested. The system variables `$it`
 contains the expression found and can be used in _exp-replacement_. The
 function returns the new modified _list_.
 
-barry code example
-
+[source,newlisp]
 --------------------------------------------------------------------------
 (set 'data '(fruits (apples 123 44) (oranges 1 5 3)))
 
@@ -15261,8 +14912,7 @@ element with _exp-replacement_. The _list_ can be nested. The system
 variable `$it` contains the expression found and can be used in
 _exp-replacement_. The function returns the new modified _list_.
 
-barry code example
-
+[source,newlisp]
 ------------------------------------------------------------------------------------------
 (set 'data '((monday (apples 20 30) (oranges 2 4 9)) (tuesday (apples 5) (oranges 32 1))))
 
@@ -15321,8 +14971,7 @@ built-in function internally, throughout this manual `setq` is used when
 setting a symbol reference and `setf` is used when setting list or array
 references.
 
-barry code example
-
+[source,newlisp]
 ----------------------------------------------------------
 (setq x 123)  → 123
 
@@ -15405,8 +15054,7 @@ extracts the sign of a real number according to the following rules:
  x < `0` : sgn(x) = -1 +
  x = `0` : sgn(x) = `0`_*
 
-barry code example
-
+[source,newlisp]
 ----------------
 (sgn -3.5)  → -1
 (sgn 0)     → 0
@@ -15418,8 +15066,7 @@ expressions _exp-1_, _exp-2_, or _exp-3_ is returned, instead of `-1`,
 `0`, or `1`. If _exp-n_ is missing for the case triggered, then `nil` is
 returned.
 
-barry code example
-
+[source,newlisp]
 -----------------------------------------------------------------
 (sgn x -1 0 1)         ; works like (sgn x)
 (sgn x -1 1 1)         ; -1 for negative x all others 1
@@ -15470,8 +15117,7 @@ directory on Unix-like operating system and a `temp` directory in the
 root of the current disk drive on Win32 systems. On Unix-like systems
 this directory is present, on Win32 it may have to be created.
 
-barry code example
-
+[source,newlisp]
 --------------------------------------------------------
 (set 'mem (share))
 
@@ -15543,8 +15189,7 @@ Some signals make newLISP exit even after a user-defined handler has
 been specified and executed (e.g., signal SIGKILL). This behavior may
 also be different on different platforms.
 
-barry code example
-
+[source,newlisp]
 ------------------------------------------------------------
 (constant 'SIGINT 2)
 (define (ctrlC-handler) (println "ctrl-C has been pressed"))
@@ -15652,8 +15297,7 @@ be used without arguments in a batch of expressions. When in interactive
 mode, hit [enter] twice after a statement using `silent` to get the
 prompt back.
 
-barry code example
-
+[source,newlisp]
 ---------------------------------------------
 (silent (my-func))  ; same as next
 
@@ -15668,8 +15312,7 @@ syntax: (sin _num-radians_)
 
 Calculates the sine function from _num-radians_ and returns the result.
 
-barry code example
-
+[source,newlisp]
 ------------------------------------------
 (sin 1)                     → 0.8414709838
 (set 'pi (mul 2 (acos 0)))  → 3.141592654
@@ -15686,8 +15329,7 @@ Calculates the hyperbolic sine of _num-radians_. The hyperbolic sine is
 defined mathematically as: _(exp (x) - exp (-x)) / 2_. An overflow to
 `inf` may occur if _num-radians_ is too large.
 
-barry code example
-
+[source,newlisp]
 ------------------------------------------
 (sinh 1)     → 1.175201194
 (sinh 10)    → 11013.23287
@@ -15704,8 +15346,7 @@ syntax: (sleep _num-milliseconds_)
 Gives up CPU time to other processes for the amount of milliseconds
 specified in _num-milli-seconds_.
 
-barry code example
-
+[source,newlisp]
 ----------------------------------------
 (sleep 1000)  ; sleeps 1 second
 (sleep 0.5)   ; sleeps 500 micro seconds
@@ -15732,8 +15373,7 @@ copies all of the elements to the end of the list.
 
 See also link:#indexing[Indexing elements of strings and lists].
 
-barry code example
-
+[source,newlisp]
 ---------------------------------------------------------
 (slice '(a b c d e f) 3 2)   → (d e)
 (slice '(a b c d e f) 2 -2)  → (c d)
@@ -15756,8 +15396,7 @@ Note that `slice` always works on single 8-bit byte boundaries for
 offset and length numbers, even when running the UTF-8 enabled version
 of newLISP.
 
-barry code example
-
+[source,newlisp]
 ------------------------------------
 (slice "Hello World" 6 2)  → "Wo"
 (slice "Hello World" 0 5)  → "Hello"
@@ -15796,8 +15435,7 @@ An optional comparison operator, user-defined function, or anonymous
 function can be supplied. The functor or operator can be given with or
 without a preceding quote.
 
-barry code example
-
+[source,newlisp]
 ----------------------------------------------------
 (sort '(v f r t h n m j))     → (f h j m n r t v)
 (sort '((3 4) (2 1) (1 10)))  → ((1 10) (2 1) (3 4))
@@ -15843,8 +15481,7 @@ sign) character are only serialized when mentioned explicitly.
 Symbols not belonging to the current context are written out with their
 context prefix.
 
-barry code example
-
+[source,newlisp]
 --------------------------------------------------------
 (define (double x) (+ x x))
 
@@ -15881,8 +15518,7 @@ returns the process id of the forked process. The following examples
 shows how the calculation of a range of prime numbers can be split up in
 four sub ranges to speed up the calculation of the whole range:
 
-barry code example
-
+[source,newlisp]
 ----------------------------------------------------------
 ; calculate primes in a range
 (define (primes from to)
@@ -16012,8 +15648,7 @@ syntax: (sqrt _num_)
 Calculates the square root from the expression in _num_ and returns the
 result.
 
-barry code example
-
+[source,newlisp]
 -----------------------
 (sqrt 10)  → 3.16227766
 (sqrt 25)  → 5
@@ -16034,8 +15669,7 @@ If a regular expression number is specified in _num-option_, _str-key_
 contains a regular expression pattern. See link:#regex[regex] for valid
 _option_ numbers.
 
-barry code example
-
+[source,newlisp]
 ---------------------------------------------------
 (starts-with "this is useful" "this")        → true
 (starts-with "this is useful" "THIS")        → nil
@@ -16049,8 +15683,7 @@ In the second version, `starts-with` checks to see if a list starts with
 the list element in _exp_. `true` or `nil` is returned depending on
 outcome.
 
-barry code example
-
+[source,newlisp]
 -----------------------------------------------
 (starts-with '(1 2 3 4 5) 1)             → true
 (starts-with '(a b c d e) 'b)            → nil
@@ -16081,8 +15714,7 @@ are returned by `stats` in a list:
 |kurt |Kurtosis of distribution
 |==============================================
 
-barry code example
-
+[source,newlisp]
 The following example uses the list output from the `stats` expression
 as an argument for the link:#format[format] statement:
 
@@ -16120,8 +15752,7 @@ Translates into a string anything that results from evaluating _exp-1_—.
 If more than one expression is specified, the resulting strings are
 concatenated.
 
-barry code example
-
+[source,newlisp]
 --------------------------------------
 (string 'hello)          → "hello"
 (string 1234)            → "1234"
@@ -16157,8 +15788,7 @@ syntax: (string? _exp_)
 Evaluates _exp_ and tests to see if it is a string. Returns `true` or
 `nil` depending on the result.
 
-barry code example
-
+[source,newlisp]
 ---------------------
 (set 'var "hello")
 (string? var)  → true
@@ -16279,8 +15909,7 @@ but it will always return a floating point number. If only one argument
 is supplied, its sign is reversed. Any floating point calculation with
 `NaN` also returns `NaN`.
 
-barry code example
-
+[source,newlisp]
 -----------------------
 (sub 10 8 0.25)  → 1.75
 (sub 123)        → -123
@@ -16301,8 +15930,7 @@ referenced by link:#assoc[assoc] or link:#lookup[lookup].
 `swap` is a destructive operation that changes the contents of the
 lists, arrays, or symbols involved.
 
-barry code example
-
+[source,newlisp]
 ------------------------------------------------------
 (set 'lst '(a b c d e f))
 
@@ -16364,8 +15992,7 @@ creation if the symbol is not found. In this case, `sym` returns `nil`
 if the symbol looked up does not exist. Using this last form, `sym` can
 be used to check for the existence of a symbol.
 
-barry code example
-
+[source,newlisp]
 -------------------------------------------------------
 (sym "some")           → some
 (set (sym "var") 345)  → 345
@@ -16384,8 +16011,7 @@ that use symbols as arguments. The following example shows the use of
 `sym` as a hash-like function for associative memory access, as well as
 symbol configurations that are not legal newLISP symbols:
 
-barry code example
-
+[source,newlisp]
 ---------------------------------------------------
 ;; using sym for simulating hash tables
 
@@ -16409,8 +16035,7 @@ symbol name in the target context. In this case, `sym` will extract the
 name from the symbol and use it as the name string for the symbol in the
 target context:
 
-barry code example
-
+[source,newlisp]
 ------------------------------------
 (sym 'myVar 'FOO)  → FOO:myVar
 
@@ -16438,8 +16063,7 @@ syntax: (symbol? _exp_)
 Evaluates the _exp_ expression and returns `true` if the value is a
 symbol; otherwise, it returns `nil`.
 
-barry code example
-
+[source,newlisp]
 --------------------------------------
 (set 'x 'y)  → y
 
@@ -16464,8 +16088,7 @@ Returns a sorted list of all symbols in the current context when called
 without an argument. If a context symbol is specified, symbols defined
 in that context are returned.
 
-barry code example
-
+[source,newlisp]
 --------------------------------------------------------
 (symbols)       ; list of all symbols in current context
 (symbols 'CTX)  ; list of symbols in context CTX
@@ -16502,8 +16125,7 @@ yet.
 
 The function `sync` is not available on Win32.
 
-barry code example
-
+[source,newlisp]
 ----------------------------------------------------------
 ; wait for 10 seconds and process finished child processes
 (sync 10000)
@@ -16562,8 +16184,7 @@ permissions when accessing the resource. Another cause of error could be
 the exhaustion of certain system resources like file handles or
 semaphores.
 
-barry code example
-
+[source,newlisp]
 ---------------------------------------------------
 ;; trying to open a nonexistent file
 (open "xyz" "r")  → nil
@@ -16630,8 +16251,7 @@ need to change.
 
 When using _int-idx_, one element of the list will be returned.
 
-barry code example
-
+[source,newlisp]
 -------------------------------------------------------------
 (sys-info)     → (401 268435456 376 1 0 2048 39220 10002 131)
 (sys-info 3)   → 1
@@ -16674,8 +16294,7 @@ The following results are returned in a list:
 The first example studies the effect of different sleep length before a
 test on the SCAT (Sam's Cognitive Ability Test):
 
-barry code example
-
+[source,newlisp]
 ---------------------------------------
 ; SCAT (Sam's Cognitive Ability Test)
 (set 'hours-sleep-8 '(5 7 5 3 5 3 3 9))
@@ -16691,8 +16310,7 @@ impact with a probability value of `0.411`.
 In the second example, the same group of people get tested twice, before
 and after a treatment with Prosac depression medication:
 
-barry code example
-
+[source,newlisp]
 -------------------------------------------------
 ; Effect of Prozac on a group of depressed people
 (set 'mood-pre '(3 0 6 7 4 3 2 1 4))
@@ -16714,8 +16332,7 @@ syntax: (tan _num-radians_)
 Calculates the tangent function from _num-radians_ and returns the
 result.
 
-barry code example
-
+[source,newlisp]
 -----------------------------------------
 (tan 1)                     → 1.557407725
 (set 'pi (mul 2 (asin 1)))  → 3.141592654
@@ -16731,8 +16348,7 @@ syntax: (tanh _num-radians_)
 Calculates the hyperbolic tangent of _num-radians_. The hyperbolic
 tangent is defined mathematically as: _sinh (x) / cosh (x)_.
 
-barry code example
-
+[source,newlisp]
 --------------------------------------------
 (tanh 1)     → 0.761594156
 (tanh 10)    → 0.9999999959
@@ -16749,8 +16365,7 @@ syntax: (term _symbol_)
 Returns as a string, the term part of a _symbol_ without the context
 prefix.
 
-barry code example
-
+[source,newlisp]
 -------------------------------
 (set 'ACTX:var 123)
 (set 'sm 'ACTX:var)
@@ -16774,8 +16389,7 @@ Works together with the link:#catch[catch] function. `throw` forces the
 return of a previous `catch` statement and puts the _exp_ into the
 result symbol of `catch`.
 
-barry code example
-
+[source,newlisp]
 ----------------------------------------------
 (define (throw-test)
     (dotimes (x 1000)
@@ -16816,8 +16430,7 @@ syntax: (throw-error _exp_)
 Causes a user-defined error exception with text provided by evaluating
 _exp_.
 
-barry code example
-
+[source,newlisp]
 -----------------------------------------------------------
 (define (foo x y)
     (if (= x 0) (throw-error "first argument cannot be 0"))
@@ -16845,8 +16458,7 @@ Evaluates the expression in _exp_ and returns the time spent on
 evaluation in floating point milliseconds. Depending on the platform
 decimals of milliseconds are shown or not shown.
 
-barry code example
-
+[source,newlisp]
 ------------------------------------
 (time (myprog x y z))  → 450.340
 
@@ -16905,8 +16517,7 @@ lines or schedules.
 `timer` called without arguments returns the symbol of the current event
 handler.
 
-barry code example
-
+[source,newlisp]
 ----------------------------------------------------
 (define (ticker)
     (println (date)) (timer 'ticker 1.0))
@@ -16931,8 +16542,7 @@ interrupt an ongoing I/O operation with `timer`, use the following
 pattern, which calls link:#net-select[net-select] to test if a socket is
 ready for reading:
 
-barry code example
-
+[source,newlisp]
 --------------------------------------------
 define (interrupt)
     (set 'timeout true))
@@ -16972,8 +16582,7 @@ Returns a copy of the string in _str_ with the first character converted
 to uppercase. When the optional _bool_ parameter evaluates to any value
 other than `nil`, the rest of the string is converted to lowercase.
 
-barry code example
-
+[source,newlisp]
 ------------------------------------
 (title-case "hello")       → "Hello"
 (title-case "hELLO" true)  → "Hello"
@@ -17018,8 +16627,7 @@ prompt for evaluation. Entering the name of a variable, for example,
 would evaluate to its contents. In this way, a variable's contents can
 be checked during debugging or set to different values.
 
-barry code example
-
+[source,newlisp]
 -----------------------------------------
 ;; switches newLISP into debugging mode
 (trace true)  → true
@@ -17056,8 +16664,7 @@ Two more strings can optionally be specified for _str-header and
 str-footer_, which control the separator and prompt. A maximum of 15
 characters is allowed for the header and 31 for the footer.
 
-barry code example
-
+[source,newlisp]
 -------------------------------------------------------
 ;; active expressions are enclosed in >> and <<
 
@@ -17093,8 +16700,7 @@ The dimensions of a matrix are defined by the number of rows and the
 number of elements in the first row. A matrix can either be a nested
 list or an link:#array[array].
 
-barry code example
-
+[source,newlisp]
 ----------------------------------------------------------
 (set 'A '((1 2 3) (4 5 6)))
 (transpose A)                      → ((1 4) (2 5) (3 6))
@@ -17149,8 +16755,7 @@ the new string.
 The second syntax can either trim different characters from both sides
 or trim only one side if an empty string is specified for the other.
 
-barry code example
-
+[source,newlisp]
 ------------------------------------------
 (trim "   hello  ")              → "hello"
 (trim "----hello-----" "-")      → "hello"
@@ -17168,8 +16773,7 @@ syntax: (true? _exp_)
 If the expression in _exp_ evaluates to anything other than `nil` or the
 empty list `()`, `true?` returns `true`; otherwise, it returns `nil`.
 
-barry code example
-
+[source,newlisp]
 --------------------------------------
 (map true? '(x 1 "hi" (a b c) nil ()))
 → (true true true true nil nil)
@@ -17190,8 +16794,7 @@ of 4-byte integers per character. The string is terminated with a 4-byte
 integer `0`. This function is only available on UTF-8–enabled versions
 of newLISP.
 
-barry code example
-
+[source,newlisp]
 -----------------------------------------------------------
 (unicode "new")
 → "n\000\000\000e\000\000\000w\000\000\000\000\000\000\000"
@@ -17230,8 +16833,7 @@ Like link:#match[match], `unify` is frequently employed as a parameter
 functor in link:#find[find], link:#ref[ref], link:#ref-all[ref-all] and
 link:#replace[replace].
 
-barry code example
-
+[source,newlisp]
 ---------------------------------------------------------------------------------------
 (unify 'A 'A)  → ()  ; tautology
 
@@ -17276,8 +16878,7 @@ barry code example
 This is useful when chaining `unify` expressions and the results of
 previous `unify` bindings must be included:
 
-barry code example
-
+[source,newlisp]
 ------------------------------------
 (unify '(f X) '(f 123))  → ((X 123))
 
@@ -17450,8 +17051,7 @@ syntax: (unique _list_)
 
 Returns a unique version of _list_ with all duplicates removed.
 
-barry code example
-
+[source,newlisp]
 --------------------------------------------
 (unique '(2 3 4 4 6 7 8 7))  → (2 3 4 6 7 8)
 --------------------------------------------
@@ -17534,8 +17134,7 @@ The following characters may define a format:
 |`<` |switches to little endian byte order
 |==================================================
 
-barry code example
-
+[source,newlisp]
 ------------------------------------------------------------
 (pack "c c c" 65 66 67)  → "ABC"
 (unpack "c c c" "ABC")   → (65 66 67)
@@ -17601,8 +17200,7 @@ result of last _exp-condition_ is returned. `until` works like
 
 `until` also updates the system iterator symbol `$idx`.
 
-barry code example
-
+[source,newlisp]
 ---------------------------------------------
 (device (open "somefile.txt" "read"))
 (set 'line-count 0)
@@ -17623,8 +17221,7 @@ syntax: (upper-case _str_)
 Returns a copy of the string in _str_ converted to uppercase.
 International characters are converted correctly.
 
-barry code example
-
+[source,newlisp]
 -------------------------------------------
 (upper-case "hello world")  → "HELLO WORLD"
 -------------------------------------------
@@ -17641,8 +17238,7 @@ syntax: (utf8 _str-unicode_)
 Converts a UCS-4, 4-byte, Unicode-encoded string (_str_) into UTF-8.
 This function is only available on UTF-8–enabled versions of newLISP.
 
-barry code example
-
+[source,newlisp]
 -----------------------------------------------------------
 (unicode "new")
 → "n\000\000\000e\000\000\000w\000\000\000\000\000\000\000"
@@ -17673,8 +17269,7 @@ characters can be encoded in more than one 8-bit byte. `utf8len` returns
 the number of UTF-8 characters in a string. This function is only
 available on UTF-8–enabled versions of newLISP.
 
-barry code example
-
+[source,newlisp]
 ---------------------------------
 (utf8len "我能吞下玻璃而不伤身体。")    → 12
 (length "我能吞下玻璃而不伤身体。")      → 36
@@ -17701,8 +17296,7 @@ identifiers. UUIDs of type 1 with node ID are generated from a timestamp
 and other data. See http://www.ietf.org/rfc/rfc4122.txt[RFC 4122] for
 details on UUID generation.
 
-barry code example
-
+[source,newlisp]
 -------------------------------------------------------
 ;; type 4 UUID for any system
 
@@ -17759,8 +17353,7 @@ can be used to continuously loop and act on returned child processes.
 This function is only available on Mac OS X, Linux and other Unix-like
 operating systems.
 
-barry code example
-
+[source,newlisp]
 ------------------------------------------------------------------
 (set 'pid (fork (my-process))) → 8596
 
@@ -17786,8 +17379,7 @@ _body_ was not executed.
 Because `when` does not have an _else_ condition as in link:#if[if], the
 statements in _body_ need not to be grouped with link:#begin[begin]:
 
-barry code example
-
+[source,newlisp]
 ------------------------------------------
 (when (read-line)
     (set 'result (analyze (current-line)))
@@ -17813,8 +17405,7 @@ the return value of the `while` expression.
 
 `while` also updates the system iterator symbol `$idx`.
 
-barry code example
-
+[source,newlisp]
 ---------------------------------------------
 (device (open "somefile.txt" "read"))
 (set 'line-count 0)
@@ -17842,8 +17433,7 @@ bytes written or `nil` on failure.
 `write` is a shorter writing of `write-buffer`. The longer form still
 works but is deprecated and should be avoided in new code.
 
-barry code example
-
+[source,newlisp]
 -----------------------------------------
 (set 'handle (open "myfile.ext" "write"))
 (write handle data 100)
@@ -17878,8 +17468,7 @@ byte.
 
 `write-char` returns the number of bytes written.
 
-barry code example
-
+[source,newlisp]
 ------------------------------------------
 (define (slow-file-copy from-file to-file)
     (set 'in-file (open from-file "read"))
@@ -17910,8 +17499,7 @@ On failure the function returns `nil`. For error information, use
 link:#sys-error[sys-error] when used on files. When used on URLs
 link:#net-error[net-error] gives more error information.
 
-barry code example
-
+[source,newlisp]
 -------------------------------------------------------
 (write-file "myfile.enc"
     (encrypt (read-file "/home/lisp/myFile") "secret"))
@@ -17925,8 +17513,7 @@ directory.
 When the prefix `http://` is used, `write-file` works exactly like
 link:#put-url[put-url] and can take the same additional parameters:
 
-barry code example
-
+[source,newlisp]
 ----------------------------------------------------------------
 (write-file "http://asite.com/message.txt" "This is a message" )
 ----------------------------------------------------------------
@@ -17957,8 +17544,7 @@ In the second syntax lines are appended to a string in _str-out_.
 
 `write-line` returns the number of bytes written.
 
-barry code example
-
+[source,newlisp]
 ---------------------------------------
 (set 'out-file (open "myfile" "write"))
 (write-line out-file "hello there")
@@ -18002,8 +17588,7 @@ link:#post-url[post-url] or any of the other data sending functions,
 _sym_ or _func_ will be called with the number of bytes transferred for
 each block of data transferred.
 
-barry code example
-
+[source,newlisp]
 ---------------------------------------
 (xfer-event (fn (n) (println "->" n)))
 (length (get-url "http://newlisp.org"))
@@ -18054,8 +17639,7 @@ error occurred. The first element contains text describing the error,
 and the second element is a number indicating the last scan position in
 the source XML text, starting at `0` (zero).
 
-barry code example
-
+[source,newlisp]
 ---------------------------------------------
 (xml-parse "<atag>hello</atag><fin")  → nil
 
@@ -18079,8 +17663,7 @@ association lists, which can be accessed using link:#assoc[assoc]. When
 `xml-parse` fails due to malformed XML, `nil` is returned and
 link:#xml-error[xml-error] can be used to access error information.
 
-barry code example
-
+[source,newlisp]
 -------------------------------------------------------------
 (set 'xml
   "<person name='John Doe' tel='555-1212'>nice guy</person>")
@@ -18344,8 +17927,7 @@ latter would be done using option numbers in link:#xml-parse[xml-parse].
 
 Using `xml-type-tags` without arguments returns the current type tags:
 
-barry code example
-
+[source,newlisp]
 -------------------------------------------------------
 (xml-type-tags)  → ("TEXT" "CDATA" "COMMENT" "ELEMENT")
 
@@ -18364,8 +17946,7 @@ syntax: (zero? _exp_)
 
 Checks the evaluation of _exp_ to see if it equals `0` (zero).
 
-barry code example
-
+[source,newlisp]
 -------------------------------------------------
 (set 'value 1.2)
 (set 'var 0)

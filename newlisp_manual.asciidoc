@@ -36,8 +36,6 @@ newLISP is a registered trademark of Lutz Mueller. +
 newLISP User Manual
 -------------------
 
-toc::[]
-
 1. Introduction
 ~~~~~~~~~~~~~~~
 
@@ -3731,3 +3729,4 @@ NOTE: Neither one of the initialization files `init.lsp` nor
 
 ( ∂ )
 
+ vim: set tw=72 :
