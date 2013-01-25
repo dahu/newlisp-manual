@@ -1,0 +1,40 @@
+newLISP(R)
+==========
+:author:         Lutz Mueller
+:revdate:        2013-01-20
+:revnumber:      10.4.5
+:toc:
+:toc-placement:  manual
+:toc-title:      Contents
+:toclevels:      3
+:icons:
+:data-uri:
+:pygments:
+//:email:        lutz@nuevatec.com
+
+****
+__For Mac OS X, GNU Linux, Unix and Win32__
+
+**User Manual and Reference v.10.4.5**
+
+Copyright (C) 2012 Lutz Mueller http://www.nuevatec.com[www.nuevatec.com]. +
+All rights reserved. +
+Permission is granted to copy, distribute and/or modify this document +
+under the terms of the GNU Free Documentation License, +
+Version 1.2 or any later version published by the Free Software +
+Foundation; with no Invariant Sections, no Front-Cover Texts, +
+and no Back-Cover Texts. A copy of the license is included in the +
+section entitled link:#GNUFDL[GNU Free Documentation License]. +
+The accompanying software is protected by the link:#GNUGPL[GNU General +
+Public License] V.3, June 2007. +
+newLISP is a registered trademark of Lutz Mueller. +
+****
+
+// toc::[]
+// ( ∂ )
+
+include::[newlisp_manual-user_manual.html]
+include::[newlisp_manual-function_reference-overview.html]
+include::[newlisp_manual-function_reference.html]
+
+// vim: set tw=72 :
