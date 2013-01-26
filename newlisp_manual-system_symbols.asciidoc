@@ -1,0 +1,100 @@
+System Symbols and Constants
+============================
+
+Variables changed by the system
+-------------------------------
+
+newLISP maintains several internal symbol variables. All of them are
+global and can be used by the programmer. Some have write protection,
+others are user settable. Some will change when used in a sub-expression
+of the enclosing expression using it. Others are safe when using
+reentrant in nested functions or expressions.
+
+All symbols starting with the `$` character will not be serialized when
+using the link:#save[save] or link:#source[source] functions.
+
+[cols="1<,7<,1<,1<",options="header",]
+|=======================================================================
+|name |purpose |protected |reentrant
+|` $0 - $15` |Used primarily in regular expressions. `$0` is also used
+to record the last state or count of execution of some functions. |no
+|no
+
+|` $args` |Contains the list parameters not bound to local variables.
+Normally the function link:#args[args] is used to retrieve the contents
+of this variable. |yes |yes
+
+|` $idx` |The function link:#dolist[dolist] maintains this as a list
+index or offset. The functions link:#map[map], link:#series[series],
+link:#while[while], link:#until[until], link:#do-while[do-while] and
+link:#do-until[do-until] maintain this variable as an iteration counter
+starting with 0 (zero) for the first iteration. |yes |yes
+
+|` $it` |The _anaphoric_ `$it` refers to the result inside an executing
+expression, i.e. in self referential assignments. `$it` is only
+available inside the function expression setting it, and is set to `nil`
+on exit of that expression. The following functions use it:
+link:#hash[hashes], link:#find-all[find-all], link:#replace[replace],
+link:#set-ref[set-ref], link:#set-ref-all[set-ref-all] and
+link:#setf[setf setq]. |yes |no
+
+|` $main-args` |Contains the list of command line arguments passed by
+the OS to newLISP when it was started. Normally the function
+link:#main-args[main-args] is used to retrieve the contents. |yes |n/a
+|=======================================================================
+
+Predefined variables and functions.
+-----------------------------------
+
+These are preset symbol constants. Two of them are used as namespace
+templates, one two write platform independent code.
+
+[cols="1<,7<,1<,1<",options="header",]
+|=======================================================================
+|name |purpose |protected |reentrant
+|` Class` |Is the predefined general FOOP class constructor which can be
+used together with `new` to create new FOOP classes, e.g:
+`(new Class 'Rectangle)` would create a class and object constructor for
+a user class `Rectangle`. See the link:#newlisp_classes[FOOP classes and
+constructors] chapter in the users manual for details. |no |n/a
+
+|` ostype` |Contains a string identifying the OS-Platform for which the
+running newLISP version has been compiled. See the reference section for
+link:#ostype[details] |yes |n/a
+
+|` Tree` |Is a predefined namespace to serve as a hash like dictionary.
+Instead of writing `(define Foo:Foo)` to create a `Foo` dictionary, the
+expression `(new Tree 'Foo)` can be used as well. See the chapter
+link:#hash[Hash functions and dictionaries] foe details. |no |n/a
+
+|` module` |Is a predefined function to load modules. Instead of using
+`load` together with the `NEWLISPDIR` environment variable, the `module`
+function loads automatically from `$NEWLISPDIR/modules/`. |no |n/a
+|=======================================================================
+
+The symbols `Class`, `Tree` and `module` are predefined as follows:
+
+[source,newlisp]
+----------------------------------------------------
+; built-in template for FOOP constructors
+; usage: (new Class 'MyClass)
+(define (Class:Class)
+    (cons (context) (args)))
+
+; built-in template for hashes
+; usage: (new Tree 'MyHash)
+(define Tree:Tree)
+
+; load modules from standard path
+; usage (module "mymodule.lsp")
+(define (module $x)
+  (load (append (env "NEWLISPDIR") "/modules/" $x)))
+
+(global 'module)
+----------------------------------------------------
+
+These symbols are not protected and can be redefined by the user. The
+`$x` variable is built-in and proteced against deletion. This `$x`
+variable is also used in link:#curry[curry] expressions.
+
+// vim: set tw=72 cms=//%s :

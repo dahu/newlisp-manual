@@ -1,0 +1,124 @@
+Error codes
+===========
+
+[cols="1<,10<",width="20%",options="header",]
+|====================================
+|no |description
+|1  |not enough memory
+|2  |environment stack overflow
+|3  |call stack overflow
+|4  |problem accessing file
+|5  |not an expression
+|6  |missing parenthesis
+|7  |string token too long
+|8  |missing argument
+|9  |number or string expected
+|10 |value expected
+|11 |string expected
+|12 |symbol expected
+|13 |context expected
+|14 |symbol or context expected
+|15 |list expected
+|16 |list or array expected
+|17 |list or symbol expected
+|18 |list or string expected
+|19 |list or number expected
+|20 |array expected
+|21 |array, list or string expected
+|22 |lambda expected
+|23 |lambda-macro expected
+|24 |invalid function
+|25 |invalid lambda expression
+|26 |invalid macro expression
+|27 |invalid let parameter list
+|28 |problem saving file
+|29 |division by zero
+|30 |matrix expected
+|31 |wrong dimensions
+|32 |matrix is singular
+|33 |syntax in regular expression
+|34 |throw without catch
+|35 |problem loading library
+|36 |import function not found
+|37 |symbol is protected
+|38 |error number too high
+|39 |regular expression
+|40 |missing end of text [/text]
+|41 |mismatch in number of arguments
+|42 |problem in format string
+|43 |data type and format don't match
+|44 |invalid parameter
+|45 |invalid parameter: 0.0
+|46 |invalid parameter: NaN
+|47 |invalid UTF8 string
+|48 |illegal parameter type
+|49 |symbol not in MAIN context
+|50 |symbol not in current context
+|51 |target cannot be MAIN
+|52 |list index out of bounds
+|53 |array index out of bounds
+|54 |string index out of bounds
+|55 |nesting level too deep
+|56 |list reference changed
+|57 |invalid syntax
+|58 |user error
+|59 |user reset -
+|60 |received SIGINT -
+|61 |function is not reentrant
+|62 |local symbol is protected
+|63 |no reference found
+|64 |list is empty
+|65 |I/O error
+|66 |working directory not found
+|67 |invalid PID
+|68 |cannot open socket pair
+|69 |cannot fork process
+|70 |no comm channel found
+|====================================
+
+Error codes extended FFI
+------------------------
+
+[cols="1<,10<",width="20%",options="header",]
+|============================
+|no |description
+|71 |FFI preparation failed
+|72 |invalid FFI type
+|73 |FFI struct expected
+|============================
+
+TCP/IP and UDP Error Codes
+--------------------------
+
+[cols="1<,10<",width="20%",options="header",]
+|=====================================
+|no  |description
+|1   |Cannot open socket
+|2   |DNS resolution failed
+|3   |Not a valid service
+|4   |Connection failed
+|5   |Accept failed
+|6   |Connection closed
+|7   |Connection broken
+|8   |Socket send() failed
+|9   |Socket recv() failed
+|10  |Cannot bind socket
+|11  |Too many sockets in net-select
+|12  |Listen failed
+|13  |Badly formed IP
+|14  |Select failed
+|15  |Peek failed
+|16  |Not a valid socket
+|17  |Cannot unblock socket
+|18  |Operation timed out
+|19  |HTTP bad formed URL
+|20  |HTTP file operation failed
+|21  |HTTP transfer failed
+|22  |HTTP invalid response from server
+|23  |HTTP no response from server
+|24  |HTTP document empty
+|25  |HTTP error in header
+|26  |HTTP error in chunked format
+|=====================================
+
+// vim: set tw=72 cms=//%s :
