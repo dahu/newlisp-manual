@@ -2495,11 +2495,9 @@ The regression coefficients `b0 = 29.241` and `b1 = -0.064` can be used
 to estimate values of the Y variable (test errors) from values in X
 (study time) using the equation `Y = b0 + b1 * X`.
 
-cos
-~~~
+==== [big red]#cos#
 
-syntax: (cos _num-radians_)
-+++++++++++++++++++++++++++
+*syntax:* (cos _num-radians_)
 
 Calculates the cosine of _num-radians_ and returns the result.
 
@@ -2510,11 +2508,9 @@ Calculates the cosine of _num-radians_ and returns the result.
 (cos pi)                    → -1
 ------------------------------------------
 
-cosh
-~~~~
+==== [big red]#cosh#
 
-syntax: (cosh _num-radians_)
-++++++++++++++++++++++++++++
+*syntax:* (cosh _num-radians_)
 
 Calculates the hyperbolic cosine of _num-radians_. The hyperbolic cosine
 is defined mathematically as: _(exp (x) + exp (-x)) / 2_. An overflow to
@@ -2528,11 +2524,9 @@ is defined mathematically as: _(exp (x) + exp (-x)) / 2_. An overflow to
 (= (cosh 1) (div (add (exp 1) (exp -1)) 2))  → true
 ---------------------------------------------------
 
-count
-~~~~~
+==== [big red]#count#
 
-syntax: (count _list-1_ _list-2_)
-+++++++++++++++++++++++++++++++++
+*syntax:* (count _list-1_ _list-2_)
 
 Counts elements of _list-1_ in _list-2_ and returns a list of those
 counts.
@@ -2554,11 +2548,9 @@ the second list, should be unique. For items that are not unique, only
 the first instance will carry a count; all other instances will display
 `0` (zero).
 
-cpymem
-~~~~~~
+==== [big red]#cpymem#
 
-syntax: (cpymem _int-from-address_ _int-to-address_ _int-bytes_)
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+*syntax:* (cpymem _int-from-address_ _int-to-address_ _int-bytes_)
 
 Copies _int-bytes_ of memory from _int-from-address_ to
 _int-to-address_. This function can be used for direct memory
@@ -2589,6 +2581,7 @@ of binary code, and adds up two numbers. This assembly language snippet
 shows the x86 (Intel CPU) code to add up two numbers and return the
 result:
 
+[source,nasm]
 -------------------------------------
  55       push ebp
  8B EC    mov  ebp, esp
@@ -2604,6 +2597,7 @@ result:
 The binary representation is attached to a new function created in
 newLISP:
 
+[source,newlisp]
 ---------------------------------------------------------------------------
 (set 'foo-code (append
      (pack "bbbbbbbbbb" 0x55 0x8B 0xEC 0x8B 0x45 0x08 0x03 0x45 0x0C 0x5D)
@@ -2622,11 +2616,9 @@ The last example will not work on all hardware platforms and OSs.
 Use the link:#dump[dump] function to retrieve binary addresses and the
 contents from newLISP cells.
 
-crc32
-~~~~~
+==== [big red]#crc32#
 
-syntax: (crc32 _str-data_)
-++++++++++++++++++++++++++
+*syntax:* (crc32 _str-data_)
 
 Calculates a running 32-bit CRC (Circular Redundancy Check) sum from the
 buffer in _str-data_, starting with a CRC of `0xffffffff` for the first
@@ -2641,11 +2633,9 @@ http://www.w3.org[www.w3.org].
 `crc32` is often used to verify data integrity in unsafe data
 transmissions.
 
-crit-chi2
-~~~~~~~~~
+==== [big red]#crit-chi2#
 
-syntax: (crit-chi2 _num-probability_ _int-df_)
-++++++++++++++++++++++++++++++++++++++++++++++
+*syntax:* (crit-chi2 _num-probability_ _int-df_)
 
 Calculates the critical minimum _Chi²_ for a given confidence
 probability _num-probability_ under the null hypothesis and the degrees
@@ -2662,11 +2652,9 @@ instead of _p_.
 
 See also the inverse function link:#prob-chi2[prob-chi2].
 
-crit-f
-~~~~~~
+==== [big red]#crit-f#
 
-syntax: (crit-f _num-probability_ _int-df1_ _int-df2_)
-++++++++++++++++++++++++++++++++++++++++++++++++++++++
+*syntax:* (crit-f _num-probability_ _int-df1_ _int-df2_)
 
 Calculates the critical minimum _F_ for a given confidence probability
 _num-probability_ under the null hypothesis and the degrees of freedmom
@@ -2680,11 +2668,9 @@ statistical null hypothesis using the _F-test_.
 
 See also the inverse function link:#prob-f[prob-f].
 
-crit-t
-~~~~~~
+==== [big red]#crit-t#
 
-syntax: (crit-t _num-probability_ _int-df_)
-+++++++++++++++++++++++++++++++++++++++++++
+*syntax:* (crit-t _num-probability_ _int-df_)
 
 Calculates the critical minimum _Student's t_ for a given confidence
 probability _num-probability_ under the null hypothesis and the degrees
@@ -2698,11 +2684,9 @@ null hypothesis.
 
 See also the inverse function link:#prob-t[prob-t].
 
-crit-z
-~~~~~~
+==== [big red]#crit-z#
 
-syntax: (crit-z _num-probability_)
-++++++++++++++++++++++++++++++++++
+*syntax:* (crit-z _num-probability_)
 
 Calculates the critical normal distributed Z value of a given cumulated
 probability _num-probability_ for testing of statistical significance
@@ -2715,11 +2699,9 @@ and confidence intervals.
 
 See also the inverse function link:#prob-z[prob-z].
 
-current-line
-~~~~~~~~~~~~
+==== [big red]#current-line#
 
-syntax: (current-line)
-++++++++++++++++++++++
+*syntax:* (current-line)
 
 Retrieves the contents of the last link:#read-line[read-line] operation.
 `current-line`'s contents are also implicitly used when
@@ -2741,6 +2723,7 @@ command-line filter:
 
 The program is invoked:
 
+[source,newlisp]
 -------------------
 ./filter myfile.lsp
 -------------------
@@ -2748,11 +2731,9 @@ The program is invoked:
 This displays all comment lines starting with `;;` from a file given as
 a command-line argument when invoking the script `filter`.
 
-curry
-~~~~~
+==== [big red]#curry#
 
-syntax: (curry _func_ _exp_)
-++++++++++++++++++++++++++++
+*syntax:* (curry _func_ _exp_)
 
 Transforms _func_ from a function _f(x, y)_ that takes two arguments
 into a function _fx(y)_ that takes a single argument. `curry` works like
@@ -2777,13 +2758,11 @@ evaluated during the application of _func_.
 
 `curry` can be used on all functions taking two arguments.
 
-date link:#utf8_capable[utf8]
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+==== [big red]#date link:#utf8_capable[utf8]#
 
-syntax: (date) +
- syntax: (date _int-secs_ [_int-offset_]) +
- syntax: (date _int-secs_ _int-offset_ _str-format_)
-++++++++++++++++++++++++++++++++++++++++++++++++++++
+*syntax:* (date) +
+*syntax:* (date _int-secs_ [_int-offset_]) +
+*syntax:* (date _int-secs_ _int-offset_ _str-format_)
 
 The first syntax returns the local time zone's current date and time as
 a string representation. If _int-secs_ is out of range, `nil` is
@@ -2849,7 +2828,7 @@ Win32 and Linux/Unix platforms. More format options are available on
 Linux/Unix. For details, consult the manual page for the C function
 `strftime()` of the individual platform's C library.
 
-[cols="<,<",options="header",]
+[cols="1<,10<",width="75%",options="header",]
 |=======================================================================
 |format |description
 |%a |abbreviated weekday name according to the current locale
@@ -2915,11 +2894,9 @@ See also link:#date-value[date-value], link:#date-list[date-list],
 link:#date-parse[date-parse], link:#time-of-day[time-of-day],
 link:#time[time], and link:#now[now].
 
-date-list
-~~~~~~~~~
+==== [big red]#date-list#
 
-syntax: (date-list _int-seconds_ [_int-index_])
-+++++++++++++++++++++++++++++++++++++++++++++++
+*syntax:* (date-list _int-seconds_ [_int-index_])
 
 Returns a list of year, month, date, hours, minutes, seconds, day of
 year and day of week from a time value given in seconds after January
@@ -2928,6 +2905,7 @@ may differ from the local timezone.
 
 The week-day value ranges from 1 to 7 for Monday thru Sunday.
 
+[source,newlisp]
 ---------------------------------------------------------------
 (date-list 1282479244)      → (2010 8 22 12 14 4 234 1)
 (date-list 1282479244 0)    → 2010 ; year
@@ -2943,11 +2921,9 @@ member of the list.
 
 `date-list` is the inverse operation of link:#date-value[date-value].
 
-date-parse
-~~~~~~~~~~
+==== [big red]#date-parse#
 
-syntax: (date-parse _str-date_ _str-format_)
-++++++++++++++++++++++++++++++++++++++++++++
+*syntax:* (date-parse _str-date_ _str-format_)
 
 Parses a date from a text string in _str-date_ using a format as defined
 in _str-format_, which uses the same formatting rules found in
@@ -2973,13 +2949,10 @@ named `parse-date` in previous versions. The old form is deprecated.
 
 See the link:#date[date] function for all possible format descriptors.
 
-date-value
-~~~~~~~~~~
+==== [big red]#date-value#
 
-syntax: (date-value _int-year_ _int-month_ _int-day_ [_int-hour_
-_int-min_ _int-sec_]) +
- syntax: (date-value)
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+*syntax:* (date-value _int-year_ _int-month_ _int-day_ [_int-hour_ _int-min_ _int-sec_]) +
+*syntax:* (date-value)
 
 In the first syntax, `date-value` returns the time in seconds since
 1970-1-1 00:00:00 for a given date and time. The parameters for the
@@ -3003,6 +2976,7 @@ the current time.
 The function link:#date-list[date-list] can be used to transform a
 `date-value` back into a list:
 
+[source,newlisp]
 ------------------------------------------------------
 (date-list 1014854400)  → (2002 2 28 0 0 0)
 (apply date-value (date-list 1014854400)) → 1014854400
@@ -3012,11 +2986,9 @@ See also link:#date[date], link:#date-list[date-list],
 link:#date-parse[date-parse], link:#time-of-day[time-of-day],
 link:#time[time], and link:#now[now].
 
-debug
-~~~~~
+==== [big red]#debug#
 
-syntax: (debug _func_)
-++++++++++++++++++++++
+*syntax:* (debug _func_)
 
 Calls link:#trace[trace] and begins evaluating the user-defined function
 in _func_. `debug` is a shortcut for executing `(trace true)`, then
@@ -3040,11 +3012,9 @@ state of the program can still be inspected while debugging.
 
 See also the link:#trace[trace] function.
 
-dec link:#destructive[!]
-~~~~~~~~~~~~~~~~~~~~~~~~
+==== [big red]#dec link:#destructive[!]#
 
-syntax: (dec _place_ [_num_])
-+++++++++++++++++++++++++++++
+*syntax:* (dec _place_ [_num_])
 
 The number in _place_ is decremented by `1.0` or the optional number
 _num_ and returned. `dec` performs float arithmetic and converts integer
@@ -3065,6 +3035,7 @@ x             → 8.75
 If the symbol for _place_ contains `nil`, it is treated as if containing
 `0.0`:
 
+[source,newlisp]
 ---------------------
 z             → nil
 (dec z)       → -1
@@ -3076,6 +3047,7 @@ z             → nil
 Places in a list structure or a number returned by another expression
 can be updated too:
 
+[source,newlisp]
 ---------------------
 (set 'l '(1 2 3 4))
 
@@ -3091,11 +3063,9 @@ l → (0 2 3 3.9)
 Use the link:#deci[--] function to decrement in integer mode. Use the
 link:#inc[inc] function to increment numbers floating point mode.
 
-def-new
-~~~~~~~
+==== [big red]#def-new#
 
-syntax: (def-new _sym-source_ [_sym-target_])
-+++++++++++++++++++++++++++++++++++++++++++++
+*syntax:* (def-new _sym-source_ [_sym-target_])
 
 This function works similarly to link:#new[new], but it only creates a
 copy of one symbol and its contents from the symbol in _sym-source_.
@@ -3136,6 +3106,7 @@ K> var
 The following example shows how a statically scoped function can be
 created by moving it its own namespace:
 
+[source,newlisp]
 -----------------------------------------
 > (set 'temp (lambda (x) (+ x x)))
 (lambda (x) (+ x x))
@@ -3150,6 +3121,7 @@ double:double
 The following definition of `def-static` can be used to create functions
 living in their own lexically protected name-space:
 
+[source,newlisp]
 --------------------------------
 (define (def-static s body)
       (def-new 'body (sym s s)))
@@ -3170,11 +3142,9 @@ The function `def-new` can also be used to configure contexts or context
 objects in a more granular fashion than is possible with link:#new[new],
 which copies a whole context.
 
-default
-~~~~~~~
+==== [big red]#default#
 
-syntax: (default _context_)
-+++++++++++++++++++++++++++
+*syntax:* (default _context_)
 
 Return the contents of the default functor in _context_.
 
@@ -3195,14 +3165,11 @@ In many situations newLISP defaults automatically to the default functor
 when seeing a context name. In circumstances where this is not the case,
 the `default` function can be used.
 
-define link:#destructive[!]
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
+==== [big red]#define link:#destructive[!]#
 
-syntax: (define (_sym-name_ [_sym-param-1_ ... ]) [_body-1_ ... ]) +
- syntax: (define (_sym-name_ [(_sym-param-1_ _exp-default_) ... ])
-[_body-1_ ... ]) +
- syntax: (define _sym-name_ _exp_)
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+*syntax:* (define (_sym-name_ [_sym-param-1_ ... ]) [_body-1_ ... ]) +
+*syntax:* (define (_sym-name_ [(_sym-param-1_ _exp-default_) ... ]) [_body-1_ ... ]) +
+*syntax:* (define _sym-name_ _exp_)
 
 Defines the new function _sym-name_, with optional parameters
 _sym-param-1_—. `define` is equivalent to assigning a lambda expression
@@ -3229,6 +3196,7 @@ evaluated in the function body.
 As an alternative, `area` could be defined as a function without using
 `define`.
 
+[source,newlisp]
 ---------------------------------
 (set 'area (lambda (x y) (* x y))
 ---------------------------------
@@ -3236,6 +3204,7 @@ As an alternative, `area` could be defined as a function without using
 _lambda_ or _fn_ expressions may be used by themselves as _anonymous_
 functions without being defined as a symbol:
 
+[source,newlisp]
 ----------------------------------
 ((lambda ( x y) (* x y)) 2 3)  → 6
 ((fn ( x y) (* x y)) 2 3)      → 6
@@ -3245,6 +3214,7 @@ functions without being defined as a symbol:
 
 Parameters can have default values specified:
 
+[source,newlisp]
 -------------------------
 (define (foo (a 1) (b 2))
   (list a b))
@@ -3257,6 +3227,7 @@ Parameters can have default values specified:
 Expressions in _exp-default_ are evaluated in the function's current
 environment.
 
+[source,newlisp]
 ----------------------------------
 (define (foo (a 10) (b (div a 2)))
   (list a b))
@@ -3283,13 +3254,10 @@ The second version of `define` works like the link:#set[set] function.
 
 Trying to redefine a protected symbol will cause an error message.
 
-define-macro
-~~~~~~~~~~~~
+==== [big red]#define-macro#
 
-syntax: (define-macro (_sym-name_ [_sym-param-1_ ... ]) _body_) +
- syntax: (define-macro (_sym-name_ [(_sym-param-1_ _exp-default_) ... ])
-_body_)
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+*syntax:* (define-macro (_sym-name_ [_sym-param-1_ ... ]) _body_) +
+*syntax:* (define-macro (_sym-name_ [(_sym-param-1_ _exp-default_) ... ]) _body_)
 
 Functions defined using `define-macro` are called _fexpr_s in other
 LISPs as they don't do variable expansion. In newLISP they are still
@@ -3324,6 +3292,7 @@ arguments, those parameters assume the value `nil`. If those parameters
 have a default value specified in _exp-default_, they assume that
 default value.
 
+[source,newlisp]
 -------------------------------
 (define-macro (foo (a 1) (b 2))
   (list a b))
@@ -3336,6 +3305,7 @@ default value.
 Expressions in _exp-default_ are evaluated in the function's current
 environment.
 
+[source,newlisp]
 ----------------------------------------
 (define-macro (foo (a 10) (b (div a 2)))
   (list a b))
@@ -3350,6 +3320,7 @@ same variable name as used in the `define-macro` definition. In this
 case, the _fexpr's_ internal variable would end up receiving `nil`
 instead of the intended value:
 
+[source,newlisp]
 ---------------------------------------------
 ;; not a good definition!
 
@@ -3400,12 +3371,10 @@ link:#args[args]:
 (define-macro (my-setq) (set (args 0) (eval (args 1))))
 -----------------------------------------------------------
 
-delete
-~~~~~~
+==== [big red]#delete#
 
-syntax: (delete _symbol_ [_bool_]) +
- syntax: (delete _sym-context_ [_bool_])
-++++++++++++++++++++++++++++++++++++++++
+*syntax:* (delete _symbol_ [_bool_]) +
+*syntax:* (delete _sym-context_ [_bool_])
 
 Deletes a symbol _symbol_, or a context in _sym-context_ with all
 contained symbols from newLISP's symbol table. References to the symbol
@@ -3458,11 +3427,9 @@ Note that deleting a symbol that is part of an expression which is
 currently executing can crash the system or have other unforeseen
 effects.
 
-delete-file
-~~~~~~~~~~~
+==== [big red]#delete-file#
 
-syntax: (delete-file _str-file-name_)
-+++++++++++++++++++++++++++++++++++++
+*syntax:* (delete-file _str-file-name_)
 
 Deletes a file given in _str-file-name_. Returns `true` if the file was
 deleted successfully.
@@ -3487,11 +3454,9 @@ second example shows how to use a URL to specify the file. In this form,
 additional parameters can be given. See link:#delete-url[delete-url] for
 details.
 
-delete-url
-~~~~~~~~~~
+==== [big red]#delete-url#
 
-syntax: (delete-file _str-url_)
-+++++++++++++++++++++++++++++++
+*syntax:* (delete-file _str-url_)
 
 This function deletes the file on a remote HTTP server specified in
 _str-url_. The HTTP `DELETE` protocol must be enabled on the target web
@@ -3519,12 +3484,10 @@ The second example configures a timeout option of five seconds. Other
 options such as special HTTP protocol headers can be specified, as well.
 See the link:#get-url[get-url] function for details.
 
-destroy
-~~~~~~~
+==== [big red]#destroy#
 
-syntax: (destroy _int-pid_) +
- syntax: (destroy _int-pid_ _int-signal_)
-+++++++++++++++++++++++++++++++++++++++++
+*syntax:* (destroy _int-pid_) +
+*syntax:* (destroy _int-pid_ _int-signal_)
 
 Destroys a process with process id in _int-pid_ and returns `true` on
 success or `nil` on failure. The process id is normally obtained from a
@@ -3551,11 +3514,9 @@ second syntax is not available on Win32.
 (sleep 100) (destroy pid)
 -----------------------------------------------------------
 
-det
-~~~
+==== [big red]#det#
 
-syntax: (det _matrix_ [_float-pivot_])
-++++++++++++++++++++++++++++++++++++++
+*syntax:* (det _matrix_ [_float-pivot_])
 
 Returns the determinant of a square matrix. A matrix can either be a
 nested list or an link:#array[array].
@@ -3582,11 +3543,9 @@ returned.
 See also the other matrix operations link:#invert[invert],
 link:#mat[mat], link:#multiply[multiply] and link:#transpose[transpose].
 
-device
-~~~~~~
+==== [big red]#device#
 
-syntax: (device [_int-handle_])
-+++++++++++++++++++++++++++++++
+*syntax:* (device [_int-handle_])
 
 _int-handle_ is an I/O device number, which is set to 0 (zero) for the
 default STD I/O pair of handles, 0 for _stdin_ and 1 for _stdout_.
@@ -3612,12 +3571,10 @@ link:#print[print] and link:#read-line[read-line] work on that file.
 Note that using link:#close[close] on `device` automatically resets
 `device` to 0 (zero).
 
-difference
-~~~~~~~~~~
+==== [big red]#difference#
 
-syntax: (difference _list-A_ _list-B_) +
- syntax: (difference _list-A_ _list-B_ _bool_)
-++++++++++++++++++++++++++++++++++++++++++++++
+*syntax:* (difference _list-A_ _list-B_) +
+*syntax:* (difference _list-A_ _list-B_ _bool_)
 
 In the first syntax, `difference` returns the _set_ difference between
 _list-A_ and _list-B_. The resulting list only has elements occurring in
@@ -3643,12 +3600,10 @@ duplicates of other elements in _list-A_ are left.
 See also the set functions link:#intersect[intersect],
 link:#unique[unique] and link:#union[union].
 
-directory
-~~~~~~~~~
+==== [big red]#directory#
 
-syntax: (directory [_str-path_]) +
- syntax: (directory _str-path_ _str-pattern_ [_int-regex-option_])
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+*syntax:* (directory [_str-path_]) +
+*syntax:* (directory _str-path_ _str-pattern_ [_int-regex-option_])
 
 A list of directory entry names is returned for the directory path given
 in _str-path_. On failure, `nil` is returned. When _str-path_ is
@@ -3690,26 +3645,23 @@ Other functions that use regular expressions are link:#find[find],
 link:#find-all[find-all], link:#parse[parse], link:#regex[regex],
 link:#replace[replace], and link:#search[search].
 
-directory?
-~~~~~~~~~~
+==== [big red]#directory?#
 
-syntax: (directory? _str-path_)
-+++++++++++++++++++++++++++++++
+*syntax:* (directory? _str-path_)
 
 Checks if _str-path_ is a directory. Returns `true` or `nil` depending
 on the outcome.
 
+[source,newlisp]
 --------------------------------------
 (directory? "/etc")             → true
 (directory? "/usr/bin/emacs/")  → nil
 --------------------------------------
 
-div
-~~~
+==== [big red]#div#
 
-syntax: (div _num-1_ _num-2_ [_num-3_ ... ]) +
- syntax: (div _num-1_)
-++++++++++++++++++++++++++++++++++++++++++++++
+*syntax:* (div _num-1_ _num-2_ [_num-3_ ... ]) +
+*syntax:* (div _num-1_)
 
 Successively divides _num-1_ by the number in _num-2—_. `div` can
 perform mixed-type arithmetic, but it always returns floating point
@@ -3726,11 +3678,9 @@ numbers. Any floating point calculation with `NaN` also returns `NaN`.
 When _num-1_ is the only argument, `div` calculates the inverse of
 _num-1_.
 
-do-until
-~~~~~~~~
+==== [big red]#do-until#
 
-syntax: (do-until _exp-condition_ [_body_])
-+++++++++++++++++++++++++++++++++++++++++++
+*syntax:* (do-until _exp-condition_ [_body_])
 
 The expressions in _body_ are evaluated before _exp-condition_ is
 evaluated. If the evaluation of _exp-condition_ is not `nil`, then the
@@ -3760,11 +3710,9 @@ never enters the loop.
 
 See also the functions link:#while[while] and link:#do-while[do-while].
 
-do-while
-~~~~~~~~
+==== [big red]#do-while#
 
-syntax: (do-while _exp-condition body_)
-+++++++++++++++++++++++++++++++++++++++
+*syntax:* (do-while _exp-condition body_)
 
 The expressions in _body_ are evaluated before _exp-condition_ is
 evaluated. If the evaluation of _exp-condition_ is `nil`, then the
@@ -3793,11 +3741,9 @@ never enters the loop.
 
 See also the functions link:#until[until] and link:#do-until[do-until].
 
-doargs
-~~~~~~
+==== [big red]#doargs#
 
-syntax: (doargs (_sym_ [_exp-break_])_body_)
-++++++++++++++++++++++++++++++++++++++++++++
+*syntax:* (doargs (_sym_ [_exp-break_])_body_)
 
 Iterates through all members of the argument list inside a user-defined
 function or macro. This function or macro can be defined using
@@ -3825,6 +3771,7 @@ expression always returns the result of the last evaluation.
 The optional break expression causes `doargs` to interrupt processing of
 the arguments:
 
+[source,newlisp]
 ------------------------
 (define-macro (foo)
     (doargs (i (= i 'x))
@@ -3839,11 +3786,9 @@ true
 Use the link:#args[args] function to access the entire argument list at
 once.
 
-dolist
-~~~~~~
+==== [big red]#dolist#
 
-syntax: (dolist (_sym_ _list_ [_exp-break_])_body_)
-+++++++++++++++++++++++++++++++++++++++++++++++++++
+*syntax:* (dolist (_sym_ _list_ [_exp-break_])_body_)
 
 The expressions in _body_ are evaluated for each element in _list_. The
 variable in _sym_ is set to each of the elements before evaluation of
@@ -3879,6 +3824,7 @@ The internal system variable `$idx` keeps track of the current offset
 into the list passed to `dolist`, and it can be accessed during its
 execution:
 
+[source,newlisp]
 ----------------------------
 (dolist (x '(a b d e f g))
   (println $idx ":" x))  → g
@@ -3894,11 +3840,9 @@ execution:
 The console output is shown in boldface. `$idx` is protected and cannot
 be changed by the user.
 
-dostring link:#utf8_capable[utf8]
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+==== [big red]#dostring link:#utf8_capable[utf8]#
 
-syntax: (dostring (_sym_ _string_ [_exp-break_]) _body_)
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+*syntax:* (dostring (_sym_ _string_ [_exp-break_]) _body_)
 
 The expressions in _body_ are evaluated for each character in _string_.
 The variable in _sym_ is set to each ASCII or UTF-8 integer value of the
@@ -3947,11 +3891,9 @@ The internal system variable `$idx` keeps track of the current offset
 into the string passed to `dostring`, and it can be accessed during its
 execution.
 
-dotimes
-~~~~~~~
+==== [big red]#dotimes#
 
-syntax: (dotimes (_sym-var_ _int-count_ [_exp-break_]) _body_)
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+*syntax:* (dotimes (_sym-var_ _int-count_ [_exp-break_]) _body_)
 
 The expressions in _body_ are evaluated _int_ times. The variable in
 _sym_ is set from 0 (zero) to (_int_ - 1) each time before evaluating
@@ -3974,11 +3916,9 @@ condition is tested before evaluating _body_.
 
 This prints `0123456789` to the console window.
 
-dotree
-~~~~~~
+==== [big red]#dotree#
 
-syntax: (dotree (_sym_ _sym-context_ [_bool_]) _body_)
-++++++++++++++++++++++++++++++++++++++++++++++++++++++
+*syntax:* (dotree (_sym_ _sym-context_ [_bool_]) _body_)
 
 The expressions in _body_ are evaluated for all symbols in
 _sym-context_. The symbols are accessed in a sorted order. Before each
@@ -4006,11 +3946,9 @@ symbols created by link:#bayes-train[bayes-train].
 This example prints the names of all symbols inside SomeCTX to the
 console window.
 
-dump
-~~~~
+==== [big red]#dump#
 
-syntax: (dump [_exp_])
-++++++++++++++++++++++
+*syntax:* (dump [_exp_])
 
 Shows the binary contents of a newLISP cell. Without an argument, this
 function outputs a listing of all Lisp cells to the console. When _exp_
@@ -4026,7 +3964,7 @@ in a list.
 
 The list contains the following memory addresses and information:
 
-[cols="<,<",options="header",]
+[cols="1<,10<",width="40%",options="header",]
 |====================================================================
 |offset |description
 |0 |memory address of the newLISP cell
@@ -4046,12 +3984,10 @@ This function is valuable for changing type bits in cells or hacking
 other parts of newLISP internals. See the function link:#cpymem[cpymem]
 for a comprehensive example.
 
-dup
-~~~
+==== [big red]#dup#
 
-syntax: (dup _exp_ _int-n_ [_bool_]) +
- syntax: (dup _exp_)
-++++++++++++++++++++++++++++++++++++++
+*syntax:* (dup _exp_ _int-n_ [_bool_]) +
+*syntax:* (dup _exp_)
 
 If the expression in _exp_ evaluates to a string, it will be replicated
 _int-n_ times within a string and returned. When specifying an
@@ -4085,12 +4021,10 @@ filled with four binary zeroes.
 See also the functions link:#sequence[sequence] and
 link:#series[series].
 
-empty?
-~~~~~~
+==== [big red]#empty?#
 
-syntax: (empty? _exp_) +
- syntax: (empty? _str_)
-++++++++++++++++++++++++
+*syntax:* (empty? _exp_) +
+*syntax:* (empty? _str_)
 
 _exp_ is tested for an empty list (or _str_ for an empty string).
 Depending on whether the argument contains elements, `true` or `nil` is
@@ -4108,11 +4042,9 @@ returned.
 The first example checks a list, while the second two examples check a
 string.
 
-encrypt
-~~~~~~~
+==== [big red]#encrypt#
 
-syntax: (encrypt _str-source_ _str-pad_)
-++++++++++++++++++++++++++++++++++++++++
+*syntax:* (encrypt _str-source_ _str-pad_)
 
 Performs a one-time–pad encryption of _str-source_ using the encryption
 pad in _str-pad_. The longer _str-pad_ is and the more random the bytes
@@ -4133,17 +4065,16 @@ are applied again to the encrypted text:
 
 The second example encrypts a whole file:
 
+[source,newlisp]
 -------------------------------------------
 (write-file "myfile.enc"
   (encrypt (read-file "myfile") "29kH67*"))
 -------------------------------------------
 
-ends-with
-~~~~~~~~~
+==== [big red]#ends-with#
 
-syntax: (ends-with _str-data_ _str-key_ [_num-option_]) +
- syntax: (ends-with _list_ _exp_)
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+*syntax:* (ends-with _str-data_ _str-key_ [_num-option_]) +
+*syntax:* (ends-with _list_ _exp_)
 
 In the first syntax, `ends-with` tests the string in _str-data_ to see
 if it ends with the string specified in _str-key_. It returns `true` or
@@ -4175,13 +4106,11 @@ The last example shows that _exp_ could be a list by itself.
 
 See also the link:#starts-with[starts-with] function.
 
-env
-~~~
+==== [big red]#env#
 
-syntax: (env) +
- syntax: (env _var-str_) +
- syntax: (env _var-str_ _value-str_)
-++++++++++++++++++++++++++++++++++++
+*syntax:* (env) +
+*syntax:* (env _var-str_) +
+*syntax:* (env _var-str_ _value-str_)
 
 In the first syntax (without arguments), the operating system's
 environment is retrieved as an association list in which each entry is a
@@ -4216,11 +4145,9 @@ with an empty string.
 (env "NEWLISPBIN")              → nil
 ---------------------------------------------
 
-erf
-~~~
+==== [big red]#erf#
 
-syntax: (erf _num_)
-+++++++++++++++++++
+*syntax:* (erf _num_)
 
 `erf` calculates the error function of a number in _num_. The error
 function is defined as:
@@ -4235,11 +4162,9 @@ function is defined as:
  0.9999779095 0.9999992569 0.9999999846 0.9999999998 1 1 1)
 -----------------------------------------------------------------
 
-error-event
-~~~~~~~~~~~
+==== [big red]#error-event#
 
-syntax: (error-event _sym-event-handler | func-event-handler_)
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+*syntax:* (error-event _sym-event-handler | func-event-handler_)
 
 _sym-event-handler_ contains a user-defined function for handling
 errors. Whenever an error occurs, the system performs a
@@ -4269,11 +4194,9 @@ For a different way of handling errors, see the link:#catch[catch]
 function. Use link:#throw-error[throw-error] to throw user-defined
 errors.
 
-eval
-~~~~
+==== [big red]#eval#
 
-syntax: (eval _exp_)
-++++++++++++++++++++
+*syntax:* (eval _exp_)
 
 _eval_ evaluates the result of evaluating _exp_ in the current variable
 environment.
@@ -4293,6 +4216,7 @@ x            → y
 As usual, evaluation of variables happens in the current variable
 environment:
 
+[source,newlisp]
 -----------------------------------------------------
 ; eval in global (top level) environment
 (set 'x 3 'y 4)
@@ -4310,6 +4234,7 @@ newLISP passes all arguments by value. Using a quoted symbol,
 expressions can be passed by reference through the symbol. `eval` can be
 used to access the original contents of the symbol:
 
+[source,newlisp]
 ----------------------------------------------------
 (define (change-list aList) (push 999 (eval aList)))
 
@@ -4328,12 +4253,9 @@ defined function using namespace ids avoids _variable capture_ of the
 passed symbol, in case the symbol passed is the same used as a parameter
 in the function.
 
-eval-string
-~~~~~~~~~~~
+==== [big red]#eval-string#
 
-syntax: (eval-string _str-source_ [_sym-context_ [_exp-error_
-[_int-offset_]]])
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+*syntax:* (eval-string _str-source_ [_sym-context_ [_exp-error_ [_int-offset_]]])
 
 The string in _str-source_ is compiled into newLISP's internal format
 and then evaluated. The evaluation result is returned. If the string
@@ -4379,16 +4301,15 @@ The symbols `a` and `b` now refer to symbols and their values in context
 See also the function link:#read-expr[read-expr] which translates a
 string without evaluating it.
 
-even?
-~~~~~
+==== [big red]#even?#
 
-syntax: (even? _int-number_)
-++++++++++++++++++++++++++++
+*syntax:* (even? _int-number_)
 
 Checks if an integer number is _even divisable_ by `2`, without
 remainder. When a floating point number is passed for _int-number_, it
 will be converted to an integer by cutting off its fractional part.
 
+[source,newlisp]
 -------------------
 (even? 123)  → nil
 (even? 8)    → true
@@ -4397,12 +4318,10 @@ will be converted to an integer by cutting off its fractional part.
 
 Use link:#oddp[odd?] to check if an integer is not divisable by `2`.
 
-exec
-~~~~
+==== [big red]#exec#
 
-syntax: (exec _str-process_) +
- syntax: (exec _str-process_ [_str-stdin_])
-+++++++++++++++++++++++++++++++++++++++++++
+*syntax:* (exec _str-process_) +
+*syntax:* (exec _str-process_ [_str-stdin_])
 
 In the first form, `exec` launches a process described in _str-process_
 and returns all standard output as a list of strings (one for each line
@@ -4432,11 +4351,9 @@ In this example, cgiProc could be a cgi processor (e.g., Perl or
 newLISP) that receives and processes standard input supplied by a string
 contained in the variable query.
 
-exists
-~~~~~~
+==== [big red]#exists#
 
-syntax: (exists _func-condition_ _list_)
-++++++++++++++++++++++++++++++++++++++++
+*syntax:* (exists _func-condition_ _list_)
 
 Successively applies _func-condition_ to the elements of _list_ and
 returns the first element that meets the condition in _func-condition_.
@@ -4464,11 +4381,9 @@ looking for `nil`.
 Use the link:#for-all[for-all] function to check if a condition is met
 for all elements in a list.
 
-exit
-~~~~
+==== [big red]#exit#
 
-syntax: (exit [_int_])
-++++++++++++++++++++++
+*syntax:* (exit [_int_])
 
 Exits newLISP. An optional exit code, _int_, may be supplied. This code
 can be tested by the host operating system. When newLISP is run in
@@ -4481,11 +4396,9 @@ listening for a new connection.
 (exit 5)
 --------
 
-exp
-~~~
+==== [big red]#exp#
 
-syntax: (exp _num_)
-+++++++++++++++++++
+*syntax:* (exp _num_)
 
 The expression in _num_ is evaluated, and the exponential function is
 calculated based on the result. `exp` is the inverse function of
@@ -4497,13 +4410,11 @@ link:#log[log].
 (exp (log 1))  → 1
 ----------------------------
 
-expand
-~~~~~~
+==== [big red]#expand#
 
-syntax: (expand _exp_ _sym-1_ [_sym-2_ ... ]) +
- syntax: (expand _exp_ _list-assoc_ [_bool_]) +
- syntax: (expand _exp_)
-+++++++++++++++++++++++++++++++++++++++++++++++
+*syntax:* (expand _exp_ _sym-1_ [_sym-2_ ... ]) +
+*syntax:* (expand _exp_ _list-assoc_ [_bool_]) +
+*syntax:* (expand _exp_)
 
 In the first syntax, one symbol in _sym_ (or more in _sym-2_ through
 _sym-n_) is looked up in a simple or nested expression _exp_. They are
@@ -4523,6 +4434,7 @@ expression is returned. The original list remains unchanged.
 `expand` is useful when composing lambda expressions or doing variable
 expansion inside macros.
 
+[source,newlisp]
 -----------------------------------------------
 (define (raise-to power)
   (expand (fn (base) (pow base power)) 'power))
@@ -4537,6 +4449,7 @@ expansion inside macros.
 If more than one symbol is present, `expand` will work in an incremental
 fashion:
 
+[source,newlisp]
 --------------------------------------
 (set 'a '(b c))
 (set 'b 1)
@@ -4547,8 +4460,7 @@ fashion:
 Like the link:#apply[apply] function, `expand` _reduces_ its argument
 list.
 
-syntax: (expand _list_ _list-assoc_ [_bool_])
-+++++++++++++++++++++++++++++++++++++++++++++
+*syntax:* (expand _exp_ _list-assoc_ [_bool_])
 
 The second syntax of `expand` allows expansion bindings to be specified
 on the fly, without performing a link:#set[set] on the participating
@@ -4572,8 +4484,7 @@ variables are set by evaluating and assigning their association parts.
 This form of `expand` is frequently used in logic programming, together
 with the link:#unify[unify] function.
 
-syntax: (expand _list_)
-+++++++++++++++++++++++
+*syntax:* (expand _exp_)
 
 A third syntax is used to expand only the contents of variables starting
 with an uppercase character. This PROLOG mode may also be used in the
@@ -4594,6 +4505,7 @@ The _currying_ function in the example demonstrating the first syntax of
 `expand` can now be written even more simply using an uppercase
 variable:
 
+[source,newlisp]
 ----------------------------------------
 (define (raise-to Power)
   (expand (fn (base) (pow base Power))))
@@ -4611,12 +4523,10 @@ See the link:#letex[letex] function, which also provides an expansion
 mechanism, and the function link:#unify[unify], which is frequently used
 together with `expand`.
 
-explode link:#utf8_capable[utf8]
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+==== [big red]#explode link:#utf8_capable[utf8]#
 
-syntax: (explode _str_ [_int-chunk_ [_bool_]]) +
- syntax: (explode _list_ [_int-chunk_ [_bool_]])
-++++++++++++++++++++++++++++++++++++++++++++++++
+*syntax:* (explode _str_ [_int-chunk_ [_bool_]]) +
+*syntax:* (explode _list_ [_int-chunk_ [_bool_]])
 
 In the first syntax, `explode` transforms the string (_str_) into a list
 of single-character strings. Optionally, a chunk size can be specified
@@ -4641,6 +4551,7 @@ omitted if it does not have the full length specified in _int-chunk_.
 Only on non UTF8– enabled versions, `explode` also works on binary
 content:
 
+[source,newlisp]
 -------------------------------
 (explode "\000\001\002\003")
 → ("\000" "\001" "\002" "\003")
@@ -4654,6 +4565,7 @@ when a zero byte character is found.
 To explode binary contents on UTF-8–enabled versions of newLISP use
 link:#unpack[unpack] as shown in the following example:
 
+[source,newlisp]
 -------------------------------------------------------------------
 (set 'str "\001\002\003\004") → "\001\002\003\004"
 
@@ -4683,12 +4595,10 @@ full length specified in _int-chunk_.
 The link:#join[join] and link:#append[append] functions are inverse
 operations of `explode`.
 
-extend link:#destructive[!]
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
+==== [big red]#extend link:#destructive[!]#
 
-syntax: (extend _list-1_ [_list-2_ ... ]) +
- syntax: (extend _string-1_ [_string-2_ ... ])
-++++++++++++++++++++++++++++++++++++++++++++++
+*syntax:* (extend _list-1_ [_list-2_ ... ]) +
+*syntax:* (extend _string-1_ [_string-2_ ... ])
 
 The list in _list-1_ is extended by appending _list-2_. More than one
 list may be appended.
@@ -4727,11 +4637,9 @@ L → (a b "CDE" (e f g))
 
 For a non-destructive list or string extension see link:#append[append].
 
-factor
-~~~~~~
+==== [big red]#factor#
 
-syntax: (factor _int_)
-++++++++++++++++++++++
+*syntax:* (factor _int_)
 
 Factors the number in _int_ into its prime components. When floating
 point numbers are passed, they are truncated to their integer part
@@ -4762,11 +4670,9 @@ first.
 than 9,223,372,036,854,775,807 (the largest 64-bit integer) converted
 from floating point numbers, the largest integer is factored.
 
-fft
-~~~
+==== [big red]#fft#
 
-syntax: (fft _list-num_)
-++++++++++++++++++++++++
+*syntax:* (fft _list-num_)
 
 Calculates the discrete Fourier transform on the list of complex numbers
 in _list-num_ using the FFT method (Fast Fourier Transform). Each
@@ -4791,11 +4697,9 @@ be used instead.
 
 The inverse operation of `fft` is the link:#ifft[ifft] function.
 
-file-info
-~~~~~~~~~
+==== [big red]#file-info#
 
-syntax: (file-info _str-name_ [_int-index_ [_bool-flag_]])
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+*syntax:* (file-info _str-name_ [_int-index_ [_bool-flag_]])
 
 Returns a list of information about the file or directory in _str_name_.
 The optional index specifies the list member to return. When no
@@ -4804,7 +4708,7 @@ information about the link is returned if the file is a link to an
 original file. If _bool-flag_ evaluates to anything else than `nil`,
 information about the original file referenced by the link is returned.
 
-[cols="<,<",options="header",]
+[cols="1<,4<",width="25%",options="header",]
 |==================================
 |offset |contents
 |0 |size
@@ -4836,11 +4740,9 @@ _/etc_ is retrieved.
 `file-info` gives file statistics (size) for a linked file, not the
 link, except for the _mode_ field.
 
-file?
-~~~~~
+==== [big red]#file?#
 
-syntax: (file? _str-path-name_ [_bool_])
-++++++++++++++++++++++++++++++++++++++++
+*syntax:* (file? _str-path-name_ [_bool_])
 
 Checks for the existence of a file in _str-name_. Returns `true` if the
 file exists; otherwise, it returns `nil`. This function will also return
@@ -4857,11 +4759,9 @@ having the permissions to read from or write to it by the current user.
 (file? "/usr/bin/foo" true)     → nil
 --------------------------------------------------------
 
-filter
-~~~~~~
+==== [big red]#filter#
 
-syntax: (filter _exp-predicate_ _exp-list_)
-+++++++++++++++++++++++++++++++++++++++++++
+*syntax:* (filter _exp-predicate_ _exp-list_)
 
 The predicate _exp-predicate_ is applied to each element of the list
 _exp-list_. A list is returned containing the elements for which
@@ -4897,12 +4797,10 @@ See also the related function link:#index[index], which returns the
 indices of the filtered elements and link:#clean[clean], which returns
 all elements of a list for which a predicate is false.
 
-find
-~~~~
+==== [big red]#find#
 
-syntax: (find _exp-key_ _list_ [_func-compare_ | _int-regex-option_]) +
- syntax: (find _str-key_ _str-data_ [_int-regex-option_ [_int-offset_]])
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+*syntax:* (find _exp-key_ _list_ [_func-compare_ | _int-regex-option_]) +
+*syntax:* (find _str-key_ _str-data_ [_int-regex-option_ [_int-offset_]])
 
 Find an expression in a list
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -5041,14 +4939,11 @@ link:#search[search].
 To find expressions in nested or multidimensional lists, use the
 link:#ref[ref] and link:#ref-all[ref-all] functions.
 
-find-all
-~~~~~~~~
+==== [big red]#find-all#
 
-syntax: (find-all _str-regex-pattern_ _str-text_ [_exp_
-[_int-regex-option_]]) +
- syntax: (find-all _list-match-pattern_ _list-lists_ [_exp_]) +
- syntax: (find-all _exp-key_ _list_ _exp_ _func-compare_)
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+*syntax:* (find-all _str-regex-pattern_ _str-text_ [_exp_ [_int-regex-option_]]) +
+*syntax:* (find-all _list-match-pattern_ _list-lists_ [_exp_]) +
+*syntax:* (find-all _exp-key_ _list_ _exp_ _func-compare_)
 
 In the first syntax, `find-all` finds all occurrences of
 _str-regex-pattern_ in the text _str-text_, returning a list containing
@@ -5124,13 +5019,11 @@ list. `find-all` in this syntax works similar to link:#filter[filter]
 but with the added benefit of being able to define a processing
 expression for the found element.
 
-first link:#utf8_capable[utf8]
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+==== [big red]#first link:#utf8_capable[utf8]#
 
-syntax: (first _list_) +
- syntax: (first _array_) +
- syntax: (first _str_)
-++++++++++++++++++++++++++
+*syntax:* (first _list_) +
+*syntax:* (first _array_) +
+*syntax:* (first _str_)
 
 Returns the first element of a list or the first character of a string.
 The operand is not changed. This function is equivalent to _car_ or
@@ -5163,11 +5056,9 @@ Note that link:#first[first] works on character boundaries rather than
 byte boundaries when the UTF-8–enabled version of newLISP is used. See
 also the functions link:#last[last] and link:#rest[rest].
 
-flat
-~~~~
+==== [big red]#flat#
 
-syntax: (flat _list_)
-+++++++++++++++++++++
+*syntax:* (flat _list_)
 
 Returns a flattened list from a list:
 
@@ -5182,11 +5073,9 @@ Returns a flattened list from a list:
 
 `flat` can be used to iterate through nested lists.
 
-float
-~~~~~
+==== [big red]#float#
 
-syntax: (float _exp_ [_exp-default_])
-+++++++++++++++++++++++++++++++++++++
+*syntax:* (float _exp_ [_exp-default_])
 
 If the expression in _exp_ evaluates to a number or a string, the
 argument is converted to a float and returned. If _exp_ cannot be
@@ -5227,11 +5116,9 @@ differs on different platforms and compilers.
 
 Use the link:#int[int] function to parse integer numbers.
 
-float?
-~~~~~~
+==== [big red]#float?#
 
-syntax: (float? _exp_)
-++++++++++++++++++++++
+*syntax:* (float? _exp_)
 
 `true` is returned only if _exp_ evaluates to a floating point number;
 otherwise, `nil` is returned.
@@ -5242,11 +5129,9 @@ otherwise, `nil` is returned.
 (float? num)  → true
 --------------------
 
-floor
-~~~~~
+==== [big red]#floor#
 
-syntax: (floor _number_)
-++++++++++++++++++++++++
+*syntax:* (floor _number_)
 
 Returns the next lowest integer below _number_ as a floating point.
 
@@ -5258,11 +5143,9 @@ Returns the next lowest integer below _number_ as a floating point.
 
 See also the link:#ceil[ceil] function.
 
-flt
-~~~
+==== [big red]#flt#
 
-syntax: (flt _number_)
-++++++++++++++++++++++
+*syntax:* (flt _number_)
 
 Converts _number_ to a 32-bit float represented by an integer. This
 function is used when passing 32-bit floats to library routines. newLISP
@@ -5286,11 +5169,9 @@ The last two statements illustrate the inner workings of `flt`.
 
 Use the link:#import[import] function to import libraries.
 
-fn
-~~
+==== [big red]#fn#
 
-syntax: (fn (_list-parameters_) _exp-body_)
-+++++++++++++++++++++++++++++++++++++++++++
+*syntax:* (fn (_list-parameters_) _exp-body_)
 
 `fn` is used to define anonymous functions, which are frequently used in
 link:#map[map], link:#sort[sort], and many other functions where
@@ -5314,12 +5195,9 @@ link:#map[map]. The second example shows strings being sorted by length.
 The link:#lambda[lambda] function (the longer, traditional form) can be
 used in place of `fn`.
 
-for
-~~~
+==== [big red]#for#
 
-syntax: (for (_sym_ _num-from_ _num-to_ [_num-step_ [_exp-break_]])
-_body_)
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+*syntax:* (for (_sym_ _num-from_ _num-to_ [_num-step_ [_exp-break_]]) _body_)
 
 Repeatedly evaluates the expressions in _body_ for a range of values
 specified in _num-from_ and _num-to_, inclusive. A step size may be
@@ -5367,11 +5245,9 @@ break condition is tested.
 
 Use the link:#sequence[sequence] function to make a sequence of numbers.
 
-for-all
-~~~~~~~
+==== [big red]#for-all#
 
-syntax: (for-all _func-condition_ _list_)
-+++++++++++++++++++++++++++++++++++++++++
+*syntax:* (for-all _func-condition_ _list_)
 
 Applies the function in _func-condition_ to all elements in _list_. If
 all elements meet the condition in _func-condition_, the result is
@@ -5389,11 +5265,9 @@ all elements meet the condition in _func-condition_, the result is
 Use the link:#exists[exists] function to check if at least one element
 in a list meets a condition.
 
-fork
-~~~~
+==== [big red]#fork#
 
-syntax: (fork _exp_)
-++++++++++++++++++++
+*syntax:* (fork _exp_)
 
 The expression in _exp_ is launched as a newLISP child process-thread of
 the platforms OS. The new process inherits the entire address space, but
@@ -5479,6 +5353,7 @@ they are picked up by the `observer-process` and displayed.
 A forked process can either exit by itself or it can be destroyed using
 the link:#destroy[destroy] function.
 
+[source,newlisp]
 ---------------------------------------------------------------
 (define (fork-destroy-demo)
     (set 'pid (fork (dotimes (i 1000) (println i) (sleep 10))))
@@ -5506,12 +5381,10 @@ and link:#share[share] for sharing memory between processes.
 See link:#spawn[spawn] for a much simpler and automated way to
 synchronize processes and collect results.
 
-format
-~~~~~~
+==== [big red]#format#
 
-syntax: (format _str-format exp-data-1_ [_exp-data-2_ ... ]) +
- syntax: (format _str-format_ _list-data_)
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+*syntax:* (format _str-format exp-data-1_ [_exp-data-2_ ... ]) +
+*syntax:* (format _str-format_ _list-data_)
 
 Constructs a formatted string from _exp-data-1_ using the format
 specified in the evaluation of _str-format_. The format specified is
@@ -5549,7 +5422,7 @@ The `f` represents a type flag and is essential; it cannot be omitted.
 
 Below are the types in `f`:
 
-[cols="<,<",options="header",]
+[cols="1<,10<",width="30%",options="header",]
 |===================================================
 |format |description
 |s |text string
@@ -5571,7 +5444,7 @@ and format the lower 32 bits of the number.
 For 64-bit numbers use the following format strings on Unix-like
 operating systems:
 
-[cols="<,<",options="header",]
+[cols="1<,10<",width="20%",options="header",]
 |==================================
 |format |description
 |lld |decimal (64-bit)
@@ -5583,7 +5456,7 @@ operating systems:
 For 64-bit numbers (since version 8.9.7) use the following format
 strings on Tru64 Unix:
 
-[cols="<,<",options="header",]
+[cols="1<,10<",width="20%",options="header",]
 |=================================
 |format |description
 |ld |decimal (64-bit)
@@ -5594,7 +5467,7 @@ strings on Tru64 Unix:
 
 On Win32 platforms the following characters apply for 64 bit numbers:
 
-[cols="<,<",options="header",]
+[cols="1<,10<",width="20%",options="header",]
 |===================================
 |format |description
 |I64d |decimal (64-bit)
@@ -5644,6 +5517,7 @@ Note that on Tru64 Unix the format character `i` can be used instead of
 
 The data to be formatted can be passed inside a list:
 
+[source,newlisp]
 ---------------------------------------------
 (set 'L '("hello" 123))
 (format "%15s %d" L)  → "          hello 123"
@@ -5652,17 +5526,16 @@ The data to be formatted can be passed inside a list:
 If the format string requires it, newLISP's `format` will automatically
 convert integers into floating points or floating points into integers:
 
+[source,newlisp]
 -----------------------------------
 (format "%f" 123)      → 123.000000
 
 (format "%d" 123.456)  → 123
 -----------------------------------
 
-fv
-~~
+==== [big red]#fv#
 
-syntax: (fv _num-rate_ _num-nper_ _num-pmt_ _num-pv_ [_int-type_])
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+*syntax:* (fv _num-rate_ _num-nper_ _num-pmt_ _num-pv_ [_int-type_])
 
 Calculates the future value of a loan with constant payment _num-pmt_
 and constant interest rate _num-rate_ after _num-nper_ period of time
@@ -5682,11 +5555,9 @@ of 7 percent.
 See also the functions link:#irr[irr], link:#nper[nper], link:#npv[npv],
 link:#pmt[pmt], and link:#pv[pv].
 
-gammai
-~~~~~~
+==== [big red]#gammai#
 
-syntax: (gammai _num-a_ _num-b_)
-++++++++++++++++++++++++++++++++
+*syntax:* (gammai _num-a_ _num-b_)
 
 Calculates the incomplete Gamma function of values _a_ and _b_ in
 _num-a_ and _num-b_, respectively.
@@ -5705,11 +5576,9 @@ _______________________________________________________
 
 See also the link:#prob-chi2[prob-chi2] function.
 
-gammaln
-~~~~~~~
+==== [big red]#gammaln#
 
-syntax: (gammaln _num-x_)
-+++++++++++++++++++++++++
+*syntax:* (gammaln _num-x_)
 
 Calculates the log Gamma function of the value _x_ in _num-x_.
 
@@ -5728,11 +5597,9 @@ ___________________________________________________________
 _*Beta(z,w) = Exp(Gammaln(z) + Gammaln(w) - Gammaln(z+w))*_
 ___________________________________________________________
 
-gcd
-~~~
+==== [big red]#gcd#
 
-syntax: (gcd _int-1_ [_int-2_ ... ])
-++++++++++++++++++++++++++++++++++++
+*syntax:* (gcd _int-1_ [_int-2_ ... ])
 
 Calculates the greatest common divisor of a group of integers. The
 greatest common divisor of two integers that are not both zero is the
@@ -5753,17 +5620,15 @@ divisor of the result and the next argument in the parameter list.
 See http://en.wikipedia.org/wiki/Greatest_common_divisor[Wikipedia] for
 details and theory about gcd numbers in mathematics.
 
-get-char
-~~~~~~~~
+==== [big red]#get-char#
 
-syntax: (get-char _int-address_)
-++++++++++++++++++++++++++++++++
+*syntax:* (get-char _int-address_)
 
 Gets an 8-bit character from an address specified in _int-address_. This
 function is useful when using imported shared library functions with
 link:#import[import].
 
-[source,newlisp]
+[source,c]
 ---------------------------
 char * foo(void)
         {
@@ -5776,6 +5641,7 @@ char * foo(void)
 Consider the above C function from a shared library, which returns a
 character pointer (address to a string).
 
+[source,newlisp]
 -------------------------------------------------
 (import "mylib.so" "foo")
 (print (get-char (foo) ))       →  65 ; ASCII "A"
@@ -5791,18 +5657,16 @@ link:#get-long[get-long], link:#get-float[get-float],
 link:#get-string[get-string], link:#pack[pack], and link:#unpack[unpack]
 functions.
 
-get-float
-~~~~~~~~~
+==== [big red]#get-float#
 
-syntax: (get-float _int-address_)
-+++++++++++++++++++++++++++++++++
+*syntax:* (get-float _int-address_)
 
 Gets a 64-bit double float from an address specified in _int-address_.
 This function is helpful when using imported shared library functions
 (with `import`) that return an address pointer to a double float or a
 pointer to a structure containing double floats.
 
-[source,newlisp]
+[source,c]
 ------------------------------
 double float * foo(void)
         {
@@ -5815,6 +5679,7 @@ double float * foo(void)
 
 The previous C function is compiled into a shared library.
 
+[source,newlisp]
 ----------------------------
 (import "mylib.so" "foo")
 (get-float (foo))  → 123.456
@@ -5830,18 +5695,16 @@ link:#get-long[get-long], link:#get-char[get-char],
 link:#get-string[get-string], link:#pack[pack], and link:#unpack[unpack]
 functions.
 
-get-int
-~~~~~~~
+==== [big red]#get-int#
 
-syntax: (get-int _int-address_)
-+++++++++++++++++++++++++++++++
+*syntax:* (get-int _int-address_)
 
 Gets a 32-bit integer from the address specified in _int-address_. This
 function is handy when using imported shared library functions with
 `import`, a function returning an address pointer to an integer, or a
 pointer to a structure containing integers.
 
-[source,newlisp]
+[source,c]
 -----------------------
 int * foo(void)
         {
@@ -5863,6 +5726,7 @@ int foo-b(void)
 Consider the C function `foo` (from a shared library), which returns an
 integer pointer (address of an integer).
 
+[source,newlisp]
 -------------------------
 (import "mylib.so" "foo")
 (get-int (foo))  → 123
@@ -5877,18 +5741,16 @@ link:#get-float[get-float], link:#get-long[get-long],
 link:#get-string[get-string], link:#pack[pack], and link:#unpack[unpack]
 functions.
 
-get-long
-~~~~~~~~
+==== [big red]#get-long#
 
-syntax: (get-long _int-address_)
-++++++++++++++++++++++++++++++++
+*syntax:* (get-long _int-address_)
 
 Gets a 64-bit integer from the address specified in _int-address_. This
 function is handy when using `import` to import shared library
 functions, a function returning an address pointer to a long integer, or
 a pointer to a structure containing long integers.
 
-[source,newlisp]
+[source,c]
 -------------------------
 long long int * foo(void)
         {
@@ -5910,6 +5772,7 @@ long long int foo-b(void)
 Consider the C function `foo` (from a shared library), which returns an
 integer pointer (address of an integer).
 
+[source,newlisp]
 -------------------------
 (import "mylib.so" "foo")
 (get-int (foo))  → 123
@@ -5924,17 +5787,15 @@ link:#get-float[get-float], link:#get-int[get-int],
 link:#get-string[get-string], link:#pack[pack], and link:#unpack[unpack]
 functions.
 
-get-string
-~~~~~~~~~~
+==== [big red]#get-string#
 
-syntax: (get-string _int-address_)
-++++++++++++++++++++++++++++++++++
+*syntax:* (get-string _int-address_)
 
 Gets a character string from the address specified in _int-address_.
 This function is helpful when using imported shared library functions
 with link:#import[import].
 
-[source,newlisp]
+[source,c]
 ---------------------------
 char * foo(void)
         {
@@ -5947,6 +5808,7 @@ char * foo(void)
 Consider the above C function from a shared library, which returns a
 character pointer (address to a string).
 
+[source,newlisp]
 ---------------------------------------
 (import "mylib.so" "foo")
 (print (get-string (foo)))  → "ABCDEFG"
@@ -5981,12 +5843,9 @@ functions.
 Note that `get-string` can crash the system or make it unstable if the
 wrong address is specified.
 
-get-url
-~~~~~~~
+==== [big red]#get-url#
 
-syntax: (get-url _str-url_ [_str-option_] [_int-timeout_
-[_str-header_]])
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+*syntax:* (get-url _str-url_ [_str-option_] [_int-timeout_ [_str-header_]])
 
 Reads a web page or file specified by the URL in _str-url_ using the
 HTTP GET protocol. Both `http://` and `file://` URLs are handled.
@@ -6048,6 +5907,7 @@ directives to the server. When no _str-header_ is specified, newLISP
 sends certain header information by default. After the following
 request:
 
+[source,newlisp]
 ------------------------------------
 (get-url "http://somehost.com" 5000)
 ------------------------------------
@@ -6063,6 +5923,7 @@ Connection: close
 
 As an alternative, the _str-header_ option could be used:
 
+[source,newlisp]
 -------------------------------------------------------
 (get-url "http://somehost.com" 5000
     "User-Agent: Mozilla/4.0\r\nCookie: name=fred\r\n")
@@ -6089,11 +5950,9 @@ See an HTTP transactions reference for valid header entries.
 Custom headers can also be used in the link:#put-url[put-url] and
 link:#post-url[post-url] functions.
 
-global
-~~~~~~
+==== [big red]#global#
 
-syntax: (global _sym-1_ [_sym-2_ ... ])
-+++++++++++++++++++++++++++++++++++++++
+*syntax:* (global _sym-1_ [_sym-2_ ... ])
 
 One or more symbols in _sym-1_ [_sym-2_ ... ] can be made globally
 accessible from contexts other than MAIN. The statement has to be
@@ -6114,11 +5973,9 @@ The second example shows how link:#constant[constant] and `global` can
 be combined into one statement, protecting and making a previous
 function definition global.
 
-global?
-~~~~~~~
+==== [big red]#global?#
 
-syntax: (global? _sym_)
-+++++++++++++++++++++++
+*syntax:* (global? _sym_)
 
 Checks if symbol in _sym_ is global. Built-in functions, context
 symbols, and all symbols made global using the function
@@ -6135,12 +5992,10 @@ global? 'print)   → true
 (global? 'foo)    → true
 ------------------------
 
-if
-~~
+==== [big red]#if#
 
-syntax: (if _exp-condition_ _exp-1_ [_exp-2_]) +
- syntax: (if _exp-cond-1_ _exp-1_ _exp-cond-2_ _exp-2_ [ ... ])
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+*syntax:* (if _exp-condition_ _exp-1_ [_exp-2_]) +
+*syntax:* (if _exp-cond-1_ _exp-1_ _exp-cond-2_ _exp-2_ [ ... ])
 
 If the value of _exp-condition_ is neither `nil` nor an empty list, the
 result of evaluating _exp-1_ is returned; otherwise, the value of
@@ -6186,11 +6041,9 @@ expression or condition evaluated.
 
 See also the link:#unless[unless] function.
 
-ifft
-~~~~
+==== [big red]#ifft#
 
-syntax: (ifft _list-num_)
-+++++++++++++++++++++++++
+*syntax:* (ifft _list-num_)
 
 Calculates the inverse discrete Fourier transform on a list of complex
 numbers in _list-num_ using the FFT method (Fast Fourier Transform).
@@ -6214,14 +6067,11 @@ imaginary part, simple numbers can be used.
 
 The inverse operation of `ifft` is the link:#fft[fft] function.
 
-import
-~~~~~~
+==== [big red]#import#
 
-syntax: (import _str-lib-name_ _str-function-name_ ["cdecl"]) +
- syntax: (import _str-lib-name_ _str-function-name_ _str-return-type_
-[_str-param-type_ . . .]) +
- syntax: (import _str-lib-name_)
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+*syntax:* (import _str-lib-name_ _str-function-name_ ["cdecl"]) +
+*syntax:* (import _str-lib-name_ _str-function-name_ _str-return-type_ [_str-param-type_ . . .]) +
+*syntax:* (import _str-lib-name_)
 
 Imports the function specified in _str-function-name_ from a shared
 library named in _str-lib-name_. Depending on the syntax used, string
@@ -6303,6 +6153,7 @@ The message box example pops up a Windows dialog box, which may be
 hidden behind the console window. The console prompt does not return
 until the 'OK' button is pressed in the message box.
 
+[source,newlisp]
 ----------------------------------------------
 ;;this pops up a message box
 
@@ -6313,6 +6164,7 @@ The other examples show several imports of Win32 DLL functions and the
 details of passing values _by value_ or _by reference_. Whenever strings
 or numbers are passed by reference, space must be reserved beforehand.
 
+[source,newlisp]
 ----------------------------------------------------------
 (import "kernel32.dll" "GetWindowsDirectoryA")
 
@@ -6346,6 +6198,7 @@ str  → "LUTZ-PC\000\000 ... "
 `import` returns the address of the function, which can be used to
 assign a different name to the imported function.
 
+[source,newlisp]
 --------------------------------------------
 (set 'imprime (import "libc.so.6" "printf"))
 → printf@400862A0
@@ -6363,6 +6216,7 @@ additional last argument when importing functions. newLISP compiled for
 Mac OS X, Linux and other Unix systems uses the _cdecl_ calling
 conventions by default and ignores any additional string.
 
+[source,newlisp]
 ---------------------------------------------------------------------
 ;; force cdecl calling conventions on Win32
 (import "sqlite.dll" "sqlite_open" "cdecl")  → sqlite_open <673D4888>
@@ -6387,7 +6241,7 @@ returned without using helper functions.
 The following types can be specified for the return value in
 _str-return-type_ and for function parameters in _str-param-type_:
 
-[cols="<,<,<",options="header",]
+[cols="1<,3<,3<",width="75%",options="header",]
 |=======================================================================
 |label |C type for return value and arguments |newLISP return and
 argument type
@@ -6431,6 +6285,7 @@ Aggregate types can be composed using the link:#struct[struct] function.
 The following examples show how the extended `import` syntax can handle
 return values of floating point values and strings:
 
+[source,newlisp]
 -----------------------------------------------------
 ;; return a float value, LIBC was defined earlier
 ;             name   return   arg
@@ -6454,6 +6309,7 @@ These pointers can then be used with link:#unpack[unpack] and
 link:#struct[struct] for destructuring. In the following example the
 return type is changed to `void*`:
 
+[source,newlisp]
 ----------------------------------------------
 (import LIBC "strcpy" "void*" "char*" "char*")
 (set 'from "Hello World")
@@ -6485,11 +6341,9 @@ for variables needs to be allocated beforehand by newLISP — see import
 of `GetWindowsDirectoryA` above — and hence, memory needs not be
 deallocated manually, because it is managed automatically by newLISP.
 
-inc link:#destructive[!]
-~~~~~~~~~~~~~~~~~~~~~~~~
+==== [big red]#inc link:#destructive[!]#
 
-syntax: (inc _place_ [_num_])
-+++++++++++++++++++++++++++++
+*syntax:* (inc _place_ [_num_])
 
 Increments the number in _place_ by `1.0` or by the optional number
 _num_ and returns the result. `inc` performs float arithmetic and
@@ -6511,6 +6365,7 @@ x             → 1.25
 If a symbol for _place_ contains `nil`, it is treated as if containing
 `0.0`:
 
+[source,newlisp]
 --------------------
 z             → nil
 (inc z)       → 1
@@ -6522,6 +6377,7 @@ z             → nil
 Places in a list structure or a number returned by another expression
 can be updated too:
 
+[source,newlisp]
 ---------------------
 (set 'l '(1 2 3 4))
 
@@ -6537,11 +6393,9 @@ l → (2 2 3 4.1)
 Use the link:#inci[++] function for incrementing numbers in integer
 mode. Use link:#dec[dec] to decrement numbers in floating point mode.
 
-index
-~~~~~
+==== [big red]#index#
 
-syntax: (index _exp-predicate_ _exp-list_)
-++++++++++++++++++++++++++++++++++++++++++
+*syntax:* (index _exp-predicate_ _exp-list_)
 
 Applies the predicate _exp-predicate_ to each element of the list
 _exp-list_ and returns a list containing the indices of the elements for
@@ -6563,11 +6417,9 @@ lambda expression.
 
 Use the link:#filter[filter] function to return the elements themselves.
 
-inf?
-~~~~
+==== [big red]#inf?#
 
-syntax: (inf? _float_)
-++++++++++++++++++++++
+*syntax:* (inf? _float_)
 
 If the value in _float_ is infinite the function returns `true` else
 `nil`.
@@ -6583,11 +6435,9 @@ Note that an integer division by zero e.g. `(/ 1 0)` will throw an
 "division by zero" error and not yield infinity. See also
 link:#NaNp[NaN?] to check if a floating point number is valid.
 
-int
-~~~
+==== [big red]#int#
 
-syntax: (int _exp_ [_exp-default_ [_int-base_]])
-++++++++++++++++++++++++++++++++++++++++++++++++
+*syntax:* (int _exp_ [_exp-default_ [_int-base_]])
 
 If the expression in _exp_ evaluates to a number or a string, the result
 is converted to an integer and returned. If _exp_ cannot be converted to
@@ -6646,11 +6496,9 @@ The inverse function to `int` with base `2` is link:#bits[bits].
 Use the link:#float[float] function to convert arguments to floating
 point numbers.
 
-integer?
-~~~~~~~~
+==== [big red]#integer?#
 
-syntax: (integer? _exp_)
-++++++++++++++++++++++++
+*syntax:* (integer? _exp_)
 
 Returns `true` only if the value of _exp_ is an integer; otherwise, it
 returns `nil`.
@@ -6661,12 +6509,10 @@ returns `nil`.
 (integer? num)  → true
 ----------------------
 
-intersect
-~~~~~~~~~
+==== [big red]#intersect#
 
-syntax: (intersect _list-A_ _list-B_) +
- syntax: (intersect _list-A_ _list-B_ _bool_)
-+++++++++++++++++++++++++++++++++++++++++++++
+*syntax:* (intersect _list-A_ _list-B_) +
+*syntax:* (intersect _list-A_ _list-B_ _bool_)
 
 In the first syntax, `intersect` returns a list containing one copy of
 each element found both in _list-A_ and _list-B_.
@@ -6691,11 +6537,9 @@ value not `nil`.
 See also the set functions link:#difference[difference],
 link:#unique[unique] and link:#union[union].
 
-invert
-~~~~~~
+==== [big red]#invert#
 
-syntax: (invert _matrix_ [_float-pivot_])
-+++++++++++++++++++++++++++++++++++++++++
+*syntax:* (invert _matrix_ [_float-pivot_])
 
 Returns the inversion of a two-dimensional matrix in _matrix_. The
 matrix must be square, with the same number of rows and columns, and
@@ -6736,11 +6580,9 @@ All operations shown here on lists can be performed on arrays, as well.
 See also the matrix functions link:#det[det], link:#mat[mat],
 link:#multiply[multiply] and link:#transpose[transpose].
 
-irr
-~~~
+==== [big red]#irr#
 
-syntax: (irr _list-amounts_ [_list-times_ [_num-guess_]])
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+*syntax:* (irr _list-amounts_ [_list-times_ [_num-guess_]])
 
 Calculates the internal rate of return of a cash flow per time period.
 The internal rate of return is the interest rate that makes the present
@@ -6787,11 +6629,9 @@ percent in 18 months.
 See also the link:#fv[fv], link:#nper[nper], link:#npv[npv],
 link:#pmt[pmt], and link:#pv[pv] functions.
 
-join
-~~~~
+==== [big red]#join#
 
-syntax: (join _list-of-strings_ [_str-joint_ [_bool-trail-joint_]])
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+*syntax:* (join _list-of-strings_ [_str-joint_ [_bool-trail-joint_]])
 
 Concatenates the given list of strings in _list-of-strings_. If
 _str-joint_ is present, it is inserted between each string in the join.
@@ -6816,22 +6656,18 @@ See also the link:#append[append], link:#string[string], and
 link:#explode[explode] functions, which are the inverse of the `join`
 operation.
 
-lambda
-~~~~~~
+==== [big red]#lambda#
 
 See the description of link:#fn[fn], which is a shorter form of writing
 `lambda`.
 
-lambda-macro
-~~~~~~~~~~~~
+==== [big red]#lambda-macro#
 
 See the description of link:#define-macro[define-macro].
 
-lambda?
-~~~~~~~
+==== [big red]#lambda?#
 
-syntax: (lambda? _exp_)
-+++++++++++++++++++++++
+*syntax:* (lambda? _exp_)
 
 Returns `true` only if the value of _exp_ is a lambda expression;
 otherwise, returns `nil`.
@@ -6848,13 +6684,11 @@ square → (lambda (x) (* x x))
 See link:#define[define] and link:#define-macro[define-macro] for more
 information about _lambda_ expressions.
 
-last link:#utf8_capable[utf8]
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+==== [big red]#last link:#utf8_capable[utf8]#
 
-syntax: (last _list_) +
- syntax: (last _array_) +
- syntax: (last _str_)
-+++++++++++++++++++++++++
+*syntax:* (last _list_) +
+*syntax:* (last _array_) +
+*syntax:* (last _str_)
 
 Returns the last element of a list or a string.
 
@@ -6882,12 +6716,10 @@ Note that link:#last[last] works on character boundaries rather than
 byte boundaries when the UTF-8–enabled version of newLISP is used. See
 also link:#first[first], link:#rest[rest] and link:#nth[nth].
 
-last-error
-~~~~~~~~~~
+==== [big red]#last-error#
 
-syntax: (last-error) +
- syntax: (last-error _int-error_)
-+++++++++++++++++++++++++++++++++
+*syntax:* (last-error) +
+*syntax:* (last-error _int-error_)
 
 Reports the last error generated by newLISP due to syntax errors or
 exhaustion of some resource. For a summary of all possible errors see
@@ -6924,11 +6756,9 @@ See also link:#net-error[net-error] for errors generated by networking
 conditions and link:#sys-error[sys-error] for errors generated by the
 operating system.
 
-legal?
-~~~~~~
+==== [big red]#legal?#
 
-syntax: (legal? _str_)
-++++++++++++++++++++++
+*syntax:* (legal? _str_)
 
 The token in _str_ is verified as a legal newLISP symbol. Non-legal
 symbols can be created using the link:#sym[sym] function (e.g. symbols
@@ -6951,11 +6781,9 @@ The example shows that the string `"one two"` does not contain a legal
 symbol although a symbol can be created from this string and treated
 like a variable.
 
-length
-~~~~~~
+==== [big red]#length#
 
-syntax: (length _exp_)
-++++++++++++++++++++++
+*syntax:* (length _exp_)
 
 Returns the number of elements in a list, the number of rows in an
 array, or the number of bytes in a string.
@@ -6988,13 +6816,10 @@ point numbers.
 Use link:#utf8len[utf8len] to calculate the number of UTF-8 characters
 in a string.
 
-let
-~~~
+==== [big red]#let#
 
-syntax: (let ((_sym1_ [_exp-init1_]) [(_sym2_ [_exp-init2_]) ... ])
-_body_) +
- syntax: (let (_sym1_ _exp-init1_ [_sym2_ _exp-init2_ ... ]) _body_)
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+*syntax:* (let ( (_sym1_ [_exp-init1_]) [(_sym2_ [_exp-init2_]) ... ]) _body_) +
+*syntax:* (let (_sym1_ _exp-init1_ [_sym2_ _exp-init2_ ... ]) _body_)
 
 One or more variables _sym1_, _sym2_, ... are declared locally and
 initialized with expressions in _exp-init1_, _exp-init2_, etc. In the
@@ -7029,6 +6854,7 @@ The variables `x` and `y` are initialized, then the expression `(+ x y)`
 is evaluated. The let form is just an optimized version and syntactic
 convenience for writing:
 
+[source,newlisp]
 ---------------------------------------------------------------
 ((lambda (sym1 [sym2 ... ]) exp-body ) exp-init1 [ exp-init2 ])
 ---------------------------------------------------------------
@@ -16216,11 +16042,9 @@ The first example just shows the currently used type tags. The second
 example specifies suppression of the "TEXT" and "ELEMENT" tags and shows
 `cdata` and `!--` instead of "CDATA" and "COMMENT".
 
-zero?
-~~~~~
+==== [big red]#zero?#
 
-syntax: (zero? _exp_)
-+++++++++++++++++++++
+*syntax:* (zero? _exp_)
 
 Checks the evaluation of _exp_ to see if it equals `0` (zero).
 
@@ -16236,10 +16060,4 @@ Checks the evaluation of _exp_ to see if it equals `0` (zero).
 
 `zero?` will return `nil` on data types other than numbers.
 
-// ( ∂ )
-
-'''''
-
-newLISP APPENDIX
-~~~~~~~~~~~~~~~~
 // vim: set tw=72 cms=//%s :
