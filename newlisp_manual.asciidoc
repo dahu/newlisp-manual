@@ -3,7 +3,7 @@ newLISP(R)
 :author:         Lutz Mueller
 :revdate:        2013-01-20
 :revnumber:      10.4.5
-:toc:
+:toc2:
 :toc-placement:  manual
 :toc-title:      Contents
 :toclevels:      3
@@ -17,8 +17,8 @@ include::newlisp_manual-preamble.asciidoc[]
 toc::[]
 
 include::newlisp_manual-user_manual.asciidoc[]
-// include::newlisp_manual-function_reference-overview.asciidoc[]
-// include::newlisp_manual-function_reference.asciidoc[]
+include::newlisp_manual-function_reference-overview.asciidoc[]
+include::newlisp_manual-function_reference.asciidoc[]
 
 Appendix
 --------
