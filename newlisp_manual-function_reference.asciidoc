@@ -6862,13 +6862,10 @@ convenience for writing:
 See also link:#letn[letn] for an incremental or nested form of `let` and
 local for initializing to `nil`.
 
-letex
-~~~~~
+==== [big red]#letex#
 
-syntax: (letex ((_sym1_ [_exp-init1_]) [(_sym2_ [_exp-init2_]) ... ])
-_body_) +
- syntax: (letex (_sym1_ _exp-init1_ [_sym2_ _exp-init2_ ... ]) _body_)
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+*syntax:* (letex ( (_sym1_ [_exp-init1_]) [(_sym2_ [_exp-init2_]) ... ]) _body_) +
+*syntax:* (letex (_sym1_ _exp-init1_ [_sym2_ _exp-init2_ ... ]) _body_)
 
 This function combines link:#let[let] and link:#expand[expand] to expand
 local variables into an expression before evaluating it. In the fully
@@ -6894,6 +6891,7 @@ list. The final expression which gets evaluated is `'(1 2 3)`.
 In the second example a function `make-adder` is defined for making
 adder functions:
 
+[source,newlisp]
 ---------------------------------------------------
 (define (make-adder n)
     (letex (c n) (lambda (x) (+ x c))))
@@ -6906,13 +6904,10 @@ adder functions:
 `letex` evaluates `n` to the constant `3` and replaces `c` with it in
 the lambda expression.
 
-letn
-~~~~
+==== [big red]#letn#
 
-syntax: (letn ((_sym1_ [_exp-init1_]) [(_sym2_ [_exp-init2_]) ... ])
-_body_) +
- syntax: (letn (_sym1_ _exp-init1_ [_sym2_ _exp-init2_ ... ]) _body_)
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+*syntax:* (letn ( (_sym1_ [_exp-init1_]) [(_sym2_ [_exp-init2_]) ... ]) _body_) +
+*syntax:* (letn (_sym1_ _exp-init1_ [_sym2_ _exp-init2_ ... ]) _body_)
 
 `letn` is like a _nested let_ and works similarly to link:#let[let], but
 will incrementally use the new symbol bindings when evaluating the
@@ -6938,6 +6933,7 @@ calculated using the binding of `x` before the link:#let[let]
 expression, in the second example using `letn` the variable `y` is
 calculated using the new local binding of `x`.
 
+[source,newlisp]
 -------------------------
 (letn  (x 1 y x)
 (+ x y))             →  2
@@ -6952,11 +6948,9 @@ calculated using the new local binding of `x`.
 `letn` works like several _nested_ link:#let[let]. The parentheses
 around the initializer expressions can be omitted.
 
-list
-~~~~
+==== [big red]#list#
 
-syntax: (list _exp-1_ [_exp-2_ ... ])
-+++++++++++++++++++++++++++++++++++++
+*syntax:* (list _exp-1_ [_exp-2_ ... ])
 
 The _exp_ are evaluated and the values used to construct a new list.
 Note that arguments of array type are converted to lists.
@@ -6970,11 +6964,9 @@ Note that arguments of array type are converted to lists.
 See also link:#cons[cons] and link:#push[push] for other forms of
 building lists.
 
-list?
-~~~~~
+==== [big red]#list?#
 
-syntax: (list? _exp_)
-+++++++++++++++++++++
+*syntax:* (list? _exp_)
 
 Returns `true` only if the value of _exp_ is a list; otherwise returns
 `nil`. Note that lambda and lambda-macro expressions are also recognized
@@ -6990,12 +6982,9 @@ as special instances of a list expression.
 (list? double)           → true
 ------------------------------------
 
-load
-~~~~
+==== [big red]#load#
 
-syntax: (load _str-file-name-1_ [_str-file-name-2_ ... ]
-[_sym-context_])
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+*syntax:* (load _str-file-name-1_ [_str-file-name-2_ ... ] [_sym-context_])
 
 Loads and translates newLISP from a source file specified in one or more
 _str-file-name_ and evaluates the expressions contained in the file(s).
@@ -7047,12 +7036,10 @@ The second to last line causes the files to be loaded into the context
 
 The `file://` URL is followed by a third `/` for the directory spec.
 
-log
-~~~
+==== [big red]#log#
 
-syntax: (log _num_) +
- syntax: (log _num_ _num-base_)
-+++++++++++++++++++++++++++++++
+*syntax:* (log _num_) +
+*syntax:* (log _num_ _num-base_)
 
 In the first syntax, the expression in _num_ is evaluated and the
 natural logarithmic function is calculated from the result.
@@ -7074,11 +7061,9 @@ In the second syntax, an arbitrary base can be specified in _num-base_.
 See also link:#exp[exp], which is the inverse function to `log` with
 base *_e_* (2.718281828).
 
-lookup
-~~~~~~
+==== [big red]#lookup#
 
-syntax: (lookup _exp-key_ _list-assoc_ [_int-index_ [_exp-default_]])
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+*syntax:* (lookup _exp-key_ _list-assoc_ [_int-index_ [_exp-default_]])
 
 Finds in _list-assoc_ an association, the key element of which has the
 same value as _exp-key_, and returns the _int-index_ element of
@@ -7123,11 +7108,9 @@ extracting a specific element found in the list.
 
 See also link:#assoc[assoc]
 
-lower-case link:#utf8_capable[utf8]
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+==== [big red]#lower-case link:#utf8_capable[utf8]#
 
-syntax: (lower-case _str_)
-++++++++++++++++++++++++++
+*syntax:* (lower-case _str_)
 
 Converts the characters of the string in _str_ to lowercase. A new
 string is created, and the original is left unaltered.
@@ -7143,11 +7126,9 @@ Str               → "ABC"
 See also the link:#upper-case[upper-case] and
 link:#title-case[title-case] functions.
 
-macro?
-~~~~~~
+==== [big red]#macro?#
 
-syntax: (macro? _exp_)
-++++++++++++++++++++++
+*syntax:* (macro? _exp_)
 
 returns `true` if _exp_ evaluates to a lambda-macro expression;
 otherwise, `nil` is returned.
@@ -7159,12 +7140,10 @@ otherwise, `nil` is returned.
 (macro? mysetq)  → true
 ------------------------------------------------
 
-main-args
-~~~~~~~~~
+==== [big red]#main-args#
 
-syntax: (main-args) +
- syntax: (main-args _int-index_)
-++++++++++++++++++++++++++++++++
+*syntax:* (main-args) +
+*syntax:* (main-args _int-index_)
 
 `main-args` returns a list with several string members, one for program
 invocation and one for each of the command-line arguments.
@@ -7185,6 +7164,7 @@ Optionally, `main-args` can take an _int-index_ for indexing into the
 list. Note that an index out of range will cause `nil` to be returned,
 not the last element of the list like in list-indexing.
 
+[source,newlisp]
 ------------------
 newlisp a b c
 
@@ -7201,6 +7181,7 @@ nil
 Note that when newLISP is executed from a script, `main-args` also
 returns the _name_ of the script as the second argument:
 
+[source,newlisp]
 ---------------------------------------------------------
 #!/usr/bin/newlisp
 #
@@ -7220,11 +7201,9 @@ script 1 2 3
 
 Try executing this script with different command-line parameters.
 
-make-dir
-~~~~~~~~
+==== [big red]#make-dir#
 
-syntax: (make-dir _str-dir-name_ [_int-mode_])
-++++++++++++++++++++++++++++++++++++++++++++++
+*syntax:* (make-dir _str-dir-name_ [_int-mode_])
 
 Creates a directory as specified in _str-dir-name_, with the optional
 access mode _int-mode_. Returns `true` or `nil` depending on the
@@ -7247,11 +7226,9 @@ non-owners of the file.
 This example creates a directory named `adir` in the current directory
 with an access mode of `0750` (octal 750 = `drwxr-x---`).
 
-map
-~~~
+==== [big red]#map#
 
-syntax: (map _exp-functor_ _list-args-1_ [_list-args-2_ ... ])
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+*syntax:* (map _exp-functor_ _list-args-1_ [_list-args-2_ ... ])
 
 Successively applies the primitive function, defined function, or lambda
 expression _exp-functor_ to the arguments specified in _list-args-1,
@@ -7270,6 +7247,7 @@ list-args-2—_, returning all results in a list.
 
 The second example shows how to dynamically create a function for `map`:
 
+[source,newlisp]
 ------------------------------------------------
 (define (foo op p)
     (append (lambda (x)) (list (list op p 'x))))
@@ -7277,6 +7255,7 @@ The second example shows how to dynamically create a function for `map`:
 
 We can also use the shorter `fn`:
 
+[source,newlisp]
 --------------------------------------------
 (define (foo op p)
     (append (fn (x)) (list (list op p 'x))))
@@ -7284,6 +7263,7 @@ We can also use the shorter `fn`:
 
 `foo` now works like a function-maker:
 
+[source,newlisp]
 -----------------------------------------------
 (foo 'add 2)  → (lambda (x) (add 2 x))
 
@@ -7298,6 +7278,7 @@ evaluate to themselves in newLISP.
 By incorporating `map` into the function definition, we can do the
 following:
 
+[source,newlisp]
 ----------------------------------------------
 (define (list-map op p lst)
     (map (lambda (x) (op p x)) lst))
@@ -7309,6 +7290,7 @@ following:
 
 `map` also sets the internal list index `$idx`.
 
+[source,newlisp]
 -----------------------------------------------------------
 (map (fn (x) (list $idx x)) '(a b c)) → ((0 a) (1 b) (2 c))
 -----------------------------------------------------------
@@ -7323,12 +7305,10 @@ the extra ones will be ignored.
 Special forms which use parentheses as syntax cannot be mapped (i.e.
 link:#case[case]).
 
-mat
-~~~
+==== [big red]#mat#
 
-syntax: (mat _+_ | _-_ | _*_ | _/_ _matrix-A matrix-B_) +
- syntax: (mat _+_ | _-_ | _*_ | _/_ _matrix-A number_)
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+*syntax:* (mat _+_ | _-_ | _*_ | _/_ _matrix-A matrix-B_) +
+*syntax:* (mat _+_ | _-_ | _*_ | _/_ _matrix-A number_)
 
 Using the first syntax, this function performs fast floating point
 scalar operations on two-dimensional matrices in _matrix-A_ or
@@ -7363,6 +7343,7 @@ link:#multiply[multiply] and link:#invert[invert].
 Using the second syntax, all cells in _matrix-A_ are operated on with a
 scalar in _number_:
 
+[source,newlisp]
 ----------------------------------------
 (mat + A 5)    → ((6 7 8) (9 10 11))
 (mat - A 2)    → ((-1 0 1) (2 3 4))
@@ -7374,11 +7355,9 @@ See also the other matrix operations link:#det[det],
 link:#invert[invert], link:#multiply[multiply], and
 link:#transpose[transpose].
 
-match
-~~~~~
+==== [big red]#match#
 
-syntax: (match _list-pattern_ _list-match_ [_bool_])
-++++++++++++++++++++++++++++++++++++++++++++++++++++
+*syntax:* (match _list-pattern_ _list-match_ [_bool_])
 
 The pattern in _list-pattern_ is matched against the list in
 _list-match_, and the matching expressions are returned in a list. The
@@ -7441,6 +7420,7 @@ least one list element.
 The following example shows how the matched expressions can be bound to
 variables.
 
+[source,newlisp]
 --------------------------------------------------------
 (map set '(x y) (match '(a (? c) d *) '(a (b c) d e f)))
 
@@ -7455,11 +7435,9 @@ link:#find-all[find-all] or link:#parse[parse].
 link:#unify[unify] is another function for matching expressions in a
 PROLOG like manner.
 
-max
-~~~
+==== [big red]#max#
 
-syntax: (max _num-1_ [_num-2_ ... ])
-++++++++++++++++++++++++++++++++++++
+*syntax:* (max _num-1_ [_num-2_ ... ])
 
 Evaluates the expressions _num-1_— and returns the largest number.
 
@@ -7470,12 +7448,10 @@ Evaluates the expressions _num-1_— and returns the largest number.
 
 See also the link:#min[min] function.
 
-member
-~~~~~~
+==== [big red]#member#
 
-syntax: (member _exp_ _list_) +
- syntax: (member _str-key_ _str_ [_num-option_])
-++++++++++++++++++++++++++++++++++++++++++++++++
+*syntax:* (member _exp_ _list_) +
+*syntax:* (member _str-key_ _str_ [_num-option_])
 
 In the first syntax, `member` searches for the element _exp_ in the list
 _list_. If the element is a member of the list, a new list starting with
@@ -7505,11 +7481,9 @@ _str-key_ is found, all of _str_ (starting with _str-key_) is returned.
 
 See also the related functions link:#slice[slice] and link:#find[find].
 
-min
-~~~
+==== [big red]#min#
 
-syntax: (min _num-1_ [_num-2_ ... ])
-++++++++++++++++++++++++++++++++++++
+*syntax:* (min _num-1_ [_num-2_ ... ])
 
 Evaluates the expressions _num-1_— and returns the smallest number.
 
@@ -7520,12 +7494,10 @@ Evaluates the expressions _num-1_— and returns the smallest number.
 
 See also the link:#max[max] function.
 
-mod
-~~~
+==== [big red]#mod#
 
-syntax: (mod _num-1_ _num-2_ [_num-3_ ... ]) +
- syntax: (mod _num-1_)
-++++++++++++++++++++++++++++++++++++++++++++++
+*syntax:* (mod _num-1_ _num-2_ [_num-3_ ... ]) +
+*syntax:* (mod _num-1_)
 
 Calculates the modular value of the numbers in _num-1_ and _num-2_.
 `mod` computes the remainder from the division of the numerator _num-i_
@@ -7548,11 +7520,9 @@ fractional part of _num-1_.
 Use the link:#arithmetic[%] (percent sign) function when working with
 integers only.
 
-mul
-~~~
+==== [big red]#mul#
 
-syntax: (mul _num-1_ _num-2_ [_num-3_ ... ])
-++++++++++++++++++++++++++++++++++++++++++++
+*syntax:* (mul _num-1_ _num-2_ [_num-3_ ... ])
 
 Evaluates all expressions _num-1_—, calculating and returning the
 product. `mul` can perform mixed-type arithmetic, but it always returns
@@ -7565,11 +7535,9 @@ returns `NaN`.
 (mul 0.5 0.5)        → 0.25
 ---------------------------
 
-multiply
-~~~~~~~~
+==== [big red]#multiply#
 
-syntax: (multiply _matrix-A_ _matrix-B_)
-++++++++++++++++++++++++++++++++++++++++
+*syntax:* (multiply _matrix-A_ _matrix-B_)
 
 Returns the matrix multiplication of matrices in _matrix-A_ and
 _matrix-B_. If _matrix-A_ has the dimensions _n_ by _m_ and _matrix-B_
@@ -7602,16 +7570,13 @@ All operations shown here on lists can be performed on arrays, as well.
 See also the matrix operations link:#det[det], link:#invert[invert],
 link:#mat[mat] and link:#transpose[transpose].
 
-name
-~~~~
+==== [big red]#name#
 
 This function is deprecated, use link:#term[term] instead.
 
-NaN?
-~~~~
+==== [big red]#NaN?#
 
-syntax: (NaN? _float_)
-++++++++++++++++++++++
+*syntax:* (NaN? _float_)
 
 Tests if the result of a floating point math operation is a `NaN`.
 Certain floating point operations return a special IEEE 754 number
@@ -7647,11 +7612,9 @@ _not_ `true` when using ANSI C. Integer operations treat `NaN` as `0`
 See also link:#infp[inf?] for testing a floating point value for
 infinity.
 
-net-accept
-~~~~~~~~~~
+==== [big red]#net-accept#
 
-syntax: (net-accept _int-socket_)
-+++++++++++++++++++++++++++++++++
+*syntax:* (net-accept _int-socket_)
 
 Accepts a connection on a socket previously put into listening mode.
 Returns a newly created socket handle for receiving and sending data on
@@ -7669,11 +7632,9 @@ mode on Unix-like operating systems.
 See also the files `server` and `client` examples in the `examples/`
 directory of the source distribution.
 
-net-close
-~~~~~~~~~
+==== [big red]#net-close#
 
-syntax: (net-close _int-socket_ [_true_])
-+++++++++++++++++++++++++++++++++++++++++
+*syntax:* (net-close _int-socket_ [_true_])
 
 Closes a network socket in _int-socket_ that was previously created by a
 link:#net-connect[net-connect] or link:#net-accept[net-accept] function.
@@ -7687,14 +7648,11 @@ Returns `true` on success and `nil` on failure.
 The optional _true_ flag suppresses immediate shutdown of sockets by
 waiting for pending data transmissions to finish.
 
-net-connect
-~~~~~~~~~~~
+==== [big red]#net-connect#
 
-syntax: (net-connect _str-remote-host_ _int-port_ [_int-timeout-ms_]) +
- syntax: (net-connect _str-remote-host_ _int-port_ [_str-mode_
-[_int-ttl_]]) +
- syntax: (net-connect _str-file-path_)
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+*syntax:* (net-connect _str-remote-host_ _int-port_ [_int-timeout-ms_]) +
+*syntax:* (net-connect _str-remote-host_ _int-port_ [_str-mode_ [_int-ttl_]]) +
+*syntax:* (net-connect _str-file-path_)
 
 In the first syntax, connects to a remote host computer specified in
 _str-remote-host_ and a port specified in _int-port_. Returns a socket
@@ -7757,6 +7715,7 @@ functions `net-connect` or `net-send-to` should provide a target
 address. The other function should specify and empty string `""` as the
 target address.
 
+[source,newlisp]
 ----------------------------------------
 ;; example server
 (net-listen 4096 "226.0.0.1" "udp")  → 5
@@ -7884,12 +7843,10 @@ communications. This type of connection can be used as a fast
 bi-directional communications channel between processes on the same file
 system. This type of connection is not available on Win32 platforms.
 
-net-error
-~~~~~~~~~
+==== [big red]#net-error#
 
-syntax: (net-error) +
- syntax: (net-error _int-error_)
-++++++++++++++++++++++++++++++++
+*syntax:* (net-error) +
+*syntax:* (net-error _int-error_)
 
 Retrieves the last error that occurred when calling a any of the
 following functions: link:#net-accept[net-accept],
@@ -7909,7 +7866,7 @@ clears the error number.
 
 The following messages are returned:
 
-[cols="<,<",options="header",]
+[cols="1<,5<",width="40%",options="header",]
 |=====================================
 |no |description
 |1 |Cannot open socket
@@ -7952,6 +7909,7 @@ The following messages are returned:
 When _int-error_ is specified the number and error text for that error
 number is returned.
 
+[source,newlisp]
 ------------------------------------------
 (net-error 10) → (10 "Cannot bind socket")
 ------------------------------------------
