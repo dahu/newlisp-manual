@@ -1,0 +1,4 @@
+newLISP Manual
+--------------
+
+__Asciidoc version of the newLISP manual__
