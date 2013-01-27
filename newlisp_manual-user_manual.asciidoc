@@ -1600,6 +1600,8 @@ by a multi-chracacter string.
 
 // ( § )
 
+anchor:destructive[]
+
 13. Destructive versus nondestructive functions
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -3498,6 +3500,8 @@ ASCII character.
 When UTF-8–enabled newLISP is used on a non-UTF-8–enabled display, both
 the output and the return value will be two characters. These are the
 two bytes necessary to encode the omega character.
+
+anchor:utf8_capable[]
 
 Functions working on UTF-8 characters
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^

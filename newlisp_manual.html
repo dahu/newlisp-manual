@@ -2386,6 +2386,7 @@ resting or slicing cannot be substituted at once using <a href="#setf">setf</a>,
 but would have to be substituted element by element. In strings only one
 character can be replaced at a time, but that character can be replaced
 by a multi-chracacter string.</p></div>
+<div class="paragraph"><p><a id="destructive"></a></p></div>
 </div>
 </div>
 <div class="sect2">
@@ -4131,6 +4132,7 @@ ASCII character.</td>
 <div class="paragraph"><p>When UTF-8–enabled newLISP is used on a non-UTF-8–enabled display, both
 the output and the return value will be two characters. These are the
 two bytes necessary to encode the omega character.</p></div>
+<div class="paragraph"><p><a id="utf8_capable"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_functions_working_on_utf_8_characters">Functions working on UTF-8 characters</h4>
@@ -6872,6 +6874,7 @@ evaluation event-driven</p></td>
 </div>
 <div class="sect2">
 <h3 id="_4_functions_in_alphabetical_order">4. Functions in alphabetical order</h3>
+<div class="paragraph"><p><a id="!"></a></p></div>
 <div class="sect3">
 <h4 id="_span_class_big_red_span"><span class="big red">!</span></h4>
 <div class="paragraph"><p><strong>syntax:</strong> (! <em>str-shell-command</em> [<em>int-flags</em>])</p></div>
@@ -6911,6 +6914,7 @@ shell operator by omitting the parenthesis and space after the <span class="mono
 <div class="paragraph"><p>Used in this way, the <span class="monospaced">!</span> operator is not a newLISP function at all, but
 rather a special feature of the newLISP command shell. The <span class="monospaced">!</span> must be
 entered as the first character on the command-line.</p></div>
+<div class="paragraph"><p><a id="$"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_span_2"><span class="big red">$</span></h4>
@@ -6936,9 +6940,14 @@ access (i.e., <span class="monospaced">($ i)</span>, where <span class="monospac
 <span class="p">(</span><span class="nv">$</span> <span class="ss">1</span><span class="p">)</span>  <span class="err">→</span> <span class="s">&quot;newlisp.org&quot;</span>
 <span class="p">(</span><span class="nv">$</span> <span class="ss">2</span><span class="p">)</span>  <span class="err">→</span> <span class="s">&quot;80&quot;</span>
 </pre></div></div></div>
+<div class="paragraph"><p><a id="+"></a>
+<a id="-"></a>
+<a id="*"></a>
+<a id="/"></a>
+<a id="%"></a></p></div>
 </div>
 <div class="sect3">
-<h4 id="_span_class_big_red_span_3"><span class="big red">+, -, *, / ,%</span></h4>
+<h4 id="_span_class_big_red_span_3"><span class="big red">+, -, *, /, %</span></h4>
 <div class="paragraph"><p><strong>syntax:</strong> (+ <em>int-1</em> [<em>int-2</em> &#8230; ])</p></div>
 <div class="paragraph"><p>Returns the sum of all numbers in <em>int-1</em> --.</p></div>
 <div class="paragraph"><p><strong>syntax:</strong> (- <em>int-1</em> [<em>int-2</em> &#8230; ])</p></div>
@@ -6979,6 +6988,7 @@ or smaller than <span class="monospaced">-9,223,372,036,854,775,808</span> wrap 
 to negative or negative to positive.</p></div>
 <div class="paragraph"><p>Floating point values that evaluate to <span class="monospaced">NaN</span> (Not a Number), ar treated
 as <span class="monospaced">0</span> (zero).</p></div>
+<div class="paragraph"><p><a id="++"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_a_href_destructive_a_span"><span class="big red">++ <a href="#destructive">!</a></span></h4>
@@ -7007,6 +7017,7 @@ number, or a number returned by an expression.</p></div>
 <span class="monospaced">0</span>.</p></div>
 <div class="paragraph"><p>See <a href="#deci">--</a> for decrementing numbers in integer mode. See
 <a href="#inc">inc</a> for incrementing numbers in floating point mode.</p></div>
+<div class="paragraph"><p><a id="--"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_a_href_destructive_a_span_2"><span class="big red">-- <a href="#destructive">!</a></span></h4>
@@ -7036,6 +7047,12 @@ number, or a number returned by an expression.</p></div>
 <span class="monospaced">0</span>.</p></div>
 <div class="paragraph"><p>See <a href="#inci">++</a> for incrementing numbers in integer mode. See
 <a href="#dec">dec</a> for decrementing numbers in floating point mode.</p></div>
+<div class="paragraph"><p><a id="&lt;"></a>
+<a id="&gt;"></a>
+<a id="="></a>
+<a id="&#8656;"></a>
+<a id="&gt;="></a>
+<a id="!="></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_lt_gt_8656_gt_span"><span class="big red">&lt;, &gt;, =, &#8656;, &gt;=, !=</span></h4>
@@ -7089,6 +7106,7 @@ the needed type, then comparing them as numbers.</p></div>
 
 <span class="p">(</span><span class="k">map</span> <span class="ss">&gt;</span> <span class="o">&#39;</span><span class="p">(</span><span class="nv">1</span> <span class="ss">3</span> <span class="k">-</span><span class="ss">4</span> <span class="k">-</span><span class="ss">3</span> <span class="ss">1</span> <span class="ss">2</span><span class="p">))</span>   <span class="err">→</span> <span class="p">(</span><span class="k">true</span> <span class="k">true</span> <span class="k">nil</span> <span class="k">nil</span> <span class="k">true</span> <span class="k">true</span><span class="p">)</span>
 </pre></div></div></div>
+<div class="paragraph"><p><a id="<a href="#></a> <a id=">[></a> <a id=]</a>"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_lt_lt_gt_gt_span"><span class="big red">&lt;&lt;, &gt;&gt;</span></h4>
@@ -7114,6 +7132,7 @@ shift</em>):</p></div>
 <span class="p">(</span><span class="nv">&gt;&gt;</span> <span class="ss">8</span><span class="p">)</span>        <span class="err">→</span>  <span class="ss">4</span>
 </pre></div></div></div>
 <div class="paragraph"><p>When <em>int-1</em> is the only argument <span class="monospaced">&lt;&lt;</span> and <span class="monospaced">&gt;&gt;</span> shift by one bit.</p></div>
+<div class="paragraph"><p><a id="&amp;"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_amp_span"><span class="big red">&amp;</span></h4>
@@ -7123,6 +7142,7 @@ number in <em>int-2</em>, then successively with <em>int-3</em>, etc.</p></div>
 <div class="listingblock">
 <div class="content"><div class="highlight"><pre><span class="p">(</span><span class="nv">&amp;</span> <span class="ss">0xAABB</span> <span class="ss">0x000F</span><span class="p">)</span>  <span class="err">→</span> <span class="ss">11</span>  <span class="c1">; which is 0xB</span>
 </pre></div></div></div>
+<div class="paragraph"><p><a id="|"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_span_4"><span class="big red">|</span></h4>
@@ -7132,6 +7152,7 @@ number in <em>int-2</em>, then successively with <em>int-3</em>, etc.</p></div>
 <div class="listingblock">
 <div class="content"><div class="highlight"><pre><span class="p">(</span><span class="nv">|</span> <span class="ss">0x10</span> <span class="ss">0x80</span> <span class="ss">2</span> <span class="ss">1</span><span class="p">)</span>  <span class="err">→</span> <span class="ss">147</span>
 </pre></div></div></div>
+<div class="paragraph"><p><a id="^"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_span_5"><span class="big red">^</span></h4>
@@ -7141,6 +7162,7 @@ number in <em>int-2</em>, then successively with <em>int-3</em>, etc.</p></div>
 <div class="listingblock">
 <div class="content"><div class="highlight"><pre><span class="p">(</span><span class="nv">^</span> <span class="ss">0xAA</span> <span class="ss">0x55</span><span class="p">)</span>  <span class="err">→</span> <span class="ss">255</span>
 </pre></div></div></div>
+<div class="paragraph"><p><a id="~"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_span_6"><span class="big red">~</span></h4>
@@ -7151,6 +7173,7 @@ all of the bits.</p></div>
 <div class="content"><div class="highlight"><pre><span class="p">(</span><span class="k">format</span> <span class="s">&quot;%X&quot;</span> <span class="p">(</span><span class="nv">~</span> <span class="ss">0xFFFFFFAA</span><span class="p">))</span>  <span class="err">→</span> <span class="s">&quot;55&quot;</span>
 <span class="p">(</span><span class="nv">~</span> <span class="ss">0xFFFFFFFF</span><span class="p">)</span>                <span class="err">→</span> <span class="ss">0</span>
 </pre></div></div></div>
+<div class="paragraph"><p><a id=":"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_span_7"><span class="big red">:</span></h4>
@@ -7205,6 +7228,7 @@ between the colon and the symbol following it.</p></div>
 </pre></div></div></div>
 <div class="paragraph"><p>Inside the FOOP methods the <a href="#self">self</a> function is used to access
 the target object of the method.</p></div>
+<div class="paragraph"><p><a id="abort"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_abort_span"><span class="big red">abort</span></h4>
@@ -7226,6 +7250,7 @@ using <a href="#fork">fork</a>, use <a href="#destroy">destroy</a> instead.</p><
 <div class="paragraph"><p>The function <span class="monospaced">abort</span> is part of the Cilk API for synchronizing child
 processes and process parallelization. See the reference for the
 function <a href="#spawn">spawn</a> for a full discussion of the Cilk API.</p></div>
+<div class="paragraph"><p><a id="abs"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_abs_span"><span class="big red">abs</span></h4>
@@ -7234,6 +7259,7 @@ function <a href="#spawn">spawn</a> for a full discussion of the Cilk API.</p></
 <div class="listingblock">
 <div class="content"><div class="highlight"><pre><span class="p">(</span><span class="k">abs</span> <span class="k">-</span><span class="ss">3.5</span><span class="p">)</span>  <span class="err">→</span> <span class="ss">3.5</span>
 </pre></div></div></div>
+<div class="paragraph"><p><a id="acos"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_acos_span"><span class="big red">acos</span></h4>
@@ -7243,6 +7269,7 @@ function <a href="#spawn">spawn</a> for a full discussion of the Cilk API.</p></
 <div class="content"><div class="highlight"><pre><span class="p">(</span><span class="k">acos</span> <span class="ss">1</span><span class="p">)</span>  <span class="err">→</span> <span class="ss">0</span>
 <span class="p">(</span><span class="k">cos</span> <span class="p">(</span><span class="k">acos</span> <span class="ss">1</span><span class="p">))</span> <span class="err">→</span> <span class="ss">1</span>
 </pre></div></div></div>
+<div class="paragraph"><p><a id="acosh"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_acosh_span"><span class="big red">acosh</span></h4>
@@ -7255,6 +7282,7 @@ whose hyperbolic cosine is <em>num-radians</em>. If <em>num-radians</em> is less
 <span class="p">(</span><span class="k">cosh</span> <span class="p">(</span><span class="k">acosh</span> <span class="ss">2</span><span class="p">))</span> <span class="err">→</span> <span class="ss">2</span>
 <span class="p">(</span><span class="k">acosh</span> <span class="ss">0.5</span><span class="p">)</span> <span class="err">→</span> <span class="ss">NaN</span>
 </pre></div></div></div>
+<div class="paragraph"><p><a id="add"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_add_span"><span class="big red">add</span></h4>
@@ -7266,6 +7294,7 @@ number. Any floating point calculation with <span class="monospaced">NaN</span> 
 <div class="content"><div class="highlight"><pre><span class="p">(</span><span class="k">add</span> <span class="ss">2</span> <span class="ss">3.25</span> <span class="ss">9</span><span class="p">)</span>   <span class="err">→</span> <span class="ss">14.25</span>
 <span class="p">(</span><span class="k">add</span> <span class="ss">1</span> <span class="ss">2</span> <span class="ss">3</span> <span class="ss">4</span> <span class="ss">5</span><span class="p">)</span>  <span class="err">→</span> <span class="ss">15</span>
 </pre></div></div></div>
+<div class="paragraph"><p><a id="address"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_address_span"><span class="big red">address</span></h4>
@@ -7305,6 +7334,7 @@ referred to by a variable symbol, not from volatile intermediate
 expression objects.</p></div>
 <div class="paragraph"><p>See also the <a href="#get-char">get-char</a>, <a href="#get-int">get-int</a>,
 <a href="#get-long">get-long</a> and <a href="#get-float">get-float</a> functions.</p></div>
+<div class="paragraph"><p><a id="amb"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_amb_span"><span class="big red">amb</span></h4>
@@ -7321,6 +7351,7 @@ random number. To generate random floating point numbers, use
 <a href="#random">random</a>, <a href="#randomize">randomize</a>, or
 <a href="#normal">normal</a>. To initialize the pseudo random number generating
 process at a specific starting point, use the <a href="#seed">seed</a> function.</p></div>
+<div class="paragraph"><p><a id="and"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_and_span"><span class="big red">and</span></h4>
@@ -7337,6 +7368,7 @@ or the empty list <span class="monospaced">()</span> is returned.</p></div>
 <span class="p">(</span><span class="k">and</span> <span class="k">true</span><span class="p">)</span>                        <span class="err">→</span> <span class="k">true</span>
 <span class="p">(</span><span class="k">and</span><span class="p">)</span>                             <span class="err">→</span> <span class="k">true</span>
 </pre></div></div></div>
+<div class="paragraph"><p><a id="append"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_append_span"><span class="big red">append</span></h4>
@@ -7380,6 +7412,7 @@ bytes.</p></div>
 convert arguments to strings and append in one step.</p></div>
 <div class="paragraph"><p>Use the functions <a href="#extend">extend</a> and <a href="#push">push</a> to append to
 an existing list or string modifying the target.</p></div>
+<div class="paragraph"><p><a id="append-file"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_append_file_span"><span class="big red">append-file</span></h4>
@@ -7411,6 +7444,7 @@ option is supplied automatically.</p></div>
 not yet exist, it will be created. In this mode, <span class="monospaced">append-file</span> can also
 be used to transfer files to remote newLISP server nodes.</p></div>
 <div class="paragraph"><p>See also <a href="#read-file">read-file</a> and <a href="#write-file">write-file</a>.</p></div>
+<div class="paragraph"><p><a id="apply"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_apply_span"><span class="big red">apply</span></h4>
@@ -7457,6 +7491,7 @@ arguments. Note, that a built-in <a href="#gcd">gcd</a> is available.</p></div>
 of their arguments, not on <em>special forms</em> like <a href="#dotimes">dotimes</a>
 or <a href="#case">case</a>, which evaluate only some of their arguments. Doing
 so will cause the function to fail.</p></div>
+<div class="paragraph"><p><a id="args"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_args_span"><span class="big red">args</span></h4>
@@ -7512,6 +7547,7 @@ first example), three arguments remain and are then returned by <span class="mon
 function call, but it should not be used as an argument to another
 macro, in which case <span class="monospaced">(args)</span> would not be evaluated and would therefore
 have the wrong contents in the new macro environment.</p></div>
+<div class="paragraph"><p><a id="array"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_array_span"><span class="big red">array</span></h4>
@@ -7603,6 +7639,7 @@ source strings using <a href="#source">source</a>.</p></div>
   <span class="p">(</span><span class="nv">5</span> <span class="ss">6</span> <span class="ss">7</span> <span class="ss">8</span><span class="p">)</span>
   <span class="p">(</span><span class="nv">9</span> <span class="ss">10</span> <span class="ss">11</span> <span class="ss">12</span><span class="p">)))))</span>
 </pre></div></div></div>
+<div class="paragraph"><p><a id="array-list"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_array_list_span"><span class="big red">array-list</span></h4>
@@ -7619,6 +7656,7 @@ unchanged:</p></div>
 <span class="p">(</span><span class="k">list</span> <span class="p">(</span><span class="k">array</span><span class="ss">?</span> <span class="ss">myarray</span><span class="p">)</span> <span class="p">(</span><span class="k">list</span><span class="ss">?</span> <span class="ss">mylist</span><span class="p">))</span>
 <span class="err">→</span> <span class="p">(</span><span class="k">true</span> <span class="k">true</span><span class="p">)</span>
 </pre></div></div></div>
+<div class="paragraph"><p><a id="array?"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_array_span_2"><span class="big red">array?</span></h4>
@@ -7632,6 +7670,7 @@ unchanged:</p></div>
 
 <span class="p">(</span><span class="k">array</span><span class="ss">?</span> <span class="p">(</span><span class="k">array-list</span> <span class="ss">M</span><span class="p">))</span>  <span class="err">→</span> <span class="k">nil</span>
 </pre></div></div></div>
+<div class="paragraph"><p><a id="asin"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_asin_span"><span class="big red">asin</span></h4>
@@ -7642,6 +7681,7 @@ returns the result.</p></div>
 <div class="content"><div class="highlight"><pre><span class="p">(</span><span class="k">asin</span> <span class="ss">1</span><span class="p">)</span>  <span class="err">→</span> <span class="ss">1.570796327</span>
 <span class="p">(</span><span class="k">sin</span> <span class="p">(</span><span class="k">asin</span> <span class="ss">1</span><span class="p">))</span> <span class="err">→</span> <span class="ss">1</span>
 </pre></div></div></div>
+<div class="paragraph"><p><a id="asinh"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_asinh_span"><span class="big red">asinh</span></h4>
@@ -7652,6 +7692,7 @@ hyperbolic sine is <em>num-radians</em>.</p></div>
 <div class="content"><div class="highlight"><pre><span class="p">(</span><span class="k">asinh</span> <span class="ss">2</span><span class="p">)</span>         <span class="err">→</span> <span class="ss">1.443635475</span>
 <span class="p">(</span><span class="k">sinh</span> <span class="p">(</span><span class="k">asinh</span> <span class="ss">2</span><span class="p">))</span>  <span class="err">→</span> <span class="ss">2</span>
 </pre></div></div></div>
+<div class="paragraph"><p><a id="assoc"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_assoc_span"><span class="big red">assoc</span></h4>
@@ -7705,6 +7746,7 @@ reference for speedier access and less memory usage:</p></div>
 <div class="paragraph"><p>For making replacements in association lists, use the <a href="#setf">setf</a>
 together with the <span class="monospaced">assoc</span> function. The <a href="#lookup">lookup</a> function is
 used to perform association lookup and element extraction in one step.</p></div>
+<div class="paragraph"><p><a id="atan"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_atan_span"><span class="big red">atan</span></h4>
@@ -7714,6 +7756,7 @@ used to perform association lookup and element extraction in one step.</p></div>
 <div class="content"><div class="highlight"><pre><span class="p">(</span><span class="k">atan</span> <span class="ss">1</span><span class="p">)</span>        <span class="err">→</span> <span class="ss">0.7853981634</span>
 <span class="p">(</span><span class="k">tan</span> <span class="p">(</span><span class="k">atan</span> <span class="ss">1</span><span class="p">))</span>  <span class="err">→</span> <span class="ss">1</span>
 </pre></div></div></div>
+<div class="paragraph"><p><a id="atan2"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_atan2_span"><span class="big red">atan2</span></h4>
@@ -7728,6 +7771,7 @@ coordinates into polar coordinates.</p></div>
 <span class="p">(</span><span class="k">atan2</span> <span class="ss">0</span> <span class="k">-</span><span class="ss">1</span><span class="p">)</span>                      <span class="err">→</span> <span class="ss">3.141592654</span>
 <span class="p">(</span><span class="nv">=</span> <span class="p">(</span><span class="k">atan2</span> <span class="ss">1</span> <span class="ss">2</span><span class="p">)</span> <span class="p">(</span><span class="k">atan</span> <span class="p">(</span><span class="k">div</span> <span class="ss">1</span> <span class="ss">2</span><span class="p">)))</span>  <span class="err">→</span> <span class="k">true</span>
 </pre></div></div></div>
+<div class="paragraph"><p><a id="atanh"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_atanh_span"><span class="big red">atanh</span></h4>
@@ -7742,6 +7786,7 @@ to 1, <span class="monospaced">atanh</span> returns infinity.</p></div>
 <span class="p">(</span><span class="k">atanh</span> <span class="ss">1.1</span><span class="p">)</span> <span class="err">→</span> <span class="ss">NaN</span>
 <span class="p">(</span><span class="k">atanh</span> <span class="ss">1</span><span class="p">)</span> <span class="err">→</span> <span class="ss">inf</span>
 </pre></div></div></div>
+<div class="paragraph"><p><a id="atom?"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_atom_span"><span class="big red">atom?</span></h4>
@@ -7757,6 +7802,7 @@ expressions, and quoted expressions are not atoms.</p></div>
      <span class="p">(</span><span class="nv">atom?</span> <span class="o">&#39;</span><span class="ss">foo</span><span class="p">))</span>    <span class="err">→</span> <span class="k">true</span>
 <span class="p">(</span><span class="nv">atom?</span> <span class="o">&#39;&#39;</span><span class="ss">foo</span><span class="p">)</span>         <span class="err">→</span> <span class="k">nil</span>
 </pre></div></div></div>
+<div class="paragraph"><p><a id="base64-dec"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_base64_dec_span"><span class="big red">base64-dec</span></h4>
@@ -7770,6 +7816,7 @@ to be a valid BASE64 string. The decoded string is returned.</p></div>
 <div class="paragraph"><p>newLISP&#8217;s BASE64 handling is derived from routines found in the Unix
 <a href="http://curl.haxx.se/">curl</a> utility and conforms to the RFC 4648
 standard.</p></div>
+<div class="paragraph"><p><a id="base64-enc"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_base64_enc_span"><span class="big red">base64-enc</span></h4>
@@ -7802,6 +7849,7 @@ string.</p></div>
 <div class="paragraph"><p>newLISP&#8217;s BASE64 handling is derived from routines found in the Unix
 <a href="http://curl.haxx.se/">curl</a> utility and conforms to the RFC 4648
 standard.</p></div>
+<div class="paragraph"><p><a id="bayes-query"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_bayes_query_span"><span class="big red">bayes-query</span></h4>
@@ -7966,6 +8014,7 @@ be used together with the Chain Bayesian mode for maximum performance:</p></div>
 </pre></div></div></div>
 <div class="paragraph"><p>As expected, the results are the same for probabilities as they are for
 frequencies.</p></div>
+<div class="paragraph"><p><a id="bayes-train"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_bayes_train_span"><span class="big red">bayes-train</span></h4>
@@ -8053,6 +8102,7 @@ function, but also as a function for counting in general. For instance,
 the resulting frequencies could be analyzed using
 <a href="#prob-chi2">prob-chi2</a> against a <em>null hypothesis</em> of proportional
 distribution of items across categories.</p></div>
+<div class="paragraph"><p><a id="begin"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_begin_span"><span class="big red">begin</span></h4>
@@ -8072,6 +8122,7 @@ allow multiple expressions in their bodies, but <span class="monospaced">begin</
 an <a href="#if">if</a> expression.</p></div>
 <div class="paragraph"><p>The <a href="#silent">silent</a> function works like <span class="monospaced">begin</span>, but suppresses
 console output on return.</p></div>
+<div class="paragraph"><p><a id="beta"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_beta_span"><span class="big red">beta</span></h4>
@@ -8082,6 +8133,7 @@ function as follows:</p></div>
 <div class="listingblock">
 <div class="content"><div class="highlight"><pre><span class="p">(</span><span class="k">beta</span> <span class="ss">1</span> <span class="ss">2</span><span class="p">)</span>  <span class="err">→</span> <span class="ss">0.5</span>
 </pre></div></div></div>
+<div class="paragraph"><p><a id="betai"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_betai_span"><span class="big red">betai</span></h4>
@@ -8100,6 +8152,7 @@ of 0.5 to occur 3 or more times in 10 trials (8 = 10 - 3 + 1). The
 incomplete Beta distribution can be used to derive a variety of other
 functions in mathematics and statistics. See also the
 <a href="#binomial">binomial</a> function.</p></div>
+<div class="paragraph"><p><a id="bind"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_bind_a_href_destructive_a_span"><span class="big red">bind <a href="#destructive">!</a></span></h4>
@@ -8142,6 +8195,7 @@ their values. <span class="monospaced">bind</span> sets all symbols to their ass
 </pre></div></div></div>
 <div class="paragraph"><p><a href="#unify">unify</a> returns an association list and <span class="monospaced">bind</span> binds the
 associations.</p></div>
+<div class="paragraph"><p><a id="binomial"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_binomial_span"><span class="big red">binomial</span></h4>
@@ -8158,6 +8212,7 @@ power of <em>y</em>.</p></div>
 <div class="paragraph"><p>The example calculates the probability for an event with a probability
 of 0.5 to occur 3 times in 10 trials. For a cumulated distribution, see
 the <a href="#betai">betai</a> function.</p></div>
+<div class="paragraph"><p><a id="bits"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_bits_span"><span class="big red">bits</span></h4>
@@ -8178,6 +8233,7 @@ and program control switching on the result.</p></div>
 <span class="p">((</span><span class="k">bits</span> <span class="ss">1234</span> <span class="k">true</span><span class="p">)</span> <span class="ss">0</span><span class="p">)</span> <span class="err">→</span> <span class="k">nil</span> <span class="c1">; indexing of the result</span>
 </pre></div></div></div>
 <div class="paragraph"><p><a href="#int">int</a> with a base of 2 is the inverse function to <span class="monospaced">bits</span>.</p></div>
+<div class="paragraph"><p><a id="callback"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_callback_span"><span class="big red">callback</span></h4>
@@ -8269,6 +8325,7 @@ extract numbers of different precision from parameters. Use
 <a href="#pack">pack</a> and <a href="#unpack">unpack</a> to extract data from binary
 buffers and structures.</p></div>
 <div class="paragraph"><p>Note that newLISP as already a fast built-in <a href="#sort">sort</a> function.</p></div>
+<div class="paragraph"><p><a id="case"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_case_span"><span class="big red">case</span></h4>
@@ -8292,6 +8349,7 @@ expression.</p></div>
 </pre></div></div></div>
 <div class="paragraph"><p>The example shows how, if no match is found, the last expression in the
 body of a <span class="monospaced">case</span> function can be evaluated.</p></div>
+<div class="paragraph"><p><a id="catch"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_catch_span"><span class="big red">catch</span></h4>
@@ -8350,6 +8408,7 @@ out of iteration loops (as in the first syntax), the second syntax of
 <span class="monospaced">catch</span> can also be used to catch errors. The
 <a href="#throw-error">throw-error</a> function may be used to throw
 user-defined errors.</p></div>
+<div class="paragraph"><p><a id="ceil"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_ceil_span"><span class="big red">ceil</span></h4>
@@ -8360,6 +8419,7 @@ user-defined errors.</p></div>
 <span class="p">(</span><span class="k">ceil</span> <span class="ss">3.4</span><span class="p">)</span>   <span class="err">→</span> <span class="ss">4</span>
 </pre></div></div></div>
 <div class="paragraph"><p>See also the <a href="#floor">floor</a> function.</p></div>
+<div class="paragraph"><p><a id="change-dir"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_change_dir_span"><span class="big red">change-dir</span></h4>
@@ -8370,6 +8430,7 @@ successful, <span class="monospaced">true</span> is returned; otherwise <span cl
 <div class="content"><div class="highlight"><pre><span class="p">(</span><span class="k">change-dir</span> <span class="s">&quot;/etc&quot;</span><span class="p">)</span>
 </pre></div></div></div>
 <div class="paragraph"><p>Makes <span class="monospaced">/etc</span> the current directory.</p></div>
+<div class="paragraph"><p><a id="char"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_char_a_href_utf8_capable_utf8_a_span"><span class="big red">char <a href="#utf8_capable">utf8</a></span></h4>
@@ -8406,6 +8467,7 @@ Unicode and a UTF-8 character is returned.</p></div>
 <span class="c1">; The Zen of UTF-8</span>
 <span class="p">(</span><span class="k">char</span> <span class="p">(</span><span class="nv">&amp;</span> <span class="p">(</span><span class="k">char</span> <span class="s">&quot;生&quot;</span><span class="p">)</span> <span class="p">(</span><span class="k">char</span> <span class="s">&quot;死&quot;</span><span class="p">)))</span> <span class="err">→</span> <span class="err">愛</span> <span class="c1">; by @kosh_bot</span>
 </pre></div></div></div>
+<div class="paragraph"><p><a id="chop"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_chop_a_href_utf8_capable_utf8_a_span"><span class="big red">chop <a href="#utf8_capable">utf8</a></span></h4>
@@ -8432,6 +8494,7 @@ with <em>int-elements</em> omitted (same as for strings).</p></div>
 
 <span class="ss">lst</span>  <span class="err">→</span> <span class="p">(</span><span class="nv">a</span> <span class="ss">b</span> <span class="p">(</span><span class="nv">c</span> <span class="ss">d</span><span class="p">)</span> <span class="ss">e</span><span class="p">)</span>
 </pre></div></div></div>
+<div class="paragraph"><p><a id="clean"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_clean_span"><span class="big red">clean</span></h4>
@@ -8462,6 +8525,7 @@ list mode option).</p></div>
 <div class="paragraph"><p>See also the related function <a href="#index">index</a>, which returns the
 indices of the remaining elements, and <a href="#filter">filter</a>, which
 returns all elements for which a predicate returns true.</p></div>
+<div class="paragraph"><p><a id="close"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_close_span"><span class="big red">close</span></h4>
@@ -8476,6 +8540,7 @@ successful, <span class="monospaced">close</span> returns <span class="monospace
 </pre></div></div></div>
 <div class="paragraph"><p>Note that using <span class="monospaced">close</span> on <a href="#device">device</a> automatically resets it
 to 0 (zero, the screen device).</p></div>
+<div class="paragraph"><p><a id="command-event"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_command_event_span"><span class="big red">command-event</span></h4>
@@ -8580,6 +8645,7 @@ newLISP will translate the command line and dispatch it to the built-in
 web server. The server output will appear in the shell window.</p></div>
 <div class="paragraph"><p>Note, that the command line length as well as the line length in HTTP
 headers is limited to 512 characters for newLISP.</p></div>
+<div class="paragraph"><p><a id="cond"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_cond_span"><span class="big red">cond</span></h4>
@@ -8614,6 +8680,7 @@ list).</p></div>
 <div class="paragraph"><p>When used with multiple arguments, the function <a href="#if">if</a> behaves
 like <span class="monospaced">cond</span>, except it does not need extra parentheses to enclose the
 condition-body pair of expressions.</p></div>
+<div class="paragraph"><p><a id="cons"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_cons_span"><span class="big red">cons</span></h4>
@@ -8645,6 +8712,7 @@ is a pair):</p></div>
 
 <span class="p">(</span><span class="k">cons</span> <span class="p">(</span><span class="k">first</span> <span class="o">&#39;</span><span class="p">(</span><span class="nv">x</span> <span class="ss">y</span><span class="p">))</span> <span class="p">(</span><span class="k">last</span> <span class="o">&#39;</span><span class="p">(</span><span class="nv">x</span> <span class="ss">y</span><span class="p">)))</span>      <span class="err">→</span> <span class="p">(</span><span class="nv">x</span> <span class="ss">y</span><span class="p">)</span>
 </pre></div></div></div>
+<div class="paragraph"><p><a id="constant"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_constant_a_href_destructive_a_span"><span class="big red">constant <a href="#destructive">!</a></span></h4>
@@ -8693,6 +8761,7 @@ There is no performance loss when renaming functions.</p></div>
 to use the mixed type floating point mode of <span class="monospaced">add</span>. The hexadecimal
 number displayed in the result is the binary address of the built-in
 function and varies on different platforms and OSes.</p></div>
+<div class="paragraph"><p><a id="context"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_context_span"><span class="big red">context</span></h4>
@@ -8802,6 +8871,7 @@ symbol and creates a symbol with the same name in the context <span class="monos
 allowed in newLISP symbols being used as variable names. This second
 syntax of <span class="monospaced">context</span> only creates the new symbol and returns the value
 contained in it. It does not switch to the new namespace.</p></div>
+<div class="paragraph"><p><a id="context?"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_context_span_2"><span class="big red">context?</span></h4>
@@ -8826,6 +8896,7 @@ symbol is specified by its name string in <em>str-sym</em>.</p></div>
 </pre></div></div></div>
 <div class="paragraph"><p>Use <a href="#context">context</a> to change and create namespaces and to create
 hash symbols in contexts.</p></div>
+<div class="paragraph"><p><a id="copy"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_copy_span"><span class="big red">copy</span></h4>
@@ -8850,6 +8921,7 @@ can be made non-destructive.</p></div>
 <div class="paragraph"><p>Using <span class="monospaced">copy</span> the functions <a href="#replace">replace</a> and
 <a href="#rotate">rotate</a> are prevented from changing the data. A modified
 version of the data is returned.</p></div>
+<div class="paragraph"><p><a id="copy-file"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_copy_file_span"><span class="big red">copy-file</span></h4>
@@ -8860,6 +8932,7 @@ successful or <span class="monospaced">nil</span>, if the copy was unsuccessful.
 <div class="listingblock">
 <div class="content"><div class="highlight"><pre><span class="p">(</span><span class="k">copy-file</span> <span class="s">&quot;/home/me/newlisp/data.lsp&quot;</span> <span class="s">&quot;/tmp/data.lsp&quot;</span><span class="p">)</span>
 </pre></div></div></div>
+<div class="paragraph"><p><a id="corr"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_corr_span"><span class="big red">corr</span></h4>
@@ -8919,6 +8992,7 @@ null hypothesis.</p></div>
 <div class="paragraph"><p>The regression coefficients <span class="monospaced">b0 = 29.241</span> and <span class="monospaced">b1 = -0.064</span> can be used
 to estimate values of the Y variable (test errors) from values in X
 (study time) using the equation <span class="monospaced">Y = b0 + b1 * X</span>.</p></div>
+<div class="paragraph"><p><a id="cos"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_cos_span"><span class="big red">cos</span></h4>
@@ -8929,6 +9003,7 @@ to estimate values of the Y variable (test errors) from values in X
 <span class="p">(</span><span class="k">set</span> <span class="o">&#39;</span><span class="ss">pi</span> <span class="p">(</span><span class="k">mul</span> <span class="ss">2</span> <span class="p">(</span><span class="k">acos</span> <span class="ss">0</span><span class="p">)))</span>  <span class="err">→</span> <span class="ss">3.141592654</span>
 <span class="p">(</span><span class="k">cos</span> <span class="ss">pi</span><span class="p">)</span>                    <span class="err">→</span> <span class="k">-</span><span class="ss">1</span>
 </pre></div></div></div>
+<div class="paragraph"><p><a id="cosh"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_cosh_span"><span class="big red">cosh</span></h4>
@@ -8942,6 +9017,7 @@ is defined mathematically as: <em>(exp (x) + exp (-x)) / 2</em>. An overflow to
 <span class="p">(</span><span class="k">cosh</span> <span class="ss">1000</span><span class="p">)</span>  <span class="err">→</span> <span class="ss">inf</span>
 <span class="p">(</span><span class="nv">=</span> <span class="p">(</span><span class="k">cosh</span> <span class="ss">1</span><span class="p">)</span> <span class="p">(</span><span class="k">div</span> <span class="p">(</span><span class="k">add</span> <span class="p">(</span><span class="k">exp</span> <span class="ss">1</span><span class="p">)</span> <span class="p">(</span><span class="k">exp</span> <span class="k">-</span><span class="ss">1</span><span class="p">))</span> <span class="ss">2</span><span class="p">))</span>  <span class="err">→</span> <span class="k">true</span>
 </pre></div></div></div>
+<div class="paragraph"><p><a id="count"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_count_span"><span class="big red">count</span></h4>
@@ -8961,6 +9037,7 @@ counts.</p></div>
 the second list, should be unique. For items that are not unique, only
 the first instance will carry a count; all other instances will display
 <span class="monospaced">0</span> (zero).</p></div>
+<div class="paragraph"><p><a id="cpymem"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_cpymem_span"><span class="big red">cpymem</span></h4>
@@ -9016,6 +9093,7 @@ newLISP:</p></div>
 <div class="paragraph"><p>The last example will not work on all hardware platforms and OSs.</p></div>
 <div class="paragraph"><p>Use the <a href="#dump">dump</a> function to retrieve binary addresses and the
 contents from newLISP cells.</p></div>
+<div class="paragraph"><p><a id="crc32"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_crc32_span"><span class="big red">crc32</span></h4>
@@ -9029,6 +9107,7 @@ byte. <span class="monospaced">crc32</span> uses an algorithm published by
 </pre></div></div></div>
 <div class="paragraph"><p><span class="monospaced">crc32</span> is often used to verify data integrity in unsafe data
 transmissions.</p></div>
+<div class="paragraph"><p><a id="crit-chi2"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_crit_chi2_span"><span class="big red">crit-chi2</span></h4>
@@ -9043,6 +9122,7 @@ instead of <em>p</em>.</p></div>
 <div class="content"><div class="highlight"><pre><span class="p">(</span><span class="k">crit-chi2</span> <span class="ss">0.01</span> <span class="ss">4</span><span class="p">)</span>  <span class="err">→</span> <span class="ss">13.27670443</span>
 </pre></div></div></div>
 <div class="paragraph"><p>See also the inverse function <a href="#prob-chi2">prob-chi2</a>.</p></div>
+<div class="paragraph"><p><a id="crit-f"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_crit_f_span"><span class="big red">crit-f</span></h4>
@@ -9055,6 +9135,7 @@ statistical null hypothesis using the <em>F-test</em>.</p></div>
 <div class="content"><div class="highlight"><pre><span class="p">(</span><span class="nv">crit-f</span> <span class="ss">0.05</span> <span class="ss">10</span> <span class="ss">12</span><span class="p">)</span>  <span class="err">→</span> <span class="ss">2.753386727</span>
 </pre></div></div></div>
 <div class="paragraph"><p>See also the inverse function <a href="#prob-f">prob-f</a>.</p></div>
+<div class="paragraph"><p><a id="crit-t"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_crit_t_span"><span class="big red">crit-t</span></h4>
@@ -9067,6 +9148,7 @@ null hypothesis.</p></div>
 <div class="content"><div class="highlight"><pre><span class="p">(</span><span class="nv">crit-t</span> <span class="ss">0.05</span> <span class="ss">14</span><span class="p">)</span>  <span class="err">→</span> <span class="ss">1.761310142</span>
 </pre></div></div></div>
 <div class="paragraph"><p>See also the inverse function <a href="#prob-t">prob-t</a>.</p></div>
+<div class="paragraph"><p><a id="crit-z"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_crit_z_span"><span class="big red">crit-z</span></h4>
@@ -9078,6 +9160,7 @@ and confidence intervals.</p></div>
 <div class="content"><div class="highlight"><pre><span class="p">(</span><span class="k">crit-z</span> <span class="ss">0.999</span><span class="p">)</span>  <span class="err">→</span> <span class="ss">3.090232372</span>
 </pre></div></div></div>
 <div class="paragraph"><p>See also the inverse function <a href="#prob-z">prob-z</a>.</p></div>
+<div class="paragraph"><p><a id="current-line"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_current_line_span"><span class="big red">current-line</span></h4>
@@ -9102,6 +9185,7 @@ command-line filter:</p></div>
 </pre></div></div></div>
 <div class="paragraph"><p>This displays all comment lines starting with <span class="monospaced">;;</span> from a file given as
 a command-line argument when invoking the script <span class="monospaced">filter</span>.</p></div>
+<div class="paragraph"><p><a id="curry"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_curry_span"><span class="big red">curry</span></h4>
@@ -9125,6 +9209,7 @@ evaluated during the application of <em>func</em>.</p></div>
 <span class="err">→</span>  <span class="p">((</span><span class="nv">x</span> <span class="ss">1</span><span class="p">)</span> <span class="p">(</span><span class="nv">x</span> <span class="ss">2</span><span class="p">)</span> <span class="p">(</span><span class="nv">x</span> <span class="ss">3</span><span class="p">)</span> <span class="p">(</span><span class="nv">x</span> <span class="ss">4</span><span class="p">)</span> <span class="p">(</span><span class="nv">x</span> <span class="ss">5</span><span class="p">))</span>
 </pre></div></div></div>
 <div class="paragraph"><p><span class="monospaced">curry</span> can be used on all functions taking two arguments.</p></div>
+<div class="paragraph"><p><a id="date"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_date_a_href_utf8_capable_utf8_a_span"><span class="big red">date <a href="#utf8_capable">utf8</a></span></h4>
@@ -9306,6 +9391,7 @@ SunOS/Solaris and Mac OS X. On Win32 use <span class="monospaced">"%#d"</span>.<
 <div class="paragraph"><p>See also <a href="#date-value">date-value</a>, <a href="#date-list">date-list</a>,
 <a href="#date-parse">date-parse</a>, <a href="#time-of-day">time-of-day</a>,
 <a href="#time">time</a>, and <a href="#now">now</a>.</p></div>
+<div class="paragraph"><p><a id="date-list"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_date_list_span"><span class="big red">date-list</span></h4>
@@ -9327,6 +9413,7 @@ may differ from the local timezone.</p></div>
 <div class="paragraph"><p>A second optional <em>int-index</em> parameter can be used to return a specific
 member of the list.</p></div>
 <div class="paragraph"><p><span class="monospaced">date-list</span> is the inverse operation of <a href="#date-value">date-value</a>.</p></div>
+<div class="paragraph"><p><a id="date-parse"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_date_parse_span"><span class="big red">date-parse</span></h4>
@@ -9350,6 +9437,7 @@ named <span class="monospaced">parse-date</span> in previous versions. The old f
 <span class="err">→</span> <span class="p">(</span><span class="nv">2010</span> <span class="ss">10</span> <span class="ss">18</span> <span class="ss">7</span> <span class="ss">0</span> <span class="ss">0</span> <span class="ss">290</span> <span class="ss">1</span><span class="p">)</span>
 </pre></div></div></div>
 <div class="paragraph"><p>See the <a href="#date">date</a> function for all possible format descriptors.</p></div>
+<div class="paragraph"><p><a id="date-value"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_date_value_span"><span class="big red">date-value</span></h4>
@@ -9379,6 +9467,7 @@ the current time.</p></div>
 <div class="paragraph"><p>See also <a href="#date">date</a>, <a href="#date-list">date-list</a>,
 <a href="#date-parse">date-parse</a>, <a href="#time-of-day">time-of-day</a>,
 <a href="#time">time</a>, and <a href="#now">now</a>.</p></div>
+<div class="paragraph"><p><a id="debug"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_debug_span"><span class="big red">debug</span></h4>
@@ -9400,6 +9489,7 @@ printed. The function causing the exception will return either <span class="mono
 <span class="monospaced">nil</span> and processing will continue. This way, variables and the current
 state of the program can still be inspected while debugging.</p></div>
 <div class="paragraph"><p>See also the <a href="#trace">trace</a> function.</p></div>
+<div class="paragraph"><p><a id="dec"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_dec_a_href_destructive_a_span"><span class="big red">dec <a href="#destructive">!</a></span></h4>
@@ -9440,6 +9530,7 @@ can be updated too:</p></div>
 </pre></div></div></div>
 <div class="paragraph"><p>Use the <a href="#deci">--</a> function to decrement in integer mode. Use the
 <a href="#inc">inc</a> function to increment numbers floating point mode.</p></div>
+<div class="paragraph"><p><a id="def-new"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_def_new_span"><span class="big red">def-new</span></h4>
@@ -9507,6 +9598,7 @@ living in their own lexically protected name-space:</p></div>
 <div class="paragraph"><p>The function <span class="monospaced">def-new</span> can also be used to configure contexts or context
 objects in a more granular fashion than is possible with <a href="#new">new</a>,
 which copies a whole context.</p></div>
+<div class="paragraph"><p><a id="default"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_default_span"><span class="big red">default</span></h4>
@@ -9526,6 +9618,7 @@ which copies a whole context.</p></div>
 <div class="paragraph"><p>In many situations newLISP defaults automatically to the default functor
 when seeing a context name. In circumstances where this is not the case,
 the <span class="monospaced">default</span> function can be used.</p></div>
+<div class="paragraph"><p><a id="define"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_define_a_href_destructive_a_span"><span class="big red">define <a href="#destructive">!</a></span></h4>
@@ -9593,6 +9686,7 @@ environment.</p></div>
 <span class="p">(</span><span class="k">define</span> <span class="p">(</span><span class="nv">area</span> <span class="ss">x</span> <span class="ss">y</span><span class="p">)</span> <span class="p">(</span><span class="nv">*</span> <span class="ss">x</span> <span class="ss">y</span><span class="p">))</span>
 </pre></div></div></div>
 <div class="paragraph"><p>Trying to redefine a protected symbol will cause an error message.</p></div>
+<div class="paragraph"><p><a id="define-macro"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_define_macro_span"><span class="big red">define-macro</span></h4>
@@ -9698,6 +9792,7 @@ it is a <a href="#default_function"><em>default function</em></a>.</p></div>
 
 <span class="p">(</span><span class="k">define-macro</span> <span class="p">(</span><span class="nv">my-setq</span><span class="p">)</span> <span class="p">(</span><span class="k">set</span> <span class="p">(</span><span class="k">args</span> <span class="ss">0</span><span class="p">)</span> <span class="p">(</span><span class="k">eval</span> <span class="p">(</span><span class="k">args</span> <span class="ss">1</span><span class="p">))))</span>
 </pre></div></div></div>
+<div class="paragraph"><p><a id="delete"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_delete_span"><span class="big red">delete</span></h4>
@@ -9745,6 +9840,7 @@ a normal unprotected symbol and contain <span class="monospaced">nil</span>.</p>
 <div class="paragraph"><p>Note that deleting a symbol that is part of an expression which is
 currently executing can crash the system or have other unforeseen
 effects.</p></div>
+<div class="paragraph"><p><a id="delete-file"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_delete_file_span"><span class="big red">delete-file</span></h4>
@@ -9766,6 +9862,7 @@ deleted successfully.</p></div>
 second example shows how to use a URL to specify the file. In this form,
 additional parameters can be given. See <a href="#delete-url">delete-url</a> for
 details.</p></div>
+<div class="paragraph"><p><a id="delete-url"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_delete_url_span"><span class="big red">delete-url</span></h4>
@@ -9790,6 +9887,7 @@ function is used and a URL is specified for the filename.</p></div>
 <div class="paragraph"><p>The second example configures a timeout option of five seconds. Other
 options such as special HTTP protocol headers can be specified, as well.
 See the <a href="#get-url">get-url</a> function for details.</p></div>
+<div class="paragraph"><p><a id="destroy"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_destroy_span"><span class="big red">destroy</span></h4>
@@ -9815,6 +9913,7 @@ second syntax is not available on Win32.</p></div>
 <span class="p">(</span><span class="k">set</span> <span class="o">&#39;</span><span class="ss">pid</span> <span class="p">(</span><span class="k">fork</span> <span class="p">(</span><span class="k">dotimes</span> <span class="p">(</span><span class="nv">i</span> <span class="ss">1000</span><span class="p">)</span> <span class="p">(</span><span class="k">println</span> <span class="ss">i</span><span class="p">)</span> <span class="p">(</span><span class="k">sleep</span> <span class="ss">10</span><span class="p">))))</span>
 <span class="p">(</span><span class="k">sleep</span> <span class="ss">100</span><span class="p">)</span> <span class="p">(</span><span class="k">destroy</span> <span class="ss">pid</span><span class="p">)</span>
 </pre></div></div></div>
+<div class="paragraph"><p><a id="det"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_det_span"><span class="big red">det</span></h4>
@@ -9838,6 +9937,7 @@ deals with a singular matrix.</p></div>
 returned.</p></div>
 <div class="paragraph"><p>See also the other matrix operations <a href="#invert">invert</a>,
 <a href="#mat">mat</a>, <a href="#multiply">multiply</a> and <a href="#transpose">transpose</a>.</p></div>
+<div class="paragraph"><p><a id="device"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_device_span"><span class="big red">device</span></h4>
@@ -9861,6 +9961,7 @@ keyboard. If the current I/O device has been set by opening a file, then
 </pre></div></div></div>
 <div class="paragraph"><p>Note that using <a href="#close">close</a> on <span class="monospaced">device</span> automatically resets
 <span class="monospaced">device</span> to 0 (zero).</p></div>
+<div class="paragraph"><p><a id="difference"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_difference_span"><span class="big red">difference</span></h4>
@@ -9883,6 +9984,7 @@ duplicates of other elements in <em>list-A</em> are left.</p></div>
 </pre></div></div></div>
 <div class="paragraph"><p>See also the set functions <a href="#intersect">intersect</a>,
 <a href="#unique">unique</a> and <a href="#union">union</a>.</p></div>
+<div class="paragraph"><p><a id="directory"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_directory_span"><span class="big red">directory</span></h4>
@@ -9919,6 +10021,7 @@ containing the string <span class="monospaced">".c"</span>.</p></div>
 <div class="paragraph"><p>Other functions that use regular expressions are <a href="#find">find</a>,
 <a href="#find-all">find-all</a>, <a href="#parse">parse</a>, <a href="#regex">regex</a>,
 <a href="#replace">replace</a>, and <a href="#search">search</a>.</p></div>
+<div class="paragraph"><p><a id="directory?"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_directory_span_2"><span class="big red">directory?</span></h4>
@@ -9929,6 +10032,7 @@ on the outcome.</p></div>
 <div class="content"><div class="highlight"><pre><span class="p">(</span><span class="k">directory</span><span class="ss">?</span> <span class="s">&quot;/etc&quot;</span><span class="p">)</span>             <span class="err">→</span> <span class="k">true</span>
 <span class="p">(</span><span class="k">directory</span><span class="ss">?</span> <span class="s">&quot;/usr/bin/emacs/&quot;</span><span class="p">)</span>  <span class="err">→</span> <span class="k">nil</span>
 </pre></div></div></div>
+<div class="paragraph"><p><a id="div"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_div_span"><span class="big red">div</span></h4>
@@ -9945,6 +10049,7 @@ numbers. Any floating point calculation with <span class="monospaced">NaN</span>
 </pre></div></div></div>
 <div class="paragraph"><p>When <em>num-1</em> is the only argument, <span class="monospaced">div</span> calculates the inverse of
 <em>num-1</em>.</p></div>
+<div class="paragraph"><p><a id="do-until"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_do_until_span"><span class="big red">do-until</span></h4>
@@ -9971,6 +10076,7 @@ the <em>body</em> expression. If <em>body</em> is empty, the last result of
 <div class="paragraph"><p>While <span class="monospaced">do-until</span> goes through the loop at least once, <a href="#until">until</a>
 never enters the loop.</p></div>
 <div class="paragraph"><p>See also the functions <a href="#while">while</a> and <a href="#do-while">do-while</a>.</p></div>
+<div class="paragraph"><p><a id="do-while"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_do_while_span"><span class="big red">do-while</span></h4>
@@ -9996,6 +10102,7 @@ the <em>body</em> expression.</p></div>
 <div class="paragraph"><p>While <span class="monospaced">do-while</span> goes through the loop at least once, <a href="#while">while</a>
 never enters the loop.</p></div>
 <div class="paragraph"><p>See also the functions <a href="#until">until</a> and <a href="#do-until">do-until</a>.</p></div>
+<div class="paragraph"><p><a id="doargs"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_doargs_span"><span class="big red">doargs</span></h4>
@@ -10033,6 +10140,7 @@ the arguments:</p></div>
 </pre></div></div></div>
 <div class="paragraph"><p>Use the <a href="#args">args</a> function to access the entire argument list at
 once.</p></div>
+<div class="paragraph"><p><a id="dolist"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_dolist_span"><span class="big red">dolist</span></h4>
@@ -10078,6 +10186,7 @@ execution:</p></div>
 </pre></div></div></div>
 <div class="paragraph"><p>The console output is shown in boldface. <span class="monospaced">$idx</span> is protected and cannot
 be changed by the user.</p></div>
+<div class="paragraph"><p><a id="dostring"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_dostring_a_href_utf8_capable_utf8_a_span"><span class="big red">dostring <a href="#utf8_capable">utf8</a></span></h4>
@@ -10123,6 +10232,7 @@ expression.</p></div>
 <div class="paragraph"><p>The internal system variable <span class="monospaced">$idx</span> keeps track of the current offset
 into the string passed to <span class="monospaced">dostring</span>, and it can be accessed during its
 execution.</p></div>
+<div class="paragraph"><p><a id="dotimes"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_dotimes_span"><span class="big red">dotimes</span></h4>
@@ -10143,6 +10253,7 @@ condition is tested before evaluating <em>body</em>.</p></div>
   <span class="p">(</span><span class="k">print</span> <span class="ss">x</span><span class="p">))</span>  <span class="err">→</span> <span class="ss">9</span>  <span class="c1">; return value</span>
 </pre></div></div></div>
 <div class="paragraph"><p>This prints <span class="monospaced">0123456789</span> to the console window.</p></div>
+<div class="paragraph"><p><a id="dotree"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_dotree_span"><span class="big red">dotree</span></h4>
@@ -10167,6 +10278,7 @@ symbols created by <a href="#bayes-train">bayes-train</a>.</p></div>
 </pre></div></div></div>
 <div class="paragraph"><p>This example prints the names of all symbols inside SomeCTX to the
 console window.</p></div>
+<div class="paragraph"><p><a id="dump"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_dump_span"><span class="big red">dump</span></h4>
@@ -10225,6 +10337,7 @@ width:40%;
 <div class="paragraph"><p>This function is valuable for changing type bits in cells or hacking
 other parts of newLISP internals. See the function <a href="#cpymem">cpymem</a>
 for a comprehensive example.</p></div>
+<div class="paragraph"><p><a id="dup"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_dup_span"><span class="big red">dup</span></h4>
@@ -10255,6 +10368,7 @@ will contain <em>int-n</em> evaluations of <em>exp</em>.</p></div>
 filled with four binary zeroes.</p></div>
 <div class="paragraph"><p>See also the functions <a href="#sequence">sequence</a> and
 <a href="#series">series</a>.</p></div>
+<div class="paragraph"><p><a id="empty?"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_empty_span"><span class="big red">empty?</span></h4>
@@ -10272,6 +10386,7 @@ returned.</p></div>
 </pre></div></div></div>
 <div class="paragraph"><p>The first example checks a list, while the second two examples check a
 string.</p></div>
+<div class="paragraph"><p><a id="encrypt"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_encrypt_span"><span class="big red">encrypt</span></h4>
@@ -10295,6 +10410,7 @@ are applied again to the encrypted text:</p></div>
 <div class="content"><div class="highlight"><pre><span class="p">(</span><span class="k">write-</span><span class="ss">file</span> <span class="s">&quot;myfile.enc&quot;</span>
   <span class="p">(</span><span class="k">encrypt</span> <span class="p">(</span><span class="k">read-</span><span class="ss">file</span> <span class="s">&quot;myfile&quot;</span><span class="p">)</span> <span class="s">&quot;29kH67*&quot;</span><span class="p">))</span>
 </pre></div></div></div>
+<div class="paragraph"><p><a id="ends-with"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_ends_with_span"><span class="big red">ends-with</span></h4>
@@ -10321,6 +10437,7 @@ element in <em>exp</em>. <span class="monospaced">true</span> or <span class="mo
 </pre></div></div></div>
 <div class="paragraph"><p>The last example shows that <em>exp</em> could be a list by itself.</p></div>
 <div class="paragraph"><p>See also the <a href="#starts-with">starts-with</a> function.</p></div>
+<div class="paragraph"><p><a id="env"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_env_span"><span class="big red">env</span></h4>
@@ -10351,6 +10468,7 @@ with an empty string.</p></div>
 <span class="p">(</span><span class="k">env</span> <span class="s">&quot;NEWLISPBIN&quot;</span> <span class="s">&quot;&quot;</span><span class="p">)</span>           <span class="err">→</span> <span class="k">true</span>
 <span class="p">(</span><span class="k">env</span> <span class="s">&quot;NEWLISPBIN&quot;</span><span class="p">)</span>              <span class="err">→</span> <span class="k">nil</span>
 </pre></div></div></div>
+<div class="paragraph"><p><a id="erf"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_erf_span"><span class="big red">erf</span></h4>
@@ -10364,6 +10482,7 @@ function is defined as:</p></div>
 <span class="p">(</span><span class="nv">0</span> <span class="ss">0.5204998778</span> <span class="ss">0.8427007929</span> <span class="ss">0.9661051465</span> <span class="ss">0.995322265</span> <span class="ss">0.999593048</span>
  <span class="ss">0.9999779095</span> <span class="ss">0.9999992569</span> <span class="ss">0.9999999846</span> <span class="ss">0.9999999998</span> <span class="ss">1</span> <span class="ss">1</span> <span class="ss">1</span><span class="p">)</span>
 </pre></div></div></div>
+<div class="paragraph"><p><a id="error-event"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_error_event_span"><span class="big red">error-event</span></h4>
@@ -10392,6 +10511,7 @@ specified as either a quoted symbol or a lambda function.</p></div>
 <div class="paragraph"><p>For a different way of handling errors, see the <a href="#catch">catch</a>
 function. Use <a href="#throw-error">throw-error</a> to throw user-defined
 errors.</p></div>
+<div class="paragraph"><p><a id="eval"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_eval_span"><span class="big red">eval</span></h4>
@@ -10440,6 +10560,7 @@ enclosing the data inside context objects. See the chapter
 defined function using namespace ids avoids <em>variable capture</em> of the
 passed symbol, in case the symbol passed is the same used as a parameter
 in the function.</p></div>
+<div class="paragraph"><p><a id="eval-string"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_eval_string_span"><span class="big red">eval-string</span></h4>
@@ -10479,6 +10600,7 @@ The symbols <span class="monospaced">a</span> and <span class="monospaced">b</sp
 <span class="monospaced">foo</span> instead of <span class="monospaced">MAIN</span>.</p></div>
 <div class="paragraph"><p>See also the function <a href="#read-expr">read-expr</a> which translates a
 string without evaluating it.</p></div>
+<div class="paragraph"><p><a id="even?"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_even_span"><span class="big red">even?</span></h4>
@@ -10492,6 +10614,7 @@ will be converted to an integer by cutting off its fractional part.</p></div>
 <span class="p">(</span><span class="nv">even?</span> <span class="ss">8.7</span><span class="p">)</span>  <span class="err">→</span> <span class="k">true</span>
 </pre></div></div></div>
 <div class="paragraph"><p>Use <a href="#oddp">odd?</a> to check if an integer is not divisable by <span class="monospaced">2</span>.</p></div>
+<div class="paragraph"><p><a id="exec"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_exec_span"><span class="big red">exec</span></h4>
@@ -10517,6 +10640,7 @@ launched; otherwise it is <span class="monospaced">nil</span>.</p></div>
 <div class="paragraph"><p>In this example, cgiProc could be a cgi processor (e.g., Perl or
 newLISP) that receives and processes standard input supplied by a string
 contained in the variable query.</p></div>
+<div class="paragraph"><p><a id="exists"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_exists_span"><span class="big red">exists</span></h4>
@@ -10542,6 +10666,7 @@ case <a href="#index">index</a> or <a href="#find">find</a> are the better metho
 looking for <span class="monospaced">nil</span>.</p></div>
 <div class="paragraph"><p>Use the <a href="#for-all">for-all</a> function to check if a condition is met
 for all elements in a list.</p></div>
+<div class="paragraph"><p><a id="exit"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_exit_span"><span class="big red">exit</span></h4>
@@ -10554,6 +10679,7 @@ listening for a new connection.</p></div>
 <div class="listingblock">
 <div class="content"><div class="highlight"><pre><span class="p">(</span><span class="k">exit</span> <span class="ss">5</span><span class="p">)</span>
 </pre></div></div></div>
+<div class="paragraph"><p><a id="exp"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_exp_span"><span class="big red">exp</span></h4>
@@ -10565,6 +10691,7 @@ calculated based on the result. <span class="monospaced">exp</span> is the inver
 <div class="content"><div class="highlight"><pre><span class="p">(</span><span class="k">exp</span> <span class="ss">1</span><span class="p">)</span>        <span class="err">→</span> <span class="ss">2.718281828</span>
 <span class="p">(</span><span class="k">exp</span> <span class="p">(</span><span class="k">log</span> <span class="ss">1</span><span class="p">))</span>  <span class="err">→</span> <span class="ss">1</span>
 </pre></div></div></div>
+<div class="paragraph"><p><a id="expand"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_expand_span"><span class="big red">expand</span></h4>
@@ -10652,6 +10779,7 @@ variable:</p></div>
 <div class="paragraph"><p>See the <a href="#letex">letex</a> function, which also provides an expansion
 mechanism, and the function <a href="#unify">unify</a>, which is frequently used
 together with <span class="monospaced">expand</span>.</p></div>
+<div class="paragraph"><p><a id="explode"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_explode_a_href_utf8_capable_utf8_a_span"><span class="big red">explode <a href="#utf8_capable">utf8</a></span></h4>
@@ -10709,6 +10837,7 @@ full length specified in <em>int-chunk</em>.</p></div>
 </pre></div></div></div>
 <div class="paragraph"><p>The <a href="#join">join</a> and <a href="#append">append</a> functions are inverse
 operations of <span class="monospaced">explode</span>.</p></div>
+<div class="paragraph"><p><a id="extend"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_extend_a_href_destructive_a_span"><span class="big red">extend <a href="#destructive">!</a></span></h4>
@@ -10744,6 +10873,7 @@ characters.</p></div>
 <span class="ss">L</span> <span class="err">→</span> <span class="p">(</span><span class="nv">a</span> <span class="ss">b</span> <span class="s">&quot;CDE&quot;</span> <span class="p">(</span><span class="nv">e</span> <span class="ss">f</span> <span class="ss">g</span><span class="p">))</span>
 </pre></div></div></div>
 <div class="paragraph"><p>For a non-destructive list or string extension see <a href="#append">append</a>.</p></div>
+<div class="paragraph"><p><a id="factor"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_factor_span"><span class="big red">factor</span></h4>
@@ -10773,6 +10903,7 @@ first.</p></div>
 <div class="paragraph"><p><span class="monospaced">factor</span> returns <span class="monospaced">nil</span> for numbers smaller than <span class="monospaced">2</span>. For numbers larger
 than 9,223,372,036,854,775,807 (the largest 64-bit integer) converted
 from floating point numbers, the largest integer is factored.</p></div>
+<div class="paragraph"><p><a id="fft"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_fft_span"><span class="big red">fft</span></h4>
@@ -10796,6 +10927,7 @@ be used instead.</p></div>
 <span class="p">(</span><span class="k">fft</span> <span class="o">&#39;</span><span class="p">(</span><span class="nv">1</span> <span class="ss">2</span> <span class="p">(</span><span class="nv">3</span> <span class="ss">0</span><span class="p">)</span> <span class="ss">4</span><span class="p">))</span>  <span class="err">→</span> <span class="p">((</span><span class="nv">10</span> <span class="ss">0</span><span class="p">)</span> <span class="p">(</span><span class="k">-</span><span class="ss">2</span> <span class="k">-</span><span class="ss">2</span><span class="p">)</span> <span class="p">(</span><span class="k">-</span><span class="ss">2</span> <span class="ss">0</span><span class="p">)</span> <span class="p">(</span><span class="k">-</span><span class="ss">2</span> <span class="ss">2</span><span class="p">))</span>
 </pre></div></div></div>
 <div class="paragraph"><p>The inverse operation of <span class="monospaced">fft</span> is the <a href="#ifft">ifft</a> function.</p></div>
+<div class="paragraph"><p><a id="file-info"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_file_info_span"><span class="big red">file-info</span></h4>
@@ -10867,6 +10999,7 @@ width:25%;
 <em>/etc</em> is retrieved.</p></div>
 <div class="paragraph"><p><span class="monospaced">file-info</span> gives file statistics (size) for a linked file, not the
 link, except for the <em>mode</em> field.</p></div>
+<div class="paragraph"><p><a id="file?"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_file_span"><span class="big red">file?</span></h4>
@@ -10883,6 +11016,7 @@ having the permissions to read from or write to it by the current user.</p></div
 <span class="p">(</span><span class="nv">file?</span> <span class="s">&quot;/usr/bin/newlisp&quot;</span> <span class="k">true</span><span class="p">)</span> <span class="err">→</span> <span class="s">&quot;/usr/bin/newlisp&quot;</span>
 <span class="p">(</span><span class="nv">file?</span> <span class="s">&quot;/usr/bin/foo&quot;</span> <span class="k">true</span><span class="p">)</span>     <span class="err">→</span> <span class="k">nil</span>
 </pre></div></div></div>
+<div class="paragraph"><p><a id="filter"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_filter_span"><span class="big red">filter</span></h4>
@@ -10915,6 +11049,7 @@ use the <a href="#difference">difference</a> function or
 <div class="paragraph"><p>See also the related function <a href="#index">index</a>, which returns the
 indices of the filtered elements and <a href="#clean">clean</a>, which returns
 all elements of a list for which a predicate is false.</p></div>
+<div class="paragraph"><p><a id="find"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_find_span"><span class="big red">find</span></h4>
@@ -11042,6 +11177,7 @@ information on regular expression searching.</p></div>
 <a href="#search">search</a>.</p></div>
 <div class="paragraph"><p>To find expressions in nested or multidimensional lists, use the
 <a href="#ref">ref</a> and <a href="#ref-all">ref-all</a> functions.</p></div>
+<div class="paragraph"><p><a id="find-all"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_find_all_span"><span class="big red">find-all</span></h4>
@@ -11108,6 +11244,7 @@ function used for comparing list elements with the key expression in
 list. <span class="monospaced">find-all</span> in this syntax works similar to <a href="#filter">filter</a>
 but with the added benefit of being able to define a processing
 expression for the found element.</p></div>
+<div class="paragraph"><p><a id="first"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_first_a_href_utf8_capable_utf8_a_span"><span class="big red">first <a href="#utf8_capable">utf8</a></span></h4>
@@ -11138,6 +11275,7 @@ The operand is not changed. This function is equivalent to <em>car</em> or
 <div class="paragraph"><p>Note that <a href="#first">first</a> works on character boundaries rather than
 byte boundaries when the UTF-8–enabled version of newLISP is used. See
 also the functions <a href="#last">last</a> and <a href="#rest">rest</a>.</p></div>
+<div class="paragraph"><p><a id="flat"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_flat_span"><span class="big red">flat</span></h4>
@@ -11151,6 +11289,7 @@ also the functions <a href="#last">last</a> and <a href="#rest">rest</a>.</p></d
 <span class="err">→</span> <span class="p">((</span><span class="nv">0</span><span class="p">)</span> <span class="p">(</span><span class="nv">1</span> <span class="ss">0</span><span class="p">)</span> <span class="p">(</span><span class="nv">1</span> <span class="ss">1</span> <span class="ss">0</span><span class="p">)</span> <span class="p">(</span><span class="nv">1</span> <span class="ss">1</span> <span class="ss">1</span><span class="p">))</span>
 </pre></div></div></div>
 <div class="paragraph"><p><span class="monospaced">flat</span> can be used to iterate through nested lists.</p></div>
+<div class="paragraph"><p><a id="float"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_float_span"><span class="big red">float</span></h4>
@@ -11189,6 +11328,7 @@ differs on different platforms and compilers.</p></div>
 <span class="p">(</span><span class="k">set</span> <span class="o">&#39;</span><span class="ss">f-num</span> <span class="p">(</span><span class="k">float</span> <span class="p">(</span><span class="k">read-</span><span class="ss">line</span><span class="p">)))</span>
 </pre></div></div></div>
 <div class="paragraph"><p>Use the <a href="#int">int</a> function to parse integer numbers.</p></div>
+<div class="paragraph"><p><a id="float?"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_float_span_2"><span class="big red">float?</span></h4>
@@ -11199,6 +11339,7 @@ otherwise, <span class="monospaced">nil</span> is returned.</p></div>
 <div class="content"><div class="highlight"><pre><span class="p">(</span><span class="k">set</span> <span class="o">&#39;</span><span class="ss">num</span> <span class="ss">1.23</span><span class="p">)</span>
 <span class="p">(</span><span class="k">float</span><span class="ss">?</span> <span class="ss">num</span><span class="p">)</span>  <span class="err">→</span> <span class="k">true</span>
 </pre></div></div></div>
+<div class="paragraph"><p><a id="floor"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_floor_span"><span class="big red">floor</span></h4>
@@ -11209,6 +11350,7 @@ otherwise, <span class="monospaced">nil</span> is returned.</p></div>
 <span class="p">(</span><span class="k">floor</span> <span class="ss">3.4</span><span class="p">)</span>   <span class="err">→</span> <span class="ss">3</span>
 </pre></div></div></div>
 <div class="paragraph"><p>See also the <a href="#ceil">ceil</a> function.</p></div>
+<div class="paragraph"><p><a id="flt"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_flt_span"><span class="big red">flt</span></h4>
@@ -11230,6 +11372,7 @@ calling imported C library routines.</p></div>
 </pre></div></div></div>
 <div class="paragraph"><p>The last two statements illustrate the inner workings of <span class="monospaced">flt</span>.</p></div>
 <div class="paragraph"><p>Use the <a href="#import">import</a> function to import libraries.</p></div>
+<div class="paragraph"><p><a id="fn"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_fn_span"><span class="big red">fn</span></h4>
@@ -11250,6 +11393,7 @@ and doubles it. The function is <em>mapped</em> onto a list of arguments using
 <a href="#map">map</a>. The second example shows strings being sorted by length.</p></div>
 <div class="paragraph"><p>The <a href="#lambda">lambda</a> function (the longer, traditional form) can be
 used in place of <span class="monospaced">fn</span>.</p></div>
+<div class="paragraph"><p><a id="for"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_for_span"><span class="big red">for</span></h4>
@@ -11293,6 +11437,7 @@ assumes its previous value.</p></div>
 that the step size is always a positive number. In the third example, a
 break condition is tested.</p></div>
 <div class="paragraph"><p>Use the <a href="#sequence">sequence</a> function to make a sequence of numbers.</p></div>
+<div class="paragraph"><p><a id="for-all"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_for_all_span"><span class="big red">for-all</span></h4>
@@ -11309,6 +11454,7 @@ all elements meet the condition in <em>func-condition</em>, the result is
 </pre></div></div></div>
 <div class="paragraph"><p>Use the <a href="#exists">exists</a> function to check if at least one element
 in a list meets a condition.</p></div>
+<div class="paragraph"><p><a id="fork"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_fork_span"><span class="big red">fork</span></h4>
@@ -11407,6 +11553,7 @@ destroyed 50 milli-seconds after start by a call to
 and <a href="#share">share</a> for sharing memory between processes.</p></div>
 <div class="paragraph"><p>See <a href="#spawn">spawn</a> for a much simpler and automated way to
 synchronize processes and collect results.</p></div>
+<div class="paragraph"><p><a id="format"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_format_span"><span class="big red">format</span></h4>
@@ -11644,6 +11791,7 @@ convert integers into floating points or floating points into integers:</p></div
 
 <span class="p">(</span><span class="k">format</span> <span class="s">&quot;%d&quot;</span> <span class="ss">123.456</span><span class="p">)</span>  <span class="err">→</span> <span class="ss">123</span>
 </pre></div></div></div>
+<div class="paragraph"><p><a id="fv"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_fv_span"><span class="big red">fv</span></h4>
@@ -11661,6 +11809,7 @@ residual of $0.55 after 240 monthly payments at a yearly interest rate
 of 7 percent.</p></div>
 <div class="paragraph"><p>See also the functions <a href="#irr">irr</a>, <a href="#nper">nper</a>, <a href="#npv">npv</a>,
 <a href="#pmt">pmt</a>, and <a href="#pv">pv</a>.</p></div>
+<div class="paragraph"><p><a id="gammai"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_gammai_span"><span class="big red">gammai</span></h4>
@@ -11679,6 +11828,7 @@ to exceed a given value for a degree of freedom, df, as follows:</p></div>
 <div class="attribution">
 </div></div>
 <div class="paragraph"><p>See also the <a href="#prob-chi2">prob-chi2</a> function.</p></div>
+<div class="paragraph"><p><a id="gammaln"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_gammaln_span"><span class="big red">gammaln</span></h4>
@@ -11697,6 +11847,7 @@ be derived from it:</p></div>
 </div>
 <div class="attribution">
 </div></div>
+<div class="paragraph"><p><a id="gcd"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_gcd_span"><span class="big red">gcd</span></h4>
@@ -11716,6 +11867,7 @@ divisor of the result and the next argument in the parameter list.</p></div>
 </pre></div></div></div>
 <div class="paragraph"><p>See <a href="http://en.wikipedia.org/wiki/Greatest_common_divisor">Wikipedia</a> for
 details and theory about gcd numbers in mathematics.</p></div>
+<div class="paragraph"><p><a id="get-char"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_get_char_span"><span class="big red">get-char</span></h4>
@@ -11745,6 +11897,7 @@ or becoming unstable.</p></div>
 <a href="#get-long">get-long</a>, <a href="#get-float">get-float</a>,
 <a href="#get-string">get-string</a>, <a href="#pack">pack</a>, and <a href="#unpack">unpack</a>
 functions.</p></div>
+<div class="paragraph"><p><a id="get-float"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_get_float_span"><span class="big red">get-float</span></h4>
@@ -11775,6 +11928,7 @@ unstable.</p></div>
 <a href="#get-long">get-long</a>, <a href="#get-char">get-char</a>,
 <a href="#get-string">get-string</a>, <a href="#pack">pack</a>, and <a href="#unpack">unpack</a>
 functions.</p></div>
+<div class="paragraph"><p><a id="get-int"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_get_int_span"><span class="big red">get-int</span></h4>
@@ -11813,6 +11967,7 @@ unsafe and could result in the system crashing or becoming unstable.</p></div>
 <a href="#get-float">get-float</a>, <a href="#get-long">get-long</a>,
 <a href="#get-string">get-string</a>, <a href="#pack">pack</a>, and <a href="#unpack">unpack</a>
 functions.</p></div>
+<div class="paragraph"><p><a id="get-long"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_get_long_span"><span class="big red">get-long</span></h4>
@@ -11851,6 +12006,7 @@ unsafe and could result in the system crashing or becoming unstable.</p></div>
 <a href="#get-float">get-float</a>, <a href="#get-int">get-int</a>,
 <a href="#get-string">get-string</a>, <a href="#pack">pack</a>, and <a href="#unpack">unpack</a>
 functions.</p></div>
+<div class="paragraph"><p><a id="get-string"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_get_string_span"><span class="big red">get-string</span></h4>
@@ -11896,6 +12052,7 @@ retrieve a string from a buffer:</p></div>
 functions.</p></div>
 <div class="paragraph"><p>Note that <span class="monospaced">get-string</span> can crash the system or make it unstable if the
 wrong address is specified.</p></div>
+<div class="paragraph"><p><a id="get-url"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_get_url_span"><span class="big red">get-url</span></h4>
@@ -11981,6 +12138,7 @@ carriage return line-feed pair: <span class="monospaced">\r\n</span>.</p></div>
 <div class="paragraph"><p>See an HTTP transactions reference for valid header entries.</p></div>
 <div class="paragraph"><p>Custom headers can also be used in the <a href="#put-url">put-url</a> and
 <a href="#post-url">post-url</a> functions.</p></div>
+<div class="paragraph"><p><a id="global"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_global_span"><span class="big red">global</span></h4>
@@ -12000,6 +12158,7 @@ made global. <span class="monospaced">global</span> returns the last symbol made
 <div class="paragraph"><p>The second example shows how <a href="#constant">constant</a> and <span class="monospaced">global</span> can
 be combined into one statement, protecting and making a previous
 function definition global.</p></div>
+<div class="paragraph"><p><a id="global?"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_global_span_2"><span class="big red">global?</span></h4>
@@ -12016,6 +12175,7 @@ symbols, and all symbols made global using the function
 
 <span class="p">(</span><span class="k">global</span><span class="ss">?</span> <span class="o">&#39;</span><span class="ss">foo</span><span class="p">)</span>    <span class="err">→</span> <span class="k">true</span>
 </pre></div></div></div>
+<div class="paragraph"><p><a id="if"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_if_span"><span class="big red">if</span></h4>
@@ -12056,6 +12216,7 @@ the condition-expression pairs.</p></div>
 <div class="paragraph"><p>In any case, the whole <span class="monospaced">if</span> expression always returns the last
 expression or condition evaluated.</p></div>
 <div class="paragraph"><p>See also the <a href="#unless">unless</a> function.</p></div>
+<div class="paragraph"><p><a id="ifft"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_ifft_span"><span class="big red">ifft</span></h4>
@@ -12078,6 +12239,7 @@ imaginary part, simple numbers can be used.</p></div>
 <span class="err">→</span> <span class="p">((</span><span class="nv">1</span> <span class="ss">0</span><span class="p">)</span> <span class="p">(</span><span class="nv">2</span> <span class="ss">0</span><span class="p">)</span> <span class="p">(</span><span class="nv">3</span> <span class="ss">0</span><span class="p">)</span> <span class="p">(</span><span class="nv">4</span> <span class="ss">0</span><span class="p">))</span>
 </pre></div></div></div>
 <div class="paragraph"><p>The inverse operation of <span class="monospaced">ifft</span> is the <a href="#fft">fft</a> function.</p></div>
+<div class="paragraph"><p><a id="import"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_import_span"><span class="big red">import</span></h4>
@@ -12365,6 +12527,7 @@ newLISP</a> document for an example.</p></div>
 for variables needs to be allocated beforehand by newLISP — see import
 of <span class="monospaced">GetWindowsDirectoryA</span> above — and hence, memory needs not be
 deallocated manually, because it is managed automatically by newLISP.</p></div>
+<div class="paragraph"><p><a id="inc"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_inc_a_href_destructive_a_span"><span class="big red">inc <a href="#destructive">!</a></span></h4>
@@ -12406,6 +12569,7 @@ can be updated too:</p></div>
 </pre></div></div></div>
 <div class="paragraph"><p>Use the <a href="#inci">++</a> function for incrementing numbers in integer
 mode. Use <a href="#dec">dec</a> to decrement numbers in floating point mode.</p></div>
+<div class="paragraph"><p><a id="index"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_index_span"><span class="big red">index</span></h4>
@@ -12425,6 +12589,7 @@ which <em>exp-predicate</em> is true.</p></div>
 <div class="paragraph"><p>The predicate may be a built-in predicate, a user-defined function, or a
 lambda expression.</p></div>
 <div class="paragraph"><p>Use the <a href="#filter">filter</a> function to return the elements themselves.</p></div>
+<div class="paragraph"><p><a id="inf?"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_inf_span"><span class="big red">inf?</span></h4>
@@ -12439,6 +12604,7 @@ lambda expression.</p></div>
 <div class="paragraph"><p>Note that an integer division by zero e.g. <span class="monospaced">(/ 1 0)</span> will throw an
 "division by zero" error and not yield infinity. See also
 <a href="#NaNp">NaN?</a> to check if a floating point number is valid.</p></div>
+<div class="paragraph"><p><a id="int"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_int_span"><span class="big red">int</span></h4>
@@ -12492,6 +12658,7 @@ converted to <span class="monospaced">0</span> (zero).</p></div>
 <div class="paragraph"><p>The inverse function to <span class="monospaced">int</span> with base <span class="monospaced">2</span> is <a href="#bits">bits</a>.</p></div>
 <div class="paragraph"><p>Use the <a href="#float">float</a> function to convert arguments to floating
 point numbers.</p></div>
+<div class="paragraph"><p><a id="integer?"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_integer_span"><span class="big red">integer?</span></h4>
@@ -12502,6 +12669,7 @@ returns <span class="monospaced">nil</span>.</p></div>
 <div class="content"><div class="highlight"><pre><span class="p">(</span><span class="k">set</span> <span class="o">&#39;</span><span class="ss">num</span> <span class="ss">123</span><span class="p">)</span>  <span class="err">→</span> <span class="ss">123</span>
 <span class="p">(</span><span class="k">integer</span><span class="ss">?</span> <span class="ss">num</span><span class="p">)</span>  <span class="err">→</span> <span class="k">true</span>
 </pre></div></div></div>
+<div class="paragraph"><p><a id="intersect"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_intersect_span"><span class="big red">intersect</span></h4>
@@ -12523,6 +12691,7 @@ value not <span class="monospaced">nil</span>.</p></div>
 </pre></div></div></div>
 <div class="paragraph"><p>See also the set functions <a href="#difference">difference</a>,
 <a href="#unique">unique</a> and <a href="#union">union</a>.</p></div>
+<div class="paragraph"><p><a id="invert"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_invert_span"><span class="big red">invert</span></h4>
@@ -12558,6 +12727,7 @@ inverted, and <em>float-pivot</em> is not specified.</p></div>
 <div class="paragraph"><p>All operations shown here on lists can be performed on arrays, as well.</p></div>
 <div class="paragraph"><p>See also the matrix functions <a href="#det">det</a>, <a href="#mat">mat</a>,
 <a href="#multiply">multiply</a> and <a href="#transpose">transpose</a>.</p></div>
+<div class="paragraph"><p><a id="irr"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_irr_span"><span class="big red">irr</span></h4>
@@ -12600,6 +12770,7 @@ are sold. Selling the remaining securities after 18 months renders
 percent in 18 months.</p></div>
 <div class="paragraph"><p>See also the <a href="#fv">fv</a>, <a href="#nper">nper</a>, <a href="#npv">npv</a>,
 <a href="#pmt">pmt</a>, and <a href="#pv">pv</a> functions.</p></div>
+<div class="paragraph"><p><a id="join"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_join_span"><span class="big red">join</span></h4>
@@ -12623,15 +12794,18 @@ the last string.</p></div>
 <div class="paragraph"><p>See also the <a href="#append">append</a>, <a href="#string">string</a>, and
 <a href="#explode">explode</a> functions, which are the inverse of the <span class="monospaced">join</span>
 operation.</p></div>
+<div class="paragraph"><p><a id="lambda"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_lambda_span"><span class="big red">lambda</span></h4>
 <div class="paragraph"><p>See the description of <a href="#fn">fn</a>, which is a shorter form of writing
 <span class="monospaced">lambda</span>.</p></div>
+<div class="paragraph"><p><a id="lambda-macro"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_lambda_macro_span"><span class="big red">lambda-macro</span></h4>
 <div class="paragraph"><p>See the description of <a href="#define-macro">define-macro</a>.</p></div>
+<div class="paragraph"><p><a id="lambda?"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_lambda_span_2"><span class="big red">lambda?</span></h4>
@@ -12647,6 +12821,7 @@ otherwise, returns <span class="monospaced">nil</span>.</p></div>
 </pre></div></div></div>
 <div class="paragraph"><p>See <a href="#define">define</a> and <a href="#define-macro">define-macro</a> for more
 information about <em>lambda</em> expressions.</p></div>
+<div class="paragraph"><p><a id="last"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_last_a_href_utf8_capable_utf8_a_span"><span class="big red">last <a href="#utf8_capable">utf8</a></span></h4>
@@ -12672,6 +12847,7 @@ as a string.</p></div>
 <div class="paragraph"><p>Note that <a href="#last">last</a> works on character boundaries rather than
 byte boundaries when the UTF-8–enabled version of newLISP is used. See
 also <a href="#first">first</a>, <a href="#rest">rest</a> and <a href="#nth">nth</a>.</p></div>
+<div class="paragraph"><p><a id="last-error"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_last_error_span"><span class="big red">last-error</span></h4>
@@ -12704,6 +12880,7 @@ error handlers.</p></div>
 <div class="paragraph"><p>See also <a href="#net-error">net-error</a> for errors generated by networking
 conditions and <a href="#sys-error">sys-error</a> for errors generated by the
 operating system.</p></div>
+<div class="paragraph"><p><a id="legal?"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_legal_span"><span class="big red">legal?</span></h4>
@@ -12725,6 +12902,7 @@ data access:</p></div>
 <div class="paragraph"><p>The example shows that the string <span class="monospaced">"one two"</span> does not contain a legal
 symbol although a symbol can be created from this string and treated
 like a variable.</p></div>
+<div class="paragraph"><p><a id="length"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_length_span"><span class="big red">length</span></h4>
@@ -12755,6 +12933,7 @@ point numbers.</p></div>
 </pre></div></div></div>
 <div class="paragraph"><p>Use <a href="#utf8len">utf8len</a> to calculate the number of UTF-8 characters
 in a string.</p></div>
+<div class="paragraph"><p><a id="let"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_let_span"><span class="big red">let</span></h4>
@@ -12792,6 +12971,7 @@ convenience for writing:</p></div>
 </pre></div></div></div>
 <div class="paragraph"><p>See also <a href="#letn">letn</a> for an incremental or nested form of <span class="monospaced">let</span> and
 local for initializing to <span class="monospaced">nil</span>.</p></div>
+<div class="paragraph"><p><a id="letex"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_letex_span"><span class="big red">letex</span></h4>
@@ -12825,6 +13005,7 @@ adder functions:</p></div>
 </pre></div></div></div>
 <div class="paragraph"><p><span class="monospaced">letex</span> evaluates <span class="monospaced">n</span> to the constant <span class="monospaced">3</span> and replaces <span class="monospaced">c</span> with it in
 the lambda expression.</p></div>
+<div class="paragraph"><p><a id="letn"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_letn_span"><span class="big red">letn</span></h4>
@@ -12861,6 +13042,7 @@ calculated using the new local binding of <span class="monospaced">x</span>.</p>
 </pre></div></div></div>
 <div class="paragraph"><p><span class="monospaced">letn</span> works like several <em>nested</em> <a href="#let">let</a>. The parentheses
 around the initializer expressions can be omitted.</p></div>
+<div class="paragraph"><p><a id="list"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_list_span"><span class="big red">list</span></h4>
@@ -12873,6 +13055,7 @@ Note that arguments of array type are converted to lists.</p></div>
 </pre></div></div></div>
 <div class="paragraph"><p>See also <a href="#cons">cons</a> and <a href="#push">push</a> for other forms of
 building lists.</p></div>
+<div class="paragraph"><p><a id="list?"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_list_span_2"><span class="big red">list?</span></h4>
@@ -12888,6 +13071,7 @@ as special instances of a list expression.</p></div>
 
 <span class="p">(</span><span class="k">list</span><span class="ss">?</span> <span class="ss">double</span><span class="p">)</span>           <span class="err">→</span> <span class="k">true</span>
 </pre></div></div></div>
+<div class="paragraph"><p><a id="load"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_load_span"><span class="big red">load</span></h4>
@@ -12931,6 +13115,7 @@ timeout.</p></div>
 <div class="paragraph"><p>The second to last line causes the files to be loaded into the context
 <span class="monospaced">MyCTX</span>. The quote forces the context to be created if it did not exist.</p></div>
 <div class="paragraph"><p>The <span class="monospaced">file://</span> URL is followed by a third <span class="monospaced">/</span> for the directory spec.</p></div>
+<div class="paragraph"><p><a id="log"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_log_span"><span class="big red">log</span></h4>
@@ -12949,6 +13134,7 @@ natural logarithmic function is calculated from the result.</p></div>
 </pre></div></div></div>
 <div class="paragraph"><p>See also <a href="#exp">exp</a>, which is the inverse function to <span class="monospaced">log</span> with
 base <strong><em>e</em></strong> (2.718281828).</p></div>
+<div class="paragraph"><p><a id="lookup"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_lookup_span"><span class="big red">lookup</span></h4>
@@ -12989,6 +13175,7 @@ extracting a specific element found in the list.</p></div>
 <span class="p">(</span><span class="k">lookup</span> <span class="s">&quot;Jane Doe&quot;</span> <span class="ss">persons</span> <span class="ss">1</span> <span class="s">&quot;N/A&quot;</span><span class="p">)</span>  <span class="err">→</span> <span class="s">&quot;N/A&quot;</span>
 </pre></div></div></div>
 <div class="paragraph"><p>See also <a href="#assoc">assoc</a></p></div>
+<div class="paragraph" id="lower-case"><p><a id="lower-case"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_lower_case_a_href_utf8_capable_utf8_a_span"><span class="big red">lower-case <a href="#utf8_capable">utf8</a></span></h4>
@@ -13003,6 +13190,7 @@ string is created, and the original is left unaltered.</p></div>
 </pre></div></div></div>
 <div class="paragraph"><p>See also the <a href="#upper-case">upper-case</a> and
 <a href="#title-case">title-case</a> functions.</p></div>
+<div class="paragraph"><p><a id="macro?"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_macro_span"><span class="big red">macro?</span></h4>
@@ -13014,6 +13202,7 @@ otherwise, <span class="monospaced">nil</span> is returned.</p></div>
 
 <span class="p">(</span><span class="nv">macro?</span> <span class="ss">mysetq</span><span class="p">)</span>  <span class="err">→</span> <span class="k">true</span>
 </pre></div></div></div>
+<div class="paragraph"><p><a id="main-args"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_main_args_span"><span class="big red">main-args</span></h4>
@@ -13064,6 +13253,7 @@ returns the <em>name</em> of the script as the second argument:</p></div>
 <span class="p">(</span><span class="s">&quot;/usr/bin/newlisp&quot;</span> <span class="s">&quot;./script&quot;</span> <span class="s">&quot;1&quot;</span> <span class="s">&quot;2&quot;</span> <span class="s">&quot;3&quot;</span><span class="p">)</span>
 </pre></div></div></div>
 <div class="paragraph"><p>Try executing this script with different command-line parameters.</p></div>
+<div class="paragraph"><p><a id="make-dir"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_make_dir_span"><span class="big red">make-dir</span></h4>
@@ -13084,6 +13274,7 @@ non-owners of the file.</p></div>
 </pre></div></div></div>
 <div class="paragraph"><p>This example creates a directory named <span class="monospaced">adir</span> in the current directory
 with an access mode of <span class="monospaced">0750</span> (octal 750 = <span class="monospaced">drwxr-x---</span>).</p></div>
+<div class="paragraph"><p><a id="map"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_map_span"><span class="big red">map</span></h4>
@@ -13142,6 +13333,7 @@ transposition occurring. If an argument list contains too many elements,
 the extra ones will be ignored.</p></div>
 <div class="paragraph"><p>Special forms which use parentheses as syntax cannot be mapped (i.e.
 <a href="#case">case</a>).</p></div>
+<div class="paragraph"><p><a id="mat"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_mat_span"><span class="big red">mat</span></h4>
@@ -13184,6 +13376,7 @@ scalar in <em>number</em>:</p></div>
 <div class="paragraph"><p>See also the other matrix operations <a href="#det">det</a>,
 <a href="#invert">invert</a>, <a href="#multiply">multiply</a>, and
 <a href="#transpose">transpose</a>.</p></div>
+<div class="paragraph"><p><a id="match"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_match_span"><span class="big red">match</span></h4>
@@ -13251,6 +13444,7 @@ string matching, use <a href="#regex">regex</a>, <a href="#find">find</a>,
 <a href="#find-all">find-all</a> or <a href="#parse">parse</a>.</p></div>
 <div class="paragraph"><p><a href="#unify">unify</a> is another function for matching expressions in a
 PROLOG like manner.</p></div>
+<div class="paragraph"><p><a id="max"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_max_span"><span class="big red">max</span></h4>
@@ -13260,6 +13454,7 @@ PROLOG like manner.</p></div>
 <div class="content"><div class="highlight"><pre><span class="p">(</span><span class="k">max</span> <span class="ss">4</span> <span class="ss">6</span> <span class="ss">2</span> <span class="ss">3.54</span> <span class="ss">7.1</span><span class="p">)</span>  <span class="err">→</span> <span class="ss">7.1</span>
 </pre></div></div></div>
 <div class="paragraph"><p>See also the <a href="#min">min</a> function.</p></div>
+<div class="paragraph"><p><a id="member"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_member_span"><span class="big red">member</span></h4>
@@ -13286,6 +13481,7 @@ returned. If nothing is found, <span class="monospaced">nil</span> is returned. 
 <span class="p">(</span><span class="k">member</span> <span class="s">&quot;li&quot;</span> <span class="s">&quot;newLISP&quot;</span> <span class="ss">1</span><span class="p">)</span>  <span class="err">→</span> <span class="s">&quot;LISP&quot;</span>
 </pre></div></div></div>
 <div class="paragraph"><p>See also the related functions <a href="#slice">slice</a> and <a href="#find">find</a>.</p></div>
+<div class="paragraph"><p><a id="min"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_min_span"><span class="big red">min</span></h4>
@@ -13295,6 +13491,7 @@ returned. If nothing is found, <span class="monospaced">nil</span> is returned. 
 <div class="content"><div class="highlight"><pre><span class="p">(</span><span class="k">min</span> <span class="ss">4</span> <span class="ss">6</span> <span class="ss">2</span> <span class="ss">3.54</span> <span class="ss">7.1</span><span class="p">)</span>  <span class="err">→</span> <span class="ss">2</span>
 </pre></div></div></div>
 <div class="paragraph"><p>See also the <a href="#max">max</a> function.</p></div>
+<div class="paragraph"><p><a id="mod"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_mod_span"><span class="big red">mod</span></h4>
@@ -13316,6 +13513,7 @@ fractional part of <em>num-1</em>.</p></div>
 </pre></div></div></div>
 <div class="paragraph"><p>Use the <a href="#arithmetic">%</a> (percent sign) function when working with
 integers only.</p></div>
+<div class="paragraph"><p><a id="mul"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_mul_span"><span class="big red">mul</span></h4>
@@ -13328,6 +13526,7 @@ returns <span class="monospaced">NaN</span>.</p></div>
 <div class="content"><div class="highlight"><pre><span class="p">(</span><span class="k">mul</span> <span class="ss">1</span> <span class="ss">2</span> <span class="ss">3</span> <span class="ss">4</span> <span class="ss">5</span> <span class="ss">1.1</span><span class="p">)</span>  <span class="err">→</span> <span class="ss">132</span>
 <span class="p">(</span><span class="k">mul</span> <span class="ss">0.5</span> <span class="ss">0.5</span><span class="p">)</span>        <span class="err">→</span> <span class="ss">0.25</span>
 </pre></div></div></div>
+<div class="paragraph"><p><a id="multiply"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_multiply_span"><span class="big red">multiply</span></h4>
@@ -13356,10 +13555,12 @@ be transformed into <span class="monospaced">n</span> rows by <span class="monos
 <div class="paragraph"><p>All operations shown here on lists can be performed on arrays, as well.</p></div>
 <div class="paragraph"><p>See also the matrix operations <a href="#det">det</a>, <a href="#invert">invert</a>,
 <a href="#mat">mat</a> and <a href="#transpose">transpose</a>.</p></div>
+<div class="paragraph"><p><a id="name"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_name_span"><span class="big red">name</span></h4>
 <div class="paragraph"><p>This function is deprecated, use <a href="#term">term</a> instead.</p></div>
+<div class="paragraph"><p><a id="NaN?"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_nan_span"><span class="big red">NaN?</span></h4>
@@ -13393,6 +13594,7 @@ comparing to itself. Comparison with itself, however, would result in
 (zero) values.</p></div>
 <div class="paragraph"><p>See also <a href="#infp">inf?</a> for testing a floating point value for
 infinity.</p></div>
+<div class="paragraph"><p><a id="net-accept"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_net_accept_span"><span class="big red">net-accept</span></h4>
@@ -13408,6 +13610,7 @@ this connection.</p></div>
 mode on Unix-like operating systems.</p></div>
 <div class="paragraph"><p>See also the files <span class="monospaced">server</span> and <span class="monospaced">client</span> examples in the <span class="monospaced">examples/</span>
 directory of the source distribution.</p></div>
+<div class="paragraph"><p><a id="net-close"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_net_close_span"><span class="big red">net-close</span></h4>
@@ -13420,6 +13623,7 @@ Returns <span class="monospaced">true</span> on success and <span class="monospa
 </pre></div></div></div>
 <div class="paragraph"><p>The optional <em>true</em> flag suppresses immediate shutdown of sockets by
 waiting for pending data transmissions to finish.</p></div>
+<div class="paragraph"><p><a id="net-connect"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_net_connect_span"><span class="big red">net-connect</span></h4>
@@ -13585,6 +13789,7 @@ connection has been established the functions
 communications. This type of connection can be used as a fast
 bi-directional communications channel between processes on the same file
 system. This type of connection is not available on Win32 platforms.</p></div>
+<div class="paragraph"><p><a id="net-error"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_net_error_span"><span class="big red">net-error</span></h4>
@@ -13736,6 +13941,7 @@ number is returned.</p></div>
 <div class="content"><div class="highlight"><pre><span class="p">(</span><span class="k">net-error</span> <span class="ss">10</span><span class="p">)</span> <span class="err">→</span> <span class="p">(</span><span class="nv">10</span> <span class="s">&quot;Cannot bind socket&quot;</span><span class="p">)</span>
 </pre></div></div></div>
 <div class="paragraph"><p>See also <a href="#last-error">last-error</a> and <a href="#sys-error">sys-error</a>.</p></div>
+<div class="paragraph"><p><a id="net-eval"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_net_eval_span"><span class="big red">net-eval</span></h4>
@@ -13895,6 +14101,7 @@ exceeded the timeout limit will contain a <span class="monospaced">nil</span> in
 example shows how a word counting task gets distributed to three remote
 nodes. The three nodes count words in different texts and the master
 node receives and consolidates the results.</p></div>
+<div class="paragraph"><p><a id="net-interface"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_net_interface_span"><span class="big red">net-interface</span></h4>
@@ -13921,6 +14128,7 @@ be used to report the error.</p></div>
 </pre></div></div></div>
 <div class="paragraph"><p>An interface address can be defined as either an IP address or a name.
 The return value is the address given in <em>str-ip-addr</em></p></div>
+<div class="paragraph"><p><a id="net-ipv"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_net_ipv_span"><span class="big red">net-ipv</span></h4>
@@ -13947,6 +14155,7 @@ to the address protocol used when creating the sockets. Different
 connections with different IPv4/6 settings can be open at the same time.</p></div>
 <div class="paragraph"><p>Note, that currently <a href="#net-packet">net-packet</a> does not support IPv6
 and will work in IPv4 mode regardless of settings.</p></div>
+<div class="paragraph"><p><a id="net-listen"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_net_listen_span"><span class="big red">net-listen</span></h4>
@@ -14118,6 +14327,7 @@ statement. The same address received by
 </pre></div></div></div>
 <div class="paragraph"><p>For more information see the Unix man pages for <em>divert</em> and the <em>ipfw</em>
 (BSDs) or <em>ipchains</em> (Linux) configuration utilities.</p></div>
+<div class="paragraph"><p><a id="net-local"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_net_local_span"><span class="big red">net-local</span></h4>
@@ -14129,6 +14339,7 @@ a specific <em>int-socket</em>.</p></div>
 </pre></div></div></div>
 <div class="paragraph"><p>Use the <a href="#net-peer">net-peer</a> function to access the remote
 computer&#8217;s IP number and port.</p></div>
+<div class="paragraph"><p><a id="net-lookup"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_net_lookup_span"><span class="big red">net-lookup</span></h4>
@@ -14147,6 +14358,7 @@ or the IP number in dot format from <em>str-hostname</em>:</p></div>
 expression in <em>bool</em> evaluates to anything other than <span class="monospaced">nil</span>,
 host-by-name lookup will be forced, even if the name string starts with
 an IP number.</p></div>
+<div class="paragraph"><p><a id="net-packet"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_net_packet_span"><span class="big red">net-packet</span></h4>
@@ -14188,6 +14400,7 @@ should only be used on well isolated, private intra-nets and only by
 network professionals.</p></div>
 <div class="paragraph"><p>For other examples of packet configuration, see the file
 <span class="monospaced">qa-specific-tests/qa-packet</span> in the newLISP source distribution.</p></div>
+<div class="paragraph"><p><a id="net-peek"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_net_peek_span"><span class="big red">net-peek</span></h4>
@@ -14206,6 +14419,7 @@ returned.</p></div>
 <div class="paragraph"><p>After connecting, the program waits in a while loop until <span class="monospaced">aSock</span> can be
 read.</p></div>
 <div class="paragraph"><p>Use the <a href="#peek">peek</a> function to check file descriptors and <span class="monospaced">stdin</span>.</p></div>
+<div class="paragraph"><p><a id="net-peer"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_net_peer_span"><span class="big red">net-peer</span></h4>
@@ -14217,6 +14431,7 @@ connection on <em>int-socket</em>.</p></div>
 </pre></div></div></div>
 <div class="paragraph"><p>Use the <a href="#net-local">net-local</a> function to access the local
 computer&#8217;s IP number and port number.</p></div>
+<div class="paragraph"><p><a id="net-ping"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_net_ping_span"><span class="big red">net-ping</span></h4>
@@ -14310,6 +14525,7 @@ an error message.</p></div>
 regardless of the timeout specified. In this case, the range should be
 broken up into sub-ranges and used with multiple <span class="monospaced">net-ping</span> invocations.
 In any case, <span class="monospaced">net-ping</span> will send out packages as quickly as possible.</p></div>
+<div class="paragraph"><p><a id="net-receive"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_net_receive_a_href_destructive_a_span"><span class="big red">net-receive <a href="#destructive">!</a></span></h4>
@@ -14355,6 +14571,7 @@ the contents of sBuff.</p></div>
 slower than the normal version because information is read
 character-by-character. In most situations, the speed difference can be
 neglected.</p></div>
+<div class="paragraph"><p><a id="net-receive-from"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_net_receive_from_span"><span class="big red">net-receive-from</span></h4>
@@ -14398,6 +14615,7 @@ data packets over open connections.</p></div>
 <div class="paragraph"><p>For blocking short UDP transactions, see the
 <a href="#net-send-udp">net-send-udp</a> and
 <a href="#net-receive-udp">net-receive-udp</a> functions.</p></div>
+<div class="paragraph"><p><a id="net-receive-udp"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_net_receive_udp_span"><span class="big red">net-receive-udp</span></h4>
@@ -14447,6 +14665,7 @@ must also be specified in <em>int-wait</em>.</p></div>
 with the <span class="monospaced">"udp"</span> option to make non-blocking data exchange possible with
 <a href="#net-receive-from">net-receive-from</a> and
 <a href="#net-send-to">net-send-to</a>.</p></div>
+<div class="paragraph"><p><a id="net-select"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_net_select_span"><span class="big red">net-select</span></h4>
@@ -14511,6 +14730,7 @@ passed the test; if timeout occurred, an empty list is returned. An
 error causes <a href="#net-error">net-error</a> to be set.</p></div>
 <div class="paragraph"><p>Note that supplying a nonexistent socket to <span class="monospaced">net-select</span> will cause an
 error to be set in <a href="#net-error">net-error</a>.</p></div>
+<div class="paragraph"><p><a id="net-send"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_net_send_span"><span class="big red">net-send</span></h4>
@@ -14531,6 +14751,7 @@ information.</p></div>
 </pre></div></div></div>
 <div class="paragraph"><p>The first <span class="monospaced">net-send</span> sends the string <span class="monospaced">"hello there"</span>, while the second
 <span class="monospaced">net-send</span> sends only the string <span class="monospaced">"hello"</span>.</p></div>
+<div class="paragraph"><p><a id="net-send-to"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_net_send_to_span"><span class="big red">net-send-to</span></h4>
@@ -14573,6 +14794,7 @@ client address and port from the message received and uses it in the
 <a href="#net-listen">net-listen</a> function with the <span class="monospaced">"udp"</span> option.</p></div>
 <div class="paragraph"><p>For blocking short UDP transactions use <a href="#net-send-udp">net-send-udp</a>
 and <a href="#net-receive-udp">net-receive-udp</a>.</p></div>
+<div class="paragraph"><p><a id="net-send-udp"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_net_send_udp_span"><span class="big red">net-send-udp</span></h4>
@@ -14609,6 +14831,7 @@ on some operating systems, sending the network mask <span class="monospaced">255
 <span class="monospaced">"udp"</span> option—together with the <a href="#net-send-to">net-send-to</a>
 function—can be used to talk to a UDP listener in a non-blocking
 fashion.</p></div>
+<div class="paragraph"><p><a id="net-service"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_net_service_span"><span class="big red">net-service</span></h4>
@@ -14628,11 +14851,13 @@ the service name.</p></div>
 <span class="c1">; get the service name from the port number</span>
 <span class="p">(</span><span class="k">net-service</span> <span class="ss">22</span> <span class="s">&quot;tcp&quot;</span><span class="p">)</span>          <span class="err">→</span> <span class="s">&quot;ssh&quot;</span>
 </pre></div></div></div>
+<div class="paragraph"><p><a id="net-sessions"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_net_sessions_span"><span class="big red">net-sessions</span></h4>
 <div class="paragraph"><p><strong>syntax:</strong> (net-sessions)</p></div>
 <div class="paragraph"><p>Returns a list of active listening and connection sockets.</p></div>
+<div class="paragraph"><p><a id="new"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_new_span"><span class="big red">new</span></h4>
@@ -14685,6 +14910,7 @@ into <span class="monospaced">bar</span>.</p></div>
 single functions instead of entire contexts. See the
 <a href="#context">context</a> function for a more comprehensive example of
 <span class="monospaced">new</span>.</p></div>
+<div class="paragraph"><p><a id="nil?"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_nil_span"><span class="big red">nil?</span></h4>
@@ -14705,6 +14931,7 @@ single functions instead of entire contexts. See the
 empty list <span class="monospaced">()</span>.</p></div>
 <div class="paragraph"><p>Note that <span class="monospaced">nil?</span> means <em>strictly</em> <span class="monospaced">nil</span> while <span class="monospaced">true?</span> means everything
 not <span class="monospaced">nil</span> or the empty list <span class="monospaced">()</span>.</p></div>
+<div class="paragraph"><p><a id="normal"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_normal_span"><span class="big red">normal</span></h4>
@@ -14729,6 +14956,7 @@ floating point number:</p></div>
 evenly distributed numbers, <a href="#amb">amb</a> for randomizing evaluation in
 a list of expressions, and <a href="#seed">seed</a> for setting a different
 start point for pseudo random number generation.</p></div>
+<div class="paragraph"><p><a id="not"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_not_span"><span class="big red">not</span></h4>
@@ -14742,6 +14970,7 @@ returned; otherwise, <span class="monospaced">nil</span> is returned.</p></div>
 <span class="p">(</span><span class="k">not</span> <span class="p">(</span><span class="nv">&lt;</span> <span class="ss">1</span> <span class="ss">10</span><span class="p">))</span>        <span class="err">→</span> <span class="k">nil</span>
 <span class="p">(</span><span class="k">not</span> <span class="p">(</span><span class="k">not</span> <span class="p">(</span><span class="nv">&lt;</span> <span class="ss">1</span> <span class="ss">10</span><span class="p">)))</span>  <span class="err">→</span> <span class="k">true</span>
 </pre></div></div></div>
+<div class="paragraph"><p><a id="now"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_now_span"><span class="big red">now</span></h4>
@@ -14877,6 +15106,7 @@ width:15%;
 <div class="paragraph"><p>See also the <a href="#date">date</a>, <a href="#date-list">date-list</a>,
 <a href="#date-parse">date-parse</a>, <a href="#date-value">date-value</a>,
 <a href="#time">time</a>, and <a href="#time-of-day">time-of-day</a> functions.</p></div>
+<div class="paragraph"><p><a id="nper"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_nper_span"><span class="big red">nper</span></h4>
@@ -14894,6 +15124,7 @@ loan of $100,000 at a yearly interest rate of 7 percent with payments of
 $775.30.</p></div>
 <div class="paragraph"><p>See also the <a href="#fv">fv</a>, <a href="#irr">irr</a>, <a href="#npv">npv</a>,
 <a href="#pmt">pmt</a>, and <a href="#pv">pv</a> functions.</p></div>
+<div class="paragraph"><p><a id="npv"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_npv_span"><span class="big red">npv</span></h4>
@@ -14914,6 +15145,7 @@ rate <em>num-interest</em> and a series of future payments and income in
 income of $1,000 after the end of the first, second, and third years.</p></div>
 <div class="paragraph"><p>See also the <a href="#fv">fv</a>, <a href="#irr">irr</a>, <a href="#nper">nper</a>,
 <a href="#pmt">pmt</a>, and <a href="#pv">pv</a> functions.</p></div>
+<div class="paragraph"><p><a id="nth"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_nth_a_href_utf8_capable_utf8_a_span"><span class="big red">nth <a href="#utf8_capable">utf8</a></span></h4>
@@ -15021,6 +15253,7 @@ ASCII and binary string buffers on single byte boundaries use
 <a href="#slice">slice</a>.</p></div>
 <div class="paragraph"><p>See also <a href="#setf">setf</a> for modifying multidimensional lists and
 arrays and <a href="#push">push</a> and <a href="#pop">pop</a> for modifying lists.</p></div>
+<div class="paragraph"><p><a id="null?"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_null_span"><span class="big red">null?</span></h4>
@@ -15045,6 +15278,7 @@ or <a href="#clean">clean</a> to check the outcome of other newLISP operations.<
 </pre></div></div></div>
 <div class="paragraph"><p>See also the predicates <a href="#emptyp">empty?</a>, <a href="#nilp">nil?</a> and
 <a href="#zerop">zero?</a>.</p></div>
+<div class="paragraph"><p><a id="number?"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_number_span"><span class="big red">number?</span></h4>
@@ -15060,6 +15294,7 @@ an integer; otherwise, <span class="monospaced">nil</span> is returned.</p></div
 </pre></div></div></div>
 <div class="paragraph"><p>See the functions <a href="#floatp">float?</a> and <a href="#integerp">integer?</a> to
 test for a specific number type.</p></div>
+<div class="paragraph"><p><a id="odd?"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_odd_span"><span class="big red">odd?</span></h4>
@@ -15074,6 +15309,7 @@ cutting off its fractional part.</p></div>
 <span class="p">(</span><span class="nv">odd?</span> <span class="ss">8.7</span><span class="p">)</span>  <span class="err">→</span> <span class="k">nil</span>
 </pre></div></div></div>
 <div class="paragraph"><p>Use <a href="#evenp">even?</a> to check if an integer is even, divisable by <span class="monospaced">2</span>.</p></div>
+<div class="paragraph"><p><a id="open"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_open_span"><span class="big red">open</span></h4>
@@ -15122,6 +15358,7 @@ required to perform I/O on named pipes.</p></div>
 </pre></div></div></div>
 <div class="paragraph"><p>The named pipe can now be used like a file with <a href="#open">open</a>,
 <a href="#read">read</a>, and <a href="#write">write</a>.</p></div>
+<div class="paragraph"><p><a id="or"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_or_span"><span class="big red">or</span></h4>
@@ -15137,6 +15374,7 @@ the return value of the <span class="monospaced">or</span> expression.</p></div>
 <span class="p">(</span><span class="k">or</span> <span class="k">true</span><span class="p">)</span>                        <span class="err">→</span> <span class="k">true</span>
 <span class="p">(</span><span class="k">or</span><span class="p">)</span>                             <span class="err">→</span> <span class="k">nil</span>
 </pre></div></div></div>
+<div class="paragraph"><p><a id="ostype"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_ostype_span"><span class="big red">ostype</span></h4>
@@ -15163,6 +15401,7 @@ newLISP running.</p></div>
 <div class="paragraph"><p>For a table of other built-in system variables and symbols see the
 chapter <a href="#system_symbols">System Symbols and Constants</a> in the
 appendix.</p></div>
+<div class="paragraph"><p><a id="pack"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_pack_span"><span class="big red">pack</span></h4>
@@ -15319,6 +15558,7 @@ required but can be used to improve readability.</p></div>
 <div class="paragraph"><p>See also the <a href="#address">address</a>, <a href="#get-int">get-int</a>,
 <a href="#get-long">get-long</a>, <a href="#get-char">get-char</a>,
 <a href="#get-string">get-string</a>, and <a href="#unpack">unpack</a> functions.</p></div>
+<div class="paragraph"><p><a id="parse"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_parse_span"><span class="big red">parse</span></h4>
@@ -15369,6 +15609,7 @@ For the regular expression option numbers, see <a href="#regex">regex</a>.</p></
 <a href="#directory">directory</a>, <a href="#find">find</a>, <a href="#find-all">find-all</a>,
 <a href="#regex">regex</a>, <a href="#replace">replace</a>, and <a href="#search">search</a>
 functions for using regular expressions.</p></div>
+<div class="paragraph"><p><a id="peek"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_peek_span"><span class="big red">peek</span></h4>
@@ -15385,6 +15626,7 @@ or for the number of available bytes on them. On Unix systems,
 <a href="#net-peek">net-peek</a> can be used to check file descriptors. The
 difference is that <a href="#net-peek">net-peek</a> also sets
 <a href="#net-error">net-error</a>.</p></div>
+<div class="paragraph"><p><a id="pipe"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_pipe_span"><span class="big red">pipe</span></h4>
@@ -15405,10 +15647,11 @@ not had the writing end closed by all processes.</p></div>
 <div class="paragraph"><p>More than one pipe can be opened if required.</p></div>
 <div class="paragraph"><p>newLISP can also use <em>named pipes</em>. See the <a href="#open">open</a> function
 for further information.</p></div>
+<div class="paragraph"><p><a id="pmt"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_pmt_span"><span class="big red">pmt</span></h4>
-<div class="paragraph"><p><strong>syntax:</strong> (pmt <em>num-interest</em> <em>num-periods</em> <em>num-principal</em> [<em>num-future-value</em> [<em>int-type</em>]])*</p></div>
+<div class="paragraph"><p><strong>syntax:</strong> (pmt <em>num-interest</em> <em>num-periods</em> <em>num-principal</em> [<em>num-future-value</em> [<em>int-type</em>]])</p></div>
 <div class="paragraph"><p>Calculates the payment for a loan based on a constant interest of
 <em>num-interest</em> and constant payments over <em>num-periods</em> of time.
 <em>num-future-value</em> is the value of the loan at the end (typically
@@ -15424,6 +15667,7 @@ paid over 20 years (20 * 12 = 240 monthly periods). This illustrates the
 typical way payment is calculated for mortgages.</p></div>
 <div class="paragraph"><p>See also the <a href="#fv">fv</a>, <a href="#irr">irr</a>, <a href="#nper">nper</a>,
 <a href="#npv">npv</a>, and <a href="#pv">pv</a> functions.</p></div>
+<div class="paragraph"><p><a id="pop"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_pop_a_href_destructive_a_a_href_utf8_capable_utf8_a_span"><span class="big red">pop <a href="#destructive">!</a> <a href="#utf8_capable">utf8</a></span></h4>
@@ -15496,6 +15740,7 @@ returned.</p></div>
 </pre></div></div></div>
 <div class="paragraph"><p>Popping an empty string will return an empty string.</p></div>
 <div class="paragraph"><p>See also the <a href="#push">push</a> function, the inverse operation to <span class="monospaced">pop</span>.</p></div>
+<div class="paragraph"><p><a id="pop-assoc"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_pop_assoc_a_href_destructive_a_span"><span class="big red">pop-assoc <a href="#destructive">!</a></span></h4>
@@ -15526,6 +15771,7 @@ association list in <em>list-assoc</em> and returns the popped expression.</p></
 </pre></div></div></div>
 <div class="paragraph"><p>See also <a href="#assoc">assoc</a> for retrieving associations and
 <a href="#setf">setf</a> for modifying association lists.</p></div>
+<div class="paragraph"><p><a id="post-url"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_post_url_span"><span class="big red">post-url</span></h4>
@@ -15573,6 +15819,7 @@ specified, as well. See the function <a href="#get-url">get-url</a> for details
 on both of these options.</p></div>
 <div class="paragraph"><p>See also the <a href="#get-url">get-url</a> and <a href="#put-url">put-url</a>
 functions.</p></div>
+<div class="paragraph"><p><a id="pow"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_pow_span"><span class="big red">pow</span></h4>
@@ -15587,6 +15834,7 @@ functions.</p></div>
 <span class="p">(</span><span class="k">pow</span> <span class="ss">3</span><span class="p">)</span>  <span class="err">→</span> <span class="ss">9</span>
 </pre></div></div></div>
 <div class="paragraph"><p>When <em>num-1</em> is the only argument, <span class="monospaced">pow</span> assumes 2 for the exponent.</p></div>
+<div class="paragraph"><p><a id="prefix"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_prefix_span"><span class="big red">prefix</span></h4>
@@ -15605,6 +15853,7 @@ functions.</p></div>
 <span class="ss">Foo&gt;</span>
 </pre></div></div></div>
 <div class="paragraph"><p>See also <a href="#term">term</a> to extract the term part of a symbol.</p></div>
+<div class="paragraph"><p><a id="pretty-print"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_pretty_print_span"><span class="big red">pretty-print</span></h4>
@@ -15649,6 +15898,7 @@ string as follows:</p></div>
 
 <span class="p">(</span><span class="k">print</span> <span class="p">(</span><span class="k">string</span> <span class="ss">my-expression</span><span class="p">))</span>
 </pre></div></div></div>
+<div class="paragraph"><p><a id="primitive?"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_primitive_span"><span class="big red">primitive?</span></h4>
@@ -15659,6 +15909,7 @@ string as follows:</p></div>
 <div class="content"><div class="highlight"><pre><span class="p">(</span><span class="k">set</span> <span class="o">&#39;</span><span class="ss">var</span> <span class="k">define</span><span class="p">)</span>
 <span class="p">(</span><span class="nv">primitive?</span> <span class="ss">var</span><span class="p">)</span>  <span class="err">→</span> <span class="k">true</span>
 </pre></div></div></div>
+<div class="paragraph"><p><a id="print"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_print_span"><span class="big red">print</span></h4>
@@ -15712,6 +15963,7 @@ width:40%;
 <span class="s">&quot;\065\066\067&quot;</span>  <span class="err">→</span> <span class="s">&quot;ABC&quot;</span>
 </pre></div></div></div>
 <div class="paragraph"><p>To finish printing with a line-feed, use <a href="#println">println</a>.</p></div>
+<div class="paragraph"><p><a id="println"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_println_span"><span class="big red">println</span></h4>
@@ -15723,6 +15975,7 @@ different I/O device. <span class="monospaced">println</span> works exactly like
 but emits a line-feed character at the end.</p></div>
 <div class="paragraph"><p>See also the <a href="#write-line">write-line</a> and <a href="#print">print</a>
 functions.</p></div>
+<div class="paragraph"><p><a id="prob-chi2"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_prob_chi2_span"><span class="big red">prob-chi2</span></h4>
@@ -15735,6 +15988,7 @@ hypothesis. <span class="monospaced">prob-chi2</span> is derived from the incomp
 <div class="content"><div class="highlight"><pre><span class="p">(</span><span class="k">prob-chi2</span> <span class="ss">10</span> <span class="ss">6</span><span class="p">)</span>  <span class="err">→</span> <span class="ss">0.1246520195</span>
 </pre></div></div></div>
 <div class="paragraph"><p>See also the inverse function <a href="#crit-chi2">crit-chi2</a>.</p></div>
+<div class="paragraph"><p><a id="prob-f"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_prob_f_span"><span class="big red">prob-f</span></h4>
@@ -15746,6 +16000,7 @@ the null hypothesis.</p></div>
 <div class="content"><div class="highlight"><pre><span class="p">(</span><span class="nv">prob-f</span> <span class="ss">2.75</span> <span class="ss">10</span> <span class="ss">12</span><span class="p">)</span>  <span class="err">→</span> <span class="ss">0.0501990804</span>
 </pre></div></div></div>
 <div class="paragraph"><p>See also the inverse function <a href="#crit-f">crit-f</a>.</p></div>
+<div class="paragraph"><p><a id="prob-t"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_prob_t_span"><span class="big red">prob-t</span></h4>
@@ -15757,6 +16012,7 @@ the null hypothesis.</p></div>
 <div class="content"><div class="highlight"><pre><span class="p">(</span><span class="nv">prob-t</span> <span class="ss">1.76</span> <span class="ss">14</span><span class="p">)</span>  <span class="err">→</span> <span class="ss">0.05011454551</span>
 </pre></div></div></div>
 <div class="paragraph"><p>See also the inverse function <a href="#crit-t">crit-t</a>.</p></div>
+<div class="paragraph"><p><a id="prob-z"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_prob_z_span"><span class="big red">prob-z</span></h4>
@@ -15768,6 +16024,7 @@ standard deviation of <span class="monospaced">1.0</span>.</p></div>
 <div class="content"><div class="highlight"><pre><span class="p">(</span><span class="k">prob-z</span> <span class="ss">0.0</span><span class="p">)</span>  <span class="err">→</span> <span class="ss">0.5</span>
 </pre></div></div></div>
 <div class="paragraph"><p>See also the inverse function <a href="#crit-z">crit-z</a>.</p></div>
+<div class="paragraph"><p><a id="process"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_process_span"><span class="big red">process</span></h4>
@@ -15883,6 +16140,7 @@ process and the other one for communications from the child process.</p></div>
 inter-process communications and the <a href="#semaphore">semaphore</a> function
 for synchronization of several processes. See the <a href="#fork">fork</a>
 function for starting separate newLISP processes on Linux/Unix.</p></div>
+<div class="paragraph"><p><a id="prompt-event"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_prompt_event_span"><span class="big red">prompt-event</span></h4>
@@ -15906,6 +16164,7 @@ this can be used to create fully customized shells or custom command
 interpreters.</p></div>
 <div class="paragraph"><p>The function in <span class="monospaced">prompt-event</span> must return a string of 63 characters
 maximum. Not returning a string will leave the prompt unchanged.</p></div>
+<div class="paragraph"><p><a id="protected?"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_protected_span"><span class="big red">protected?</span></h4>
@@ -15918,6 +16177,7 @@ functions, context symbols, and all symbols made constant using the
 <span class="p">(</span><span class="k">constant</span> <span class="o">&#39;</span><span class="ss">aVar</span> <span class="ss">123</span><span class="p">)</span>
 <span class="p">(</span><span class="nv">protected?</span> <span class="o">&#39;</span><span class="ss">aVar</span><span class="p">)</span>       <span class="err">→</span> <span class="k">true</span>
 </pre></div></div></div>
+<div class="paragraph"><p><a id="push"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_push_a_href_destructive_a_a_href_utf8_capable_utf8_a_span"><span class="big red">push <a href="#destructive">!</a> <a href="#utf8_capable">utf8</a></span></h4>
@@ -16020,6 +16280,7 @@ positions. UTF-8 characters may be multi-byte characters.</p></div>
 </pre></div></div></div>
 <div class="paragraph"><p>See also the <a href="#pop">pop</a> function, which is the inverse operation to
 <span class="monospaced">push</span>.</p></div>
+<div class="paragraph"><p><a id="put-url"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_put_url_span"><span class="big red">put-url</span></h4>
@@ -16115,6 +16376,7 @@ header option <em>str-header</em> can be specified, as well. See the function
 <div class="paragraph"><p>See also the functions <a href="#get-url">get-url</a> and
 <a href="#post-url">post-url</a>, which can be used to upload files when
 formatting form data as <span class="monospaced">multipart/form-data</span>.</p></div>
+<div class="paragraph"><p><a id="pv"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_pv_span"><span class="big red">pv</span></h4>
@@ -16133,6 +16395,7 @@ period, <em>int-type</em> is 1.</p></div>
 year would start out at $100,000.14.</p></div>
 <div class="paragraph"><p>See also the <a href="#fv">fv</a>, <a href="#irr">irr</a>, <a href="#nper">nper</a>,
 <a href="#npv">npv</a>, and <a href="#pmt">pmt</a> functions.</p></div>
+<div class="paragraph"><p><a id="quote"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_quote_span"><span class="big red">quote</span></h4>
@@ -16145,6 +16408,7 @@ prepending a <span class="monospaced">'</span> (single quote) to <em>exp</em>.</
 <span class="p">(</span><span class="k">quote</span> <span class="p">(</span><span class="nv">a</span> <span class="ss">b</span> <span class="ss">c</span><span class="p">))</span>   <span class="err">→</span> <span class="p">(</span><span class="nv">a</span> <span class="ss">b</span> <span class="ss">c</span><span class="p">)</span>
 <span class="p">(</span><span class="nv">=</span> <span class="p">(</span><span class="k">quote</span> <span class="ss">x</span><span class="p">)</span> <span class="o">&#39;</span><span class="ss">x</span><span class="p">)</span>  <span class="err">→</span> <span class="k">true</span>
 </pre></div></div></div>
+<div class="paragraph"><p><a id="quote?"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_quote_span_2"><span class="big red">quote?</span></h4>
@@ -16157,6 +16421,7 @@ depending on the result.</p></div>
 </pre></div></div></div>
 <div class="paragraph"><p>Note that in the <span class="monospaced">set</span> statement, ` ''x` is quoted twice because the
 first quote is lost during the evaluation of the <span class="monospaced">set</span> assignment.</p></div>
+<div class="paragraph"><p><a id="rand"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_rand_span"><span class="big red">rand</span></h4>
@@ -16178,6 +16443,7 @@ be specified to return a list of length <em>int-N</em> of random numbers.</p></d
 <a href="#normal">normal</a> functions to generate floating point random
 numbers, and use <a href="#seed">seed</a> to vary the initial seed for random
 number generation.</p></div>
+<div class="paragraph"><p><a id="random"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_random_span"><span class="big red">random</span></h4>
@@ -16198,6 +16464,7 @@ distributed number:</p></div>
 <div class="content"><div class="highlight"><pre><span class="p">(</span><span class="k">random</span> <span class="ss">10</span> <span class="ss">5</span><span class="p">)</span>  <span class="err">→</span> <span class="ss">11.0971</span>
 </pre></div></div></div>
 <div class="paragraph"><p>See also the <a href="#normal">normal</a> and <a href="#rand">rand</a> functions.</p></div>
+<div class="paragraph"><p><a id="randomize"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_randomize_span"><span class="big red">randomize</span></h4>
@@ -16217,6 +16484,7 @@ specified in <em>bool</em>.</p></div>
 <div class="paragraph"><p><span class="monospaced">randomize</span> uses an internal <em>pseudo random sequence</em> generator that
 returns the same series of results each time newLISP is started. Use the
 <a href="#seed">seed</a> function to change this sequence.</p></div>
+<div class="paragraph"><p><a id="read"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_read_a_href_destructive_a_span"><span class="big red">read <a href="#destructive">!</a></span></h4>
@@ -16250,6 +16518,7 @@ no new bytes have been read, <em>sym-buffer</em> will contain <span class="monos
 <div class="paragraph"><p>Reads 1000 bytes or until the string <span class="monospaced">password:</span> is encountered. The
 string <span class="monospaced">password:</span> will be part of the data returned.</p></div>
 <div class="paragraph"><p>See also the <a href="#write">write</a> function.</p></div>
+<div class="paragraph"><p><a id="read-char"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_read_char_span"><span class="big red">read-char</span></h4>
@@ -16273,6 +16542,7 @@ the end of the file is reached, <span class="monospaced">nil</span> is returned.
 text lines at a time. Note that newLISP supplies a fast built-in
 function called <a href="#copy-file">copy-file</a> for copying files.</p></div>
 <div class="paragraph"><p>See also the <a href="#write-char">write-char</a> function.</p></div>
+<div class="paragraph"><p><a id="read-expr"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_read_expr_span"><span class="big red">read-expr</span></h4>
@@ -16306,6 +16576,7 @@ without the evaluation step:</p></div>
 preprocessing expressions before evaluation.</p></div>
 <div class="paragraph"><p>See also <a href="#reader-event">reader-event</a> for preprocessing expressions
 event-driven.</p></div>
+<div class="paragraph"><p><a id="read-file"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_read_file_span"><span class="big red">read-file</span></h4>
@@ -16334,6 +16605,7 @@ it is not finished. In this mode, <span class="monospaced">read-file</span> can 
 transfer files from remote newLISP server nodes.</p></div>
 <div class="paragraph"><p>See also the <a href="#write-file">write-file</a> and
 <a href="#append-file">append-file</a> functions.</p></div>
+<div class="paragraph"><p><a id="read-key"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_read_key_span"><span class="big red">read-key</span></h4>
@@ -16359,6 +16631,7 @@ shell or Win32 command shell. It will not work in the Java based
 newLISP-GS or Tcl/Tk based newLISP-Tk frontend. It will also not work
 when executed by newLISP Unix shared library or newLISP Win32 DLL
 (Dynamic Link Library).</p></div>
+<div class="paragraph"><p><a id="read-line"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_read_line_span"><span class="big red">read-line</span></h4>
@@ -16399,6 +16672,7 @@ without argument, it writes the contents of the last <span class="monospaced">re
 to the screen.</p></div>
 <div class="paragraph"><p>See also the <a href="#current-line">current-line</a> function for retrieving
 this buffer.</p></div>
+<div class="paragraph"><p><a id="read-utf8"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_read_utf8_span"><span class="big red">read-utf8</span></h4>
@@ -16417,6 +16691,7 @@ displayable UTF-8 character string using the <a href="#char">char</a> function.<
 </pre></div></div></div>
 <div class="paragraph"><p>The example reads a file containing UTF-8 encoded text and displays it
 to the terminal screen.</p></div>
+<div class="paragraph"><p><a id="reader-event"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_reader_event_span"><span class="big red">reader-event</span></h4>
@@ -16487,6 +16762,7 @@ of a <span class="monospaced">(square ...)</span> to a <span class="monospaced">
 macro registering function uses a syntax form of <span class="monospaced">expand</span> working only
 on upper-case variables.</p></div>
 <div class="paragraph"><p>For a more detailed description see the documentation for <span class="monospaced">macro.lsp</span>.</p></div>
+<div class="paragraph"><p><a id="real-path"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_real_path_span"><span class="big red">real-path</span></h4>
@@ -16501,6 +16777,7 @@ If a path is not given, <span class="monospaced">"."</span> (the current directo
 <div class="paragraph"><p>The output length is limited by the OS&#8217;s maximum allowed path length. If
 <span class="monospaced">real-path</span> fails (e.g., because of a nonexistent path), <span class="monospaced">nil</span> is
 returned.</p></div>
+<div class="paragraph"><p><a id="receive"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_receive_a_href_destructive_a_span"><span class="big red">receive <a href="#destructive">!</a></span></h4>
@@ -16543,6 +16820,7 @@ queue.</p></div>
 <div class="paragraph"><p>The <span class="monospaced">receive</span> function is not available on Win32.</p></div>
 <div class="paragraph"><p>For a more detailed discussion of this function and examples, see the
 <a href="#send">send</a> function.</p></div>
+<div class="paragraph"><p><a id="ref"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_ref_span"><span class="big red">ref</span></h4>
@@ -16638,6 +16916,7 @@ are quoted to protect them from evaluation.</p></div>
 also the chapter <a href="#pass_big">Passing data by reference</a>.</p></div>
 <div class="paragraph"><p>See also the <a href="#ref-all">ref-all</a> function, which searches for all
 occurrences of a key expression in a nested list.</p></div>
+<div class="paragraph"><p><a id="ref-all"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_ref_all_span"><span class="big red">ref-all</span></h4>
@@ -16727,6 +17006,7 @@ searches are for strings.</p></div>
 <span class="p">(</span><span class="k">ref-all</span> <span class="o">&#39;</span><span class="p">(</span><span class="nv">X</span> <span class="ss">g</span><span class="p">)</span> <span class="ss">L</span> <span class="k">unify</span> <span class="k">true</span><span class="p">)</span> <span class="err">→</span> <span class="p">(((</span><span class="nv">x</span> <span class="ss">y</span> <span class="ss">z</span><span class="p">)</span> <span class="ss">g</span><span class="p">)</span> <span class="p">(</span><span class="nv">f</span> <span class="ss">g</span><span class="p">))</span>
 </pre></div></div></div>
 <div class="paragraph"><p>See also the <a href="#ref">ref</a> function.</p></div>
+<div class="paragraph"><p><a id="regex"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_regex_span"><span class="big red">regex</span></h4>
@@ -16946,6 +17226,7 @@ Linux or Unix also contain chapters about regular expressions. See also
 manual pages.</p></div>
 <div class="paragraph"><p>Regular expression patterns can be precompiled for higher speed when
 using changing repetitive patterns with <a href="#regex-comp">regex-comp</a>.</p></div>
+<div class="paragraph"><p><a id="regex-comp"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_regex_comp_span"><span class="big red">regex-comp</span></h4>
@@ -16980,6 +17261,7 @@ pre-compiled patterns are used. Normal pattern options are specified
 during pre-compilation with <span class="monospaced">regex-comp</span> . The <span class="monospaced">0x10000</span> option can only
 be combined with <span class="monospaced">0x8000</span>, the option used to specify that only one
 replacement should be made when using <a href="#replace">replace</a>.</p></div>
+<div class="paragraph"><p><a id="remove-dir"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_remove_dir_span"><span class="big red">remove-dir</span></h4>
@@ -16991,6 +17273,7 @@ failure.</p></div>
 <div class="content"><div class="highlight"><pre><span class="p">(</span><span class="k">remove-dir</span> <span class="s">&quot;temp&quot;</span><span class="p">)</span>
 </pre></div></div></div>
 <div class="paragraph"><p>Removes the directory <span class="monospaced">temp</span> in the current directory.</p></div>
+<div class="paragraph"><p><a id="rename-file"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_rename_file_span"><span class="big red">rename-file</span></h4>
@@ -17001,6 +17284,7 @@ on the operation&#8217;s success.</p></div>
 <div class="listingblock">
 <div class="content"><div class="highlight"><pre><span class="p">(</span><span class="k">rename-file</span> <span class="s">&quot;data.lisp&quot;</span> <span class="s">&quot;data.backup&quot;</span><span class="p">)</span>
 </pre></div></div></div>
+<div class="paragraph"><p><a id="replace"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_replace_a_href_destructive_a_span"><span class="big red">replace <a href="#destructive">!</a></span></h4>
@@ -17165,6 +17449,7 @@ elements in a list.</p></div>
 <div class="paragraph"><p>See <a href="#directory">directory</a>, <a href="#find">find</a>,
 <a href="#find-all">find-all</a>, <a href="#parse">parse</a>, <a href="#regex">regex</a>, and
 <a href="#search">search</a> for other functions using regular expressions.</p></div>
+<div class="paragraph"><p><a id="reset"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_reset_span"><span class="big red">reset</span></h4>
@@ -17185,6 +17470,7 @@ new clean newLISP process with the same command-line parameters. This
 mode will only work when newLISP was started using its full path-name,
 e.g. <span class="monospaced">/usr/bin/newlisp</span> instead of only <span class="monospaced">newlisp</span>. This mode is not
 available on Win32.</p></div>
+<div class="paragraph"><p><a id="rest"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_rest_a_href_utf8_capable_utf8_a_span"><span class="big red">rest <a href="#utf8_capable">utf8</a></span></h4>
@@ -17220,6 +17506,7 @@ string <em>str</em> in a string.</p></div>
 <a href="#implicit_rest_slice">Implicit rest and slice</a>.</p></div>
 <div class="paragraph"><p>Note that <a href="#rest">rest</a> works on character boundaries rather than
 byte boundaries when the UTF-8–enabled version of newLISP is used.</p></div>
+<div class="paragraph"><p><a id="reverse"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_reverse_a_href_destructive_a_span"><span class="big red">reverse <a href="#destructive">!</a></span></h4>
@@ -17242,6 +17529,7 @@ in a string.</p></div>
 <span class="ss">str</span>            <span class="err">→</span> <span class="s">&quot;PSILwen&quot;</span>
 </pre></div></div></div>
 <div class="paragraph"><p>See also the <a href="#sort">sort</a> function.</p></div>
+<div class="paragraph"><p><a id="rotate"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_rotate_a_href_destructive_a_span"><span class="big red">rotate <a href="#destructive">!</a></span></h4>
@@ -17271,6 +17559,7 @@ changes the contents of the original list or string.</p></div>
 </pre></div></div></div>
 <div class="paragraph"><p>When working on a string, <span class="monospaced">rotate</span> works on byte boundaries rather than
 character boundaries.</p></div>
+<div class="paragraph"><p><a id="round"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_round_span"><span class="big red">round</span></h4>
@@ -17289,6 +17578,7 @@ It is positive when the integer part of a number is being rounded.</p></div>
 </pre></div></div></div>
 <div class="paragraph"><p>Note that rounding for display purposes is better accomplished using
 <a href="#format">format</a>.</p></div>
+<div class="paragraph"><p><a id="save"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_save_span"><span class="big red">save</span></h4>
@@ -17342,6 +17632,7 @@ the same output.</p></div>
 <div class="paragraph"><p>See also the functions <a href="#load">load</a> (the inverse operation of
 <span class="monospaced">save</span>) and <a href="#source">source</a>, which saves symbols and contexts to a
 string instead of a file.</p></div>
+<div class="paragraph"><p><a id="search"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_search_span"><span class="big red">search</span></h4>
@@ -17379,6 +17670,7 @@ the string "#define ".</p></div>
 <div class="paragraph"><p>For other functions using regular expressions, see
 <a href="#directory">directory</a>, <a href="#find">find</a>, <a href="#find-all">find-all</a>,
 <a href="#parse">parse</a>, <a href="#regex">regex</a>, and <a href="#replace">replace</a>.</p></div>
+<div class="paragraph"><p><a id="seed"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_seed_span"><span class="big red">seed</span></h4>
@@ -17402,6 +17694,7 @@ data are involved. Using <span class="monospaced">seed</span>, the same random s
 generated over and over again.</p></div>
 <div class="paragraph"><p>The second example is useful for guaranteeing a different seed any time
 the program starts.</p></div>
+<div class="paragraph"><p><a id="self"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_self_span"><span class="big red">self</span></h4>
@@ -17431,6 +17724,7 @@ more <em>int-index</em> are used to access the object members.</p></div>
 </pre></div></div></div>
 <div class="paragraph"><p>See also the chapter about programming with FOOP: <a href="#foop">Functional
 object-oriented programming in newLISP</a></p></div>
+<div class="paragraph"><p><a id="seek"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_seek_span"><span class="big red">seek</span></h4>
@@ -17460,6 +17754,7 @@ disk, so the file takes up less space and is called a <em>sparse file</em>.</p><
 <span class="p">(</span><span class="k">seek</span> <span class="ss">file</span> <span class="ss">30000000000</span><span class="p">)</span>  <span class="err">→</span> <span class="ss">30000000000</span>
 </pre></div></div></div>
 <div class="paragraph"><p>newLISP supports file position numbers up to 9,223,372,036,854,775,807.</p></div>
+<div class="paragraph"><p><a id="select"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_select_a_href_utf8_capable_utf8_a_span"><span class="big red">select <a href="#utf8_capable">utf8</a></span></h4>
@@ -17494,6 +17789,7 @@ using one or more indices specified in <em>list-selection</em> or the
 <div class="paragraph"><p>Selected elements can be repeated and do not have to appear in order,
 although this speeds up processing. The order in <em>list-selection</em> or
 <em>int-index_i</em> can be changed to rearrange elements.</p></div>
+<div class="paragraph"><p><a id="semaphore"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_semaphore_span"><span class="big red">semaphore</span></h4>
@@ -17609,6 +17905,7 @@ a more comprehensive example of using <span class="monospaced">semaphore</span> 
 processes, see the file <span class="monospaced">prodcons.lsp</span> example in the <span class="monospaced">examples</span>
 directory in the source distribution, as well as the examples and
 modules distributed with newLISP.</p></div>
+<div class="paragraph"><p><a id="send"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_send_span"><span class="big red">send</span></h4>
@@ -17788,6 +18085,7 @@ the parent process they will be bound to the correct process ID numbers.</p></di
 loop to finish.</p></div>
 <div class="paragraph"><p>For more details on <span class="monospaced">send</span> and <span class="monospaced">receive</span> and more examples see the
 <a href="http://www.newlisp.org/CodePatterns.html">Code Patterns</a> document.</p></div>
+<div class="paragraph"><p><a id="sequence"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_sequence_span"><span class="big red">sequence</span></h4>
@@ -17805,6 +18103,7 @@ step size is present).</p></div>
 <div class="paragraph"><p>Note that the step size must be a positive number, even if sequencing
 from a higher to a lower number.</p></div>
 <div class="paragraph"><p>Use the <a href="#series">series</a> function to generate geometric sequences.</p></div>
+<div class="paragraph"><p><a id="series"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_series_span"><span class="big red">series</span></h4>
@@ -17863,6 +18162,7 @@ defined previously for better readability of the <span class="monospaced">series
 which can be used inside <em>func</em>.</p></div>
 <div class="paragraph"><p>Use the <a href="#sequence">sequence</a> function to generate arithmetic
 sequences.</p></div>
+<div class="paragraph"><p><a id="set"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_set_a_href_destructive_a_span"><span class="big red">set <a href="#destructive">!</a></span></h4>
@@ -17918,6 +18218,7 @@ is equivalent to using <a href="#define">define</a> or
 protect the symbol from subsequent alteration. Using the
 <a href="#setq">setq</a> or <a href="#setf">setf</a> function eliminates the need to
 quote the variable symbol.</p></div>
+<div class="paragraph"><p><a id="set-locale"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_set_locale_span"><span class="big red">set-locale</span></h4>
@@ -17968,6 +18269,7 @@ Compatible Regular Expressions), newLISP must be compiled with different
 character tables. See the file, LOCALIZATION, in the newLISP source
 distribution for details.</p></div>
 <div class="paragraph"><p>See also the chapter <a href="#switching">Switching the locale</a>.</p></div>
+<div class="paragraph"><p><a id="set-ref"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_set_ref_a_href_destructive_a_span"><span class="big red">set-ref <a href="#destructive">!</a></span></h4>
@@ -18000,6 +18302,7 @@ lists by reference:</p></div>
 <a href="#set-ref-all">set-ref-all</a></p></div>
 <div class="paragraph"><p>For changing all occurrences of an element in a list use
 <a href="#set-ref-all">set-ref-all</a>.</p></div>
+<div class="paragraph"><p><a id="set-ref-all"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_set_ref_all_a_href_destructive_a_span"><span class="big red">set-ref-all <a href="#destructive">!</a></span></h4>
@@ -18044,9 +18347,11 @@ on a copy of <span class="monospaced">db:db</span>.</p></div>
 <span class="monospaced">oranges</span>. The found items appear in <span class="monospaced">$it</span></p></div>
 <div class="paragraph"><p>See also <a href="#set-ref">set-ref</a> which replaces only the first element
 found.</p></div>
+<div class="paragraph"><p><a id="setq"></a>
+<a id="setf"></a></p></div>
 </div>
 <div class="sect3">
-<h4 id="_span_class_big_red_setq_setf_a_href_destructive_a_span"><span class="big red">setq setf <a href="#destructive">!</a></span></h4>
+<h4 id="_span_class_big_red_setq_setf_a_href_destructive_a_span"><span class="big red">setq, setf <a href="#destructive">!</a></span></h4>
 <div class="paragraph"><p><strong>syntax:</strong> (setq <em>place-1</em> <em>exp-1</em> [<em>place-2</em> <em>exp-2</em> &#8230; ])</p></div>
 <div class="paragraph"><p><span class="monospaced">setq</span> and <span class="monospaced">setf</span> work alike in newLISP and set the contents of a
 symbol, list, array or string or of a list, array or string place
@@ -18120,6 +18425,7 @@ the anaphoric system variable <span class="monospaced">$it</span> to refer to th
 
 <span class="ss">s</span> <span class="err">→</span> <span class="s">&quot;newLISP&quot;</span>
 </pre></div></div></div>
+<div class="paragraph"><p><a id="sgn"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_sgn_span"><span class="big red">sgn</span></h4>
@@ -18146,6 +18452,7 @@ returned.</p></div>
 <span class="p">(</span><span class="k">sgn</span> <span class="ss">x</span> <span class="p">(</span><span class="k">abs</span> <span class="ss">x</span><span class="p">)</span> <span class="ss">0</span><span class="p">)</span>      <span class="c1">; (abs x) for x &lt; 0, 0 for x = 0, else nil</span>
 </pre></div></div></div>
 <div class="paragraph"><p>Any expression or constant can be used for <em>exp-1</em>, <em>exp-2</em>, or <em>exp-3</em>.</p></div>
+<div class="paragraph"><p><a id="share"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_share_span"><span class="big red">share</span></h4>
@@ -18207,6 +18514,7 @@ shared memory can crash the running process.</p></div>
 <div class="paragraph"><p>For a more comprehensive example of using shared memory in a multi
 process Linux/Unix application, see the file <span class="monospaced">example/prodcons.lsp</span> in
 the newLISP source distribution.</p></div>
+<div class="paragraph"><p><a id="signal"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_signal_span"><span class="big red">signal</span></h4>
@@ -18309,6 +18617,7 @@ parameter.</p></div>
     <span class="p">(</span><span class="k">signal</span> <span class="ss">s</span> <span class="o">&#39;</span><span class="k">signal-</span><span class="ss">handler</span><span class="p">))</span>
 </pre></div></div></div>
 <div class="paragraph"><p>In this example, all signals from 1 to 8 are set to the same handler.</p></div>
+<div class="paragraph"><p><a id="silent"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_silent_span"><span class="big red">silent</span></h4>
@@ -18328,6 +18637,7 @@ prompt back.</p></div>
 
 <span class="p">(</span><span class="k">silent</span><span class="p">)</span> <span class="p">(</span><span class="nv">my-func</span><span class="p">)</span>  <span class="c1">; same effect as previous</span>
 </pre></div></div></div>
+<div class="paragraph"><p><a id="sin"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_sin_span"><span class="big red">sin</span></h4>
@@ -18338,6 +18648,7 @@ prompt back.</p></div>
 <span class="p">(</span><span class="k">set</span> <span class="o">&#39;</span><span class="ss">pi</span> <span class="p">(</span><span class="k">mul</span> <span class="ss">2</span> <span class="p">(</span><span class="k">acos</span> <span class="ss">0</span><span class="p">)))</span>  <span class="err">→</span> <span class="ss">3.141592654</span>
 <span class="p">(</span><span class="k">sin</span> <span class="p">(</span><span class="k">div</span> <span class="ss">pi</span> <span class="ss">2</span><span class="p">))</span>            <span class="err">→</span> <span class="ss">1</span>
 </pre></div></div></div>
+<div class="paragraph"><p><a id="sinh"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_sinh_span"><span class="big red">sinh</span></h4>
@@ -18351,6 +18662,7 @@ defined mathematically as: <em>(exp (x) - exp (-x)) / 2</em>. An overflow to
 <span class="p">(</span><span class="k">sinh</span> <span class="ss">1000</span><span class="p">)</span>  <span class="err">→</span> <span class="ss">inf</span>
 <span class="p">(</span><span class="k">sub</span> <span class="p">(</span><span class="k">tanh</span> <span class="ss">1</span><span class="p">)</span> <span class="p">(</span><span class="k">div</span> <span class="p">(</span><span class="k">sinh</span> <span class="ss">1</span><span class="p">)</span> <span class="p">(</span><span class="k">cosh</span> <span class="ss">1</span><span class="p">)))</span> <span class="err">→</span> <span class="ss">0</span>
 </pre></div></div></div>
+<div class="paragraph"><p><a id="sleep"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_sleep_span"><span class="big red">sleep</span></h4>
@@ -18364,6 +18676,7 @@ specified in <em>num-milli-seconds</em>.</p></div>
 <div class="paragraph"><p>On some platforms, <span class="monospaced">sleep</span> is only available with a resolution of one
 second. In this case, the parameter <em>int-milli-seconds</em> will be rounded
 to the nearest full second.</p></div>
+<div class="paragraph"><p><a id="slice"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_slice_span"><span class="big red">slice</span></h4>
@@ -18407,6 +18720,7 @@ of newLISP.</p></div>
 <div class="paragraph"><p>Be aware that <a href="#slice">slice</a> always works on byte boundaries rather
 than character boundaries in the UTF-8–enabled version of newLISP. As a
 result, <a href="#slice">slice</a> can be used to manipulate binary content.</p></div>
+<div class="paragraph"><p><a id="sort"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_sort_a_href_destructive_a_span"><span class="big red">sort <a href="#destructive">!</a></span></h4>
@@ -18450,6 +18764,7 @@ without a preceding quote.</p></div>
 <span class="c1">;; use an anonymous function</span>
 <span class="p">(</span><span class="k">sort</span> <span class="ss">db</span> <span class="p">(</span><span class="k">fn</span> <span class="p">(</span><span class="nv">x</span> <span class="ss">y</span><span class="p">)</span> <span class="p">(</span><span class="nv">&gt;</span> <span class="p">(</span><span class="k">last</span> <span class="ss">x</span><span class="p">)</span> <span class="p">(</span><span class="k">last</span> <span class="ss">y</span><span class="p">))))</span>
 </pre></div></div></div>
+<div class="paragraph"><p><a id="source"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_source_span"><span class="big red">source</span></h4>
@@ -18473,6 +18788,7 @@ context prefix.</p></div>
 <div class="paragraph"><p>As with <a href="#save">save</a>, the formatting of line breaks and leading
 spaces or tabs can be controlled using the
 <a href="#pretty-print">pretty-print</a> function.</p></div>
+<div class="paragraph"><p><a id="spawn"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_spawn_span"><span class="big red">spawn</span></h4>
@@ -18600,6 +18916,7 @@ functions are available for communications between parent and child
 processes. Using these functions any data or expression of any size can
 be transferred. Additionally messaged expressions can be evaluated in
 the recipient&#8217;s environment.</p></div>
+<div class="paragraph"><p><a id="sqrt"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_sqrt_span"><span class="big red">sqrt</span></h4>
@@ -18610,6 +18927,7 @@ result.</p></div>
 <div class="content"><div class="highlight"><pre><span class="p">(</span><span class="k">sqrt</span> <span class="ss">10</span><span class="p">)</span>  <span class="err">→</span> <span class="ss">3.16227766</span>
 <span class="p">(</span><span class="k">sqrt</span> <span class="ss">25</span><span class="p">)</span>  <span class="err">→</span> <span class="ss">5</span>
 </pre></div></div></div>
+<div class="paragraph"><p><a id="starts-with"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_starts_with_span"><span class="big red">starts-with</span></h4>
@@ -18638,6 +18956,7 @@ outcome.</p></div>
 <span class="p">(</span><span class="k">starts-with</span> <span class="o">&#39;</span><span class="p">((</span><span class="nv">+</span> <span class="ss">3</span> <span class="ss">4</span><span class="p">)</span> <span class="ss">b</span> <span class="ss">c</span> <span class="ss">d</span><span class="p">)</span> <span class="o">&#39;</span><span class="p">(</span><span class="nv">+</span> <span class="ss">3</span> <span class="ss">4</span><span class="p">))</span>  <span class="err">→</span> <span class="k">true</span>
 </pre></div></div></div>
 <div class="paragraph"><p>See also the <a href="#ends-with">ends-with</a> function.</p></div>
+<div class="paragraph"><p><a id="stats"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_stats_span"><span class="big red">stats</span></h4>
@@ -18715,6 +19034,7 @@ width:30%;
     <span class="ss">skew</span>     <span class="ss">=</span>     <span class="ss">0.49</span>
     <span class="ss">kurtosis</span> <span class="ss">=</span>    <span class="k">-</span><span class="ss">1.34</span>
 </pre></div></div></div>
+<div class="paragraph"><p><a id="string"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_string_span"><span class="big red">string</span></h4>
@@ -18744,6 +19064,7 @@ the first terminating zero will be copied:</p></div>
 string to be specified) functions to concatenate strings containing zero
 bytes. Use the <a href="#source">source</a> function to convert a lambda
 expression into its newLISP source string representation.</p></div>
+<div class="paragraph"><p><a id="string?"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_string_span_2"><span class="big red">string?</span></h4>
@@ -18754,6 +19075,7 @@ expression into its newLISP source string representation.</p></div>
 <div class="content"><div class="highlight"><pre><span class="p">(</span><span class="k">set</span> <span class="o">&#39;</span><span class="ss">var</span> <span class="s">&quot;hello&quot;</span><span class="p">)</span>
 <span class="p">(</span><span class="k">string</span><span class="ss">?</span> <span class="ss">var</span><span class="p">)</span>  <span class="err">→</span> <span class="k">true</span>
 </pre></div></div></div>
+<div class="paragraph"><p><a id="struct"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_struct_span"><span class="big red">struct</span></h4>
@@ -18846,6 +19168,7 @@ it unstable.</p></div>
 <span class="p">(</span><span class="k">unpack</span> <span class="ss">comp</span> <span class="s">&quot;\001\002\000\000\003\000\000\000&quot;</span><span class="p">)</span> <span class="err">→</span> <span class="p">((</span><span class="nv">1</span> <span class="ss">2</span><span class="p">)</span> <span class="ss">3</span><span class="p">)</span>
 </pre></div></div></div>
 <div class="paragraph"><p>Nested structures are unpacked recursively.</p></div>
+<div class="paragraph"><p><a id="sub"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_sub_span"><span class="big red">sub</span></h4>
@@ -18859,6 +19182,7 @@ is supplied, its sign is reversed. Any floating point calculation with
 <div class="content"><div class="highlight"><pre><span class="p">(</span><span class="k">sub</span> <span class="ss">10</span> <span class="ss">8</span> <span class="ss">0.25</span><span class="p">)</span>  <span class="err">→</span> <span class="ss">1.75</span>
 <span class="p">(</span><span class="k">sub</span> <span class="ss">123</span><span class="p">)</span>        <span class="err">→</span> <span class="k">-</span><span class="ss">123</span>
 </pre></div></div></div>
+<div class="paragraph"><p><a id="swap"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_swap_a_href_destructive_a_span"><span class="big red">swap <a href="#destructive">!</a></span></h4>
@@ -18901,6 +19225,7 @@ lists, arrays, or symbols involved.</p></div>
 <span class="ss">lst</span> <span class="err">→</span>  <span class="p">((</span><span class="nv">b</span> <span class="ss">3</span> <span class="ss">20</span> <span class="ss">30</span><span class="p">)</span> <span class="p">(</span><span class="nv">a</span> <span class="ss">1</span> <span class="ss">2</span> <span class="ss">10</span><span class="p">))</span>
 </pre></div></div></div>
 <div class="paragraph"><p>Any two places can be swept in the same or different objects.</p></div>
+<div class="paragraph"><p><a id="sym"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_sym_span"><span class="big red">sym</span></h4>
@@ -18975,6 +19300,7 @@ target context:</p></div>
 that creates contexts and their variables in a dynamic fashion.</p></div>
 <div class="paragraph"><p>A syntax of the <a href="#context">context</a> function can also be used to
 create, set and evaluate symbols.</p></div>
+<div class="paragraph"><p><a id="symbol?"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_symbol_span"><span class="big red">symbol?</span></h4>
@@ -18993,6 +19319,7 @@ symbol; otherwise, it returns <span class="monospaced">nil</span>.</p></div>
 <div class="paragraph"><p>The first statement sets the contents of <span class="monospaced">x</span> to the symbol <span class="monospaced">y</span>. The
 second statement then checks the contents of <span class="monospaced">x</span>. The last example
 checks the first element of a list.</p></div>
+<div class="paragraph"><p><a id="symbols"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_symbols_span"><span class="big red">symbols</span></h4>
@@ -19008,6 +19335,7 @@ in that context are returned.</p></div>
 <span class="p">(</span><span class="k">symbols</span> <span class="ss">ct</span><span class="p">)</span>    <span class="c1">; list of symbols in context CTX</span>
 </pre></div></div></div>
 <div class="paragraph"><p>The quote can be omitted because contexts evaluate to themselves.</p></div>
+<div class="paragraph"><p><a id="sync"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_sync_span"><span class="big red">sync</span></h4>
@@ -19055,6 +19383,7 @@ earlier. When no parameter is specified or a function is specified,
 <div class="paragraph"><p>The function <span class="monospaced">sync</span> is part of the Cilk API for synchronizing child
 processes and process parallelization. See the reference for the
 function <a href="#spawn">spawn</a> for a full discussion of the Cilk API.</p></div>
+<div class="paragraph"><p><a id="sys-error"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_sys_error_span"><span class="big red">sys-error</span></h4>
@@ -19087,6 +19416,7 @@ semaphores.</p></div>
 <span class="p">(</span><span class="k">sys-error</span><span class="p">)</span>       <span class="err">→</span> <span class="k">nil</span>
 </pre></div></div></div>
 <div class="paragraph"><p>See also <a href="#last-error">last-error</a> and <a href="#net-error">net-error</a>.</p></div>
+<div class="paragraph"><p><a id="sys-info"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_sys_info_span"><span class="big red">sys-info</span></h4>
@@ -19174,6 +19504,7 @@ need to change.</p></div>
 command-line switch. For each megabyte of Lisp cell memory, 64k memory
 cells can be allocated. The maximum call stack depth can be changed
 using the <span class="monospaced">-s</span> command-line switch.</p></div>
+<div class="paragraph"><p><a id="t-test"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_t_test_span"><span class="big red">t-test</span></h4>
@@ -19252,6 +19583,7 @@ and after a treatment with Prosac depression medication:</p></div>
 </pre></div></div></div>
 <div class="paragraph"><p>The effect of the Prosac treatment is moderately significant with a <span class="monospaced">p</span>
 of <span class="monospaced">0.0137</span>.</p></div>
+<div class="paragraph"><p><a id="tan"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_tan_span"><span class="big red">tan</span></h4>
@@ -19263,6 +19595,7 @@ result.</p></div>
 <span class="p">(</span><span class="k">set</span> <span class="o">&#39;</span><span class="ss">pi</span> <span class="p">(</span><span class="k">mul</span> <span class="ss">2</span> <span class="p">(</span><span class="k">asin</span> <span class="ss">1</span><span class="p">)))</span>  <span class="err">→</span> <span class="ss">3.141592654</span>
 <span class="p">(</span><span class="k">tan</span> <span class="p">(</span><span class="k">div</span> <span class="ss">pi</span> <span class="ss">4</span><span class="p">))</span>            <span class="err">→</span> <span class="ss">1</span>
 </pre></div></div></div>
+<div class="paragraph"><p><a id="tanh"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_tanh_span"><span class="big red">tanh</span></h4>
@@ -19275,6 +19608,7 @@ tangent is defined mathematically as: <em>sinh (x) / cosh (x)</em>.</p></div>
 <span class="p">(</span><span class="k">tanh</span> <span class="ss">1000</span><span class="p">)</span>  <span class="err">→</span> <span class="ss">1</span>
 <span class="p">(</span><span class="nv">=</span> <span class="p">(</span><span class="k">tanh</span> <span class="ss">1</span><span class="p">)</span> <span class="p">(</span><span class="k">div</span> <span class="p">(</span><span class="k">sinh</span> <span class="ss">1</span><span class="p">)</span> <span class="p">(</span><span class="k">cosh</span> <span class="ss">1</span><span class="p">)))</span>  <span class="err">→</span> <span class="k">true</span>
 </pre></div></div></div>
+<div class="paragraph"><p><a id="term"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_term_span"><span class="big red">term</span></h4>
@@ -19292,6 +19626,7 @@ prefix.</p></div>
 </pre></div></div></div>
 <div class="paragraph"><p>See also <a href="#prefix">prefix</a> to extract the namespace or context prefix
 from a symbol.</p></div>
+<div class="paragraph"><p><a id="throw"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_throw_span"><span class="big red">throw</span></h4>
@@ -19325,6 +19660,7 @@ be returned:</p></div>
 </pre></div></div></div>
 <div class="paragraph"><p><span class="monospaced">throw</span> will <em>not</em> cause an error exception. Use
 <a href="#throw-error">throw-error</a> to throw user error exceptions.</p></div>
+<div class="paragraph"><p><a id="throw-error"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_throw_error_span"><span class="big red">throw-error</span></h4>
@@ -19346,6 +19682,7 @@ be returned:</p></div>
 user-defined error handlers and the <a href="#error-event">error-event</a>
 function, or the form of <a href="#catch">catch</a> that can capture error
 exceptions.</p></div>
+<div class="paragraph"><p><a id="time"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_time_span"><span class="big red">time</span></h4>
@@ -19363,6 +19700,7 @@ decimals of milliseconds are shown or not shown.</p></div>
 evaluations of <span class="monospaced">(myprog x y z)</span>. See also <a href="#date">date</a>,
 <a href="#date-value">date-value</a>, <a href="#time-of-day">time-of-day</a>, and
 <a href="#now">now</a>.</p></div>
+<div class="paragraph"><p><a id="time-of-day"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_time_of_day_span"><span class="big red">time-of-day</span></h4>
@@ -19370,6 +19708,7 @@ evaluations of <span class="monospaced">(myprog x y z)</span>. See also <a href=
 <div class="paragraph"><p>Returns the time in milliseconds since the start of the current day.</p></div>
 <div class="paragraph"><p>See also the <a href="#date">date</a>, <a href="#date-value">date-value</a>,
 <a href="#time">time</a>, and <a href="#now">now</a> functions.</p></div>
+<div class="paragraph"><p><a id="timer"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_timer_span"><span class="big red">timer</span></h4>
@@ -19444,6 +19783,7 @@ ready for reading:</p></div>
 <div class="paragraph"><p>In this example, the <span class="monospaced">until</span> loop will run until something can be read
 from <span class="monospaced">socket</span>, or until ten seconds have passed and the <span class="monospaced">timeout</span>
 variable is set.</p></div>
+<div class="paragraph"><p><a id="title-case"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_title_case_a_href_utf8_capable_utf8_a_span"><span class="big red">title-case <a href="#utf8_capable">utf8</a></span></h4>
@@ -19458,6 +19798,7 @@ other than <span class="monospaced">nil</span>, the rest of the string is conver
 </pre></div></div></div>
 <div class="paragraph"><p>See also the <a href="#lower-case">lower-case</a> and
 <a href="#upper-case">upper-case</a> functions.</p></div>
+<div class="paragraph"><p><a id="trace"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_trace_span"><span class="big red">trace</span></h4>
@@ -19499,6 +19840,7 @@ be checked during debugging or set to different values.</p></div>
 go into debugging mode, put <span class="monospaced">(trace true)</span> statements into the newLISP
 code where execution should switch on the debugger.</p></div>
 <div class="paragraph"><p>Use the <a href="#debug">debug</a> function as a shortcut for the above example.</p></div>
+<div class="paragraph"><p><a id="trace-highlight"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_trace_highlight_span"><span class="big red">trace-highlight</span></h4>
@@ -19526,6 +19868,7 @@ characters is allowed for the header and 31 for the footer.</p></div>
 <span class="monospaced">&lt;&lt;</span>. The second example works on most Linux shells. It may not,
 however, work in console windows under Win32 or CYGWIN, depending on the
 configuration of the terminal.</p></div>
+<div class="paragraph"><p><a id="transpose"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_transpose_span"><span class="big red">transpose</span></h4>
@@ -19573,6 +19916,7 @@ it like an entire row of elements of that data type:</p></div>
 <div class="paragraph"><p>All operations shown here on lists can also be performed on arrays.</p></div>
 <div class="paragraph"><p>See also the matrix operations <a href="#det">det</a>, <a href="#invert">invert</a>,
 <a href="#mat">mat</a> and <a href="#multiply">multiply</a>.</p></div>
+<div class="paragraph"><p><a id="trim"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_trim_a_href_utf8_capable_utf8_a_span"><span class="big red">trim <a href="#utf8_capable">utf8</a></span></h4>
@@ -19591,6 +19935,7 @@ or trim only one side if an empty string is specified for the other.</p></div>
 <span class="p">(</span><span class="k">trim</span> <span class="s">&quot;1234000&quot;</span> <span class="s">&quot;&quot;</span> <span class="s">&quot;0&quot;</span><span class="p">)</span>          <span class="err">→</span> <span class="s">&quot;1234&quot;</span>
 <span class="p">(</span><span class="k">trim</span> <span class="s">&quot;----hello=====&quot;</span> <span class="s">&quot;-&quot;</span> <span class="s">&quot;=&quot;</span><span class="p">)</span>  <span class="err">→</span> <span class="s">&quot;hello&quot;</span>
 </pre></div></div></div>
+<div class="paragraph"><p><a id="true?"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_true_span"><span class="big red">true?</span></h4>
@@ -19604,6 +19949,7 @@ empty list <span class="monospaced">()</span>, <span class="monospaced">true?</s
 <span class="p">(</span><span class="k">true</span><span class="ss">?</span> <span class="o">&#39;</span><span class="p">())</span>  <span class="err">→</span> <span class="k">nil</span>
 </pre></div></div></div>
 <div class="paragraph"><p><span class="monospaced">true?</span> behaves like <a href="#if">if</a> and rejects the empty list <span class="monospaced">()</span>.</p></div>
+<div class="paragraph"><p><a id="unicode"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_unicode_span"><span class="big red">unicode</span></h4>
@@ -19622,6 +19968,7 @@ of newLISP.</p></div>
 high to low. The <span class="monospaced">unicode</span> and <a href="#utf8">utf8</a> functions are the
 inverse of each other. These functions are only necessary if UCS-4
 Unicode is in use. Most systems use UTF-8 encoding only.</p></div>
+<div class="paragraph"><p><a id="unify"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_unify_span"><span class="big red">unify</span></h4>
@@ -19814,6 +20161,7 @@ queries.</p></div>
 rules. This makes it possible to implement functions for doing other
 work while processing rule terms. <span class="monospaced">prove-rule</span> could accomplish this
 testing for the symbol <span class="monospaced">eval</span> in each rule term.</p></div>
+<div class="paragraph"><p><a id="union"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_union_span"><span class="big red">union</span></h4>
@@ -19826,6 +20174,7 @@ two or more lists.</p></div>
 <div class="paragraph"><p>Like the other set functions <a href="#difference">difference</a>,
 <a href="#interset">intersect</a> and <a href="#unique">unique</a>, <span class="monospaced">union</span> maintains
 the order of elements as found in the original lists.</p></div>
+<div class="paragraph"><p><a id="unique"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_unique_span"><span class="big red">unique</span></h4>
@@ -19838,6 +20187,7 @@ the order of elements as found in the original lists.</p></div>
 <span class="monospaced">unique</span> perform faster.</p></div>
 <div class="paragraph"><p>Other <em>set</em> functions are <a href="#difference">difference</a>,
 <a href="#intersect">intersect</a> and <a href="#union">union</a>.</p></div>
+<div class="paragraph"><p><a id="unless"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_unless_span"><span class="big red">unless</span></h4>
@@ -19856,6 +20206,7 @@ the statements in <em>body</em> need not to be grouped with <a href="#begin">beg
 <span class="p">)</span>
 </pre></div></div></div>
 <div class="paragraph"><p>See also the function <a href="#when">when</a>.</p></div>
+<div class="paragraph"><p><a id="unpack"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_unpack_span"><span class="big red">unpack</span></h4>
@@ -19990,6 +20341,7 @@ string specifies, some formatting characters may be left unused.</p></div>
 <div class="paragraph"><p>See also the <a href="#address">address</a>, <a href="#get-int">get-int</a>,
 <a href="#get-long">get-long</a>, <a href="#get-char">get-char</a>,
 <a href="#get-string">get-string</a>, and <a href="#pack">pack</a> functions.</p></div>
+<div class="paragraph"><p><a id="until"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_until_span"><span class="big red">until</span></h4>
@@ -20011,6 +20363,7 @@ result of last <em>exp-condition</em> is returned. <span class="monospaced">unti
 </pre></div></div></div>
 <div class="paragraph"><p>Use the <a href="#do-until">do-until</a> function to test the condition <em>after</em>
 evaluation of the body expressions.</p></div>
+<div class="paragraph"><p><a id="upper-case"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_upper_case_a_href_utf8_capable_utf8_a_span"><span class="big red">upper-case <a href="#utf8_capable">utf8</a></span></h4>
@@ -20022,6 +20375,7 @@ International characters are converted correctly.</p></div>
 </pre></div></div></div>
 <div class="paragraph"><p>See also the <a href="#lower-case">lower-case</a> and
 <a href="#title-case">title-case</a> functions.</p></div>
+<div class="paragraph"><p><a id="utf8"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_utf8_span"><span class="big red">utf8</span></h4>
@@ -20043,6 +20397,7 @@ UTF-8–enabled newLISP:</p></div>
 highest to lowest. The <span class="monospaced">utf8</span> and <a href="#unicode">unicode</a> functions are
 the inverse of each other. These functions are only necessary if UCS-4
 Unicode is in use. Most systems use UTF-8 Unicode encoding only.</p></div>
+<div class="paragraph"><p><a id="utf8len"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_utf8len_span"><span class="big red">utf8len</span></h4>
@@ -20058,6 +20413,7 @@ available on UTF-8–enabled versions of newLISP.</p></div>
 <div class="paragraph"><p>See also the <a href="#unicode">unicode</a> and <a href="#utf8">utf8</a> functions.
 Above Chinese text from <a href="http://www.columbia.edu/kermit/utf8.html">UTF-8
 Sampler</a>.</p></div>
+<div class="paragraph"><p><a id="uuid"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_uuid_span"><span class="big red">uuid</span></h4>
@@ -20094,6 +20450,7 @@ process ID of the generating newLISP process is part of the seed for the
 random number generator. When type 4 IDs are used on a distributed
 system, two identical UUID&#8217;s are still highly unlikely and impossible
 for type 1 IDs if real MAC addresses are used.</p></div>
+<div class="paragraph"><p><a id="wait-pid"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_wait_pid_span"><span class="big red">wait-pid</span></h4>
@@ -20129,6 +20486,7 @@ operating systems.</p></div>
 </pre></div></div></div>
 <div class="paragraph"><p>The process <span class="monospaced">my-process</span> is started, then the main program blocks in the
 <span class="monospaced">wait-pid</span> call until <span class="monospaced">my-process</span> has finished.</p></div>
+<div class="paragraph"><p><a id="when"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_when_span"><span class="big red">when</span></h4>
@@ -20148,6 +20506,7 @@ statements in <em>body</em> need not to be grouped with <a href="#begin">begin</
 </pre></div></div></div>
 <div class="paragraph"><p>See also the function <a href="#unless">unless</a> working like
 <span class="monospaced">(when (not ...) ...)</span>.</p></div>
+<div class="paragraph"><p><a id="while"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_while_span"><span class="big red">while</span></h4>
@@ -20167,6 +20526,7 @@ the return value of the <span class="monospaced">while</span> expression.</p></d
 </pre></div></div></div>
 <div class="paragraph"><p>Use the <a href="#do-while">do-while</a> function to evaluate the condition
 <em>after</em> evaluating the body of expressions.</p></div>
+<div class="paragraph"><p><a id="write"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_write_a_href_destructive_a_span"><span class="big red">write <a href="#destructive">!</a></span></h4>
@@ -20195,6 +20555,7 @@ appending:</p></div>
 <span class="ss">str</span>   <span class="err">→</span> <span class="s">&quot;hello world&quot;</span>
 </pre></div></div></div>
 <div class="paragraph"><p>See also the <a href="#read">read</a> function.</p></div>
+<div class="paragraph"><p><a id="write-char"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_write_char_span"><span class="big red">write-char</span></h4>
@@ -20218,6 +20579,7 @@ byte.</p></div>
 larger portions of data at a time. Note that newLISP already supplies a
 faster built-in function called <a href="#copy-file">copy-file</a>.</p></div>
 <div class="paragraph"><p>See also the <a href="#read-char">read-char</a> function.</p></div>
+<div class="paragraph"><p><a id="write-file"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_write_file_span"><span class="big red">write-file</span></h4>
@@ -20246,6 +20608,7 @@ When the prefix <span class="monospaced">http://</span> is used, <span class="mo
 nodes.</p></div>
 <div class="paragraph"><p>See also the <a href="#append-file">append-file</a> and
 <a href="#read-file">read-file</a> functions.</p></div>
+<div class="paragraph"><p><a id="write-line"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_write_line_a_href_destructive_a_span"><span class="big red">write-line <a href="#destructive">!</a></span></h4>
@@ -20278,6 +20641,7 @@ the file. The second example shows the usage of <span class="monospaced">write-l
 arguments. The contents of <span class="monospaced">init.lsp</span> are written to the console screen.</p></div>
 <div class="paragraph"><p>See also the function <a href="#write">write</a> for writing to a device without
 the line-terminating character.</p></div>
+<div class="paragraph"><p><a id="xfer-event"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_xfer_event_span"><span class="big red">xfer-event</span></h4>
@@ -20329,6 +20693,7 @@ a function definition could have been used:</p></div>
 </pre></div></div></div>
 <div class="paragraph"><p>This can be used to monitor the progress of longer lasting byte
 transfers in HTTP uploads or downloads.</p></div>
+<div class="paragraph"><p><a id="xml-error"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_xml_error_span"><span class="big red">xml-error</span></h4>
@@ -20343,6 +20708,7 @@ the source XML text, starting at <span class="monospaced">0</span> (zero).</p></
 
 <span class="p">(</span><span class="k">xml-error</span><span class="p">)</span>  <span class="err">→</span> <span class="p">(</span><span class="s">&quot;expected closing tag: &gt;&quot;</span> <span class="ss">18</span><span class="p">)</span>
 </pre></div></div></div>
+<div class="paragraph"><p><a id="xml-parse"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_xml_parse_span"><span class="big red">xml-parse</span></h4>
@@ -20585,6 +20951,7 @@ length in the source XML:</p></div>
 </pre></div></div></div>
 <div class="paragraph"><p>The example callback handler function filters the tags of interest and
 processes them as they occur.</p></div>
+<div class="paragraph"><p><a id="xml-type-tags"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_xml_type_tags_span"><span class="big red">xml-type-tags</span></h4>
@@ -20604,6 +20971,7 @@ latter would be done using option numbers in <a href="#xml-parse">xml-parse</a>.
 <div class="paragraph"><p>The first example just shows the currently used type tags. The second
 example specifies suppression of the "TEXT" and "ELEMENT" tags and shows
 <span class="monospaced">cdata</span> and <span class="monospaced">!--</span> instead of "CDATA" and "COMMENT".</p></div>
+<div class="paragraph"><p><a id="zero?"></a></p></div>
 </div>
 <div class="sect3">
 <h4 id="_span_class_big_red_zero_span"><span class="big red">zero?</span></h4>
@@ -22257,7 +22625,7 @@ copy of the Program in return for a fee.</p></div>
 <div id="footer">
 <div id="footer-text">
 Version 10.4.5<br>
-Last updated 2013-01-26 19:13:59 CST
+Last updated 2013-01-27 12:21:50 CST
 </div>
 </div>
 </body>
