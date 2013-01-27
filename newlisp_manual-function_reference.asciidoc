@@ -1,6 +1,8 @@
 4. Functions in alphabetical order
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+anchor:![]
+
 ==== [big red]#!#
 
 *syntax:* (! _str-shell-command_ [_int-flags_])
@@ -53,6 +55,8 @@ Used in this way, the `!` operator is not a newLISP function at all, but
 rather a special feature of the newLISP command shell. The `!` must be
 entered as the first character on the command-line.
 
+anchor:$[]
+
 ==== [big red]#$#
 
 *syntax:* ($ _int-idx_)
@@ -81,7 +85,13 @@ $2  → "80"
 ($ 2)  → "80"
 ------------------------------------
 
-==== [big red]#+, -, *, / ,%#
+anchor:+[]
+anchor:-[]
+anchor:*[]
+anchor:/[]
+anchor:%[]
+
+==== [big red]#+, -, *, /, %#
 
 *syntax:* (+ _int-1_ [_int-2_ ... ])
 
@@ -139,6 +149,8 @@ to negative or negative to positive.
 Floating point values that evaluate to `NaN` (Not a Number), ar treated
 as `0` (zero).
 
+anchor:++[]
+
 ==== [big red]#++ link:#destructive[!]#
 
 *syntax:* (++ _place_ [_num_ ... ])
@@ -174,6 +186,8 @@ If the symbol for _place_ contains `nil`, it is treated as if containing
 
 See link:#deci[--] for decrementing numbers in integer mode. See
 link:#inc[inc] for incrementing numbers in floating point mode.
+
+anchor:--[]
 
 ==== [big red]#-- link:#destructive[!]#
 
@@ -211,6 +225,13 @@ If the symbol for _place_ contains `nil`, it is treated as if containing
 
 See link:#inci[++] for incrementing numbers in integer mode. See
 link:#dec[dec] for decrementing numbers in floating point mode.
+
+anchor:<[]
+anchor:>[]
+anchor:=[]
+anchor:<=[]
+anchor:>=[]
+anchor:!=[]
 
 ==== [big red]#<, >, =, <=, >=, !=#
 
@@ -272,6 +293,9 @@ the needed type, then comparing them as numbers.
 (map > '(1 3 -4 -3 1 2))   → (true true nil nil true true)
 ----------------------------------------------------------
 
+anchor:<<[]
+anchor:>>[]
+
 ==== [big red]#<<, >>#
 
 *syntax:* (<< _int-1_ _int-2_ [_int-3_ ... ]) +
@@ -303,6 +327,8 @@ shift_):
 
 When _int-1_ is the only argument `<<` and `>>` shift by one bit.
 
+anchor:&[]
+
 ==== [big red]#&#
 
 *syntax:* (& _int-1_ _int-2_ [_int-3_ ... ])
@@ -314,6 +340,8 @@ number in _int-2_, then successively with _int-3_, etc.
 ---------------------------------------
 (& 0xAABB 0x000F)  → 11  ; which is 0xB
 ---------------------------------------
+
+anchor:|[]
 
 ==== [big red]#|#
 
@@ -327,6 +355,8 @@ number in _int-2_, then successively with _int-3_, etc.
 (| 0x10 0x80 2 1)  → 147
 ------------------------
 
+anchor:^[]
+
 ==== [big red]#^#
 
 *syntax:* (^ _int-1_ _int-2_ [_int-3_ ... ])
@@ -338,6 +368,8 @@ number in _int-2_, then successively with _int-3_, etc.
 --------------------
 (^ 0xAA 0x55)  → 255
 --------------------
+
+anchor:~[]
 
 ==== [big red]#~#
 
@@ -351,6 +383,8 @@ all of the bits.
 (format "%X" (~ 0xFFFFFFAA))  → "55"
 (~ 0xFFFFFFFF)                → 0
 ------------------------------------
+
+anchor::[]
 
 ==== [big red]#:#
 
@@ -411,6 +445,8 @@ mycircle → (Circle 5 7 10)
 Inside the FOOP methods the link:#self[self] function is used to access
 the target object of the method.
 
+anchor:abort[]
+
 ==== [big red]#abort#
 
 *syntax:* (abort _int-pid_) +
@@ -440,6 +476,8 @@ The function `abort` is part of the Cilk API for synchronizing child
 processes and process parallelization. See the reference for the
 function link:#spawn[spawn] for a full discussion of the Cilk API.
 
+anchor:abs[]
+
 ==== [big red]#abs#
 
 *syntax:* (abs _num_)
@@ -450,6 +488,8 @@ Returns the absolute value of the number in _num_.
 -----------------
 (abs -3.5)  → 3.5
 -----------------
+
+anchor:acos[]
 
 ==== [big red]#acos#
 
@@ -462,6 +502,8 @@ The arc-cosine function is calculated from the number in _num-radians_.
 (acos 1)  → 0
 (cos (acos 1)) → 1
 ------------------
+
+anchor:acosh[]
 
 ==== [big red]#acosh#
 
@@ -478,6 +520,8 @@ whose hyperbolic cosine is _num-radians_. If _num-radians_ is less than
 (acosh 0.5) → NaN
 ------------------------
 
+anchor:add[]
+
 ==== [big red]#add#
 
 *syntax:* (add _num-1_ [_num-2_ ... ])
@@ -491,6 +535,8 @@ number. Any floating point calculation with `NaN` also returns `NaN`.
 (add 2 3.25 9)   → 14.25
 (add 1 2 3 4 5)  → 15
 ------------------------
+
+anchor:address[]
 
 ==== [big red]#address#
 
@@ -537,6 +583,8 @@ expression objects.
 See also the link:#get-char[get-char], link:#get-int[get-int],
 link:#get-long[get-long] and link:#get-float[get-float] functions.
 
+anchor:amb[]
+
 ==== [big red]#amb#
 
 *syntax:* (amb _exp-1_ [_exp-2_ ... ])
@@ -557,6 +605,8 @@ link:#random[random], link:#randomize[randomize], or
 link:#normal[normal]. To initialize the pseudo random number generating
 process at a specific starting point, use the link:#seed[seed] function.
 
+anchor:and[]
+
 ==== [big red]#and#
 
 *syntax:* (and _exp-1_ [_exp-2_ ... ])
@@ -575,6 +625,8 @@ or the empty list `()` is returned.
 (and true)                        → true
 (and)                             → true
 --------------------------------------------
+
+anchor:append[]
 
 ==== [big red]#append#
 
@@ -631,6 +683,8 @@ convert arguments to strings and append in one step.
 Use the functions link:#extend[extend] and link:#push[push] to append to
 an existing list or string modifying the target.
 
+anchor:append-file[]
+
 ==== [big red]#append-file#
 
 *syntax:* (append-file _str-filename_ _str-buffer_)
@@ -670,6 +724,8 @@ not yet exist, it will be created. In this mode, `append-file` can also
 be used to transfer files to remote newLISP server nodes.
 
 See also link:#read-file[read-file] and link:#write-file[write-file].
+
+anchor:apply[]
 
 ==== [big red]#apply#
 
@@ -724,6 +780,8 @@ arguments. Note, that a built-in link:#gcd[gcd] is available.
 of their arguments, not on _special forms_ like link:#dotimes[dotimes]
 or link:#case[case], which evaluate only some of their arguments. Doing
 so will cause the function to fail.
+
+anchor:args[]
 
 ==== [big red]#args#
 
@@ -793,6 +851,8 @@ first example), three arguments remain and are then returned by `args`.
 function call, but it should not be used as an argument to another
 macro, in which case `(args)` would not be evaluated and would therefore
 have the wrong contents in the new macro environment.
+
+anchor:array[]
 
 ==== [big red]#array#
 
@@ -906,6 +966,8 @@ source strings using link:#source[source].
   (9 10 11 12)))))
 ------------------------------------------
 
+anchor:array-list[]
+
 ==== [big red]#array-list#
 
 *syntax:* (array-list _array_)
@@ -925,6 +987,8 @@ unchanged:
 → (true true)
 ------------------------------------------
 
+anchor:array?[]
+
 ==== [big red]#array?#
 
 *syntax:* (array? _exp_)
@@ -941,6 +1005,8 @@ Checks if _exp_ is an array:
 (array? (array-list M))  → nil
 -----------------------------------
 
+anchor:asin[]
+
 ==== [big red]#asin#
 
 *syntax:* (asin _num-radians_)
@@ -954,6 +1020,8 @@ returns the result.
 (sin (asin 1)) → 1
 -----------------------
 
+anchor:asinh[]
+
 ==== [big red]#asinh#
 
 *syntax:* (asinh _num-radians_)
@@ -966,6 +1034,8 @@ hyperbolic sine is _num-radians_.
 (asinh 2)         → 1.443635475
 (sinh (asinh 2))  → 2
 -------------------------------
+
+anchor:assoc[]
 
 ==== [big red]#assoc#
 
@@ -1033,6 +1103,8 @@ For making replacements in association lists, use the link:#setf[setf]
 together with the `assoc` function. The link:#lookup[lookup] function is
 used to perform association lookup and element extraction in one step.
 
+anchor:atan[]
+
 ==== [big red]#atan#
 
 *syntax:* (atan _num-radians_)
@@ -1044,6 +1116,8 @@ The arctangent of _num-radians_ is calculated and returned.
 (atan 1)        → 0.7853981634
 (tan (atan 1))  → 1
 ------------------------------
+
+anchor:atan2[]
 
 ==== [big red]#atan2#
 
@@ -1062,6 +1136,8 @@ coordinates into polar coordinates.
 (= (atan2 1 2) (atan (div 1 2)))  → true
 ------------------------------------------------
 
+anchor:atanh[]
+
 ==== [big red]#atanh#
 
 *syntax:* (atanh _num-radians_)
@@ -1078,6 +1154,8 @@ to 1, `atanh` returns infinity.
 (atanh 1.1) → NaN
 (atanh 1) → inf
 --------------------------
+
+anchor:atom?[]
 
 ==== [big red]#atom?#
 
@@ -1097,6 +1175,8 @@ expressions, and quoted expressions are not atoms.
 (atom? ''foo)         → nil
 ----------------------------
 
+anchor:base64-dec[]
+
 ==== [big red]#base64-dec#
 
 *syntax:* (base64-dec _str_)
@@ -1114,6 +1194,8 @@ For encoding, use the link:#base64-enc[base64-enc] function.
 newLISP's BASE64 handling is derived from routines found in the Unix
 http://curl.haxx.se/[curl] utility and conforms to the RFC 4648
 standard.
+
+anchor:base64-enc[]
 
 ==== [big red]#base64-enc#
 
@@ -1155,6 +1237,8 @@ For decoding, use the link:#base64-dec[base64-dec] function.
 newLISP's BASE64 handling is derived from routines found in the Unix
 http://curl.haxx.se/[curl] utility and conforms to the RFC 4648
 standard.
+
+anchor:bayes-query[]
 
 ==== [big red]#bayes-query#
 
@@ -1357,6 +1441,8 @@ be used together with the Chain Bayesian mode for maximum performance:
 As expected, the results are the same for probabilities as they are for
 frequencies.
 
+anchor:bayes-train[]
+
 ==== [big red]#bayes-train#
 
 *syntax:* (bayes-train _list-M1_ [_list-M2_ ... ] _sym-context-D_)
@@ -1464,6 +1550,8 @@ the resulting frequencies could be analyzed using
 link:#prob-chi2[prob-chi2] against a _null hypothesis_ of proportional
 distribution of items across categories.
 
+anchor:begin[]
+
 ==== [big red]#begin#
 
 *syntax:* (begin _body_)
@@ -1488,6 +1576,8 @@ an link:#if[if] expression.
 The link:#silent[silent] function works like `begin`, but suppresses
 console output on return.
 
+anchor:beta[]
+
 ==== [big red]#beta#
 
 *syntax:* (beta _cum-a_ _num-b_)
@@ -1501,6 +1591,8 @@ _*beta = exp(gammaln(a) + gammaln(b) - gammaln(a + b))*_
 -----------------
 (beta 1 2)  → 0.5
 -----------------
+
+anchor:betai[]
 
 ==== [big red]#betai#
 
@@ -1524,6 +1616,8 @@ of 0.5 to occur 3 or more times in 10 trials (8 = 10 - 3 + 1). The
 incomplete Beta distribution can be used to derive a variety of other
 functions in mathematics and statistics. See also the
 link:#binomial[binomial] function.
+
+anchor:bind[]
 
 ==== [big red]#bind link:#destructive[!]#
 
@@ -1579,6 +1673,8 @@ E → (x y z)
 link:#unify[unify] returns an association list and `bind` binds the
 associations.
 
+anchor:binomial[]
+
 ==== [big red]#binomial#
 
 *syntax:* (binomial _int-n_ _int-k_ _float-p_)
@@ -1600,6 +1696,8 @@ power of _y_.
 The example calculates the probability for an event with a probability
 of 0.5 to occur 3 times in 10 trials. For a cumulated distribution, see
 the link:#betai[betai] function.
+
+anchor:bits[]
 
 ==== [big red]#bits#
 
@@ -1625,6 +1723,8 @@ and program control switching on the result.
 -------------------------------------------------------------------------
 
 link:#int[int] with a base of 2 is the inverse function to `bits`.
+
+anchor:callback[]
 
 ==== [big red]#callback#
 
@@ -1731,6 +1831,8 @@ buffers and structures.
 
 Note that newLISP as already a fast built-in link:#sort[sort] function.
 
+anchor:case[]
+
 ==== [big red]#case#
 
 *syntax:* (case _exp-switch_ (_exp-1_ _body-1_) [(_exp-2_ _body-2_) ... ])
@@ -1757,6 +1859,8 @@ expression.
 
 The example shows how, if no match is found, the last expression in the
 body of a `case` function can be evaluated.
+
+anchor:catch[]
 
 ==== [big red]#catch#
 
@@ -1829,6 +1933,8 @@ out of iteration loops (as in the first syntax), the second syntax of
 link:#throw-error[throw-error] function may be used to throw
 user-defined errors.
 
+anchor:ceil[]
+
 ==== [big red]#ceil#
 
 *syntax:* (ceil _number_)
@@ -1843,6 +1949,8 @@ Returns the next highest integer above _number_ as a floating point.
 
 See also the link:#floor[floor] function.
 
+anchor:change-dir[]
+
 ==== [big red]#change-dir#
 
 *syntax:* (change-dir _str-path_)
@@ -1856,6 +1964,8 @@ successful, `true` is returned; otherwise `nil` is returned.
 -------------------
 
 Makes `/etc` the current directory.
+
+anchor:char[]
 
 ==== [big red]#char link:#utf8_capable[utf8]#
 
@@ -1901,6 +2011,8 @@ Unicode and a UTF-8 character is returned.
 (char (& (char "生") (char "死"))) → 愛 ; by @kosh_bot
 ------------------------------------------------------------
 
+anchor:chop[]
+
 ==== [big red]#chop link:#utf8_capable[utf8]#
 
 *syntax:* (chop _str_ [_int-chars_]) +
@@ -1930,6 +2042,8 @@ str  → "newLISP"
 
 lst  → (a b (c d) e)
 ---------------------------------
+
+anchor:clean[]
 
 ==== [big red]#clean#
 
@@ -1968,6 +2082,8 @@ See also the related function link:#index[index], which returns the
 indices of the remaining elements, and link:#filter[filter], which
 returns all elements for which a predicate returns true.
 
+anchor:close[]
+
 ==== [big red]#close#
 
 *syntax:* (close _int-file_)
@@ -1985,6 +2101,8 @@ successful, `close` returns `true`; otherwise `nil` is returned.
 
 Note that using `close` on link:#device[device] automatically resets it
 to 0 (zero, the screen device).
+
+anchor:command-event[]
 
 ==== [big red]#command-event#
 
@@ -2112,6 +2230,8 @@ web server. The server output will appear in the shell window.
 Note, that the command line length as well as the line length in HTTP
 headers is limited to 512 characters for newLISP.
 
+anchor:cond[]
+
 ==== [big red]#cond#
 
 *syntax:* (cond (_exp-condition-1_ _body-1_) [(_exp-condition-2_ _body-2_) ... ])
@@ -2153,6 +2273,8 @@ When used with multiple arguments, the function link:#if[if] behaves
 like `cond`, except it does not need extra parentheses to enclose the
 condition-body pair of expressions.
 
+anchor:cons[]
+
 ==== [big red]#cons#
 
 *syntax:* (cons _exp-1_ _exp-2_)
@@ -2190,6 +2312,8 @@ is a pair):
 
 (cons (first '(x y)) (last '(x y)))      → (x y)
 --------------------------------------------------
+
+anchor:constant[]
 
 ==== [big red]#constant link:#destructive[!]#
 
@@ -2248,6 +2372,8 @@ There is no performance loss when renaming functions.
 to use the mixed type floating point mode of `add`. The hexadecimal
 number displayed in the result is the binary address of the built-in
 function and varies on different platforms and OSes.
+
+anchor:context[]
 
 ==== [big red]#context#
 
@@ -2386,6 +2512,8 @@ allowed in newLISP symbols being used as variable names. This second
 syntax of `context` only creates the new symbol and returns the value
 contained in it. It does not switch to the new namespace.
 
+anchor:context?[]
+
 ==== [big red]#context?#
 
 *syntax:* (context? _exp_) +
@@ -2417,6 +2545,8 @@ symbol is specified by its name string in _str-sym_.
 Use link:#context[context] to change and create namespaces and to create
 hash symbols in contexts.
 
+anchor:copy[]
+
 ==== [big red]#copy#
 
 *syntax:* (copy _exp_)
@@ -2445,6 +2575,8 @@ Using `copy` the functions link:#replace[replace] and
 link:#rotate[rotate] are prevented from changing the data. A modified
 version of the data is returned.
 
+anchor:copy-file[]
+
 ==== [big red]#copy-file#
 
 *syntax:* (copy-file _str-from-name_ _str-to-name_)
@@ -2457,6 +2589,8 @@ successful or `nil`, if the copy was unsuccessful.
 -------------------------------------------------------
 (copy-file "/home/me/newlisp/data.lsp" "/tmp/data.lsp")
 -------------------------------------------------------
+
+anchor:corr[]
 
 ==== [big red]#corr#
 
@@ -2495,6 +2629,8 @@ The regression coefficients `b0 = 29.241` and `b1 = -0.064` can be used
 to estimate values of the Y variable (test errors) from values in X
 (study time) using the equation `Y = b0 + b1 * X`.
 
+anchor:cos[]
+
 ==== [big red]#cos#
 
 *syntax:* (cos _num-radians_)
@@ -2507,6 +2643,8 @@ Calculates the cosine of _num-radians_ and returns the result.
 (set 'pi (mul 2 (acos 0)))  → 3.141592654
 (cos pi)                    → -1
 ------------------------------------------
+
+anchor:cosh[]
 
 ==== [big red]#cosh#
 
@@ -2523,6 +2661,8 @@ is defined mathematically as: _(exp (x) + exp (-x)) / 2_. An overflow to
 (cosh 1000)  → inf
 (= (cosh 1) (div (add (exp 1) (exp -1)) 2))  → true
 ---------------------------------------------------
+
+anchor:count[]
 
 ==== [big red]#count#
 
@@ -2547,6 +2687,8 @@ The first list in `count`, which specifies the items to be counted in
 the second list, should be unique. For items that are not unique, only
 the first instance will carry a count; all other instances will display
 `0` (zero).
+
+anchor:cpymem[]
 
 ==== [big red]#cpymem#
 
@@ -2616,6 +2758,8 @@ The last example will not work on all hardware platforms and OSs.
 Use the link:#dump[dump] function to retrieve binary addresses and the
 contents from newLISP cells.
 
+anchor:crc32[]
+
 ==== [big red]#crc32#
 
 *syntax:* (crc32 _str-data_)
@@ -2632,6 +2776,8 @@ http://www.w3.org[www.w3.org].
 
 `crc32` is often used to verify data integrity in unsafe data
 transmissions.
+
+anchor:crit-chi2[]
 
 ==== [big red]#crit-chi2#
 
@@ -2652,6 +2798,8 @@ instead of _p_.
 
 See also the inverse function link:#prob-chi2[prob-chi2].
 
+anchor:crit-f[]
+
 ==== [big red]#crit-f#
 
 *syntax:* (crit-f _num-probability_ _int-df1_ _int-df2_)
@@ -2667,6 +2815,8 @@ statistical null hypothesis using the _F-test_.
 ----------------------------------
 
 See also the inverse function link:#prob-f[prob-f].
+
+anchor:crit-t[]
 
 ==== [big red]#crit-t#
 
@@ -2684,6 +2834,8 @@ null hypothesis.
 
 See also the inverse function link:#prob-t[prob-t].
 
+anchor:crit-z[]
+
 ==== [big red]#crit-z#
 
 *syntax:* (crit-z _num-probability_)
@@ -2698,6 +2850,8 @@ and confidence intervals.
 -----------------------------
 
 See also the inverse function link:#prob-z[prob-z].
+
+anchor:current-line[]
 
 ==== [big red]#current-line#
 
@@ -2731,6 +2885,8 @@ The program is invoked:
 This displays all comment lines starting with `;;` from a file given as
 a command-line argument when invoking the script `filter`.
 
+anchor:curry[]
+
 ==== [big red]#curry#
 
 *syntax:* (curry _func_ _exp_)
@@ -2757,6 +2913,8 @@ evaluated during the application of _func_.
 ---------------------------------------------------------------
 
 `curry` can be used on all functions taking two arguments.
+
+anchor:date[]
 
 ==== [big red]#date link:#utf8_capable[utf8]#
 
@@ -2894,6 +3052,8 @@ See also link:#date-value[date-value], link:#date-list[date-list],
 link:#date-parse[date-parse], link:#time-of-day[time-of-day],
 link:#time[time], and link:#now[now].
 
+anchor:date-list[]
+
 ==== [big red]#date-list#
 
 *syntax:* (date-list _int-seconds_ [_int-index_])
@@ -2920,6 +3080,8 @@ A second optional _int-index_ parameter can be used to return a specific
 member of the list.
 
 `date-list` is the inverse operation of link:#date-value[date-value].
+
+anchor:date-parse[]
 
 ==== [big red]#date-parse#
 
@@ -2948,6 +3110,8 @@ named `parse-date` in previous versions. The old form is deprecated.
 -------------------------------------------------------------------------
 
 See the link:#date[date] function for all possible format descriptors.
+
+anchor:date-value[]
 
 ==== [big red]#date-value#
 
@@ -2986,6 +3150,8 @@ See also link:#date[date], link:#date-list[date-list],
 link:#date-parse[date-parse], link:#time-of-day[time-of-day],
 link:#time[time], and link:#now[now].
 
+anchor:debug[]
+
 ==== [big red]#debug#
 
 *syntax:* (debug _func_)
@@ -3011,6 +3177,8 @@ printed. The function causing the exception will return either `0` or
 state of the program can still be inspected while debugging.
 
 See also the link:#trace[trace] function.
+
+anchor:dec[]
 
 ==== [big red]#dec link:#destructive[!]#
 
@@ -3062,6 +3230,8 @@ l → (0 2 3 3.9)
 
 Use the link:#deci[--] function to decrement in integer mode. Use the
 link:#inc[inc] function to increment numbers floating point mode.
+
+anchor:def-new[]
 
 ==== [big red]#def-new#
 
@@ -3142,6 +3312,8 @@ The function `def-new` can also be used to configure contexts or context
 objects in a more granular fashion than is possible with link:#new[new],
 which copies a whole context.
 
+anchor:default[]
+
 ==== [big red]#default#
 
 *syntax:* (default _context_)
@@ -3164,6 +3336,8 @@ Foo:Foo       → 456
 In many situations newLISP defaults automatically to the default functor
 when seeing a context name. In circumstances where this is not the case,
 the `default` function can be used.
+
+anchor:define[]
 
 ==== [big red]#define link:#destructive[!]#
 
@@ -3253,6 +3427,8 @@ The second version of `define` works like the link:#set[set] function.
 -------------------------------------
 
 Trying to redefine a protected symbol will cause an error message.
+
+anchor:define-macro[]
 
 ==== [big red]#define-macro#
 
@@ -3371,6 +3547,8 @@ link:#args[args]:
 (define-macro (my-setq) (set (args 0) (eval (args 1))))
 -----------------------------------------------------------
 
+anchor:delete[]
+
 ==== [big red]#delete#
 
 *syntax:* (delete _symbol_ [_bool_]) +
@@ -3427,6 +3605,8 @@ Note that deleting a symbol that is part of an expression which is
 currently executing can crash the system or have other unforeseen
 effects.
 
+anchor:delete-file[]
+
 ==== [big red]#delete-file#
 
 *syntax:* (delete-file _str-file-name_)
@@ -3453,6 +3633,8 @@ The first example deletes the file `junk` in the current directory. The
 second example shows how to use a URL to specify the file. In this form,
 additional parameters can be given. See link:#delete-url[delete-url] for
 details.
+
+anchor:delete-url[]
 
 ==== [big red]#delete-url#
 
@@ -3484,6 +3666,8 @@ The second example configures a timeout option of five seconds. Other
 options such as special HTTP protocol headers can be specified, as well.
 See the link:#get-url[get-url] function for details.
 
+anchor:destroy[]
+
 ==== [big red]#destroy#
 
 *syntax:* (destroy _int-pid_) +
@@ -3514,6 +3698,8 @@ second syntax is not available on Win32.
 (sleep 100) (destroy pid)
 -----------------------------------------------------------
 
+anchor:det[]
+
 ==== [big red]#det#
 
 *syntax:* (det _matrix_ [_float-pivot_])
@@ -3543,6 +3729,8 @@ returned.
 See also the other matrix operations link:#invert[invert],
 link:#mat[mat], link:#multiply[multiply] and link:#transpose[transpose].
 
+anchor:device[]
+
 ==== [big red]#device#
 
 *syntax:* (device [_int-handle_])
@@ -3570,6 +3758,8 @@ link:#print[print] and link:#read-line[read-line] work on that file.
 
 Note that using link:#close[close] on `device` automatically resets
 `device` to 0 (zero).
+
+anchor:difference[]
 
 ==== [big red]#difference#
 
@@ -3599,6 +3789,8 @@ duplicates of other elements in _list-A_ are left.
 
 See also the set functions link:#intersect[intersect],
 link:#unique[unique] and link:#union[union].
+
+anchor:directory[]
 
 ==== [big red]#directory#
 
@@ -3645,6 +3837,8 @@ Other functions that use regular expressions are link:#find[find],
 link:#find-all[find-all], link:#parse[parse], link:#regex[regex],
 link:#replace[replace], and link:#search[search].
 
+anchor:directory?[]
+
 ==== [big red]#directory?#
 
 *syntax:* (directory? _str-path_)
@@ -3657,6 +3851,8 @@ on the outcome.
 (directory? "/etc")             → true
 (directory? "/usr/bin/emacs/")  → nil
 --------------------------------------
+
+anchor:div[]
 
 ==== [big red]#div#
 
@@ -3677,6 +3873,8 @@ numbers. Any floating point calculation with `NaN` also returns `NaN`.
 
 When _num-1_ is the only argument, `div` calculates the inverse of
 _num-1_.
+
+anchor:do-until[]
 
 ==== [big red]#do-until#
 
@@ -3710,6 +3908,8 @@ never enters the loop.
 
 See also the functions link:#while[while] and link:#do-while[do-while].
 
+anchor:do-while[]
+
 ==== [big red]#do-while#
 
 *syntax:* (do-while _exp-condition body_)
@@ -3740,6 +3940,8 @@ While `do-while` goes through the loop at least once, link:#while[while]
 never enters the loop.
 
 See also the functions link:#until[until] and link:#do-until[do-until].
+
+anchor:doargs[]
 
 ==== [big red]#doargs#
 
@@ -3785,6 +3987,8 @@ true
 
 Use the link:#args[args] function to access the entire argument list at
 once.
+
+anchor:dolist[]
 
 ==== [big red]#dolist#
 
@@ -3840,6 +4044,8 @@ execution:
 The console output is shown in boldface. `$idx` is protected and cannot
 be changed by the user.
 
+anchor:dostring[]
+
 ==== [big red]#dostring link:#utf8_capable[utf8]#
 
 *syntax:* (dostring (_sym_ _string_ [_exp-break_]) _body_)
@@ -3891,6 +4097,8 @@ The internal system variable `$idx` keeps track of the current offset
 into the string passed to `dostring`, and it can be accessed during its
 execution.
 
+anchor:dotimes[]
+
 ==== [big red]#dotimes#
 
 *syntax:* (dotimes (_sym-var_ _int-count_ [_exp-break_]) _body_)
@@ -3915,6 +4123,8 @@ condition is tested before evaluating _body_.
 ---------------------------------
 
 This prints `0123456789` to the console window.
+
+anchor:dotree[]
 
 ==== [big red]#dotree#
 
@@ -3945,6 +4155,8 @@ symbols created by link:#bayes-train[bayes-train].
 
 This example prints the names of all symbols inside SomeCTX to the
 console window.
+
+anchor:dump[]
 
 ==== [big red]#dump#
 
@@ -3984,6 +4196,8 @@ This function is valuable for changing type bits in cells or hacking
 other parts of newLISP internals. See the function link:#cpymem[cpymem]
 for a comprehensive example.
 
+anchor:dup[]
+
 ==== [big red]#dup#
 
 *syntax:* (dup _exp_ _int-n_ [_bool_]) +
@@ -4021,6 +4235,8 @@ filled with four binary zeroes.
 See also the functions link:#sequence[sequence] and
 link:#series[series].
 
+anchor:empty?[]
+
 ==== [big red]#empty?#
 
 *syntax:* (empty? _exp_) +
@@ -4041,6 +4257,8 @@ returned.
 
 The first example checks a list, while the second two examples check a
 string.
+
+anchor:encrypt[]
 
 ==== [big red]#encrypt#
 
@@ -4070,6 +4288,8 @@ The second example encrypts a whole file:
 (write-file "myfile.enc"
   (encrypt (read-file "myfile") "29kH67*"))
 -------------------------------------------
+
+anchor:ends-with[]
 
 ==== [big red]#ends-with#
 
@@ -4105,6 +4325,8 @@ element in _exp_. `true` or `nil` is returned depending on outcome.
 The last example shows that _exp_ could be a list by itself.
 
 See also the link:#starts-with[starts-with] function.
+
+anchor:env[]
 
 ==== [big red]#env#
 
@@ -4145,6 +4367,8 @@ with an empty string.
 (env "NEWLISPBIN")              → nil
 ---------------------------------------------
 
+anchor:erf[]
+
 ==== [big red]#erf#
 
 *syntax:* (erf _num_)
@@ -4161,6 +4385,8 @@ function is defined as:
 (0 0.5204998778 0.8427007929 0.9661051465 0.995322265 0.999593048
  0.9999779095 0.9999992569 0.9999999846 0.9999999998 1 1 1)
 -----------------------------------------------------------------
+
+anchor:error-event[]
 
 ==== [big red]#error-event#
 
@@ -4193,6 +4419,8 @@ specified as either a quoted symbol or a lambda function.
 For a different way of handling errors, see the link:#catch[catch]
 function. Use link:#throw-error[throw-error] to throw user-defined
 errors.
+
+anchor:eval[]
 
 ==== [big red]#eval#
 
@@ -4253,6 +4481,8 @@ defined function using namespace ids avoids _variable capture_ of the
 passed symbol, in case the symbol passed is the same used as a parameter
 in the function.
 
+anchor:eval-string[]
+
 ==== [big red]#eval-string#
 
 *syntax:* (eval-string _str-source_ [_sym-context_ [_exp-error_ [_int-offset_]]])
@@ -4301,6 +4531,8 @@ The symbols `a` and `b` now refer to symbols and their values in context
 See also the function link:#read-expr[read-expr] which translates a
 string without evaluating it.
 
+anchor:even?[]
+
 ==== [big red]#even?#
 
 *syntax:* (even? _int-number_)
@@ -4317,6 +4549,8 @@ will be converted to an integer by cutting off its fractional part.
 -------------------
 
 Use link:#oddp[odd?] to check if an integer is not divisable by `2`.
+
+anchor:exec[]
 
 ==== [big red]#exec#
 
@@ -4351,6 +4585,8 @@ In this example, cgiProc could be a cgi processor (e.g., Perl or
 newLISP) that receives and processes standard input supplied by a string
 contained in the variable query.
 
+anchor:exists[]
+
 ==== [big red]#exists#
 
 *syntax:* (exists _func-condition_ _list_)
@@ -4381,6 +4617,8 @@ looking for `nil`.
 Use the link:#for-all[for-all] function to check if a condition is met
 for all elements in a list.
 
+anchor:exit[]
+
 ==== [big red]#exit#
 
 *syntax:* (exit [_int_])
@@ -4396,6 +4634,8 @@ listening for a new connection.
 (exit 5)
 --------
 
+anchor:exp[]
+
 ==== [big red]#exp#
 
 *syntax:* (exp _num_)
@@ -4409,6 +4649,8 @@ link:#log[log].
 (exp 1)        → 2.718281828
 (exp (log 1))  → 1
 ----------------------------
+
+anchor:expand[]
 
 ==== [big red]#expand#
 
@@ -4523,6 +4765,8 @@ See the link:#letex[letex] function, which also provides an expansion
 mechanism, and the function link:#unify[unify], which is frequently used
 together with `expand`.
 
+anchor:explode[]
+
 ==== [big red]#explode link:#utf8_capable[utf8]#
 
 *syntax:* (explode _str_ [_int-chunk_ [_bool_]]) +
@@ -4595,6 +4839,8 @@ full length specified in _int-chunk_.
 The link:#join[join] and link:#append[append] functions are inverse
 operations of `explode`.
 
+anchor:extend[]
+
 ==== [big red]#extend link:#destructive[!]#
 
 *syntax:* (extend _list-1_ [_list-2_ ... ]) +
@@ -4637,6 +4883,8 @@ L → (a b "CDE" (e f g))
 
 For a non-destructive list or string extension see link:#append[append].
 
+anchor:factor[]
+
 ==== [big red]#factor#
 
 *syntax:* (factor _int_)
@@ -4670,6 +4918,8 @@ first.
 than 9,223,372,036,854,775,807 (the largest 64-bit integer) converted
 from floating point numbers, the largest integer is factored.
 
+anchor:fft[]
+
 ==== [big red]#fft#
 
 *syntax:* (fft _list-num_)
@@ -4696,6 +4946,8 @@ be used instead.
 ------------------------------------------------------
 
 The inverse operation of `fft` is the link:#ifft[ifft] function.
+
+anchor:file-info[]
 
 ==== [big red]#file-info#
 
@@ -4740,6 +4992,8 @@ _/etc_ is retrieved.
 `file-info` gives file statistics (size) for a linked file, not the
 link, except for the _mode_ field.
 
+anchor:file?[]
+
 ==== [big red]#file?#
 
 *syntax:* (file? _str-path-name_ [_bool_])
@@ -4758,6 +5012,8 @@ having the permissions to read from or write to it by the current user.
 (file? "/usr/bin/newlisp" true) → "/usr/bin/newlisp"
 (file? "/usr/bin/foo" true)     → nil
 --------------------------------------------------------
+
+anchor:filter[]
 
 ==== [big red]#filter#
 
@@ -4796,6 +5052,8 @@ link:#intersect[intersect] (with the _list_ option).
 See also the related function link:#index[index], which returns the
 indices of the filtered elements and link:#clean[clean], which returns
 all elements of a list for which a predicate is false.
+
+anchor:find[]
 
 ==== [big red]#find#
 
@@ -4939,6 +5197,8 @@ link:#search[search].
 To find expressions in nested or multidimensional lists, use the
 link:#ref[ref] and link:#ref-all[ref-all] functions.
 
+anchor:find-all[]
+
 ==== [big red]#find-all#
 
 *syntax:* (find-all _str-regex-pattern_ _str-text_ [_exp_ [_int-regex-option_]]) +
@@ -5019,6 +5279,8 @@ list. `find-all` in this syntax works similar to link:#filter[filter]
 but with the added benefit of being able to define a processing
 expression for the found element.
 
+anchor:first[]
+
 ==== [big red]#first link:#utf8_capable[utf8]#
 
 *syntax:* (first _list_) +
@@ -5056,6 +5318,8 @@ Note that link:#first[first] works on character boundaries rather than
 byte boundaries when the UTF-8–enabled version of newLISP is used. See
 also the functions link:#last[last] and link:#rest[rest].
 
+anchor:flat[]
+
 ==== [big red]#flat#
 
 *syntax:* (flat _list_)
@@ -5072,6 +5336,8 @@ Returns a flattened list from a list:
 -------------------------------------
 
 `flat` can be used to iterate through nested lists.
+
+anchor:float[]
 
 ==== [big red]#float#
 
@@ -5116,6 +5382,8 @@ differs on different platforms and compilers.
 
 Use the link:#int[int] function to parse integer numbers.
 
+anchor:float?[]
+
 ==== [big red]#float?#
 
 *syntax:* (float? _exp_)
@@ -5128,6 +5396,8 @@ otherwise, `nil` is returned.
 (set 'num 1.23)
 (float? num)  → true
 --------------------
+
+anchor:floor[]
 
 ==== [big red]#floor#
 
@@ -5142,6 +5412,8 @@ Returns the next lowest integer below _number_ as a floating point.
 ------------------
 
 See also the link:#ceil[ceil] function.
+
+anchor:flt[]
 
 ==== [big red]#flt#
 
@@ -5169,6 +5441,8 @@ The last two statements illustrate the inner workings of `flt`.
 
 Use the link:#import[import] function to import libraries.
 
+anchor:fn[]
+
 ==== [big red]#fn#
 
 *syntax:* (fn (_list-parameters_) _exp-body_)
@@ -5194,6 +5468,8 @@ link:#map[map]. The second example shows strings being sorted by length.
 
 The link:#lambda[lambda] function (the longer, traditional form) can be
 used in place of `fn`.
+
+anchor:for[]
 
 ==== [big red]#for#
 
@@ -5245,6 +5521,8 @@ break condition is tested.
 
 Use the link:#sequence[sequence] function to make a sequence of numbers.
 
+anchor:for-all[]
+
 ==== [big red]#for-all#
 
 *syntax:* (for-all _func-condition_ _list_)
@@ -5264,6 +5542,8 @@ all elements meet the condition in _func-condition_, the result is
 
 Use the link:#exists[exists] function to check if at least one element
 in a list meets a condition.
+
+anchor:fork[]
 
 ==== [big red]#fork#
 
@@ -5380,6 +5660,8 @@ and link:#share[share] for sharing memory between processes.
 
 See link:#spawn[spawn] for a much simpler and automated way to
 synchronize processes and collect results.
+
+anchor:format[]
 
 ==== [big red]#format#
 
@@ -5533,6 +5815,8 @@ convert integers into floating points or floating points into integers:
 (format "%d" 123.456)  → 123
 -----------------------------------
 
+anchor:fv[]
+
 ==== [big red]#fv#
 
 *syntax:* (fv _num-rate_ _num-nper_ _num-pmt_ _num-pv_ [_int-type_])
@@ -5555,6 +5839,8 @@ of 7 percent.
 See also the functions link:#irr[irr], link:#nper[nper], link:#npv[npv],
 link:#pmt[pmt], and link:#pv[pv].
 
+anchor:gammai[]
+
 ==== [big red]#gammai#
 
 *syntax:* (gammai _num-a_ _num-b_)
@@ -5576,6 +5862,8 @@ _______________________________________________________
 
 See also the link:#prob-chi2[prob-chi2] function.
 
+anchor:gammaln[]
+
 ==== [big red]#gammaln#
 
 *syntax:* (gammaln _num-x_)
@@ -5596,6 +5884,8 @@ be derived from it:
 ___________________________________________________________
 _*Beta(z,w) = Exp(Gammaln(z) + Gammaln(w) - Gammaln(z+w))*_
 ___________________________________________________________
+
+anchor:gcd[]
 
 ==== [big red]#gcd#
 
@@ -5619,6 +5909,8 @@ divisor of the result and the next argument in the parameter list.
 
 See http://en.wikipedia.org/wiki/Greatest_common_divisor[Wikipedia] for
 details and theory about gcd numbers in mathematics.
+
+anchor:get-char[]
 
 ==== [big red]#get-char#
 
@@ -5657,6 +5949,8 @@ link:#get-long[get-long], link:#get-float[get-float],
 link:#get-string[get-string], link:#pack[pack], and link:#unpack[unpack]
 functions.
 
+anchor:get-float[]
+
 ==== [big red]#get-float#
 
 *syntax:* (get-float _int-address_)
@@ -5694,6 +5988,8 @@ See also the link:#address[address], link:#get-int[get-int],
 link:#get-long[get-long], link:#get-char[get-char],
 link:#get-string[get-string], link:#pack[pack], and link:#unpack[unpack]
 functions.
+
+anchor:get-int[]
 
 ==== [big red]#get-int#
 
@@ -5741,6 +6037,8 @@ link:#get-float[get-float], link:#get-long[get-long],
 link:#get-string[get-string], link:#pack[pack], and link:#unpack[unpack]
 functions.
 
+anchor:get-long[]
+
 ==== [big red]#get-long#
 
 *syntax:* (get-long _int-address_)
@@ -5786,6 +6084,8 @@ See also the link:#address[address], link:#get-char[get-char],
 link:#get-float[get-float], link:#get-int[get-int],
 link:#get-string[get-string], link:#pack[pack], and link:#unpack[unpack]
 functions.
+
+anchor:get-string[]
 
 ==== [big red]#get-string#
 
@@ -5842,6 +6142,8 @@ functions.
 
 Note that `get-string` can crash the system or make it unstable if the
 wrong address is specified.
+
+anchor:get-url[]
 
 ==== [big red]#get-url#
 
@@ -5950,6 +6252,8 @@ See an HTTP transactions reference for valid header entries.
 Custom headers can also be used in the link:#put-url[put-url] and
 link:#post-url[post-url] functions.
 
+anchor:global[]
+
 ==== [big red]#global#
 
 *syntax:* (global _sym-1_ [_sym-2_ ... ])
@@ -5973,6 +6277,8 @@ The second example shows how link:#constant[constant] and `global` can
 be combined into one statement, protecting and making a previous
 function definition global.
 
+anchor:global?[]
+
 ==== [big red]#global?#
 
 *syntax:* (global? _sym_)
@@ -5991,6 +6297,8 @@ global? 'print)   → true
 
 (global? 'foo)    → true
 ------------------------
+
+anchor:if[]
 
 ==== [big red]#if#
 
@@ -6041,6 +6349,8 @@ expression or condition evaluated.
 
 See also the link:#unless[unless] function.
 
+anchor:ifft[]
+
 ==== [big red]#ifft#
 
 *syntax:* (ifft _list-num_)
@@ -6066,6 +6376,8 @@ imaginary part, simple numbers can be used.
 ---------------------------------------------------
 
 The inverse operation of `ifft` is the link:#fft[fft] function.
+
+anchor:import[]
 
 ==== [big red]#import#
 
@@ -6341,6 +6653,8 @@ for variables needs to be allocated beforehand by newLISP — see import
 of `GetWindowsDirectoryA` above — and hence, memory needs not be
 deallocated manually, because it is managed automatically by newLISP.
 
+anchor:inc[]
+
 ==== [big red]#inc link:#destructive[!]#
 
 *syntax:* (inc _place_ [_num_])
@@ -6393,6 +6707,8 @@ l → (2 2 3 4.1)
 Use the link:#inci[++] function for incrementing numbers in integer
 mode. Use link:#dec[dec] to decrement numbers in floating point mode.
 
+anchor:index[]
+
 ==== [big red]#index#
 
 *syntax:* (index _exp-predicate_ _exp-list_)
@@ -6417,6 +6733,8 @@ lambda expression.
 
 Use the link:#filter[filter] function to return the elements themselves.
 
+anchor:inf?[]
+
 ==== [big red]#inf?#
 
 *syntax:* (inf? _float_)
@@ -6434,6 +6752,8 @@ If the value in _float_ is infinite the function returns `true` else
 Note that an integer division by zero e.g. `(/ 1 0)` will throw an
 "division by zero" error and not yield infinity. See also
 link:#NaNp[NaN?] to check if a floating point number is valid.
+
+anchor:int[]
 
 ==== [big red]#int#
 
@@ -6496,6 +6816,8 @@ The inverse function to `int` with base `2` is link:#bits[bits].
 Use the link:#float[float] function to convert arguments to floating
 point numbers.
 
+anchor:integer?[]
+
 ==== [big red]#integer?#
 
 *syntax:* (integer? _exp_)
@@ -6508,6 +6830,8 @@ returns `nil`.
 (set 'num 123)  → 123
 (integer? num)  → true
 ----------------------
+
+anchor:intersect[]
 
 ==== [big red]#intersect#
 
@@ -6536,6 +6860,8 @@ value not `nil`.
 
 See also the set functions link:#difference[difference],
 link:#unique[unique] and link:#union[union].
+
+anchor:invert[]
 
 ==== [big red]#invert#
 
@@ -6579,6 +6905,8 @@ All operations shown here on lists can be performed on arrays, as well.
 
 See also the matrix functions link:#det[det], link:#mat[mat],
 link:#multiply[multiply] and link:#transpose[transpose].
+
+anchor:irr[]
 
 ==== [big red]#irr#
 
@@ -6629,6 +6957,8 @@ percent in 18 months.
 See also the link:#fv[fv], link:#nper[nper], link:#npv[npv],
 link:#pmt[pmt], and link:#pv[pv] functions.
 
+anchor:join[]
+
 ==== [big red]#join#
 
 *syntax:* (join _list-of-strings_ [_str-joint_ [_bool-trail-joint_]])
@@ -6656,14 +6986,20 @@ See also the link:#append[append], link:#string[string], and
 link:#explode[explode] functions, which are the inverse of the `join`
 operation.
 
+anchor:lambda[]
+
 ==== [big red]#lambda#
 
 See the description of link:#fn[fn], which is a shorter form of writing
 `lambda`.
 
+anchor:lambda-macro[]
+
 ==== [big red]#lambda-macro#
 
 See the description of link:#define-macro[define-macro].
+
+anchor:lambda?[]
 
 ==== [big red]#lambda?#
 
@@ -6683,6 +7019,8 @@ square → (lambda (x) (* x x))
 
 See link:#define[define] and link:#define-macro[define-macro] for more
 information about _lambda_ expressions.
+
+anchor:last[]
 
 ==== [big red]#last link:#utf8_capable[utf8]#
 
@@ -6715,6 +7053,8 @@ as a string.
 Note that link:#last[last] works on character boundaries rather than
 byte boundaries when the UTF-8–enabled version of newLISP is used. See
 also link:#first[first], link:#rest[rest] and link:#nth[nth].
+
+anchor:last-error[]
 
 ==== [big red]#last-error#
 
@@ -6756,6 +7096,8 @@ See also link:#net-error[net-error] for errors generated by networking
 conditions and link:#sys-error[sys-error] for errors generated by the
 operating system.
 
+anchor:legal?[]
+
 ==== [big red]#legal?#
 
 *syntax:* (legal? _str_)
@@ -6780,6 +7122,8 @@ data access:
 The example shows that the string `"one two"` does not contain a legal
 symbol although a symbol can be created from this string and treated
 like a variable.
+
+anchor:length[]
 
 ==== [big red]#length#
 
@@ -6815,6 +7159,8 @@ point numbers.
 
 Use link:#utf8len[utf8len] to calculate the number of UTF-8 characters
 in a string.
+
+anchor:let[]
 
 ==== [big red]#let#
 
@@ -6862,6 +7208,8 @@ convenience for writing:
 See also link:#letn[letn] for an incremental or nested form of `let` and
 local for initializing to `nil`.
 
+anchor:letex[]
+
 ==== [big red]#letex#
 
 *syntax:* (letex ( (_sym1_ [_exp-init1_]) [(_sym2_ [_exp-init2_]) ... ]) _body_) +
@@ -6903,6 +7251,8 @@ adder functions:
 
 `letex` evaluates `n` to the constant `3` and replaces `c` with it in
 the lambda expression.
+
+anchor:letn[]
 
 ==== [big red]#letn#
 
@@ -6948,6 +7298,8 @@ calculated using the new local binding of `x`.
 `letn` works like several _nested_ link:#let[let]. The parentheses
 around the initializer expressions can be omitted.
 
+anchor:list[]
+
 ==== [big red]#list#
 
 *syntax:* (list _exp-1_ [_exp-2_ ... ])
@@ -6963,6 +7315,8 @@ Note that arguments of array type are converted to lists.
 
 See also link:#cons[cons] and link:#push[push] for other forms of
 building lists.
+
+anchor:list?[]
 
 ==== [big red]#list?#
 
@@ -6981,6 +7335,8 @@ as special instances of a list expression.
 
 (list? double)           → true
 ------------------------------------
+
+anchor:load[]
 
 ==== [big red]#load#
 
@@ -7036,6 +7392,8 @@ The second to last line causes the files to be loaded into the context
 
 The `file://` URL is followed by a third `/` for the directory spec.
 
+anchor:log[]
+
 ==== [big red]#log#
 
 *syntax:* (log _num_) +
@@ -7060,6 +7418,8 @@ In the second syntax, an arbitrary base can be specified in _num-base_.
 
 See also link:#exp[exp], which is the inverse function to `log` with
 base *_e_* (2.718281828).
+
+anchor:lookup[]
 
 ==== [big red]#lookup#
 
@@ -7108,6 +7468,9 @@ extracting a specific element found in the list.
 
 See also link:#assoc[assoc]
 
+[[lower-case]]
+anchor:lower-case[]
+
 ==== [big red]#lower-case link:#utf8_capable[utf8]#
 
 *syntax:* (lower-case _str_)
@@ -7126,6 +7489,8 @@ Str               → "ABC"
 See also the link:#upper-case[upper-case] and
 link:#title-case[title-case] functions.
 
+anchor:macro?[]
+
 ==== [big red]#macro?#
 
 *syntax:* (macro? _exp_)
@@ -7139,6 +7504,8 @@ otherwise, `nil` is returned.
 
 (macro? mysetq)  → true
 ------------------------------------------------
+
+anchor:main-args[]
 
 ==== [big red]#main-args#
 
@@ -7201,6 +7568,8 @@ script 1 2 3
 
 Try executing this script with different command-line parameters.
 
+anchor:make-dir[]
+
 ==== [big red]#make-dir#
 
 *syntax:* (make-dir _str-dir-name_ [_int-mode_])
@@ -7225,6 +7594,8 @@ non-owners of the file.
 
 This example creates a directory named `adir` in the current directory
 with an access mode of `0750` (octal 750 = `drwxr-x---`).
+
+anchor:map[]
 
 ==== [big red]#map#
 
@@ -7305,6 +7676,8 @@ the extra ones will be ignored.
 Special forms which use parentheses as syntax cannot be mapped (i.e.
 link:#case[case]).
 
+anchor:mat[]
+
 ==== [big red]#mat#
 
 *syntax:* (mat _+_ | _-_ | _*_ | _/_ _matrix-A matrix-B_) +
@@ -7354,6 +7727,8 @@ scalar in _number_:
 See also the other matrix operations link:#det[det],
 link:#invert[invert], link:#multiply[multiply], and
 link:#transpose[transpose].
+
+anchor:match[]
 
 ==== [big red]#match#
 
@@ -7435,6 +7810,8 @@ link:#find-all[find-all] or link:#parse[parse].
 link:#unify[unify] is another function for matching expressions in a
 PROLOG like manner.
 
+anchor:max[]
+
 ==== [big red]#max#
 
 *syntax:* (max _num-1_ [_num-2_ ... ])
@@ -7447,6 +7824,8 @@ Evaluates the expressions _num-1_— and returns the largest number.
 ---------------------------
 
 See also the link:#min[min] function.
+
+anchor:member[]
 
 ==== [big red]#member#
 
@@ -7481,6 +7860,8 @@ _str-key_ is found, all of _str_ (starting with _str-key_) is returned.
 
 See also the related functions link:#slice[slice] and link:#find[find].
 
+anchor:min[]
+
 ==== [big red]#min#
 
 *syntax:* (min _num-1_ [_num-2_ ... ])
@@ -7493,6 +7874,8 @@ Evaluates the expressions _num-1_— and returns the smallest number.
 -------------------------
 
 See also the link:#max[max] function.
+
+anchor:mod[]
 
 ==== [big red]#mod#
 
@@ -7520,6 +7903,8 @@ fractional part of _num-1_.
 Use the link:#arithmetic[%] (percent sign) function when working with
 integers only.
 
+anchor:mul[]
+
 ==== [big red]#mul#
 
 *syntax:* (mul _num-1_ _num-2_ [_num-3_ ... ])
@@ -7534,6 +7919,8 @@ returns `NaN`.
 (mul 1 2 3 4 5 1.1)  → 132
 (mul 0.5 0.5)        → 0.25
 ---------------------------
+
+anchor:multiply[]
 
 ==== [big red]#multiply#
 
@@ -7570,9 +7957,13 @@ All operations shown here on lists can be performed on arrays, as well.
 See also the matrix operations link:#det[det], link:#invert[invert],
 link:#mat[mat] and link:#transpose[transpose].
 
+anchor:name[]
+
 ==== [big red]#name#
 
 This function is deprecated, use link:#term[term] instead.
+
+anchor:NaN?[]
 
 ==== [big red]#NaN?#
 
@@ -7612,6 +8003,8 @@ _not_ `true` when using ANSI C. Integer operations treat `NaN` as `0`
 See also link:#infp[inf?] for testing a floating point value for
 infinity.
 
+anchor:net-accept[]
+
 ==== [big red]#net-accept#
 
 *syntax:* (net-accept _int-socket_)
@@ -7632,6 +8025,8 @@ mode on Unix-like operating systems.
 See also the files `server` and `client` examples in the `examples/`
 directory of the source distribution.
 
+anchor:net-close[]
+
 ==== [big red]#net-close#
 
 *syntax:* (net-close _int-socket_ [_true_])
@@ -7647,6 +8042,8 @@ Returns `true` on success and `nil` on failure.
 
 The optional _true_ flag suppresses immediate shutdown of sockets by
 waiting for pending data transmissions to finish.
+
+anchor:net-connect[]
 
 ==== [big red]#net-connect#
 
@@ -7843,6 +8240,8 @@ communications. This type of connection can be used as a fast
 bi-directional communications channel between processes on the same file
 system. This type of connection is not available on Win32 platforms.
 
+anchor:net-error[]
+
 ==== [big red]#net-error#
 
 *syntax:* (net-error) +
@@ -7915,6 +8314,8 @@ number is returned.
 ------------------------------------------
 
 See also link:#last-error[last-error] and link:#sys-error[sys-error].
+
+anchor:net-eval[]
 
 ==== [big red]#net-eval#
 
@@ -8100,6 +8501,8 @@ example shows how a word counting task gets distributed to three remote
 nodes. The three nodes count words in different texts and the master
 node receives and consolidates the results.
 
+anchor:net-interface[]
+
 ==== [big red]#net-interface#
 
 *syntax:* (net-interface _str-ip-addr_) +
@@ -8132,6 +8535,8 @@ be used to report the error.
 
 An interface address can be defined as either an IP address or a name.
 The return value is the address given in _str-ip-addr_
+
+anchor:net-ipv[]
 
 ==== [big red]#net-ipv#
 
@@ -8166,6 +8571,8 @@ connections with different IPv4/6 settings can be open at the same time.
 
 Note, that currently link:#net-packet[net-packet] does not support IPv6
 and will work in IPv4 mode regardless of settings.
+
+anchor:net-listen[]
 
 ==== [big red]#net-listen#
 
@@ -8371,6 +8778,8 @@ link:#net-send-to[net-send-to] call when re-injecting the packet:
 For more information see the Unix man pages for _divert_ and the _ipfw_
 (BSDs) or _ipchains_ (Linux) configuration utilities.
 
+anchor:net-local[]
+
 ==== [big red]#net-local#
 
 *syntax:* (net-local _int-socket_)
@@ -8385,6 +8794,8 @@ a specific _int-socket_.
 
 Use the link:#net-peer[net-peer] function to access the remote
 computer's IP number and port.
+
+anchor:net-lookup[]
 
 ==== [big red]#net-lookup#
 
@@ -8407,6 +8818,8 @@ Optionally, a _bool_ flag can be specified in the second syntax. If the
 expression in _bool_ evaluates to anything other than `nil`,
 host-by-name lookup will be forced, even if the name string starts with
 an IP number.
+
+anchor:net-packet[]
 
 ==== [big red]#net-packet#
 
@@ -8457,6 +8870,8 @@ network professionals.
 For other examples of packet configuration, see the file
 `qa-specific-tests/qa-packet` in the newLISP source distribution.
 
+anchor:net-peek[]
+
 ==== [big red]#net-peek#
 
 *syntax:* (net-peek _int-socket_)
@@ -8480,6 +8895,8 @@ read.
 
 Use the link:#peek[peek] function to check file descriptors and `stdin`.
 
+anchor:net-peer[]
+
 ==== [big red]#net-peer#
 
 *syntax:* (net-peer _int-socket_)
@@ -8494,6 +8911,8 @@ connection on _int-socket_.
 
 Use the link:#net-local[net-local] function to access the local
 computer's IP number and port number.
+
+anchor:net-ping[]
 
 ==== [big red]#net-ping#
 
@@ -8607,6 +9026,8 @@ regardless of the timeout specified. In this case, the range should be
 broken up into sub-ranges and used with multiple `net-ping` invocations.
 In any case, `net-ping` will send out packages as quickly as possible.
 
+anchor:net-receive[]
+
 ==== [big red]#net-receive link:#destructive[!]#
 
 *syntax:* (net-receive _int-socket_ _sym-buffer_ _int-max-bytes_ [_wait-string_])
@@ -8663,6 +9084,8 @@ slower than the normal version because information is read
 character-by-character. In most situations, the speed difference can be
 neglected.
 
+anchor:net-receive-from[]
+
 ==== [big red]#net-receive-from#
 
 *syntax:* (net-receive-from _int-socket_ _int-max-size_)
@@ -8713,6 +9136,8 @@ data packets over open connections.
 For blocking short UDP transactions, see the
 link:#net-send-udp[net-send-udp] and
 link:#net-receive-udp[net-receive-udp] functions.
+
+anchor:net-receive-udp[]
 
 ==== [big red]#net-receive-udp#
 
@@ -8770,6 +9195,8 @@ link:#net-listen[net-listen], or link:#net-connect[net-connect] together
 with the `"udp"` option to make non-blocking data exchange possible with
 link:#net-receive-from[net-receive-from] and
 link:#net-send-to[net-send-to].
+
+anchor:net-select[]
 
 ==== [big red]#net-select#
 
@@ -8847,6 +9274,8 @@ error causes link:#net-error[net-error] to be set.
 Note that supplying a nonexistent socket to `net-select` will cause an
 error to be set in link:#net-error[net-error].
 
+anchor:net-send[]
+
 ==== [big red]#net-send#
 
 *syntax:* (net-send _int-socket_ _str-buffer_ [_int-num-bytes_])
@@ -8871,6 +9300,8 @@ information.
 
 The first `net-send` sends the string `"hello there"`, while the second
 `net-send` sends only the string `"hello"`.
+
+anchor:net-send-to[]
 
 ==== [big red]#net-send-to#
 
@@ -8921,6 +9352,8 @@ link:#net-listen[net-listen] function with the `"udp"` option.
 For blocking short UDP transactions use link:#net-send-udp[net-send-udp]
 and link:#net-receive-udp[net-receive-udp].
 
+anchor:net-send-udp[]
+
 ==== [big red]#net-send-udp#
 
 *syntax:* (net-send-udp _str-remotehost_ _int-remoteport_ _str-buffer_ [_bool_])
@@ -8968,6 +9401,8 @@ As an alternative, the link:#net-connect[net-connect] function using the
 function—can be used to talk to a UDP listener in a non-blocking
 fashion.
 
+anchor:net-service[]
+
 ==== [big red]#net-service#
 
 *syntax:* (net-service _str-service_ _str-protocol_) +
@@ -8992,11 +9427,15 @@ Returns `nil` on failure.
 (net-service 22 "tcp")          → "ssh"
 -------------------------------------------------------
 
+anchor:net-sessions[]
+
 ==== [big red]#net-sessions#
 
 *syntax:* (net-sessions)
 
 Returns a list of active listening and connection sockets.
+
+anchor:new[]
 
 ==== [big red]#new#
 
@@ -9062,6 +9501,8 @@ single functions instead of entire contexts. See the
 link:#context[context] function for a more comprehensive example of
 `new`.
 
+anchor:nil?[]
+
 ==== [big red]#nil?#
 
 *syntax:* (nil? _exp_)
@@ -9086,6 +9527,8 @@ empty list `()`.
 
 Note that `nil?` means _strictly_ `nil` while `true?` means everything
 not `nil` or the empty list `()`.
+
+anchor:normal[]
 
 ==== [big red]#normal#
 
@@ -9118,6 +9561,8 @@ evenly distributed numbers, link:#amb[amb] for randomizing evaluation in
 a list of expressions, and link:#seed[seed] for setting a different
 start point for pseudo random number generation.
 
+anchor:not[]
+
 ==== [big red]#not#
 
 *syntax:* (not _exp_)
@@ -9133,6 +9578,8 @@ returned; otherwise, `nil` is returned.
 (not (< 1 10))        → nil
 (not (not (< 1 10)))  → true
 ----------------------------
+
+anchor:now[]
 
 ==== [big red]#now#
 
@@ -9216,6 +9663,8 @@ See also the link:#date[date], link:#date-list[date-list],
 link:#date-parse[date-parse], link:#date-value[date-value],
 link:#time[time], and link:#time-of-day[time-of-day] functions.
 
+anchor:nper[]
+
 ==== [big red]#nper#
 
 *syntax:* (nper _num-interest_ _num-pmt_ _num-pv_ [_num-fv_ [_int-type_]])
@@ -9237,6 +9686,8 @@ $775.30.
 
 See also the link:#fv[fv], link:#irr[irr], link:#npv[npv],
 link:#pmt[pmt], and link:#pv[pv] functions.
+
+anchor:npv[]
 
 ==== [big red]#npv#
 
@@ -9262,6 +9713,8 @@ income of $1,000 after the end of the first, second, and third years.
 
 See also the link:#fv[fv], link:#irr[irr], link:#nper[nper],
 link:#pmt[pmt], and link:#pv[pv] functions.
+
+anchor:nth[]
 
 ==== [big red]#nth link:#utf8_capable[utf8]#
 
@@ -9388,6 +9841,8 @@ link:#slice[slice].
 See also link:#setf[setf] for modifying multidimensional lists and
 arrays and link:#push[push] and link:#pop[pop] for modifying lists.
 
+anchor:null?[]
+
 ==== [big red]#null?#
 
 *syntax:* (null? _exp_)
@@ -9416,6 +9871,8 @@ or link:#clean[clean] to check the outcome of other newLISP operations.
 See also the predicates link:#emptyp[empty?], link:#nilp[nil?] and
 link:#zerop[zero?].
 
+anchor:number?[]
+
 ==== [big red]#number?#
 
 *syntax:* (number? _exp_)
@@ -9435,6 +9892,8 @@ an integer; otherwise, `nil` is returned.
 See the functions link:#floatp[float?] and link:#integerp[integer?] to
 test for a specific number type.
 
+anchor:odd?[]
+
 ==== [big red]#odd?#
 
 *syntax:* (odd? _int-number_)
@@ -9452,6 +9911,8 @@ cutting off its fractional part.
 ------------------
 
 Use link:#evenp[even?] to check if an integer is even, divisable by `2`.
+
+anchor:open[]
 
 ==== [big red]#open#
 
@@ -9512,6 +9973,8 @@ link:#import[import] function:
 The named pipe can now be used like a file with link:#open[open],
 link:#read[read], and link:#write[write].
 
+anchor:or[]
+
 ==== [big red]#or#
 
 *syntax:* (or _exp-1_ [_exp-2_ ... ])
@@ -9529,6 +9992,8 @@ the return value of the `or` expression.
 (or true)                        → true
 (or)                             → nil
 ------------------------------------------
+
+anchor:ostype[]
 
 ==== [big red]#ostype#
 
@@ -9564,6 +10029,8 @@ newLISP running.
 For a table of other built-in system variables and symbols see the
 chapter link:#system_symbols[System Symbols and Constants] in the
 appendix.
+
+anchor:pack[]
 
 ==== [big red]#pack#
 
@@ -9689,6 +10156,8 @@ See also the link:#address[address], link:#get-int[get-int],
 link:#get-long[get-long], link:#get-char[get-char],
 link:#get-string[get-string], and link:#unpack[unpack] functions.
 
+anchor:parse[]
+
 ==== [big red]#parse#
 
 *syntax:* (parse _str-data_ [_str-break_ [_int-option_]])
@@ -9750,6 +10219,8 @@ link:#directory[directory], link:#find[find], link:#find-all[find-all],
 link:#regex[regex], link:#replace[replace], and link:#search[search]
 functions for using regular expressions.
 
+anchor:peek[]
+
 ==== [big red]#peek#
 
 *syntax:* (peek _int-handle_)
@@ -9769,6 +10240,8 @@ or for the number of available bytes on them. On Unix systems,
 link:#net-peek[net-peek] can be used to check file descriptors. The
 difference is that link:#net-peek[net-peek] also sets
 link:#net-error[net-error].
+
+anchor:pipe[]
 
 ==== [big red]#pipe#
 
@@ -9797,6 +10270,8 @@ More than one pipe can be opened if required.
 newLISP can also use _named pipes_. See the link:#open[open] function
 for further information.
 
+anchor:pmt[]
+
 ==== [big red]#pmt#
 
 *syntax:* (pmt _num-interest_ _num-periods_ _num-principal_ [_num-future-value_ [_int-type_]])
@@ -9820,6 +10295,8 @@ typical way payment is calculated for mortgages.
 
 See also the link:#fv[fv], link:#irr[irr], link:#nper[nper],
 link:#npv[npv], and link:#pv[pv] functions.
+
+anchor:pop[]
 
 ==== [big red]#pop link:#destructive[!] link:#utf8_capable[utf8]#
 
@@ -9904,6 +10381,8 @@ Popping an empty string will return an empty string.
 
 See also the link:#push[push] function, the inverse operation to `pop`.
 
+anchor:pop-assoc[]
+
 ==== [big red]#pop-assoc link:#destructive[!]#
 
 *syntax:* (pop-assoc _exp-key_ _list-assoc_) +
@@ -9937,6 +10416,8 @@ L → ((a (b 1))))
 
 See also link:#assoc[assoc] for retrieving associations and
 link:#setf[setf] for modifying association lists.
+
+anchor:post-url[]
 
 ==== [big red]#post-url#
 
@@ -9993,6 +10474,8 @@ on both of these options.
 See also the link:#get-url[get-url] and link:#put-url[put-url]
 functions.
 
+anchor:pow[]
+
 ==== [big red]#pow#
 
 *syntax:* (pow _num-1_ _num-2_ [_num-3_ ... ]) +
@@ -10010,6 +10493,8 @@ Calculates _num-1_ to the power of _num-2_ and so forth.
 ------------------------
 
 When _num-1_ is the only argument, `pow` assumes 2 for the exponent.
+
+anchor:prefix[]
 
 ==== [big red]#prefix#
 
@@ -10032,6 +10517,8 @@ Foo>
 -------------------------------------------------
 
 See also link:#term[term] to extract the term part of a symbol.
+
+anchor:pretty-print[]
 
 ==== [big red]#pretty-print#
 
@@ -10084,6 +10571,8 @@ string as follows:
 (print (string my-expression))
 ------------------------------
 
+anchor:primitive?[]
+
 ==== [big red]#primitive?#
 
 *syntax:* (primitive? _exp_)
@@ -10096,6 +10585,8 @@ Evaluates and tests if _exp_ is a primitive symbol and returns `true` or
 (set 'var define)
 (primitive? var)  → true
 ------------------------
+
+anchor:print[]
 
 ==== [big red]#print#
 
@@ -10131,6 +10622,8 @@ escape character `\`:
 
 To finish printing with a line-feed, use link:#println[println].
 
+anchor:println[]
+
 ==== [big red]#println#
 
 *syntax:* (println _exp-1_ [_exp-2_ ... ])
@@ -10143,6 +10636,8 @@ but emits a line-feed character at the end.
 
 See also the link:#write-line[write-line] and link:#print[print]
 functions.
+
+anchor:prob-chi2[]
 
 ==== [big red]#prob-chi2#
 
@@ -10160,6 +10655,8 @@ link:#gammai[gammai].
 
 See also the inverse function link:#crit-chi2[crit-chi2].
 
+anchor:prob-f[]
+
 ==== [big red]#prob-f#
 
 *syntax:* (prob-f _num-f_ _int-df1_ _int-df2_)
@@ -10174,6 +10671,8 @@ the null hypothesis.
 -----------------------------------
 
 See also the inverse function link:#crit-f[crit-f].
+
+anchor:prob-t[]
 
 ==== [big red]#prob-t#
 
@@ -10190,6 +10689,8 @@ the null hypothesis.
 
 See also the inverse function link:#crit-t[crit-t].
 
+anchor:prob-z[]
+
 ==== [big red]#prob-z#
 
 *syntax:* (prob-z _num-z_)
@@ -10204,6 +10705,8 @@ standard deviation of `1.0`.
 -------------------
 
 See also the inverse function link:#crit-z[crit-z].
+
+anchor:process[]
 
 ==== [big red]#process#
 
@@ -10339,6 +10842,8 @@ inter-process communications and the link:#semaphore[semaphore] function
 for synchronization of several processes. See the link:#fork[fork]
 function for starting separate newLISP processes on Linux/Unix.
 
+anchor:prompt-event[]
+
 ==== [big red]#prompt-event#
 
 *syntax:* (prompt-event _sym-event-handler_ | _func-event-handler_)
@@ -10368,6 +10873,8 @@ interpreters.
 The function in `prompt-event` must return a string of 63 characters
 maximum. Not returning a string will leave the prompt unchanged.
 
+anchor:protected?[]
+
 ==== [big red]#protected?#
 
 *syntax:* (protected? _sym_)
@@ -10382,6 +10889,8 @@ link:#constant[constant] function:
 (constant 'aVar 123)
 (protected? 'aVar)       → true
 -------------------------------
+
+anchor:push[]
 
 ==== [big red]#push link:#destructive[!] link:#utf8_capable[utf8]#
 
@@ -10501,6 +11010,8 @@ lst → ("xabc" "xyz")
 See also the link:#pop[pop] function, which is the inverse operation to
 `push`.
 
+anchor:put-url[]
+
 ==== [big red]#put-url#
 
 *syntax:* (put-url _str-url_ _str-content_ [_str-option_] [_int-timeout_ [_str-header_]])
@@ -10613,6 +11124,8 @@ See also the functions link:#get-url[get-url] and
 link:#post-url[post-url], which can be used to upload files when
 formatting form data as `multipart/form-data`.
 
+anchor:pv[]
+
 ==== [big red]#pv#
 
 *syntax:* (pv _num-int_ _num-nper_ _num-pmt_ [_num-fv_ [_int-type_]])
@@ -10636,6 +11149,8 @@ year would start out at $100,000.14.
 See also the link:#fv[fv], link:#irr[irr], link:#nper[nper],
 link:#npv[npv], and link:#pmt[pmt] functions.
 
+anchor:quote[]
+
 ==== [big red]#quote#
 
 *syntax:* (quote _exp_)
@@ -10650,6 +11165,8 @@ prepending a `'` (single quote) to _exp_.
 (quote (a b c))   → (a b c)
 (= (quote x) 'x)  → true
 ---------------------------
+
+anchor:quote?[]
 
 ==== [big red]#quote?#
 
@@ -10666,6 +11183,8 @@ depending on the result.
 
 Note that in the `set` statement, ` ''x` is quoted twice because the
 first quote is lost during the evaluation of the `set` assignment.
+
+anchor:rand[]
 
 ==== [big red]#rand#
 
@@ -10691,6 +11210,8 @@ The first line in the example prints equally distributed `0`'s and
 link:#normal[normal] functions to generate floating point random
 numbers, and use link:#seed[seed] to vary the initial seed for random
 number generation.
+
+anchor:random[]
 
 ==== [big red]#random#
 
@@ -10719,6 +11240,8 @@ distributed number:
 
 See also the link:#normal[normal] and link:#rand[rand] functions.
 
+anchor:randomize[]
+
 ==== [big red]#randomize#
 
 *syntax:* (randomize _list_ [_bool_])
@@ -10742,6 +11265,8 @@ specified in _bool_.
 `randomize` uses an internal _pseudo random sequence_ generator that
 returns the same series of results each time newLISP is started. Use the
 link:#seed[seed] function to change this sequence.
+
+anchor:read[]
 
 ==== [big red]#read link:#destructive[!]#
 
@@ -10787,6 +11312,8 @@ string `password:` will be part of the data returned.
 
 See also the link:#write[write] function.
 
+anchor:read-char[]
+
 ==== [big red]#read-char#
 
 *syntax:* (read-char [_int-file_])
@@ -10814,6 +11341,8 @@ text lines at a time. Note that newLISP supplies a fast built-in
 function called link:#copy-file[copy-file] for copying files.
 
 See also the link:#write-char[write-char] function.
+
+anchor:read-expr[]
 
 ==== [big red]#read-expr#
 
@@ -10859,6 +11388,8 @@ preprocessing expressions before evaluation.
 See also link:#reader-event[reader-event] for preprocessing expressions
 event-driven.
 
+anchor:read-file[]
+
 ==== [big red]#read-file#
 
 *syntax:* (read-file _str-file-name_)
@@ -10897,6 +11428,8 @@ transfer files from remote newLISP server nodes.
 See also the link:#write-file[write-file] and
 link:#append-file[append-file] functions.
 
+anchor:read-key[]
+
 ==== [big red]#read-key#
 
 *syntax:* (read-key)
@@ -10926,6 +11459,8 @@ shell or Win32 command shell. It will not work in the Java based
 newLISP-GS or Tcl/Tk based newLISP-Tk frontend. It will also not work
 when executed by newLISP Unix shared library or newLISP Win32 DLL
 (Dynamic Link Library).
+
+anchor:read-line[]
 
 ==== [big red]#read-line#
 
@@ -10976,6 +11511,8 @@ to the screen.
 See also the link:#current-line[current-line] function for retrieving
 this buffer.
 
+anchor:read-utf8[]
+
 ==== [big red]#read-utf8#
 
 *syntax:* (read-utf8 _int-file_)
@@ -10998,6 +11535,8 @@ displayable UTF-8 character string using the link:#char[char] function.
 
 The example reads a file containing UTF-8 encoded text and displays it
 to the terminal screen.
+
+anchor:reader-event[]
 
 ==== [big red]#reader-event#
 
@@ -11085,6 +11624,8 @@ on upper-case variables.
 
 For a more detailed description see the documentation for `macro.lsp`.
 
+anchor:real-path[]
+
 ==== [big red]#real-path#
 
 *syntax:* (real-path [_str-path_])
@@ -11102,6 +11643,8 @@ If a path is not given, `"."` (the current directory) is assumed.
 The output length is limited by the OS's maximum allowed path length. If
 `real-path` fails (e.g., because of a nonexistent path), `nil` is
 returned.
+
+anchor:receive[]
 
 ==== [big red]#receive link:#destructive[!]#
 
@@ -11158,6 +11701,8 @@ The `receive` function is not available on Win32.
 
 For a more detailed discussion of this function and examples, see the
 link:#send[send] function.
+
+anchor:ref[]
 
 ==== [big red]#ref#
 
@@ -11268,6 +11813,8 @@ also the chapter link:#pass_big[Passing data by reference].
 See also the link:#ref-all[ref-all] function, which searches for all
 occurrences of a key expression in a nested list.
 
+anchor:ref-all[]
+
 ==== [big red]#ref-all#
 
 *syntax:* (ref-all _exp-key_ _list_ [_func-compare_ [true]])
@@ -11366,6 +11913,8 @@ searches are for strings.
 -------------------------------------------------------------
 
 See also the link:#ref[ref] function.
+
+anchor:regex[]
 
 ==== [big red]#regex#
 
@@ -11534,6 +12083,8 @@ manual pages.
 Regular expression patterns can be precompiled for higher speed when
 using changing repetitive patterns with link:#regex-comp[regex-comp].
 
+anchor:regex-comp[]
+
 ==== [big red]#regex-comp#
 
 *syntax:* (regex-comp _str-pattern_ [_int-option_])
@@ -11572,6 +12123,8 @@ during pre-compilation with `regex-comp` . The `0x10000` option can only
 be combined with `0x8000`, the option used to specify that only one
 replacement should be made when using link:#replace[replace].
 
+anchor:remove-dir[]
+
 ==== [big red]#remove-dir#
 
 *syntax:* (remove-dir _str-path_)
@@ -11587,6 +12140,8 @@ failure.
 
 Removes the directory `temp` in the current directory.
 
+anchor:rename-file[]
+
 ==== [big red]#rename-file#
 
 *syntax:* (rename-file _str-path-old_ _str-path-new_)
@@ -11599,6 +12154,8 @@ on the operation's success.
 ---------------------------------------
 (rename-file "data.lisp" "data.backup")
 ---------------------------------------
+
+anchor:replace[]
 
 ==== [big red]#replace link:#destructive[!]#
 
@@ -11786,6 +12343,8 @@ See link:#directory[directory], link:#find[find],
 link:#find-all[find-all], link:#parse[parse], link:#regex[regex], and
 link:#search[search] for other functions using regular expressions.
 
+anchor:reset[]
+
 ==== [big red]#reset#
 
 *syntax:* (reset) +
@@ -11809,6 +12368,8 @@ new clean newLISP process with the same command-line parameters. This
 mode will only work when newLISP was started using its full path-name,
 e.g. `/usr/bin/newlisp` instead of only `newlisp`. This mode is not
 available on Win32.
+
+anchor:rest[]
 
 ==== [big red]#rest link:#utf8_capable[utf8]#
 
@@ -11854,6 +12415,8 @@ link:#implicit_rest_slice[Implicit rest and slice].
 Note that link:#rest[rest] works on character boundaries rather than
 byte boundaries when the UTF-8–enabled version of newLISP is used.
 
+anchor:reverse[]
+
 ==== [big red]#reverse link:#destructive[!]#
 
 *syntax:* (reverse _list_) +
@@ -11882,6 +12445,8 @@ str            → "PSILwen"
 --------------------------
 
 See also the link:#sort[sort] function.
+
+anchor:rotate[]
 
 ==== [big red]#rotate link:#destructive[!]#
 
@@ -11916,6 +12481,8 @@ l  → (7 8 9 1 2 3 4 5 6)
 When working on a string, `rotate` works on byte boundaries rather than
 character boundaries.
 
+anchor:round[]
+
 ==== [big red]#round#
 
 *syntax:* (round _number_ [_int-digits_])
@@ -11938,6 +12505,8 @@ If _int-digits_ is omitted, the function rounds to `0` decimal digits.
 
 Note that rounding for display purposes is better accomplished using
 link:#format[format].
+
+anchor:save[]
 
 ==== [big red]#save#
 
@@ -12003,6 +12572,8 @@ See also the functions link:#load[load] (the inverse operation of
 `save`) and link:#source[source], which saves symbols and contexts to a
 string instead of a file.
 
+anchor:search[]
+
 ==== [big red]#search#
 
 *syntax:* (search _int-file_ _str-search_ [_bool-flag_ [_int-options_]])
@@ -12049,6 +12620,8 @@ For other functions using regular expressions, see
 link:#directory[directory], link:#find[find], link:#find-all[find-all],
 link:#parse[parse], link:#regex[regex], and link:#replace[replace].
 
+anchor:seed[]
+
 ==== [big red]#seed#
 
 *syntax:* (seed _int-seed_)
@@ -12077,6 +12650,8 @@ generated over and over again.
 
 The second example is useful for guaranteeing a different seed any time
 the program starts.
+
+anchor:self[]
 
 ==== [big red]#self#
 
@@ -12112,6 +12687,8 @@ circles → ((Circle 11 22 3) (Circle 14 25 6))
 See also the chapter about programming with FOOP: link:#foop[Functional
 object-oriented programming in newLISP]
 
+anchor:seek[]
+
 ==== [big red]#seek#
 
 *syntax:* (seek _int-file_ [_int-position_])
@@ -12145,6 +12722,8 @@ disk, so the file takes up less space and is called a _sparse file_.
 -----------------------------------------
 
 newLISP supports file position numbers up to 9,223,372,036,854,775,807.
+
+anchor:select[]
 
 ==== [big red]#select link:#utf8_capable[utf8]#
 
@@ -12186,6 +12765,8 @@ _int-index_i_.
 Selected elements can be repeated and do not have to appear in order,
 although this speeds up processing. The order in _list-selection_ or
 _int-index_i_ can be changed to rearrange elements.
+
+anchor:semaphore[]
 
 ==== [big red]#semaphore#
 
@@ -12318,6 +12899,8 @@ a more comprehensive example of using `semaphore` to synchronize
 processes, see the file `prodcons.lsp` example in the `examples`
 directory in the source distribution, as well as the examples and
 modules distributed with newLISP.
+
+anchor:send[]
 
 ==== [big red]#send#
 
@@ -12537,6 +13120,8 @@ loop to finish.
 For more details on `send` and `receive` and more examples see the
 http://www.newlisp.org/CodePatterns.html[Code Patterns] document.
 
+anchor:sequence[]
+
 ==== [big red]#sequence#
 
 *syntax:* (sequence _num-start_ _num-end_ [_num-step_])
@@ -12558,6 +13143,8 @@ Note that the step size must be a positive number, even if sequencing
 from a higher to a lower number.
 
 Use the link:#series[series] function to generate geometric sequences.
+
+anchor:series[]
 
 ==== [big red]#series#
 
@@ -12626,6 +13213,8 @@ which can be used inside _func_.
 
 Use the link:#sequence[sequence] function to generate arithmetic
 sequences.
+
+anchor:set[]
 
 ==== [big red]#set link:#destructive[!]#
 
@@ -12698,6 +13287,8 @@ protect the symbol from subsequent alteration. Using the
 link:#setq[setq] or link:#setf[setf] function eliminates the need to
 quote the variable symbol.
 
+anchor:set-locale[]
+
 ==== [big red]#set-locale#
 
 *syntax:* (set-locale [_str-locale_ [_int-category_]])
@@ -12759,6 +13350,8 @@ distribution for details.
 
 See also the chapter link:#switching[Switching the locale].
 
+anchor:set-ref[]
+
 ==== [big red]#set-ref link:#destructive[!]#
 
 *syntax:* (set-ref _exp-key_ _list_ _exp-replacement_ [_func-compare_])
@@ -12798,6 +13391,8 @@ link:#set-ref-all[set-ref-all]
 
 For changing all occurrences of an element in a list use
 link:#set-ref-all[set-ref-all].
+
+anchor:set-ref-all[]
 
 ==== [big red]#set-ref-all link:#destructive[!]#
 
@@ -12855,7 +13450,10 @@ The example sums all numbers found in records starting with the symbol
 See also link:#set-ref[set-ref] which replaces only the first element
 found.
 
-==== [big red]#setq setf link:#destructive[!]#
+anchor:setq[]
+anchor:setf[]
+
+==== [big red]#setq, setf link:#destructive[!]#
 
 *syntax:* (setq _place-1_ _exp-1_ [_place-2_ _exp-2_ ... ])
 
@@ -12937,6 +13535,8 @@ L                        → ((apples 4) (oranges 2))
 s → "newLISP"
 ---------------------------------------------------
 
+anchor:sgn[]
+
 ==== [big red]#sgn#
 
 *syntax:* (sgn _num_) +
@@ -12970,6 +13570,8 @@ returned.
 -----------------------------------------------------------------
 
 Any expression or constant can be used for _exp-1_, _exp-2_, or _exp-3_.
+
+anchor:share[]
 
 ==== [big red]#share#
 
@@ -13042,6 +13644,8 @@ shared memory can crash the running process.
 For a more comprehensive example of using shared memory in a multi
 process Linux/Unix application, see the file `example/prodcons.lsp` in
 the newLISP source distribution.
+
+anchor:signal[]
 
 ==== [big red]#signal#
 
@@ -13174,6 +13778,8 @@ parameter.
 
 In this example, all signals from 1 to 8 are set to the same handler.
 
+anchor:silent[]
+
 ==== [big red]#silent#
 
 *syntax:* (silent [_exp-1_ [_exp-2_ ... ]])
@@ -13197,6 +13803,8 @@ prompt back.
 (silent) (my-func)  ; same effect as previous
 ---------------------------------------------
 
+anchor:sin[]
+
 ==== [big red]#sin#
 
 *syntax:* (sin _num-radians_)
@@ -13209,6 +13817,8 @@ Calculates the sine function from _num-radians_ and returns the result.
 (set 'pi (mul 2 (acos 0)))  → 3.141592654
 (sin (div pi 2))            → 1
 ------------------------------------------
+
+anchor:sinh[]
 
 ==== [big red]#sinh#
 
@@ -13226,6 +13836,8 @@ defined mathematically as: _(exp (x) - exp (-x)) / 2_. An overflow to
 (sub (tanh 1) (div (sinh 1) (cosh 1))) → 0
 ------------------------------------------
 
+anchor:sleep[]
+
 ==== [big red]#sleep#
 
 *syntax:* (sleep _num-milliseconds_)
@@ -13242,6 +13854,8 @@ specified in _num-milli-seconds_.
 On some platforms, `sleep` is only available with a resolution of one
 second. In this case, the parameter _int-milli-seconds_ will be rounded
 to the nearest full second.
+
+anchor:slice[]
 
 ==== [big red]#slice#
 
@@ -13296,6 +13910,8 @@ Be aware that link:#slice[slice] always works on byte boundaries rather
 than character boundaries in the UTF-8–enabled version of newLISP. As a
 result, link:#slice[slice] can be used to manipulate binary content.
 
+anchor:sort[]
+
 ==== [big red]#sort link:#destructive[!]#
 
 *syntax:* (sort _list_ [_func-compare_])
@@ -13346,6 +13962,8 @@ s           → (s l k a)
 (sort db (fn (x y) (> (last x) (last y))))
 ----------------------------------------------------
 
+anchor:source[]
+
 ==== [big red]#source#
 
 *syntax:* (source) +
@@ -13373,6 +13991,8 @@ context prefix.
 As with link:#save[save], the formatting of line breaks and leading
 spaces or tabs can be controlled using the
 link:#pretty-print[pretty-print] function.
+
+anchor:spawn[]
 
 ==== [big red]#spawn#
 
@@ -13523,6 +14143,8 @@ processes. Using these functions any data or expression of any size can
 be transferred. Additionally messaged expressions can be evaluated in
 the recipient's environment.
 
+anchor:sqrt[]
+
 ==== [big red]#sqrt#
 
 *syntax:* (sqrt _num_)
@@ -13535,6 +14157,8 @@ result.
 (sqrt 10)  → 3.16227766
 (sqrt 25)  → 5
 -----------------------
+
+anchor:starts-with[]
 
 ==== [big red]#starts-with#
 
@@ -13571,6 +14195,8 @@ outcome.
 -----------------------------------------------
 
 See also the link:#ends-with[ends-with] function.
+
+anchor:stats[]
 
 ==== [big red]#stats#
 
@@ -13621,6 +14247,8 @@ as an argument for the link:#format[format] statement:
     kurtosis =    -1.34
 -----------------------------------------------------
 
+anchor:string[]
+
 ==== [big red]#string#
 
 *syntax:* (string _exp-1_ [_exp-2_ ... ])
@@ -13657,6 +14285,8 @@ string to be specified) functions to concatenate strings containing zero
 bytes. Use the link:#source[source] function to convert a lambda
 expression into its newLISP source string representation.
 
+anchor:string?[]
+
 ==== [big red]#string?#
 
 *syntax:* (string? _exp_)
@@ -13669,6 +14299,8 @@ Evaluates _exp_ and tests to see if it is a string. Returns `true` or
 (set 'var "hello")
 (string? var)  → true
 ---------------------
+
+anchor:struct[]
 
 ==== [big red]#struct#
 
@@ -13774,6 +14406,8 @@ it unstable.
 
 Nested structures are unpacked recursively.
 
+anchor:sub[]
+
 ==== [big red]#sub#
 
 *syntax:* (sub _num-1_ [_num-2_ ... ])
@@ -13789,6 +14423,8 @@ is supplied, its sign is reversed. Any floating point calculation with
 (sub 10 8 0.25)  → 1.75
 (sub 123)        → -123
 -----------------------
+
+anchor:swap[]
 
 ==== [big red]#swap link:#destructive[!]#
 
@@ -13836,6 +14472,8 @@ lst →  ((b 3 20 30) (a 1 2 10))
 ------------------------------------------------------
 
 Any two places can be swept in the same or different objects.
+
+anchor:sym[]
 
 ==== [big red]#sym#
 
@@ -13925,6 +14563,8 @@ that creates contexts and their variables in a dynamic fashion.
 A syntax of the link:#context[context] function can also be used to
 create, set and evaluate symbols.
 
+anchor:symbol?[]
+
 ==== [big red]#symbol?#
 
 *syntax:* (symbol? _exp_)
@@ -13947,6 +14587,8 @@ The first statement sets the contents of `x` to the symbol `y`. The
 second statement then checks the contents of `x`. The last example
 checks the first element of a list.
 
+anchor:symbols[]
+
 ==== [big red]#symbols#
 
 *syntax:* (symbols [_context_])
@@ -13965,6 +14607,8 @@ in that context are returned.
 --------------------------------------------------------
 
 The quote can be omitted because contexts evaluate to themselves.
+
+anchor:sync[]
 
 ==== [big red]#sync#
 
@@ -14021,6 +14665,8 @@ The function `sync` is part of the Cilk API for synchronizing child
 processes and process parallelization. See the reference for the
 function link:#spawn[spawn] for a full discussion of the Cilk API.
 
+anchor:sys-error[]
+
 ==== [big red]#sys-error#
 
 *syntax:* (sys-error) +
@@ -14060,6 +14706,8 @@ semaphores.
 ---------------------------------------------------
 
 See also link:#last-error[last-error] and link:#net-error[net-error].
+
+anchor:sys-info[]
 
 ==== [big red]#sys-info#
 
@@ -14124,6 +14772,8 @@ command-line switch. For each megabyte of Lisp cell memory, 64k memory
 cells can be allocated. The maximum call stack depth can be changed
 using the `-s` command-line switch.
 
+anchor:t-test[]
+
 ==== [big red]#t-test#
 
 *syntax:* (t-test _list-vector-A_ _list-vecor-B_ [`true`])
@@ -14182,6 +14832,8 @@ and after a treatment with Prosac depression medication:
 The effect of the Prosac treatment is moderately significant with a `p`
 of `0.0137`.
 
+anchor:tan[]
+
 ==== [big red]#tan#
 
 *syntax:* (tan _num-radians_)
@@ -14195,6 +14847,8 @@ result.
 (set 'pi (mul 2 (asin 1)))  → 3.141592654
 (tan (div pi 4))            → 1
 -----------------------------------------
+
+anchor:tanh[]
 
 ==== [big red]#tanh#
 
@@ -14210,6 +14864,8 @@ tangent is defined mathematically as: _sinh (x) / cosh (x)_.
 (tanh 1000)  → 1
 (= (tanh 1) (div (sinh 1) (cosh 1)))  → true
 --------------------------------------------
+
+anchor:term[]
 
 ==== [big red]#term#
 
@@ -14231,6 +14887,8 @@ prefix.
 
 See also link:#prefix[prefix] to extract the namespace or context prefix
 from a symbol.
+
+anchor:throw[]
 
 ==== [big red]#throw#
 
@@ -14273,6 +14931,8 @@ be returned:
 `throw` will _not_ cause an error exception. Use
 link:#throw-error[throw-error] to throw user error exceptions.
 
+anchor:throw-error[]
+
 ==== [big red]#throw-error#
 
 *syntax:* (throw-error _exp_)
@@ -14298,6 +14958,8 @@ user-defined error handlers and the link:#error-event[error-event]
 function, or the form of link:#catch[catch] that can capture error
 exceptions.
 
+anchor:time[]
+
 ==== [big red]#time#
 
 *syntax:* (time _exp_ [_int-count_)
@@ -14319,6 +14981,8 @@ evaluations of `(myprog x y z)`. See also link:#date[date],
 link:#date-value[date-value], link:#time-of-day[time-of-day], and
 link:#now[now].
 
+anchor:time-of-day[]
+
 ==== [big red]#time-of-day#
 
 *syntax:* (time-of-day)
@@ -14327,6 +14991,8 @@ Returns the time in milliseconds since the start of the current day.
 
 See also the link:#date[date], link:#date-value[date-value],
 link:#time[time], and link:#now[now] functions.
+
+anchor:timer[]
 
 ==== [big red]#timer#
 
@@ -14415,6 +15081,8 @@ In this example, the `until` loop will run until something can be read
 from `socket`, or until ten seconds have passed and the `timeout`
 variable is set.
 
+anchor:title-case[]
+
 ==== [big red]#title-case link:#utf8_capable[utf8]#
 
 *syntax:* (title-case _str_ _[bool]_)
@@ -14432,6 +15100,8 @@ other than `nil`, the rest of the string is converted to lowercase.
 
 See also the link:#lower-case[lower-case] and
 link:#upper-case[upper-case] functions.
+
+anchor:trace[]
 
 ==== [big red]#trace#
 
@@ -14485,6 +15155,8 @@ code where execution should switch on the debugger.
 
 Use the link:#debug[debug] function as a shortcut for the above example.
 
+anchor:trace-highlight[]
+
 ==== [big red]#trace-highlight#
 
 *syntax:* (trace-highlight _str-pre_ _str-post_ [_str-header_ _str-footer_])
@@ -14516,6 +15188,8 @@ The first example replaces the default `#` (number sign) with a `>>` and
 `<<`. The second example works on most Linux shells. It may not,
 however, work in console windows under Win32 or CYGWIN, depending on the
 configuration of the terminal.
+
+anchor:transpose[]
 
 ==== [big red]#transpose#
 
@@ -14577,6 +15251,8 @@ All operations shown here on lists can also be performed on arrays.
 See also the matrix operations link:#det[det], link:#invert[invert],
 link:#mat[mat] and link:#multiply[multiply].
 
+anchor:trim[]
+
 ==== [big red]#trim link:#utf8_capable[utf8]#
 
 *syntax:* (trim _str_ [_str-char_]) +
@@ -14599,6 +15275,8 @@ or trim only one side if an empty string is specified for the other.
 (trim "----hello=====" "-" "=")  → "hello"
 ------------------------------------------
 
+anchor:true?[]
+
 ==== [big red]#true?#
 
 *syntax:* (true? _exp_)
@@ -14615,6 +15293,8 @@ empty list `()`, `true?` returns `true`; otherwise, it returns `nil`.
 --------------------------------------
 
 `true?` behaves like link:#if[if] and rejects the empty list `()`.
+
+anchor:unicode[]
 
 ==== [big red]#unicode#
 
@@ -14637,6 +15317,8 @@ On _big endian_ CPU architectures, the byte order will be reversed from
 high to low. The `unicode` and link:#utf8[utf8] functions are the
 inverse of each other. These functions are only necessary if UCS-4
 Unicode is in use. Most systems use UTF-8 encoding only.
+
+anchor:unify[]
 
 ==== [big red]#unify#
 
@@ -14860,6 +15542,8 @@ rules. This makes it possible to implement functions for doing other
 work while processing rule terms. `prove-rule` could accomplish this
 testing for the symbol `eval` in each rule term.
 
+anchor:union[]
+
 ==== [big red]#union#
 
 *syntax:* (union _list-1_ _list-2_ [_list-3_ ... ])
@@ -14875,6 +15559,8 @@ two or more lists.
 Like the other set functions link:#difference[difference],
 link:#interset[intersect] and link:#unique[unique], `union` maintains
 the order of elements as found in the original lists.
+
+anchor:unique[]
 
 ==== [big red]#unique#
 
@@ -14892,6 +15578,8 @@ Note that the list does not need to be sorted, but a sorted list makes
 
 Other _set_ functions are link:#difference[difference],
 link:#intersect[intersect] and link:#union[union].
+
+anchor:unless[]
 
 ==== [big red]#unless#
 
@@ -14915,6 +15603,8 @@ the statements in _body_ need not to be grouped with link:#begin[begin]:
 ----------------------------------------
 
 See also the function link:#when[when].
+
+anchor:unpack[]
 
 ==== [big red]#unpack#
 
@@ -15014,6 +15704,8 @@ See also the link:#address[address], link:#get-int[get-int],
 link:#get-long[get-long], link:#get-char[get-char],
 link:#get-string[get-string], and link:#pack[pack] functions.
 
+anchor:until[]
+
 ==== [big red]#until#
 
 *syntax:* (until _exp-condition_ [_body_])
@@ -15040,6 +15732,8 @@ result of last _exp-condition_ is returned. `until` works like
 Use the link:#do-until[do-until] function to test the condition _after_
 evaluation of the body expressions.
 
+anchor:upper-case[]
+
 ==== [big red]#upper-case link:#utf8_capable[utf8]#
 
 *syntax:* (upper-case _str_)
@@ -15054,6 +15748,8 @@ International characters are converted correctly.
 
 See also the link:#lower-case[lower-case] and
 link:#title-case[title-case] functions.
+
+anchor:utf8[]
 
 ==== [big red]#utf8#
 
@@ -15083,6 +15779,8 @@ highest to lowest. The `utf8` and link:#unicode[unicode] functions are
 the inverse of each other. These functions are only necessary if UCS-4
 Unicode is in use. Most systems use UTF-8 Unicode encoding only.
 
+anchor:utf8len[]
+
 ==== [big red]#utf8len#
 
 *syntax:* (utf8len _str_)
@@ -15101,6 +15799,8 @@ available on UTF-8–enabled versions of newLISP.
 See also the link:#unicode[unicode] and link:#utf8[utf8] functions.
 Above Chinese text from http://www.columbia.edu/kermit/utf8.html[UTF-8
 Sampler].
+
+anchor:uuid[]
 
 ==== [big red]#uuid#
 
@@ -15141,6 +15841,8 @@ process ID of the generating newLISP process is part of the seed for the
 random number generator. When type 4 IDs are used on a distributed
 system, two identical UUID's are still highly unlikely and impossible
 for type 1 IDs if real MAC addresses are used.
+
+anchor:wait-pid[]
 
 ==== [big red]#wait-pid#
 
@@ -15184,6 +15886,8 @@ operating systems.
 The process `my-process` is started, then the main program blocks in the
 `wait-pid` call until `my-process` has finished.
 
+anchor:when[]
+
 ==== [big red]#when#
 
 *syntax:* (when _exp-condition_ _body_)
@@ -15208,6 +15912,8 @@ statements in _body_ need not to be grouped with link:#begin[begin]:
 See also the function link:#unless[unless] working like
 `(when (not ...) ...)`.
 
+anchor:while[]
+
 ==== [big red]#while#
 
 *syntax:* (while _exp-condition_ _body_)
@@ -15231,6 +15937,8 @@ the return value of the `while` expression.
 
 Use the link:#do-while[do-while] function to evaluate the condition
 _after_ evaluating the body of expressions.
+
+anchor:write[]
 
 ==== [big red]#write link:#destructive[!]#
 
@@ -15269,6 +15977,8 @@ str   → "hello world"
 
 See also the link:#read[read] function.
 
+anchor:write-char[]
+
 ==== [big red]#write-char#
 
 *syntax:* (write-char _int-file_ _int-byte1_ [_int-byte2_ ... ])
@@ -15297,6 +16007,8 @@ larger portions of data at a time. Note that newLISP already supplies a
 faster built-in function called link:#copy-file[copy-file].
 
 See also the link:#read-char[read-char] function.
+
+anchor:write-file[]
 
 ==== [big red]#write-file#
 
@@ -15336,6 +16048,8 @@ nodes.
 See also the link:#append-file[append-file] and
 link:#read-file[read-file] functions.
 
+anchor:write-line[]
+
 ==== [big red]#write-line link:#destructive[!]#
 
 *syntax:* (write-line [_int-file_ [_str_]]) +
@@ -15374,6 +16088,8 @@ arguments. The contents of `init.lsp` are written to the console screen.
 
 See also the function link:#write[write] for writing to a device without
 the line-terminating character.
+
+anchor:xfer-event[]
 
 ==== [big red]#xfer-event#
 
@@ -15434,6 +16150,8 @@ a function definition could have been used:
 This can be used to monitor the progress of longer lasting byte
 transfers in HTTP uploads or downloads.
 
+anchor:xml-error[]
+
 ==== [big red]#xml-error#
 
 *syntax:* (xml-error)
@@ -15450,6 +16168,8 @@ the source XML text, starting at `0` (zero).
 
 (xml-error)  → ("expected closing tag: >" 18)
 ---------------------------------------------
+
+anchor:xml-parse[]
 
 ==== [big red]#xml-parse#
 
@@ -15714,6 +16434,8 @@ parsed expression:(PRICE "0.60"), source:<PRICE>0.60</PRICE>
 The example callback handler function filters the tags of interest and
 processes them as they occur.
 
+anchor:xml-type-tags[]
+
 ==== [big red]#xml-type-tags#
 
 *syntax:* (xml-type-tags [_exp-text-tag_ _exp-cdata-tag_ _exp-comment-tag_ _exp-element-tags_])
@@ -15738,6 +16460,8 @@ Using `xml-type-tags` without arguments returns the current type tags:
 The first example just shows the currently used type tags. The second
 example specifies suppression of the "TEXT" and "ELEMENT" tags and shows
 `cdata` and `!--` instead of "CDATA" and "COMMENT".
+
+anchor:zero?[]
 
 ==== [big red]#zero?#
 
