@@ -9725,8 +9725,8 @@ the string in _str-break_.
 
 The last two examples show a regular expression as the break string with
 the default option `0` (zero). Instead of `{` and `}` (left and right
-curly brackets), double quotes can be used to limit the pattern. In this
-case, double backslashes must be used inside the pattern. The last
+curly brackets), double quotes can be used to delimit the pattern. In
+this case, double backslashes must be used inside the pattern. The last
 pattern could be used for parsing CSV (Comma Separated Values) files.
 For the regular expression option numbers, see link:#regex[regex].
 
@@ -11604,7 +11604,7 @@ on the operation's success.
 function::replace[!]
 
 *syntax:* (replace _exp-key_ _list_ _exp-replacement_ [_func-compare_]) +
-*syntax:* (replace _exp list_) +
+*syntax:* (replace _exp_ _list_) +
 *syntax:* (replace _str-key_ _str-data_ _exp-replacement_) +
 *syntax:* (replace _str-pattern_ _str-data_ _exp-replacement_ _int-regex-option_)
 
