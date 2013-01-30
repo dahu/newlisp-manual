@@ -50,21 +50,24 @@
 (define (insert-snippets text)
   (replace {__PRE2VIMDOC_SNIPPET_\d+} text (Snippets:get) 0))
 
-;; TODO - move markup to before /bin/fmt
-
 ;; remove all code snippets until after reflowing text with /bin/fmt
 (setf pretext (extract-snippets (read-file ((main-args) 2))))
+
+;; add vim-doc markup for function refs and literals
+;; and reflow text to 68 cols wide
 (set 'tmp-file (open "/tmp/pre2vimdoc.txt" "write"))
-(write tmp-file pretext)
+(write tmp-file (join (map markup (parse pretext "\n" 0)) "\n"))
 (close tmp-file)
 (setf posttext (join (exec "fmt -68 /tmp/pre2vimdoc.txt") "\n"))
 
-;; add vim-doc markup
-(dolist (ln (parse posttext "\n" 0))
-  (if (regex {^\s*function::(.*?)\[(.*?)\]} ln)
-    (push (generate-functions $1 (or $2 "")) output)
-    (push (markup ln) output)))
-
-(println (insert-snippets (join (reverse output) "\n")))
+;; generate function anchors (IDs) and
+;; reinsert snippets now formatted for vim-doc
+(println (insert-snippets (join
+  (map (fn (ln)
+    (if (regex {^\s*function::(.*?)\[(.*?)\]} ln)
+      (generate-functions $1 (or $2 ""))
+      ln))
+    (parse posttext "\n" 0))
+  "\n")))
 
 (exit)
